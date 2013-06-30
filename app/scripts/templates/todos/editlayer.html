@@ -1,0 +1,59 @@
+<div id="edit-layer-wrapper" class="modal">
+    <header class="bar-title modal-header">
+        <h1 class="title"><%- todo.title.substr(0, 7) + '...' %></h1>
+
+        <!-- this save btn is never disabled as it also closes the modal -->
+        <a id="header-save" href="#"
+            class="close-layer save"></a>
+
+    </header>
+
+    <div class="content content-padded">
+
+        <input type="text" id="todo-title" value="<%- todo.title %>">
+
+        <p id="timestamp" class="aog-green-text centered small"><%- __('updated') %> <%- common.fromNow(todo.updated_at, false, app.lang) %> <%- __('by') %> <%- common.getUser(todo, true) %></p>
+
+        <div class="centered">
+            <textarea id="notice" rows="3" placeholder="<%- __('notices') %>"
+                readonly><%- todo.notice %></textarea>
+        </div>
+
+        <!-- bei completed todos gibts keine Benachrichtigungen mehr -->
+        <div class="<%- todo.completed ? 'hidden' : '' %>">
+            <h2 class="centered"><%= __('notifySettings') %></h2>
+
+            <input type="text" id="date-input" style="margin-bottom: 0px;"
+                placeholder="<%- __('todoDate') %>"
+                value="<%- date %>" readonly>
+
+            <br /><br />
+
+            <div class="choose-participants hidden">
+                <p class="aog-green-text centered"><%- __('notificationQuestion') %></p>
+
+                <ul class="aog-list">
+                    <% _.each(todolist.participants, function(user) { %>
+                    <li class="no-link">
+                        <div class="ago-toggle-wrap">
+                        <%
+                        var isChecked = _.indexOf(todo.users_to_notify, user._id) >= 0;
+                        %>
+                        <span class="ago-toggle <%- isChecked ? 'checked' : '' %>"
+                            data-user-id="<%- user._id %>"></span>
+                        </div>
+
+                        <div class="title-wrap">
+                            <p class="title">
+                                <%- theUser._id == user._id ? __('me') : user.display_name + ' (' + user.email + ')' %>
+                            </p>
+                        </div>
+                    </li>
+                    <% }); %>
+                </ul>
+
+                <br /><br />
+            </div>
+        </div>
+    </div>
+</div>

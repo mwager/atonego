@@ -1,0 +1,32 @@
+
+# "framework" and "src_files" are irrelevant in this case
+"test_page": "test/index_testem.html"
+
+# framework: mocha
+# src_files:
+    # - test/js/blanket.js
+    # - lib/require.min.js
+    # - test/js/expect.js
+    # - test/js/window.js
+    # - test/js/bootstrap_tests.js
+
+#launchers:
+#    Chrome
+
+#    Node:
+#        command: mocha main -R tap
+#        protocol: tap
+
+#launch_in_dev:
+#- Safari
+
+# only phantom js should enough (works on travis)
+launch_in_ci:
+    - PhantomJS
+
+#     - Safari
+#     - Chrome
+#     - Chrome Canary
+#     - Opera
+#     - Firefox
+#     - PhantomJS

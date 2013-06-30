@@ -1,0 +1,50 @@
+</div>
+
+<footer>
+    <div class="left">
+        <a href="/imprint?lang=<%- lang %>"><%- imprint %></a>
+        |
+        <a href="/terms?lang=<%- lang %>"><%- terms %></a>
+        <br />
+        <small>
+        AtOneGo &copy; 2013 - <a target="_blank" href="http://mwager.de">Michael Wager</a>
+        <!---
+        <a target="_blank" href="https://github.com/mwager/atonego">It's open source!</a>-->
+        </small>
+    </div>
+
+    <div class="right">
+        <a rel="alternate" hreflang="en" href="<%- baseUrl %>"><img src="<%- baseUrl %>img/lang/en.gif"></a>
+        <a rel="alternate" hreflang="de" href="<%- baseUrl %>?lang=de"><img src="<%- baseUrl %>img/lang/de.gif"></a>
+    </div>
+</footer>
+
+<script type="text/javascript">
+    var __app_config__ = {
+        ENV: "<%- ENV %>",
+        BASE_URL: "<%- baseUrl %>"
+    };
+</script>
+
+<!-- XXX grunt build !? ! -->
+<script src="<%- baseUrl %>js/vendor/jquery.js"></script>
+<script src="<%- baseUrl %>js/vendor/bootstrap.js"></script>
+<script src="<%- baseUrl %>js/helper.js"></script>
+<script src="<%- baseUrl %>js/vendor/underscore-min.js"></script>
+<script src="<%- baseUrl %>js/main.js"></script>
+
+<% if(ENV === 'production') { %>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-39391179-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async =  true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+<% } %>
+</body>
+</html>

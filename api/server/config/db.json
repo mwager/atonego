@@ -1,0 +1,41 @@
+{
+    "test"      :{
+        "main":{
+            "USER"    :"",
+            "PASS"    :"",
+            "HOST"    :"localhost",
+            "PORT"    :"27017",
+            "DATABASE":"atonego-test"
+        }
+    },
+
+    "development":{
+        "main":{
+            "USER"    :"",
+            "PASS"    :"",
+            "HOST"    :"localhost",
+            "PORT"    :"27017",
+            "DATABASE":"atonego-dev"
+        }
+    },
+
+    "staging":{
+        "main":{
+            "USER"    :"",
+            "PASS"    :"",
+            "HOST"    :"localhost",
+            "PORT"    :"27017",
+            "DATABASE":"atonego-main"
+        }
+    },
+
+    "production":{
+        "main":{
+            "USER"    :"NOT_NEEDED_HERE_USING_OPENSHIFT",
+            "PASS"    :"NOT_NEEDED_HERE_USING_OPENSHIFT",
+            "HOST"    :"NOT_NEEDED_HERE_USING_OPENSHIFT",
+            "PORT"    :"NOT_NEEDED_HERE_USING_OPENSHIFT",
+            "DATABASE":"NOT_NEEDED_HERE_USING_OPENSHIFT"
+        }
+    }
+}

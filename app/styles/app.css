@@ -1,0 +1,779 @@
+/*
+ * This file is part of the AtOneGo project.
+ * (c) 2013 Michael Wager <mail@mwager.de>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+/*******************************************************************************
+ * AtOneGo custom styles
+ *
+ * @author Michael Wager, Thomas Kress
+ ******************************************************************************/
+
+@font-face {
+    font-family : 'LITOPRINT';
+    src         : url('../fonts/26025F_0_0.eot');
+    src         : url('../fonts/26025F_0_0.woff') format('woff'),
+                  url('../fonts/26025F_0_0.ttf') format('truetype');
+}
+
+/*******************************************************************************
+ * Background Image (body and modal?)
+ ******************************************************************************/
+body, .modal {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background : #f6f6bb url(../images/background.png) repeat;
+}
+
+/* disable text selection on long tap */
+html {
+    -webkit-user-select: none;
+    -webkit-text-size-adjust:none;
+}
+
+/* DO NOT USE THIS ON ANDROID! */
+/*div#main {
+    -webkit-transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+}*/
+
+/* custom font only for specific elements: */
+h1, h2, h3, .content a, .aog-list .title, .aog-green-text, .aog-button, select, .dwb {
+    font-family : "LITOPRINT", "Helvetica", "Arial", "sans serif" !important;
+    font-weight : normal !important;
+    font-style  : normal !important;
+}
+
+/* our links */
+.content a, .modal a {
+   color: #000;
+   text-decoration: none;
+
+    /* Tip #10 - Disable tap highlighting
+       http://www.mikedellanoce.com/2012/09/10-tips-for-getting-that-native-ios.html
+    */
+   -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
+/*******************************************************************************
+ * custom resets
+ ******************************************************************************/
+h2 {
+    margin: 15px 0px 3px 0px;
+    font-size: 1.4em;
+}
+
+button, input, textarea, a, li {
+    min-height: 20px;
+}
+
+button, input, textarea {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    line-height: 0;
+    overflow: visible;
+    -webkit-appearence: none;
+}
+
+button {
+    width: 100%; /* !!! siehe main.js !!! */
+}
+
+/* der button als link - XXX smelly + ugly */
+a.aog-button {
+    /*width: 100%; DAMNIT!!!*/
+    display:block; /* (-: */
+}
+
+/* our textfields */
+/* .aog-input-wrap {} ????? */
+input[type=text],
+input[type=url],
+input[type=email],
+input[type=password] {
+    font: bold 12px/25px "Helvetica Neue", sans-serif;
+    letter-spacing: 0.09em;
+    border-radius: 5px;
+}
+
+/* textfield validation error messages */
+.error-msg { margin: -5px 0 15px 10px; color: #f00; }
+
+/* textarea special */
+textarea {
+    width: 100%; /* !!! siehe main.js !!! */
+    background-color: #fff;
+    /*display: block;*/
+    position: relative;
+    margin: 10px 0 10px 0;
+    padding: 5px;
+
+    text-decoration: none;
+    text-shadow: 1px 1px 1px rgba(255,255,255,.22);
+    font: bold 12px/25px Arial, sans-serif;
+    letter-spacing: 0.09em;
+
+    border-radius: 5px;
+    box-shadow: inset 1px 1px 3px#aaa;
+
+    -webkit-box-shadow: inset 1px 1px 3px#aaa;
+    -webkit-appearance: none;
+}
+
+/**
+ * Our selects
+ *
+ * WANT BETTER ONES? NEED IMAGES:
+ *  http://s3.amazonaws.com/37assets/svn/480-custom_forms.html
+**/
+select {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f6c2), color-stop(100%,#e5e4b4));
+    background: -webkit-linear-gradient(top, #f7f6c2 0%,#e5e4b4 100%);
+    -webkit-border-radius: 8px;
+    -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,.29), inset 1px 1px 3px rgba(255,255,255,.44);
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    -webkit-background-size: 1600px 40px;
+}
+
+
+/*******************************************************************************
+ * Fixed Header
+ ******************************************************************************/
+header {
+    /** reset ratchet header and append own background **/
+    background-color: #fff !important;
+    border-bottom: 0px !important;
+
+    background: url(../images/header-bg.png) !important;
+
+    background-repeat: repeat-x;
+
+    height: 50px !important;
+}
+
+header .title {
+    color: #000 !important;
+    text-shadow: none !important;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: 0 30%;
+}
+
+/* The app-loader, top right in the header */
+header #app-loader {
+    display:none;
+    position: absolute;
+    right: 5px;
+    top:0;
+    z-index: 1001;
+
+    margin     : 5px 10px 0 0;
+
+    width      : 24px;
+    height     : 24px;
+    background-size: 24px 24px;
+    background-image: url(../images/loader.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/*header img {
+    max-width: 40px;
+    max-height: 40px;
+
+    background-size: 40px 40px;
+    -webkit-background-size: 40px 40px;
+}*/
+/* background images in the header */
+
+/* the logo in the header **/
+header #gotolists {
+    width: 40px;
+    height: 40px;
+
+    background-image: url(../images/list.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: 40px 40px;
+
+    position: absolute;
+    z-index: 1000;
+}
+
+/** Our history "go-back" button in the header **/
+header #goback {
+    width: 40px;
+    height: 40px;
+
+    background-image: url(../images/back.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: 40px 40px;
+
+    position: absolute;
+    z-index: 1000;
+}
+
+header #header-save {
+    width: 40px;
+    height: 40px;
+
+    background-image: url(../images/save.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: 40px 40px;
+
+    position: absolute;
+    top: 0;
+    right: 10px;
+    z-index: 1000;
+}
+
+/** The pencil in the header - navigation to list settings **/
+header #list-settings {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    z-index: 1000;
+    margin: 0px 10px 0 0;
+    top: 0;
+    right: 0;
+    left: auto;
+    background-image: url(../images/edit.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: 40px 40px;
+}
+
+/** The save button in the header
+header .save {
+    position: absolute;
+    display: block;
+    right: 0;
+    top: 0;
+    width: auto;
+    text-align: center;
+    margin: 0 10px 0 0;
+    padding: 12px 10px 0 10px;
+    height: 28px;
+    background: #fff !important;
+    color: #3ac51e;
+}**/
+
+header a {
+    margin: -1px 0 0 0;
+}
+
+/** overwrite ratchet stuff **/
+.modal-header a {
+    margin-top: 4px;
+    width:  40px  !important;
+    height: 40px !important;
+}
+
+/** god dammit **/
+.modal-header .title {
+    position: absolute;
+    width: 100%;
+    margin: 0;
+}
+
+/** active state of header button images on click/tap */
+header .tapped:not(.disabled),
+.modal-header a.tapped { /* here, we never disable! */
+    box-shadow: 0 0 6px #3CCD1F;
+}
+
+
+/** This is the scrollable content (ratchet.css) **/
+.content {
+    background: transparent;
+    padding: 10px 10px 0 10px;
+
+    /* we never ever want to allow horizontal scrolling **/
+    overflow-x: hidden !important;
+}
+
+/*******************************************************************************
+Notification Box in the middle on top (e.g. "Successfully saved!")
+*******************************************************************************/
+#notification {
+    display: none;
+
+    /* HOWTO center an absolute||fixed positioned element */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 55px;
+    width: 90%;
+    margin: 0 auto;
+
+    /* more styles */
+    z-index: 11111;
+    text-align: center;
+    padding: 10px 3px 10px 3px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+    /* hmm performance problems on old devices !? */
+    box-shadow: 2px 2px 5px #333;
+}
+
+#notification h2 {
+    font-size: 1.0em;
+}
+
+/*******************************************************************************
+The timestamps "nebeneinander"
+*******************************************************************************/
+.timestamps {
+    list-style: none;
+}
+.timestamps li {
+    display: inline;
+    float: left;
+    margin: 10px 10px 10px 0;
+}
+
+/*******************************************************************************
+ghost clicks'n'stuff
+--------------------
+Nach jedem View-Render wird einige millis (Dauer der FadeIn Animation)
+eine nicht sichtbarer Layer über den gesamten Screen gelegt um
+ghostclicks zu verhindern.
+Das ist zwar nicht alles - einige weitere gc workarounds befinden sich im js -
+funktioniert aber ganz gut.
+*******************************************************************************/
+#ghostbuster-overlay {
+    display:none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10077; /* über allen anderen elementen (-; **/
+
+    /* bg-color nur zum testen:
+    das overlay ist nicht sichtbar, verhindert aber ghost
+    clicks oder ghost focus stuff...
+    background-color: black;
+    opacity: 0.5; ***/
+}
+
+
+/* logo on the startScreen */
+#logo-wrap {
+    width: 240px;
+    height: 213px;
+
+    text-align: center;
+
+    background-image: url(../images/logo.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 240px 213px;
+
+    margin: 0 auto;
+}
+
+/** clear completed stuff */
+#clear-completed-btn-view a#clear-completed {
+    float: right;
+}
+#clear-completed-btn-view a#clear-completed.disabled {
+    float: right;
+    color: grey;
+}
+
+/*******************************************************************************
+ * Helpers, Sonstiges, etc...
+ ******************************************************************************/
+.muted a { color : #999; text-decoration : none; }
+
+.clear { clear : both; }
+
+.divider { clear: both; margin : 0; height: 20px; /*border-bottom : 1px dashed #aaa;*/ }
+/*.no-wrap { word-wrap: break-word; white-space: pre-wrap;}*/
+
+/* error text */
+.error, .destructive { color : #f00 !important; }
+.error {
+    margin: 3px;
+}
+.full-width { width: 100%; }
+
+.centered { text-align: center; }
+
+.small { font-size: 80%; }
+
+/*.opa { opacity: 0.9;}*/
+
+.remove-activity { text-align: center; }
+.remove-activities { float: right; margin: -20px 0 0 0; }
+
+/*******************************************************************************
+ * Namespace "aog-"
+ ******************************************************************************/
+
+.aog-green-text {
+    color: #3ac51e;
+    /*text-align: center;*/
+}
+.green-header {
+    margin: 10px 0 10px 0;
+}
+
+.aog-centered {
+    text-align: center;
+}
+
+/* unsere forms */
+.aog-form {
+
+}
+
+/* Default Buttons */
+.aog-button {
+    display: inline-block;
+    /*position: relative;*/
+    margin: 10px 0px 10px 0px;
+    padding: 0 20px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px rgba(255,255,255,.22);
+    font: bold 12px/25px Arial, sans-serif;
+    letter-spacing: 0.09em;
+
+    -webkit-border-radius: 30px;
+    -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,.29), inset 1px 1px 3px rgba(255,255,255,.44);
+}
+
+
+
+/* FAST BUTTONS/ACTIVE STATES:
+--------------------------------------------------------------------------------
+    read: https://developers.google.com/mobile/articles/fast_buttons
+    and : http://maxdegterev.name/javascript-2/fast-buttons-for-webapps
+
+    Wir geben jedem Button die Klasse .pressed on "touchstart" und nehmen
+    sie on "touchend" wieder weg.
+    Grund:
+        Ältere Geräte unterstützen :active nicht.
+        Außerdem muss bei touchmove die Klasse .pressed ebenfalls
+        entfernt werden.
+
+    @see main.js.
+*/
+/*.aog-button:active {
+    color: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000), color-stop(100%,#000));
+    background: -webkit-linear-gradient(top,  #0000%,#000 100%);
+}*/
+
+/* Alle Elemente mit Klasse .pressed bekommen selben active state (-> buttons und listen mit links) */
+.pressed:not([disabled]) {
+    color: #fff !important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000), color-stop(100%,#000)) !important;
+    background: -webkit-linear-gradient(top,  #0000%,#000 100%) !important;
+}
+.aog-list li.pressed a, .pressed, {
+    color: #fff !important;
+}
+
+/* pressed lists extra */
+.aog-list .pressed-list {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e5e4b4), color-stop(100%,#f7f6c2));
+    background: -webkit-linear-gradient(top,  #e5e4b4 0%,#f7f6c2 100%);
+}
+
+/****************
+ul.aog-list li:active {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000), color-stop(100%,#000));
+    background: -webkit-linear-gradient(top,  #0000%,#000 100%);
+}*********/
+
+/* Listen welche nicht anklickbar sein sollen
+können dem <li/> die Klasse .no-link geben */
+/****************
+ul.aog-list .no-link:active {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f6c2), color-stop(100%,#e5e4b4));
+    background: -webkit-linear-gradient(top,  #f7f6c2 0%,#e5e4b4 100%);
+}
+ul.aog-list li:active a {
+    color: #fff;
+}*********/
+
+
+
+.aog-big {
+    padding: 14px 40px 8px 40px;
+    text-transform: uppercase;
+    font: normal 16px/18px LITOPRINT, Arial, sans-serif;
+}
+
+.aog-delete-cross {
+    float:right;
+    font-size: 17px;
+}
+
+/* Farben */
+.aog-green {
+    color: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#51d038), color-stop(100%,#37b71e));
+    background: -webkit-linear-gradient(top,  #51d038 0%,#37b71e 100%);
+}
+.aog-white {
+    color: #000;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f6f6), color-stop(100%,#f7f7f7));
+    background: -webkit-linear-gradient(top,  #fff 0%,#f7f7f7 100%);
+}
+.aog-red {
+    color: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f90000 ), color-stop(100%,#c50000));
+    background: -webkit-linear-gradient(top,  #f90000 0%,#c50000 100%);
+}
+
+.aog-green[disabled]  {
+    color: #f7f7c1;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a4e37c), color-stop(100%,#97d76f));
+    background: -webkit-linear-gradient(top,  #a4e37c 0%,#97d76f 100%);
+}
+.aog-white[disabled]  {
+    color: #adac87;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8e1), color-stop(100%,#f2f2db));
+    background: -webkit-linear-gradient(top,  #f8f8e1 0%,#f2f2db 100%);
+}
+.aog-red[disabled]  {
+    color: #f7f7c1;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f57b61 ), color-stop(100%,#de7b61));
+    background: -webkit-linear-gradient(top,  #f57b61 0%,#de7b61 100%);
+}
+
+header a.disabled {
+    /*color: #ddd;*/
+    opacity: .3;
+}
+
+
+/*******************************************************************************
+ * Default Listen "ul.aog-list"
+ * jquery mobile listviews sind manchmal einfach zu langsam auf mobilen
+ * geräten... deshalb simulieren wir das Aussehen nativer jQM Listviews via CSS
+ ******************************************************************************/
+ul.aog-list {
+    width: 100%;
+    list-style: none;
+    width      : 100%;
+    margin     : 0;
+    padding    : 0;
+
+
+    /** XXX TODO ?
+    -webkit-transform:  translate3d(0, 0%, 0);
+    transform:          translate3d(0, 0%, 0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;*/
+}
+
+ul.aog-list li {
+    /*width: 100%;*/
+    /*position: relative;*/
+
+    min-height: 22px;
+
+    margin  : 10px 0 0 0;
+    padding : 12px 10px 8px 10px;
+
+    text-decoration: none;
+    text-shadow: 1px 1px 1px rgba(255,255,255,.22);
+    font: bold 12px/25px Arial, sans-serif;
+    letter-spacing: 0.09em;
+
+    color: #000;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f6c2), color-stop(100%,#e5e4b4));
+    background: -webkit-linear-gradient(top,  #f7f6c2 0%,#e5e4b4 100%);
+
+    -webkit-border-radius: 8px;
+    -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,.29), inset 1px 1px 3px rgba(255,255,255,.44);
+
+    border-radius : 5px;
+
+    opacity: 1;
+}
+
+.white-list li {
+    background: #fff !important;
+}
+
+/** The count bubble on our lists **/
+ul.aog-list li .count {
+    float: right;
+}
+
+ul.aog-list li input[type=text] {
+    width: 90%;
+}
+ul.aog-list li a {
+    /* befindet sich ein link in eines liste muss die ganze liste klickbar sein */
+    display:block;
+}
+
+ul.aog-list li a,
+ul.aog-list li .title {
+    line-height: 1.6em;
+}
+
+ul.aog-list li .title-wrap {
+    margin: 0 0 0 32px;
+    padding: 0;
+    width: 98%;
+    /* background-color: grey; um zu sehen wie breit die klickbare fläche wirklich ist */
+}
+
+ul.aog-list li .title {
+    width: 96%;
+
+    /** following is needed to prevent text going out of the viewport **/
+    /* eg longtexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxt
+    -> so user is then able to horiz. scroll, which we do not want
+    */
+    /** THIS WILL CAUSE FLICKERING AT ANY RE-RENDER (on real devices only) !!! **/
+    /** overflow-x: hidden; **/
+
+    /** BUT STRANGELY, THIS WILL NOT... **/
+    overflow: hidden; **/
+
+    /*word-break         : break-word;*/
+    /*-webkit-transition : color 0.4s;
+    transition         : color 0.4s;*/
+}
+
+ul.aog-list li .ago-toggle-wrap {
+    float              : left;
+    margin             : -5px 5px 0px 0px;
+    width: 35px;
+    height: 30px;
+    /*background-color: red; /** XXX raus **/
+}
+
+ul.aog-list li .ago-toggle {
+    float              : left;
+
+    width              : 18px;
+    height             : 18px;
+    padding            : 0px;
+
+    background-image: url(../images/check_n.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+}
+
+ul.aog-list li .title:hover {
+    cursor: pointer;
+}
+ul.aog-list li .ago-toggle-wrap:hover {
+    cursor: pointer;
+}
+ul.aog-list li .ago-toggle.checked {
+    background-image: url(../images/check_a.png);
+}
+
+ul.aog-list li .ago-toggle.checked:after {
+    color       : #85ada7;
+    text-shadow : 0 1px 0 #669991;
+    bottom      : 1px;
+    position    : relative;
+}
+
+ul.aog-list li.editing:last-child {
+    margin-bottom : -1px;
+}
+
+/* A todo in "completed-state" */
+ul.aog-list li.completed {
+    opacity : 0.7;
+}
+ul.aog-list li.completed .title,
+.completed {
+    color           : #a9a9a9;
+    text-decoration : line-through;
+}
+
+/* A todo in "edit-state" */
+ul.aog-list li .edit {
+    display : none;
+}
+
+/* weitere elemente im edit zustand */
+ul.aog-list li.editing {
+    border-bottom : none;
+    padding       : 0;
+}
+
+ul.aog-list li.editing div.ui-input-text {
+    margin : 0 auto;
+    width  : 90%;
+}
+
+ul.aog-list li.editing div.edit-wrap {
+    /*height : 50px;*/
+    margin: 0px 0% 0px 8%;
+}
+/* toggle checkbox im edit zustand */
+ul.aog-list li.editing .ago-toggle {
+    padding : 10px;
+}
+/* edit button im edit zustand */
+ul.aog-list li.editing .edit-todo {
+    display:none;
+}
+/*
+ im editing-Zustand wird das textfeld angezeigt!
+ */
+ul.aog-list li.editing .edit {
+    display : block;
+}
+
+ul.aog-list li.editing .title {
+    display : none;
+}
+/**************************** END .aog-list ****************************/
+
+/*******************************************************************************
+ * There is one list for uncompleted todos, and one for completed ones
+ ******************************************************************************/
+#uncompleted-list {
+    min-height: 20px;
+}
+/*
+#completed-list {
+
+}*/
+
+/** some mobiscroll edits **/
+.dwbg {
+    height: 100%;
+}
+.dwb-s .dwb {
+    color: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#51d038), color-stop(100%,#37b71e));
+    background: -webkit-linear-gradient(top,  #51d038 0%,#37b71e 100%);
+}
+
+.dwb-c .dwb {
+    color: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f90000 ), color-stop(100%,#c50000));
+    background: -webkit-linear-gradient(top,  #f90000 0%,#c50000 100%);
+}

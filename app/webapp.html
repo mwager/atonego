@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>AtOneGo - WebApp</title>
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+<!--[if lt IE 10]>
+<h1>SORRY. Your browser is not supported.</h1>
+<![endif]-->
+
+<div id="app-container">
+    <div id="app-main">
+    </div>
+</div>
+
+<div id="ghostbuster-overlay"></div>
+<div id="notification" class="aog-white"></div>
+
+<script type="text/javascript">
+(function (win) {
+    'use strict';
+
+    var appConf, log;
+
+    // from modernizr
+    var touch = (
+        ('ontouchstart' in window) ||
+        window.DocumentTouch && document instanceof DocumentTouch
+     );
+
+    // Global application config (exported to the global namespace)
+    appConf = {
+        touch: touch,
+        defaultClickEvent: touch ? 'tap' : 'click',
+
+        // App-Environment: production | staging | development
+        ENV: 'development',
+
+        // see pause & resume events in main.js
+        isPaused: false
+    };
+
+    appConf.BASE_URL         = '/';
+
+    // API Endpoint Root
+    appConf.API_ROOT         = 'https://atonego-mwager.rhcloud.com';  // -> no slash
+    appConf.WEBSITE_BASE_URL = 'https://atonego-mwager.rhcloud.com/';
+
+
+    // Global log helper
+    log = function () {
+        // XXX REIN
+        /*if (__app_config__.ENV === 'production') {
+             return false;
+        }*/
+
+        if(!console) {
+            return false;
+        }
+
+        console.log.apply(console, arguments);
+    };
+
+    // export globals
+    win.__app_config__ = appConf;
+    win.log = log;
+})(window);
+</script>
+
+<script type="text/javascript">
+    // simple cache busting (see the Makefile's task "webapp")
+    var require = {
+        waitSeconds: 60,
+        urlArgs : 'v=XXXXXXXX'
+    };
+</script>
+
+<!-- build:js scripts/aog.js -->
+<script data-main="scripts/config" src="scripts/libs/require.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<header></header>
+
+<div class="content">
+    <% if(todolist && todolist.title) { %>
+    <input id="list-title" type="text"
+           placeholder="<%= __('todolistTitle') %>"
+           value="<%- todolist.title %>">
+
+   <p id="timestamp" class="aog-green-text centered small"><%- __('updated') %> <%- common.fromNow(todolist.updated_at, false, app.lang) %> <%- __('by') %> <%- common.getUser(todolist, true) %></p>
+
+    <button class="delete-list aog-button aog-red aog-big">
+    <%- __('deleteList') %>
+    </button>
+    <% } %>
+
+    <div class="divider"></div>
+
+    <h2><%- __('shareList') %></h2>
+
+    <small class="aog-green-text"><%= __('whoWorksWithThisList') %></small>
+    <input id="search-input" type="email"
+           placeholder="<%= __('searchForUsers') %>">
+
+    <div id="search-results"></div>
+
+    <div class="divider"></div>
+
+    <% if(todolist && todolist.participants && todolist.participants.length > 0) { %>
+    <p class="aog-green-text"><%= __('allowedUsers') %></p>
+    <% } %>
+    <div class="share-settings">
+        <ul class="aog-list white-list">
+        <% _.each(todolist.participants, function(u) { %>
+        <li class="no-link">
+            <p><%- u.display_name + ' (' + u.email + ')'  %><%- u.is_owner ? '(' + __('owner') + ')' : '' %></p>
+
+            <% // cannot remove himself or owner
+            if(!u.is_owner && (u._id != theUser._id)) { %>
+            <div class="divider"></div>
+
+            <a href="#" id="<%- 'user_' + u._id %>"
+                class="destroy destructive centered"
+                    data-user-id="<%- u._id %>"><%- __('remove') %></a>
+            <% } %>
+        </li>
+        <% }); %>
+        </ul>
+
+        <br/>
+
+    </div>
+</div>

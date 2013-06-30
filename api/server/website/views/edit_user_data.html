@@ -1,0 +1,20 @@
+<% include layoutTop.html %>
+
+<h2>Hi <%- user.display_name %></h2>
+
+<form method="POST" action="<%- change_pw_url %>?lang=<%- lang %>">
+    <div>
+        <label for="p1">Passwort</label>
+        <input id="p1" name="p1" type="password" required>
+    </div>
+
+    <div>
+        <label for="p2">Passwort wiederholen</label>
+        <input id="p2" name="p2" type="password" required>
+    </div>
+
+    <input type="hidden" class="hidden" name="tmp_token" value="<%- tmp_token %>">
+    <input type="submit" value="OK">
+</form>
+
+<% include layoutBottom.html %>

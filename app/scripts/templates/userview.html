@@ -1,0 +1,70 @@
+<h2><%= __('userSettings') %></h2>
+
+<% if(!user.active) { %>
+<p class="error small"><%= __('accountNotActivatedYet', {days: days}) %></p>
+<% } %>
+
+<input type="text" id="display_name"
+    placeholder="<%- __('userDisplayName') %>" value="<%- user.display_name %>">
+
+<input type="email" id="email"
+    placeholder="<%- __('userDisplayEmail') %>" value="<%- user.email %>">
+
+<input type="password" placeholder="<%- __('userDisplayPassword') %>" id="password">
+<input type="password" placeholder="<%- __('userDisplayPasswordAgain') %>" id="password2">
+<p id="pw-error" class="error-msg small hidden"><%- __('passwordError') %></p>
+
+<!-- language select -->
+<p class="aog-green-text green-header"><%= __('selectLang') %></p>
+<select id="select-lang">
+    <option value="en"
+    <%= (app.lang === 'en' || app.lang !== 'de') ? 'selected' : '' %>>
+    English
+    </option>
+
+    <option value="de"
+    <%= app.lang === 'de' ? 'selected' : '' %>>
+    Deutsch
+    </option>
+</select>
+
+<!-- notification settings-->
+<p class="aog-green-text green-header"><%= __('notifySettings') %></p>
+<ul class="aog-list notify-settings-list">
+    <li class="no-link">
+        <div class="ago-toggle-wrap">
+            <span class="ago-toggle email-checkbox <%= user.notify_settings.email ? 'checked' : '' %>">
+            </span>
+        </div>
+
+        <div class="title-wrap">
+            <p class="title"><%= __('notifyEmail') %></p>
+        </div>
+    </li>
+
+    <!--
+    <li class="no-link">
+        <div class="ago-toggle-wrap">
+            <span class="ago-toggle push-checkbox <%= user.notify_settings.push ? 'checked' : '' %>">
+            </span>
+        </div>
+
+        <div class="title-wrap">
+            <p class="title">< % = __('notifyPush') % ></p>
+        </div>
+    </li>
+    -->
+
+    <% if(!app.isBrowser) { %>
+    <li class="no-link">
+        <div class="ago-toggle-wrap">
+            <span class="ago-toggle vibrate-checkbox <%= user.notify_settings.vibrate ? 'checked' : '' %>">
+            </span>
+        </div>
+
+        <div class="title-wrap">
+            <p class="title"><%= __('notifyVibrate') %></p>
+        </div>
+    </li>
+    <% } %>
+</ul>

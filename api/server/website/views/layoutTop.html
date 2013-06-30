@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]>
+<html class="no-js iem7"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!-->
+<html lang="<%- lang %>" dir="ltr" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>At One Go<%- title ? ' - ' + title : '' %></title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="author" content="Michael Wager" />
+
+    <meta name="description"
+          content="You gotta do what you got to do - the simple way!"/>
+    <meta name="keywords"
+          content="atonego app todo todoapp todolist reminder notice forgot sync share team productivity aufgaben erledigen vergessen merkzettel">
+
+    <link rel="author" href="<%- baseUrl %>humans.txt"/>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cleartype" content="on">
+
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="<%- baseUrl %>img/touch/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="<%- baseUrl %>img/touch/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed"
+          href="<%- baseUrl %>img/touch/apple-touch-icon-57x57-precomposed.png">
+    <link rel="shortcut icon"
+          href="<%- baseUrl %>img/touch/apple-touch-icon.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage"
+          content="<%- baseUrl %>img/touch/apple-touch-icon-114x114-precomposed.png">
+    <meta name="msapplication-TileColor" content="#222222">
+
+    <link rel="stylesheet" href="<%- baseUrl %>css/normalize.css">
+    <link rel="stylesheet" href="<%- baseUrl %>css/bootstrap.css">
+    <link rel="stylesheet" href="<%- baseUrl %>css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="<%- baseUrl %>css/main.css">
+    <script src="<%- baseUrl %>js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+
+<noscript>
+    <div class="flash-error">
+        <a href="http://www.enable-javascript.com">how to enable javascript</a>
+    </div>
+</noscript>
+
+<% if(error && error.length > 0) { %>
+<div class="flash-error"><%- error %></div>
+<% } else if(info && info.length > 0) { %>
+<div class="flash-info"><%- info %></div>
+<% } %>
+
+<header>
+    <a href="<%- baseUrl %>?lang=<%- lang %>">
+        <img src="<%- baseUrl %>img/header.png">
+    </a>
+    <% if(typeof showHeader !== 'undefined' && true === showHeader) { %>
+    <div class="store-badges">
+        <a class="store-ios" target="_blank" href="#">
+            <img src="<%- baseUrl %>img/store_ios.png">
+        </a>
+
+        <!--
+        <a class="store-android" target="_blank" href="http://play.google.com/store/apps/details?id=de.mwager.atonego">
+            <img src="<%- baseUrl %>img/store_android.png">
+        </a>
+        -->
+
+        <a class="webapp-link" target="_blank" href="https://atonego-mwager.rhcloud.com/app">
+            <img src="<%- baseUrl %>img/whoNeedsAppStores.png">
+        </a>
+    </div>
+    <% } %>
+</header>
+
+
+<div id="content">

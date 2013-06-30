@@ -1,0 +1,15 @@
+<header></header>
+
+<div id="login-form" class="content">
+    <input class="login-input" placeholder="<%= __('userDisplayEmail') %>"    type="email"    id="email">
+    <input class="login-input" placeholder="<%= __('userDisplayPassword') %>" type="password" id="password">
+
+    <button id="login-btn" class="aog-button aog-big aog-green" disabled><%= __('login') %></button>
+
+    <br/>
+    <div class="aog-centered">
+        <a href="<%- __app_config__.WEBSITE_BASE_URL + 'password/recover?lang=' + app.lang %>">
+            <%= __('recoverPasswort') %>
+        </a>
+    </div>
+</div>

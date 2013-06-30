@@ -1,0 +1,13 @@
+/**
+    see test_email_template.html !
+*/
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin           : 0 auto;
+    padding          : 20px;
+    background-image : url(http://at-one-go.com/img/bg.gif);
+}
+
+.logo {
+    width: 100%;
+}

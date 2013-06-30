@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Testsuite</title>
+    <link rel="stylesheet" href="lib/mocha/mocha.css">
+
+    <!--<meta name="viewport" content="width=device-width; user-scalable=1;" />-->
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=0.5" />
+
+    <style>
+
+    #body {
+        /*width: 100% !important;
+        /*height: 300px;
+        overflow-x: scroll !important;
+        overflow: scroll !important;
+
+        -webkit-overflow-scrolling: touch;
+
+        border: 2px solid #38C71B;
+        border-radius: 5px;*/
+    }
+
+    /*.container { width: 100% !important; overflow-x: hidden !important; overflow: hidden !important; -webkit-overflow-scrolling: touch; border: 2px solid #38C71B; border-radius: 5px; }*/
+    /*#mocha { -webkit-overflow-scrolling: touch; overflow: scroll; overflow-x: scroll !important; height: 300px; width: 100% !important;border: 2px solid #38C71B; border-radius: 5px; }*/
+    footer {font-size: 70%; border-top: 1px solid grey; margin-top: 100px;}
+    #report h1, #report h2{ line-height: 20px; }
+    .hidden { display:none;}
+    </style>
+
+    <!-- load mocha and sinon globally -->
+    <script src="lib/mocha/mocha.js"></script>
+    <script src="lib/sinon/sinon.js"></script>
+
+    <!-- cordova replace -->
+
+    <!-- pushplugin replace -->
+
+    <!------- Unsere Testsuite ------->
+    <script src="../app/scripts/libs/modernizr.js"></script>
+
+    <!-- Option A: entweder src files: -->
+    <script type="text/javascript">
+        var __app_config__ = {
+            ENV     :'test',
+            API_ROOT:'---',
+            BASE_URL:'http://127.0.0.1/atonego/app/',
+
+            // testing!
+            browser:true,
+            optimized:false,
+
+            defaultClickEvent: 'click'
+        };
+
+        window.onerror = function (errorMsg, url, lineNumber) {
+            console.log(errorMsg, url, lineNumber);
+            // true in test environment prevents browser from doing anything
+            return true;
+        };
+    </script>
+    <script data-main="bootstrap_tests.js" src="../app/scripts/libs/require.js"></script>
+
+    <!-- Option B: oder das optimierte skript:
+    <script type="text/javascript">var __app_config__ = {ENV: 'test', browser:true, optimized:true};</script>
+    <script data-main="bootstrap_tests.js" src="../dist/scripts/620c07f8.amd-app.js"></script>
+    -->
+</head>
+<body>
+<div id="body">
+<h1>AtOneGo - Client Test Suite</h1>
+<img src="../app/images/logo.png" style="float:right;max-width:100px;">
+
+<div class="container">
+    <div id="loading">bitte warten...</div>
+    <div id="mocha"></div>
+
+    <h2>Logs</h2>
+    <pre id="logs"></pre>
+</div>
+
+</div>
+<footer>
+    <span style="float:right;">&copy; 2013 Michael Wager</span>
+</footer>
+</body>
+</html>

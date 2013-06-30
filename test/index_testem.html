@@ -1,0 +1,81 @@
+<!--
+Own testem index file. We want to add code coverage via blanket.js (http://migrii.github.com/blanket)
+-->
+<!doctype html>
+<html>
+<head>
+    <title>Testsuite</title>
+    <link rel="stylesheet" href="/testem/mocha.css">
+
+    <style>
+        footer { font-size : 70%; border-top : 1px solid grey; margin-top : 100px; }
+        #report h1, #report h2 { line-height : 20px; }
+    </style>
+
+    <!-- load mocha and sinon globally -->
+    <script src="/testem/mocha.js"></script>
+    <script src="/testem.js"></script>
+    <script src="/test/lib/sinon/sinon.js"></script>
+
+    <!--<script src="/app/scripts/libs/modernizr.js"></script>-->
+
+    <script type="text/javascript">
+        var __app_config__ = {
+            ENV     :'test',
+            API_ROOT:'---',
+            BASE_URL:'http://127.0.0.1/atonego/app/',
+
+            // testing!
+            browser:true,
+            optimized:false,
+
+            defaultClickEvent: 'click'
+        };
+        window.onerror = function (errorMsg, url, lineNumber) {
+            console.log(errorMsg, url, lineNumber);
+            // true in test environment prevents browser from doing anything
+            return true;
+        };
+    </script>
+
+    <!-- include own needed files -->
+    <script data-main="/test/bootstrap_tests.js"
+            src="/app/scripts/libs/require.js"></script>
+
+    <!--
+    ADD BLANKET.JS FOR CODE COVERAGE REPORT
+    =======================================
+    From readme:
+    Add a `data-cover-only` attribute to avoid having to add `data-cover` to each script you want covered.
+    You can pass the filter value as a string to match, an array of filename, or a regular expression:
+
+    TODO coverage for ALL my modules!!!
+    ...scheint bis jetzt nur mit einem zu funktionieren... zB "/" klappt nich !
+    -->
+    <style>#blanket-main { margin-top : 20px !important; }</style>
+    <!--WTF?
+    <script src="/test/lib/blanket.js"
+            data-cover-adapter="/test/lib/mocha-blanket.js"
+            data-cover-only="/app/scripts"></script>
+    -->
+
+    <!-- DOESNT WORK although documented here: https://github.com/Migrii/blanket/blob/master/docs/intermediate_browser.md
+     data-cover-only="['src.js', 'src2.js']"></script>
+     -->
+
+    <!-- fake global namespace
+    <script src="/test/window.js"></script>
+    -->
+
+</head>
+<body>
+<div class="container">
+    <h1>Todos App - Test Suite</h1>
+
+    <div id="loading">lade tests...</div>
+    <div id="mocha"></div>
+
+    <h3>Code Coverage</h3>
+</div>
+</body>
+</html>

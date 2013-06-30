@@ -1,0 +1,42 @@
+# if used jshint directly...
+# see GruntfileNEW.js
+
+###### default ######
+GruntfileNEW.js
+Gruntfile.js
+
+docs
+temp
+dist
+node_modules
+mobile
+app/components
+app/scripts/libs
+app/scripts/vendor
+test/lib
+test/runner
+
+
+###### api ######
+api/node_modules
+# hmm?
+api/server/lib/logger.js
+api/server/locales
+
+api_deployment
+
+###### website ######
+
+api/server/website/js/vendor
+api/server/website/js/plugins.js
+api/server/website/js/helper.js
+api/server/website/css
+api/server/website/img
+api/server/website/views
+
+# do no lint the optimized webapp sources:
+api/server/website/app
+
+PushPlugin
+
+pushplugin_tmp_TODO_verfolgen

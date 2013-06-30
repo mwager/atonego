@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>AtOneGo</title>
+
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.5, maximum-scale=0.5" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+</head>
+<body>
+
+<h1>Quick "document.createDocumentFragment" bench</h1>
+<pre>
+    INFO
+    1. copy this file and cordova.ios.js to mobile/io/www
+    2. $ make ios
+    3. watch in sim or on real device
+</pre>
+
+<div id="log"></div>
+
+<div id="b1"></div>
+
+
+
+<script type="text/javascript" src="cordova.ios.js"></script>
+
+<script type="text/javascript">
+function main() {
+// Global log helper
+var log = function () {
+    if(!console) {
+        return false;
+    }
+
+    console.log.apply(console, arguments);
+
+    document.getElementById('log').innerHTML = arguments[0];
+};
+
+function doBench(fn) {
+    var start = new Date,
+        iterations = 1000;
+
+    while (iterations--) {
+        fn();
+    }
+
+    return new Date - start;
+}
+
+// even in such a small example we can see a big performance boost
+// using document.createDocumentFragment
+var t, m;
+
+// --- 1.
+t = doBench(function() {
+    var a = document.getElementById('b1')
+    var d = document.createElement('div');
+    d.innerHTML = 'hi'
+    a.appendChild(d) // ADD TO DOM WITHIN LOOP
+});
+m = '1. execution: ' + t/1000.0 + 's';
+log(m)
+
+// --- 2.
+var f = document.createDocumentFragment()
+var a = document.getElementById('b1')
+t = doBench(function() {
+    var d = document.createElement('div');
+    d.innerHTML = 'hi'
+    f.appendChild(d) // ADD TO FRAGMENT WITHIN LOOP
+});
+a.appendChild(f) // NOW REFLOW: ONLY ONCE
+
+m = '2. execution: ' + t/1000.0 + 's';
+log(m)
+}
+
+document.addEventListener('deviceready', main, false);
+
+</script>
+</body>
+</html>
