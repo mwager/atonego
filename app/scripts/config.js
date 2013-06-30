@@ -1,17 +1,25 @@
 /*
- * This file is part of the AtOneGo project.
+ * This file is part of the at-one-go project.
  * (c) 2013 Michael Wager <mail@mwager.de>
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
 
-/**
- * requrejs config for production use - see Makefile
- *
- * KEEP IN SYNC WITH config.js
- */
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// requirejs dev config
+// keep in sync with config.production.js !
+// der requirejs optimizer meckert wegen urlArgs, deshalb tauscht Makefile
+// diese temporär mit "config.production.js" aus
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 require.config({
+
+    urlArgs: __app_config__.ENV === 'production' ?
+        '' :
+        'v' + new Date().getMilliseconds() + Math.random() * 1000,
+
+    waitSeconds: 60000, // dev only!
 
     deps   : ['main'],
 

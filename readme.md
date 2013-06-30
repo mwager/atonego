@@ -10,7 +10,7 @@ This is the repo of the app [AtOneGo](http://at-one-go.com)
 
 __Not submitted to the app store yet.__
 
-* TODO dl app stores (Android currently not supported, maybe later)
+* XXX dl app stores (Android currently not supported, maybe later)
 * [Try the WebApp](https://atonego-mwager.rhcloud.com/app)
 
 This file contains the documentation for developers.

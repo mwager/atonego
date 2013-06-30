@@ -11,5 +11,5 @@
  */
 define([], function() {
     'use strict';
-    return ''; // DO NOT EDIT!
+    return '___XXX___'; // DO NOT EDIT!
 });
