@@ -13,8 +13,7 @@
 <body>
 
 <div id="app-container">
-    <div id="app-main">
-    </div>
+    <div id="app-main"></div>
 </div>
 
 <div id="ghostbuster-overlay"></div>
@@ -66,9 +65,9 @@
             appConf.WEBSITE_BASE_URL = location.origin + ':4000/'; // Mit slash
     }
 
-    // Global log helper
+    // global log helper
     log = function () {
-        // XXX REIN
+        // XXX now
         /*if (__app_config__.ENV === 'production') {
              return false;
         }*/
@@ -78,14 +77,6 @@
         }
 
         console.log.apply(console, arguments);
-
-        // ----------------------------------------------------
-        // for mobile devices (quick and dirty logs to the dom)
-        /*for(var i in arguments) {
-            var arg = arguments[i];
-            $('#logs').prepend(arg + '<br/>');
-        }*/
-        // ----------------------------------------------------
     };
 
     // export globals

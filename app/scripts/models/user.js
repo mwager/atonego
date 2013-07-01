@@ -15,7 +15,7 @@ define(function(require) {
     var
         // _ = require('lodash'),
         Backbone = require('backbone'),
-        app = require('app');
+        app      = require('app');
 
     var User = Backbone.Model.extend({
         idAttribute: '_id',

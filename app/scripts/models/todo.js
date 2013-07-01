@@ -25,7 +25,7 @@ define(function(require) {
             completed : false,
             notice    : '',
 
-            // Benachrichtigungen
+            // notifications
             date      : null,
             users_to_notify: [],
 

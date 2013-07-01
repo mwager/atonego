@@ -12,13 +12,14 @@
 define(function (require) {
     'use strict';
 
-    var app = require('app'),
-        BaseView = require('views/base'),
-        tpl = require('text!templates/todos/clearcompletedbtn.html'),
-        _ = require('lodash'),
-        $ = require('zepto'),
-        common = require('common'),
-        events = {};
+    var
+        app         = require('app'),
+        BaseView    = require('views/base'),
+        tpl         = require('text!templates/todos/clearcompletedbtn.html'),
+        _           = require('lodash'),
+        $           = require('zepto'),
+        common      = require('common'),
+        events      = {};
 
     // events of this view
     events[app.defaultClickEvent + ' #clear-completed'] = 'clearCompleted';

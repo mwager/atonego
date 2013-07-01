@@ -17,15 +17,11 @@
 define(function (require) {
     'use strict';
 
-    var _ = require('lodash'),
-        // Backbone = require('backbone'),
-        // $ = require('zepto'),
-        app = require('app'),
-        // common = require('common'),
-        // Todolist = require('models/todolist'),
-        BaseView = require('views/base'),
-        tpl = require('text!templates/lists/todolistitem.html'),
-        events = {};
+    var _           = require('lodash'),
+        app         = require('app'),
+        BaseView    = require('views/base'),
+        tpl         = require('text!templates/lists/todolistitem.html'),
+        events      = {};
 
     return BaseView.extend({
         tagName: 'li',

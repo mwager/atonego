@@ -4,7 +4,7 @@
 
     "f1"                        : "Erstelle und verwalte Listen mit deinen Aufgaben",
     "f2"                        : "Teile ausgewählte Listen mit deinen Freunden, Bekannten, Kollegen oder deinem Lebenspartner",
-    "f3"                        : "Erinnerungen: Lass dich und/oder weitere Listenmitglieder bei Fälligkeit einer Aufgabe benachrichtigen: via E-Mail- und PUSH-Notifications !",
+    "f3"                        : "Erinnerungen: Lass dich und/oder weitere Listenmitglieder bei Fälligkeit einer Aufgabe benachrichtigen: via E-Mail- und PUSH-Notifications!",
     "f4"                        : "Kinderleichte Bedienung",
     "f5"                        : "Für Smartphones und Tablets erhältlich (iOS)",
     "f6"                        : "Auch auf deinem Desktop Rechner verfügbar via <a target=\"_blank\" class=\"own-font\" href=\"https://atonego-mwager.rhcloud.com/app\">Web-App</a>",
@@ -20,6 +20,7 @@
     "newAccountText"            : "<h1>Hi %s!</h1><p>Schön, dass du dich entschieden hast AtOneGo zu verwenden!</p><p>Klicke auf den folgenden Link um deinen Account zu aktivieren:</p><a href=\"%s\">Account aktivieren</a>",
     "newAccountActivated"       : "Dein Account wurde erfolgreich aktiviert!",
     "passwordsNotSame"          : "Die beiden Passwörter stimmen nicht überein.",
+    "passwordsLenErr"           : "Das Passwort muss mindestens 6 Zeichen besitzen",
     "accountDeletedSubject"     : "Account wurde gelöscht!",
     "accountDeletedBody"        : "<h1>Hi %s!</h1><p>Dein Account wurde gelöscht, da du ihn nicht innerhalb der 3 Tage aktiviert hast.</p><p>Solltest du das einfach vergessen haben, kannst du Dir natürlich einfach nochmal einen Account erstellen.</p>",
     "newAccountExpired"         : "Der Account wurde nicht rechtzeitig aktiviert und somit gelöscht.",

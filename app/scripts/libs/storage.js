@@ -9,7 +9,7 @@
 /**
  * Storage module
  *
- * TODO XXX code review, cleanup
+ * XXX code review, cleanup
  *
  * Es wird nur local gespeichert, NIEMALS andersrum: (local db -> sync -> server -> NO!).
  * Wenn also ein Benutzer kein Netz hat, wird der Datensatz weder zum Server, noch
@@ -24,9 +24,9 @@ define(function (require) {
     'use strict';
 
     // module constants & dependencies
-    var ONE_MB           = 1048576; // one megabyte -> 1048576/1024.0/1024.0 === 1 (TODO oder 1000000/1000/1000 ?!)
+    var ONE_MB           = 1048576; // one megabyte -> 1048576/1024.0/1024.0 === 1 (XXX 1000000/1000/1000 ?!)
     var DATABASE_NAME    = 'atonego_v1_db';
-    var DATABASE_SIZE    = ONE_MB * 5; // TODO TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    var DATABASE_SIZE    = ONE_MB * 5; // XXX TEST !
     var DATABASE_VERSION = '1.0';
 
     // db encryption key

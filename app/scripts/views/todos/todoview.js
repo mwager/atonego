@@ -7,19 +7,21 @@
  */
 
 /**
- * Ein Todo-listeneintrag. Verwaltet das Todomodel
+ * TodoView
+ *
+ * One Todo-list item
  */
 define(function (require) {
     'use strict';
 
-    var app = require('app'),
-        common = require('common'),
-        $ = require('zepto'),
-        _ = require('lodash'),
-        TodoEditLayer = require('views/todos/editlayer'),
-        // Backbone = require('backbone'),
-        todosTemplate = require('text!templates/todos/todoview.html'),
-        BaseView = require('views/base'),
+    var app             = require('app'),
+        common          = require('common'),
+        $               = require('zepto'),
+        _               = require('lodash'),
+        TodoEditLayer   = require('views/todos/editlayer'),
+        // Backbone     = require('backbone'),
+        todosTemplate   = require('text!templates/todos/todoview.html'),
+        BaseView        = require('views/base'),
         events = {};
 
     events[app.defaultClickEvent + ' .ago-toggle-wrap'] = 'toggleCompleted';

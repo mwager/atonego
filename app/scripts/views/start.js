@@ -34,8 +34,6 @@ define(function (require) {
 
         initialize: function () {
             this.template = _.template(tpl);
-
-            app.user.on('change', this.render, this);
         },
 
         /**

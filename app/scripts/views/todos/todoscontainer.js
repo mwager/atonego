@@ -16,12 +16,12 @@
 define(function (require) {
     'use strict';
 
-    var _ = require('lodash'),
-        app = require('app'),
-        common = require('common'),
-        $ = require('zepto'),
-        Todo = require('models/todo'),
-        tpl = require('text!templates/todos/todoscontainer.html'),
+    var _       = require('lodash'),
+        app     = require('app'),
+        common  = require('common'),
+        $       = require('zepto'),
+        Todo    = require('models/todo'),
+        tpl     = require('text!templates/todos/todoscontainer.html'),
 
         // Views
         BaseView = require('views/base'),

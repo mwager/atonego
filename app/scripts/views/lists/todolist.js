@@ -16,15 +16,13 @@
 define(function (require) {
     'use strict';
 
-    var app = require('app'),
-        // common = require('common'),
-        _ = require('lodash'),
-        // Backbone = require('backbone'),
-        tpl = require('text!templates/lists/todolist.html'),
-        Todolist = require('models/todolist'),
-        BaseView = require('views/base'),
+    var app          = require('app'),
+        _            = require('lodash'),
+        tpl          = require('text!templates/lists/todolist.html'),
+        Todolist     = require('models/todolist'),
+        BaseView     = require('views/base'),
         TodolistItem = require('views/lists/todolistitem'),
-        events = {};
+        events       = {};
 
     return BaseView.extend({
         // id: '',

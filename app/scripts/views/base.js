@@ -14,9 +14,9 @@
 define(function(require) {
     'use strict';
 
-    var _ = require('lodash'),
-        Backbone = require('backbone'),
-        HeaderView = require('views/header');
+    var _           = require('lodash'),
+        Backbone    = require('backbone'),
+        HeaderView  = require('views/header');
 
     var BaseView = function (options) {
         this.defaultViewData = {};
@@ -33,7 +33,8 @@ define(function(require) {
          */
         dispose: function () {
             /***
-            "remove" looks like this in Backbone 1.0
+            "remove" looks like this in Backbone 1.0:
+            --------
             remove: function() {
               this.$el.remove();
               this.stopListening();
@@ -51,7 +52,7 @@ define(function(require) {
         renderSelf: function (data) {
             var html = this.template(data || this.defaultViewData);
 
-            /* does this actually make it faster? #benchs #xxx
+            /* does this make it faster?
             this.$el.empty();
             f = document.createDocumentFragment(),
             div = document.createElement('div');

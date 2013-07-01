@@ -21,10 +21,10 @@
 define(function (require) {
     'use strict';
 
-    var app = require('app'),
-        common = require('common'),
-        $ = require('zepto'),
-        _ = require('lodash'),
+    var app     = require('app'),
+        common  = require('common'),
+        $       = require('zepto'),
+        _       = require('lodash'),
         // Backbone = require('backbone'),
         BaseView = require('views/base'),
         TodoView = require('views/todos/todoview'),

@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # AtOneGo Makefile
 #
-# e.g. optimize sources via grunt, building and running via phonegap,
+# Optimize sources via grunt, building and running via phonegap,
 # deploying the api sources, running tests, etc
 # ------------------------------------------------------------------------------
 

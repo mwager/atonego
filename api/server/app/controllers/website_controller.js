@@ -264,7 +264,12 @@ WebsiteController = function (app, mongoose, _config) {
                 // email = req.body.m;
 
             if (p1 !== p2) {
-                req.flash('error', req.i18n.__('passwordsNotSame')); // XXX locale
+                req.flash('error', req.i18n.__('passwordsNotSame'));
+                return res.redirect(errorUrl);
+            }
+
+            if (p1.length < 6) {
+                req.flash('error', req.i18n.__('passwordsLenErr'));
                 return res.redirect(errorUrl);
             }
 

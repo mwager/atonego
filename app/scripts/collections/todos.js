@@ -15,11 +15,11 @@ define(function(require) {
     'use strict';
 
     var
-        _ = require('lodash'),
-        $ = require('zepto'),
+        _        = require('lodash'),
+        $        = require('zepto'),
         Backbone = require('backbone'),
-        app = require('app'),
-        Todo = require('models/todo');
+        app      = require('app'),
+        Todo     = require('models/todo');
 
     var TodosCollection = Backbone.Collection.extend({
         // Reference to this collection's model.
