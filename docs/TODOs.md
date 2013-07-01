@@ -1,6 +1,13 @@
 # TODOs
 
+ERST WENN IM im app store: (-:
+
+    $ git push -u origin master
+
+
+
 ## onBefore: iOS App Store
+
 * search XXX now
 * MORE PERFORMANCE!?
 * Checkout:

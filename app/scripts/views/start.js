@@ -14,13 +14,13 @@
 define(function (require) {
     'use strict';
 
-    var _ = require('lodash'),
-        // $ = require('zepto'),
-        app = require('app'),
+    var
+        _        = require('lodash'),
+        app      = require('app'),
         // common = require('common'),
-        tpl = require('text!templates/start.html'),
+        tpl      = require('text!templates/start.html'),
         BaseView = require('views/base'),
-        events = {};
+        events   = {};
 
     // events[app.defaultClickEvent + ' .no-account-btn'] = 'startWithoutAccount';
 
@@ -47,7 +47,9 @@ define(function (require) {
             });
 
             return this;
-        }/*,
+        }
+
+        /*,
         startWithoutAccount: function() {
             common.store.set('no-account', 1);
             return true;

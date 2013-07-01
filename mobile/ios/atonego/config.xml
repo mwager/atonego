@@ -56,11 +56,11 @@
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="FadeSplashScreenDuration" value=".50" />
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
     <!-- =========================== OWN end =============================== -->
 
     <!-- Preferences for iOS -->
     <preference name="AllowInlineMediaPlayback" value="false" />
-    <preference name="DisallowOverscroll" value="false" />
     <preference name="EnableLocation" value="false" /><!-- DEPRECATED -->
     <preference name="EnableViewportScale" value="false" />
     <preference name="FadeSplashScreen" value="true" />

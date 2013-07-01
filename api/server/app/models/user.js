@@ -8,7 +8,7 @@
 
 /**
  *
- * The User Model
+ * UserModel
  *
  * @see model_tests.js
  *
@@ -17,17 +17,18 @@
 'use strict';
 
 var
-    _ = require('underscore'),
-    BaseModel = require(__dirname + '/base'),
+    ENV         = process.env.NODE_ENV || 'test',
+    _           = require('underscore'),
+    BaseModel   = require(__dirname + '/base'),
     application = require('../../lib/application'),
-    utils = require('../../lib/utils'),
-    logger = require('../../lib/logger'),
-    // log = console.log,
+    utils       = require('../../lib/utils'),
+    logger      = require('../../lib/logger'),
+    // log      = console.log,
     Schema,
     modelIdentifier = 'User',
     USERNAME_LENGTH = 32,
     // PASSWORD_MIN_LENGTH = 6,
-    userTrialDays = 3;
+    userTrialDays   = 3;
 
 /**
  * reduce an array by passing an object as second param
@@ -584,10 +585,41 @@ module.exports = function (mongoose) {
         });
     };
 
+
+    Schema.statics.removeTokenFromUser = function _remTokn(token, cb) {
+        var User = this;
+
+        this.find({device_tokens: token}, function(err, users) {
+            if(err) {
+                return cb({key: 'error'});
+            }
+            else if(!users || users.length === 0) {
+                return cb({key: 'no users found'});
+            }
+            else if(users.length > 0) {
+                if(ENV !== 'test') {
+                    console.log('User.removeTokenFromUser() -> Found users: ', users);
+                }
+
+                var n = users.length;
+                users.forEach(function(u) {
+                    User.addOrRemoveAPNDeviceToken(true, u, token, function(err, success) {
+                        if(--n === 0) {
+                            cb(err, success);
+                        }
+                    });
+                });
+            }
+            else {
+                return cb({key: 'error'});
+            }
+        });
+    };
+
     /**
      * Add or remove an apn device token for this user
      *
-     * @param {bool} remove OIf True we are in "remove"-mode else add
+     * @param {bool} remove If True we are in "remove"-mode else add
      */
     Schema.statics.addOrRemoveAPNDeviceToken = function _addOrRemoveAPNDeviceToken(remove, user, token, cb) {
         if(!user || !token) {

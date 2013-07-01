@@ -417,7 +417,7 @@ describe('===== Testing ALL Models', function () {
         });
 
         describe('addOrRemoveAPNDeviceToken()', function () {
-            it('should add an iOS device token to an empty array', function (done) {
+            it('Should add an iOS device token to an empty array', function (done) {
                 var demoToken = '42dce3cfa6c2a9e14c5297f4860e5399b95f325acb75311af7cd71a1074e8e18';
 
                 User.addOrRemoveAPNDeviceToken(false, fred, demoToken, function(err, success) {
@@ -480,6 +480,39 @@ describe('===== Testing ALL Models', function () {
                     });
                 });
             });
+
+            it('should add the token again', function (done) {
+                var demoToken = '42dce3cfa6c2a9e14c5297f4860e5399b95f325acb75311af7cd71a1074e8e19';
+
+                User.addOrRemoveAPNDeviceToken(false, fred, demoToken, function(err, success) {
+                    should.not.exist(err);
+                    success.should.equal(true);
+
+                    // re-fetch
+                    User.fetchUser(fred._id, function(err, user) {
+                        user.device_tokens.length.should.equal(2);
+                        fred = user;
+                        done();
+                    });
+                });
+            });
+
+            it('should find users for a token to remove it', function (done) {
+                var demoToken = '42dce3cfa6c2a9e14c5297f4860e5399b95f325acb75311af7cd71a1074e8e19';
+
+                User.removeTokenFromUser(demoToken, function(err, success) {
+                    should.not.exist(err);
+                    success.should.equal(true);
+
+                    // re-fetch
+                    User.fetchUser(fred._id, function(err, user) {
+                        user.device_tokens.length.should.equal(1);
+                        fred = user;
+                        done();
+                    });
+                });
+            });
+
         });
     }); // end User model
 

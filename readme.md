@@ -59,6 +59,8 @@ Native App via Phonegap for iOS [and Android]. (WebApp served via Node.js)
 * __`/test`                   - All frontend tests__
 * `/dist`                     - Created via Grunt. The optimized sources will be used in the phonegap app and the webapp
 * `/mobile`                   - Phonegap iOS and Android container (the sources from `dist` will be copied to the specific phonegap `www`-directory)
+* `/mobile/ios/www`           - Phonegap assets dir iOS
+* `/mobile/android/assets/www`- Phonegap assets dir Android
 * `/docs`                     - All software documentation
 
 ### Files
@@ -70,6 +72,8 @@ Native App via Phonegap for iOS [and Android]. (WebApp served via Node.js)
 * `/app/scripts/config.js`            - The RequireJS config file for development (see also `/app/scripts/config.production.js`)
 * `/app/scripts/main.js`              - The main bootstrapper, all initial event handling (domready/deviceready, global click/touch handlers, global ajax config...)
 * `/app/scripts/router.js`            - The AppRouter, all client side navigation is done via history api (pushstate is on phonegap apps not needed). All routes of the app are defined here, and the router takes care of the rendering of root-views (screens)
+
+
 
 ## Local installation
 
@@ -163,6 +167,7 @@ We mark problems and todos in the code comments via the marker `XXX` since using
 
 
 
+
 ## Tests
 
 ### Overview
@@ -220,11 +225,12 @@ Tests in `/test/functional` via (casperjs.org)[http://casperjs.org].
     $ casperjs test test/functional
 
 
-### Continuous Integration - Jenkins/Travis
+### Continuous Integration - Travis
 
-TODO. Jenkins at openshift? Travis?
+[![Build Status](https://travis-ci.org/mwager/atonego.png?branch=master)](https://travis-ci.org/mwager/atonego)
 
-NOTE: The Database is currently not mocked in the api tests.
+See `.travis.yml` and [the travis page](https://travis-ci.org/mwager/atonego).
+
 
 ### Testing/Debugging via weinre
 
@@ -246,6 +252,9 @@ Then include smt like this in `app/index.html` right after `<body>`:
 
 
 and open [this](http://192.168.1.233:8081/client/#anonymous) page with a browser.
+
+
+
 
 
 ## The API, error handling & multilingualism
@@ -297,6 +306,8 @@ Models are always returning the Error as the __first__ parameter in the callback
 
 
 
+
+
 ## Deployment
 
 Be sure to check out the `Makefile` for more infos.
@@ -320,13 +331,10 @@ We generate __one__ optimized JavaScript file (`aog.js`) via the requirejs optim
     # be sure to connect a real device before running the following one, else the android simulator could screw up your system (-;
     $ make android_build && make android_run && clear && adb logcat | grep "Cordova"
 
-
 ### App Store Submission (iOS)
 
 * [apple docs 1](http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Conceptual/YourFirstAppStoreSubmission/AboutYourFirstAppStoreSubmission/AboutYourFirstAppStoreSubmission.html)
 * [creating app record in iTunes connect](http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Conceptual/YourFirstAppStoreSubmission/CreateYourAppRecordiniTunesConnect/CreateYourAppRecordiniTunesConnect.html)
-
-
 
 ### Deployment of the API
 
@@ -452,6 +460,7 @@ __Note__: use `gateway.sandbox.push.apple.com` in development (same port)
 
 
 
+
 ## Problems, Solutions, Workarounds, Known Bugs
 
 ### Performance
@@ -539,7 +548,8 @@ See also:
 * XCode: update codesigning identity according to the downloaded provisioning profile (project AND target)
 
 ### The cronjob
-On the server runs a minutely cronjob, checking all todos which are due now, so we can notify users. However, I could not figure out a good solution to re-use my existing (running) node app to do this. The current workaround is to listen for a POST to a specific URL, and POSTing to that URL via `curl` from the cronjob with some pseudo credentials set to "make sure" that the request came from the shell script, not from outside )-:
+
+A minutely cronjob runs on the server, checking all todos which are due now, so we can notify users. However, I could not figure out a _good_ solution to re-use my existing (running) node app for this. The current workaround is to listen for a POST to a specific URL, and POSTing to that URL via `curl` from the cronjob with some pseudo credentials set to "make sure" that the request came from the shell script, not from outside )-:
 
 Search `/api/worker.js` -> "cron"
 
@@ -565,5 +575,9 @@ Open the app in chrome or safari ([dev](http://127.0.0.1/atonego/app) or [live](
     var list = app.todolists.get('51503c5957603cbc0400001e');
     list.set('title', '');
 
+
+
+
 ## Todos
+
 See `docs/TODOs.md`

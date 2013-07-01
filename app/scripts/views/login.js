@@ -14,13 +14,13 @@
 define(function (require) {
     'use strict';
 
-    var $ = require('zepto'),
-        _ = require('lodash'),
-        app = require('app'),
-        common = require('common'),
-        tpl = require('text!templates/login.html'),
-        BaseView = require('views/base'),
-        events = {};
+    var $           = require('zepto'),
+        _           = require('lodash'),
+        app         = require('app'),
+        common      = require('common'),
+        tpl         = require('text!templates/login.html'),
+        BaseView    = require('views/base'),
+        events      = {};
 
     events['keyup .login-input'] = 'validate';
     events[app.defaultClickEvent + ' #login-btn'] = 'login';

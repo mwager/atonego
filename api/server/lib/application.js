@@ -39,7 +39,7 @@ var
 
 // APN PUSH CONFIGS:
 var
-    APN_PRODUCTION = true, // XXX now test in DEV working before release! feedback SHIT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    APN_PRODUCTION = true,
     gateway,
     cert,
     key;
@@ -433,8 +433,11 @@ var app = {
             var myDevice = new apn.Device(token);
             var note     = new apn.Notification();
 
+            note.device     = myDevice;
+
             // XXX
             // note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+
             note.badge      = 1;
             note.sound      = 'notification-beep.wav'; // muss sein, sonst kein sound
             note.alert      = message; // \uD83D\uDCE7   ✔ == \u2714
@@ -443,8 +446,6 @@ var app = {
             if(typeof type === 'string')  {
                 note.payload = {'type': type};
             }
-
-            note.device     = myDevice;
 
             // the apn error callback
             var errorCallback = function(errorNum, notification) {
@@ -473,11 +474,9 @@ var app = {
 
     /**
      * Check for invalid Apple device tokens periodically
-     * TODO wenn apn integration, dann auch das hier.
-     * tokens beim user speichern? evtl mehrere?????
+     * and remove from user
      *
-     * auch undelivered PUSH messages usw hier?
-     * XXX TODO push
+     * XXX push
      */
     initAPNFeedbackPolling: function() {
         var passphrase = config.production.APN_PUSH_PASSPHRASE;
@@ -491,31 +490,34 @@ var app = {
             console.log('ERROR application.initAPNFeedbackPolling()', a, b);
         }
 
-        // "TODO"
-        // XXX später dann alle 300 secs?
         var options = {
             // dev only:
             // address : 'feedback.sandbox.push.apple.com',
             // address: gateway,
             'batchFeedback': true,
-            'interval': 1,
+            'interval':     300, // interval seconds
 
-            errorCallback: callback2,
-            cert: cert,
-            key: key,
-            passphrase: passphrase
+            errorCallback:  callback2,
+            cert:           cert,
+            key:            key,
+            passphrase:     passphrase
         };
 
         var feedback = new apn.Feedback(options);
         feedback.on('feedback', function(devices) {
             var msg = '=====> FEEDBACK POLLING! devices: ' + devices.length;
 
-            // XXX
             console.log(devices);
+
             devices.forEach(function(item) {
                 // Do something with item.device and item.time
                 console.log('------------------------------',item);
                 msg += ' DEVICE: ' + item.device + ' at' + item.time;
+
+                // find the user with this token and remove the token
+                User.removeTokenFromUser(item.device, function(/*err, success*/) {
+
+                });
             });
 
             // send a mail now...
