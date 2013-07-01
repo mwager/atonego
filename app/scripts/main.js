@@ -396,7 +396,7 @@ require([
         var onResume = function() {
             __app_config__.isPaused = false;
 
-            log('---> onResume');
+            log('---> onResume - app.isLoggedIn? ' + (app.isLoggedIn ? 'yes' : 'no!'));
 
             // do not connect if not logged in
             if(!app.isLoggedIn) {
@@ -482,32 +482,6 @@ require([
             image.src = images[i];
         }
     }
-
-    /* testing only
-    function testSocketIO_Reconnect() {
-        setTimeout(function() {
-            app.socketWrapper.disconnect(true);
-
-            setTimeout(function() {
-                app.socketWrapper.connect(app.API_TOKEN);
-                app.socketWrapper.once('connect_success', function() {
-                    app.socketWrapper.subscribeToLists(app.todolists);
-                });
-
-                setTimeout(function() {
-                    app.socketWrapper.disconnect(true);
-
-                    setTimeout(function() {
-                        app.socketWrapper.connect(app.API_TOKEN);
-                        app.socketWrapper.once('connect_success', function() {
-                            app.socketWrapper.subscribeToLists(app.todolists);
-                        });
-                    }, 1000);
-                }, 3000);
-
-            }, 1000);
-        }, 3000);
-    }*/
 
     /**
      * Init the application

@@ -218,7 +218,6 @@ UsersController = function (app, mongoose, config) {
                         var foundUser = foundUsers[0];
                         var type = 'invitation';
 
-                        // XXX send mail here too?
                         User.inviteToList(userID, foundUser._id, todolist, function (err, invitedUser) {
                             if (err || !invitedUser) {
                                 // TODO locale

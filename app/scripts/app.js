@@ -99,7 +99,6 @@ define(function (require) {
      *
      * @param callback gets a lang string like 'en' or 'de' (default 'en')
      */
-
     function detectLang(callback) {
         var lang = common.store.get('app-language');
 
@@ -152,48 +151,6 @@ define(function (require) {
         }
     }
 
-    /**
-     * ScrollFix v0.1
-     * http://www.joelambert.co.uk
-     *
-     * Copyright 2011, Joe Lambert.
-     * Free to use under the MIT license.
-     * http://www.opensource.org/licenses/mit-license.php
-
-    // found here:
-    // http://www.kylejlarson.com/blog/2011/fixed-elements-and-scrolling-divs-in-ios-5/
-    var ScrollFix = function(elem) {
-        // Variables to track inputs
-        var startY, startTopScroll; // , deltaY;
-
-        // prevent scrolling in the current screen's header
-        $('header').on('touchstart', function(e) {
-            e.preventDefault();
-            // log("'HEADER TOUCH !!!!!!!!!!!!!")
-        });
-
-        // If there is no element, then do nothing
-        if(!elem) {
-            return;
-        }
-
-        // Handle the start of interactions
-        elem.addEventListener('touchstart', function(event){
-            startY = event.touches[0].pageY;
-            startTopScroll = elem.scrollTop;
-
-            log('TOUCHSTART: startTopScroll: ' + startTopScroll + ' elem.offsetHeight: ' +
-                elem.offsetHeight + ' elem.scrollHeight: ' + elem.scrollHeight);
-
-            if(startTopScroll <= 0) {
-                elem.scrollTop = 1;
-            }
-
-            if(startTopScroll + elem.offsetHeight >= elem.scrollHeight) {
-                elem.scrollTop = elem.scrollHeight - elem.offsetHeight - 1;
-            }
-        }, false);
-    };*/
 
     var isPhantomJS      = /phantomjs/.test(navigator.userAgent.toLowerCase());
 
@@ -203,8 +160,10 @@ define(function (require) {
     // wir befinden uns in einem mobilen browser (nicht phonegap)
     var isMobile_Browser = isMobile && isMobileBrowser();
 
-    // Provide a global location to place configuration settings and module
-    // creation.
+
+
+    // Provide a global location to place configuration
+    // settings and module creation.
     var app = {
         VERSION:        version,
         API_ROOT:       __app_config__.API_ROOT,
@@ -237,8 +196,6 @@ define(function (require) {
 
         // Global SocketIO wrapper class
         socketWrapper: null
-
-        // ScrollFix: ScrollFix
     };
 
     // Mix Backbone.Events, modules, and layout management into the app
@@ -260,23 +217,23 @@ define(function (require) {
          * App-global error helper
          */
         handleError: function(err, isFatal) {
+            if(typeof err !== 'string') {
+                err = err + '';
+            }
+
             // log the error to the console
-            log(err);
+            log('app.handleError() -> ' + err);
 
             if(!isFatal) {
                 return false;
             }
 
-            if(typeof err !== 'string') {
-                err = err + '';
-            }
-
             // send this error silently to our server if possible
             $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url:app.API_ROOT + '/api/v1/logs',
-                data: {m: err}
+                type:       'POST',
+                dataType:   'json',
+                url:        app.API_ROOT + '/api/v1/logs',
+                data:       {m: err}
             });
         },
 

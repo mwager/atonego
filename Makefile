@@ -128,7 +128,7 @@ jsbuild : clean
 	du -sh $(DST)/scripts/aog.js
 	du -sh $(DST)/index.html
 
-	# TODO XXX raus
+	# XXX raus
 	# (js)-beautify the aog.js
 	js-beautify -f $(DST)/scripts/aog.js -o $(DST)/scripts/aog.js
 
