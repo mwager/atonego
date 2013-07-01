@@ -581,8 +581,8 @@ define(function (require) {
 
                     // erst nach dem cleanup
                     // scrolling fix for every new scrolling .content
-                    var scrollingContent = $('.content')[0];
-                    new app.ScrollFix(scrollingContent);
+                    // var scrollingContent = $('.content')[0];
+                    // new app.ScrollFix(scrollingContent);
                 }, 200);
             });
 

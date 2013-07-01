@@ -159,7 +159,7 @@ define(function (require) {
      * Copyright 2011, Joe Lambert.
      * Free to use under the MIT license.
      * http://www.opensource.org/licenses/mit-license.php
-     */
+
     // found here:
     // http://www.kylejlarson.com/blog/2011/fixed-elements-and-scrolling-divs-in-ios-5/
     var ScrollFix = function(elem) {
@@ -193,7 +193,7 @@ define(function (require) {
                 elem.scrollTop = elem.scrollHeight - elem.offsetHeight - 1;
             }
         }, false);
-    };
+    };*/
 
     var isPhantomJS      = /phantomjs/.test(navigator.userAgent.toLowerCase());
 
@@ -236,9 +236,9 @@ define(function (require) {
         activities: [],
 
         // Global SocketIO wrapper class
-        socketWrapper: null,
+        socketWrapper: null
 
-        ScrollFix: ScrollFix
+        // ScrollFix: ScrollFix
     };
 
     // Mix Backbone.Events, modules, and layout management into the app
