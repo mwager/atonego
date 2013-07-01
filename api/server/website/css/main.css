@@ -1,4 +1,6 @@
 /*
+ * WEBSITE STYLES
+ *
  * HTML5 Boilerplate
  *
  * What follows is the result of much research on cross-browser styling.
@@ -23,18 +25,16 @@ body {
     line-height : 1.4;
 }
 
-a {
-    color : #551a8b;
+/* links */
+a,
+a:active,
+a:visited,
+a:hover {
+    color : #34b11a;
     text-decoration: none;
 }
-
-a:visited {
-    color : #551a8b;
-}
-
 a:hover {
     text-decoration: underline;
-    color : #551a8b;
 }
 
 /*
@@ -80,32 +80,44 @@ textarea {
 }
 
 body {
-    margin           : 0 auto;
-    padding          : 0 20px 0 20px;
-    max-width        : 960px;
     background-image : url(../img/bg.gif);
     height           : 100%;
+    width            : 100%;
+    font-family: 'Open-Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+}
+
+#container {
+    margin           : 0 auto;
+    max-width        : 960px;
+    padding          : 0 20px 0 20px;
+}
+
+#container .content {
+    max-width : 810px;
+    margin: 0 auto;
+}
+
+#container p {
+    /*max-width: 700px;*/
 }
 
 li {
     line-height: 25px;
 }
-h1, h2, a.own-font {
+h1, h2 {
     font-family : 'LITOPRINT';
 }
 
 a.own-font {
-    color: #000;
-}
-a.own-font:hover {
-    text-decoration: none;
+    font-weight: bold;
 }
 
 h2 {
     font-size: 25px
 }
 
-/** TODO wackeln beim ersten Laden verhindern */
 header {
     min-height: 400px;
 }
@@ -113,13 +125,6 @@ header {
 #myCarousel {
     min-height: 400px;
 }
-
-/* Modernizr gibt <body> die Klasse .js beim Laden der Seite.
-   Das bedeutet der User hat js aktiviert.
-   Deshalb verstecken wir .js und blenden via jQuery dann
-   wieder ein onDomReady.
-.js { display : none; }
-*/
 
 header {
     margin : 30px 0 0 0;
@@ -137,8 +142,6 @@ footer {
 
 .divider {
     margin: 30px auto 30px auto;
-    max-width: 810px;
-
     border-bottom: 1px dotted #333;
 }
 
@@ -174,36 +177,25 @@ footer .right {
 }
 
 h1, h2, h3, h4 {
-    max-width   : 810px;
-    margin      : 0 auto;
     padding     : 0 27px 20px 27px;
     display     : block;
 }
 
 p {
-    max-width   : 810px;
-    margin      : 0 auto;
     padding     : 0 27px 15px 27px;
     line-height : 23px;
 }
 
 ul {
-    max-width : 810px;
-    margin    : 0 auto;
-    padding   : 0 27px 30px 60px;
+    padding   : 0 27px 30px 30px;
 }
 
 form {
     padding: 0 27px 30px 27px;
 }
-form, fieldset, label, input {
-    max-width: 810px;
-    margin: 0 auto;
-}
 
 form input, form textarea {
     width: 95%;
-    max-width: 810px;
 }
 p strong {
     text-transform : uppercase;

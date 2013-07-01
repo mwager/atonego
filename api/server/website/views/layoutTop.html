@@ -36,48 +36,59 @@
           content="<%- baseUrl %>img/touch/apple-touch-icon-114x114-precomposed.png">
     <meta name="msapplication-TileColor" content="#222222">
 
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+    <% if(ENV !== 'production') { %>
     <link rel="stylesheet" href="<%- baseUrl %>css/normalize.css">
     <link rel="stylesheet" href="<%- baseUrl %>css/bootstrap.css">
     <link rel="stylesheet" href="<%- baseUrl %>css/bootstrap-responsive.css">
     <link rel="stylesheet" href="<%- baseUrl %>css/main.css">
+    <% } else { %>
+    <link rel="stylesheet" href="<%- baseUrl %>css/build.css?v=123456">
+    <% } %>
+
     <script src="<%- baseUrl %>js/vendor/modernizr-2.6.2.min.js"></script>
+
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
 </head>
 <body>
 
-<noscript>
-    <div class="flash-error">
-        <a href="http://www.enable-javascript.com">how to enable javascript</a>
-    </div>
-</noscript>
-
-<% if(error && error.length > 0) { %>
-<div class="flash-error"><%- error %></div>
-<% } else if(info && info.length > 0) { %>
-<div class="flash-info"><%- info %></div>
-<% } %>
-
-<header>
-    <a href="<%- baseUrl %>?lang=<%- lang %>">
-        <img src="<%- baseUrl %>img/header.png">
-    </a>
-    <% if(typeof showHeader !== 'undefined' && true === showHeader) { %>
-    <div class="store-badges">
-        <a class="store-ios" target="_blank" href="#">
-            <img src="<%- baseUrl %>img/store_ios.png">
+<div id="container">
+    <header>
+        <a href="<%- baseUrl %>?lang=<%- lang %>">
+            <img src="<%- baseUrl %>img/header.png">
         </a>
+        <% if(typeof showHeader !== 'undefined' && true === showHeader) { %>
+        <div class="store-badges">
+            <a class="store-ios" target="_blank" href="#">
+                <img src="<%- baseUrl %>img/store_ios.png">
+            </a>
 
-        <!--
-        <a class="store-android" target="_blank" href="http://play.google.com/store/apps/details?id=de.mwager.atonego">
-            <img src="<%- baseUrl %>img/store_android.png">
-        </a>
-        -->
+            <!--
+            <a class="store-android" target="_blank" href="http://play.google.com/store/apps/details?id=de.mwager.atonego">
+                <img src="<%- baseUrl %>img/store_android.png">
+            </a>
+            -->
 
-        <a class="webapp-link" target="_blank" href="https://atonego-mwager.rhcloud.com/app">
-            <img src="<%- baseUrl %>img/whoNeedsAppStores.png">
-        </a>
-    </div>
+            <a class="webapp-link" target="_blank" href="https://atonego-mwager.rhcloud.com/app">
+                <img src="<%- baseUrl %>img/whoNeedsAppStores.png">
+            </a>
+        </div>
+        <% } %>
+    </header>
+
+    <noscript>
+        <div class="flash-error">
+            <a href="http://www.enable-javascript.com">how to enable javascript</a>
+        </div>
+    </noscript>
+
+    <% if(error && error.length > 0) { %>
+    <div class="flash-error"><%- error %></div>
+    <% } else if(info && info.length > 0) { %>
+    <div class="flash-info"><%- info %></div>
     <% } %>
-</header>
 
-
-<div id="content">
+    <div class="content">

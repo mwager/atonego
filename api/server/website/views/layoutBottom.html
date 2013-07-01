@@ -1,4 +1,5 @@
 </div>
+</div>
 
 <footer>
     <div class="left">
@@ -26,14 +27,15 @@
     };
 </script>
 
+<% if(ENV !== 'production') { %>
 <!-- XXX grunt build !? ! -->
 <script src="<%- baseUrl %>js/vendor/jquery.js"></script>
 <script src="<%- baseUrl %>js/vendor/bootstrap.js"></script>
-<script src="<%- baseUrl %>js/helper.js"></script>
 <script src="<%- baseUrl %>js/vendor/underscore-min.js"></script>
 <script src="<%- baseUrl %>js/main.js"></script>
 
-<% if(ENV === 'production') { %>
+<% } else if(ENV === 'production') { %>
+<script src="<%- baseUrl %>js/build.js?v=123456"></script>
 <script type="text/javascript">
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-39391179-1']);
@@ -46,5 +48,10 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 })();
 </script>
 <% } %>
+<script type="text/javascript">stLight.options({publisher: "bc978512-05a7-479b-aca7-6adaf8c95bed", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+<script>
+var options={ "publisher": "bc978512-05a7-479b-aca7-6adaf8c95bed", "position": "right", "ad": { "visible": false, "openDelay": 5, "closeDelay": 0}, "chicklets": { "items": ["facebook", "twitter", "googleplus", "xing", "email", "sharethis"]}};
+var st_hover_widget = new sharethis.widgets.hoverbuttons(options);
+</script>
 </body>
 </html>

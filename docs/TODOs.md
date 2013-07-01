@@ -4,7 +4,8 @@ ERST WENN IM im app store: (-:
 
     $ git push -u origin master
 
-
+-> sharethis testen (-:
+-> twitter/xing/app magazine anschreiben?
 
 ## onBefore: iOS App Store
 
@@ -23,3 +24,4 @@ ERST WENN IM im app store: (-:
 * Android App ? (fix scrolling and you are done?)
 * Windows App ?
 * Android 9-patch images? via sdk tools...
+-> google analytics tracking? (app store clicks? webapp? ...)

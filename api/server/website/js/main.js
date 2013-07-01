@@ -14,7 +14,6 @@
 (function (window, document, _, $) {
     'use strict';
 
-    // TODO ENV !?!?
     var log = function () {
         if(!console || __app_config__.ENV === 'production') {
             return false;
@@ -31,21 +30,12 @@
 
         // returning true prevents browsers from doing anything
         // on uncaught errors
-        return false; // todo
+        return true;
     };
 
     var app = {};
 
     // -------------------------------------------------------------------------
-    /*function fadeInBody($el) {
-        //        .fadeIn('fast');
-        $el.css({
-            display: 'block',
-            opacity: 0
-        }).animate({
-            opacity: 1
-        }, 1000);
-    }*/
 
     app.fadeOutFlashMessages = function() {
         var flashInfo = $('.flash-info');
@@ -66,13 +56,6 @@
     };
 
     function onDOMReady() {
-        // fade in body.js
-        // var body = $('.js');
-
-        // wenn js deaktiviert!?!?!?
-        // fadeInBody($('header'));
-        // fadeInBody($('#myCarousel'));
-
         app.fadeOutFlashMessages();
     }
 

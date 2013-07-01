@@ -22,7 +22,7 @@ api/node_modules
 # hmm?
 api/server/lib/logger.js
 api/server/locales
-
+api/server/website/js/build.js
 api_deployment
 
 ###### website ######

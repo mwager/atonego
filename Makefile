@@ -263,12 +263,15 @@ api_deploy : webapp
 	### check status und ggf manuell deploy/push ?
 	cd ./api_deployment && git status && git add -A && git commit -a -m "auto commit" && git push origin master
 
+	### website build
+	bash $(API_SRC)/server/build/run.sh
+
 	tput bel
 
 # run all tests
 all_tests :
 	@echo
-	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - running all tests $(NO_COLOR)"
+	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - running all tests. Please start the node server first. $(NO_COLOR)"
 
 	# KABOOM
 	cd api && npm test && cd .. && ./casperjs/bin/casperjs test test/functional && ./node_modules/testem/testem.js ci
