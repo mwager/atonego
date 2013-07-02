@@ -15,7 +15,6 @@
  * XXX:
  *     - more modularity, less deps
  *     - better test concept
- *     - mocking the db, travis integration? (jenkins @ openshift?)
  */
 'use strict';
 
@@ -27,18 +26,18 @@ process.env.NODE_ENV = 'test';
 //    process.exit(-1);
 //}
 var
-    root = __dirname + '/../../../../',
-    libpath = root + 'server/',
-    mongoose = require('mongoose'),
-    moment = require('moment'),
-    utils = require(root + 'server/lib/utils'),
-    db = require(root + 'server/lib/db'),
-    should = require('should'),
-    _ = require('underscore'),
+    root        = __dirname + '/../../../../',
+    libpath     = root + 'server/',
+    mongoose    = require('mongoose'),
+    moment      = require('moment'),
+    utils       = require(root + 'server/lib/utils'),
+    db          = require(root + 'server/lib/db'),
+    should      = require('should'),
+    _           = require('underscore'),
     // cleanCollection = db.cleanCollection,
-    log = console.log,
-    // colors = require('colors'),
-    ENV = process.env.NODE_ENV || 'test';
+    log         = console.log,
+    // colors   = require('colors'),
+    ENV         = process.env.NODE_ENV || 'test';
 
 log = log; // jshint...
 // ----- test globals -----
@@ -606,9 +605,9 @@ describe('===== Testing ALL Models', function () {
         });
 
         /**
-         * this is some tricky stuff...
+         * This is some tricky stuff...
          *
-         * Beispiel:
+         * Example:
          * =====================================================================
          * Users:
          * id   name   lists
@@ -645,9 +644,9 @@ describe('===== Testing ALL Models', function () {
 
                         fred.name.should.equal(userName); // (-;
 
-                        //                            console.log(todolist);
-                        //                            console.log(fred.todolists);
-                        //console.log(fred.todolists.id(todolist._id));
+                        // console.log(todolist);
+                        // console.log(fred.todolists);
+                        // console.log(fred.todolists.id(todolist._id));
                         // ist fred der owner?
                         fred.todolists.forEach(function (l) {
                             if(('' + l._id) === ('' + todolist._id)) {

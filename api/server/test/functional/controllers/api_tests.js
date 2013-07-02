@@ -20,19 +20,19 @@ var
     // libpath = root + 'server/',
     // application = require(root + 'lib/application'),
 
-    mongoose = require('mongoose'),
-    request = require('request'),
+    mongoose    = require('mongoose'),
+    request     = require('request'),
     oldRequest,
 
-    should = require('should'),
-    _ = require('underscore'),
+    should      = require('should'),
+    _           = require('underscore'),
     log,
-    BOOTSTRAP = require('../../bootstrap_tests');
+    BOOTSTRAP   = require('../../bootstrap_tests');
 
 log = console.log;
 
-var testUserEmail = 'trash@at-one-go.com',
-    testUser2Email = 'trash2@at-one-go.com';
+var testUserEmail   = 'trash@at-one-go.com',
+    testUser2Email  = 'trash2@at-one-go.com';
 
 var testUser, testUser2, testList, testTodo;
 var listTestTitle = 'my private list';

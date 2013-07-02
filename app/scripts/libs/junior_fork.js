@@ -1,7 +1,7 @@
 // fork of https://github.com/justspamjustin/junior/blob/master/src/javascripts/junior.js
 // June 2013 Michael Wager <mail@mwager.de>
 
-// XXX now - code review and:
+// XXX code review and:
 //
 // "empty page bug"
 // Sometimes there will be a blank screen AFTER the transition is

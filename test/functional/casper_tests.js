@@ -15,7 +15,7 @@
  * und somit Webkit basiert. Wir deployen die App für iOS und Android;
  *  -> beide webkit!
  *
- * XXX more ! XXX now - use case / testprotocol, #docs here!
+ * XXX more ! use case / testprotocol...
  */
 'use strict';
 

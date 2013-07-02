@@ -478,7 +478,7 @@ define(function (require) {
                 app.iScroll.destroy();
             }
 
-            app.isAndroid = true; // XXX now
+            app.isAndroid = true; // XXX
             if(app.isAndroid) {
                 log('-----> init iscroll instance')
 

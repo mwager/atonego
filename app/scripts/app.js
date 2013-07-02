@@ -615,7 +615,6 @@ define(function (require) {
                     'ecb':   'onNotificationAPN'
                 };
 
-                // XXX now - nochmal checken wie das is DEV vs PRODUCTION mit register/unregister
                 // am Besten die apple docs
                 log('#register call now................................................');
                 // return app.pushNotification.register(tokenHandler, errorHandler, opts);

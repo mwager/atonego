@@ -31,12 +31,13 @@ window.onerror = function window_onerror(errorMsg, url, lineNumber) {
 
     msg = msg + msg2;
 
-    /*global alert: true*/
-    // XXX now
-    if(__app_config__.touch) {
-        alert('THIS IS A GLOBAL F*** ERROR: ' + errorMsg +
-            ' IN FILE ' + url + ' LINE NUMBER: ' + lineNumber);
-    }
+    /* global alert: true*/
+    // alerting global uncaught errors can be VERY HELPFUL WHILE
+    // TESTING ON REAL DEVICES
+    // if(__app_config__.touch) {
+    //     alert('THIS IS A GLOBAL F*** ERROR: ' + errorMsg +
+    //         ' IN FILE ' + url + ' LINE NUMBER: ' + lineNumber);
+    // }
 
     log(msg);
 
@@ -366,7 +367,7 @@ require([
             }());
         }
 
-        // XXX now
+        // XXX
         /*if(app.isAndroid) {
             document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
         }*/

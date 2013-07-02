@@ -1,7 +1,8 @@
 # TODOs
 
 ERST WENN IM im app store: (-:
-
+NOCHMAL NEUES REPO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+dann:
     $ git push -u origin master
 
 -> sharethis testen (-:
@@ -9,15 +10,8 @@ ERST WENN IM im app store: (-:
 
 ## onBefore: iOS App Store
 
-* search XXX now
-* MORE PERFORMANCE!?
-* Checkout:
-    * index.html TODOs ! e.g. no production logging! and /all/ logs.
-* Code review
-* Makefile review
-
 ## API
-* Security review
+* Security review?
 * API: apn push feedback stuff (application.js @ initAPNFeedbackPolling())
 
 ### Other Todos (maybe later)

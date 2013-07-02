@@ -128,9 +128,8 @@ jsbuild : clean
 	du -sh $(DST)/scripts/aog.js
 	du -sh $(DST)/index.html
 
-	# XXX raus
 	# (js)-beautify the aog.js
-	js-beautify -f $(DST)/scripts/aog.js -o $(DST)/scripts/aog.js
+	# js-beautify -f $(DST)/scripts/aog.js -o $(DST)/scripts/aog.js
 
 ### wenn man die app auf nem device ohne requirejs build laufen lassen will
 ### muss "jsbuild_debug" die dependency des "build" tasks sein!
