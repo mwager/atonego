@@ -285,7 +285,7 @@ TodosController = function (app, mongoose, config) {
                         //     self.socketController.broadcast(user, listID, 'delete_todos', todos, req);
                         // }
 
-                        if(todos.length > 0) {
+                        if(todos.length > 0 && todo.todolist && todo.todolist.title) {
                             var pushMsgArgs = ['delete_todos', todos.join(', '), todo.todolist.title];
                             doAPNPush(user, todo, pushMsgArgs);
                         }
