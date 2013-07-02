@@ -39,10 +39,6 @@
     <!-- ***** FOR TESTING (-: *****
     <content src="test/index.html" />-->
 
-    <!-- dev / staging -->
-    <access origin="http://127.0.0.1*"/>
-    <access origin="http://192.168.1.233*"/>
-
     <!-- production -->
     <access origin="https://atonego-mwager.rhcloud.com*"/>
     <access origin="https://at-one-go.com*"/>

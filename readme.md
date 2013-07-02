@@ -333,6 +333,7 @@ We generate __one__ optimized JavaScript file (`aog.js`) via the requirejs optim
 
 ### App Store Submission (iOS)
 
+* [checkout this tutorial first](http://www.adobe.com/devnet/dreamweaver/articles/phonegap-mobile-app-pt7.html#addconfappdist)
 * [apple docs 1](http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Conceptual/YourFirstAppStoreSubmission/AboutYourFirstAppStoreSubmission/AboutYourFirstAppStoreSubmission.html)
 * [creating app record in iTunes connect](http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Conceptual/YourFirstAppStoreSubmission/CreateYourAppRecordiniTunesConnect/CreateYourAppRecordiniTunesConnect.html)
 
