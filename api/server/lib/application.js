@@ -414,6 +414,10 @@ var app = {
      * Send a APN PUSH notification to all device-token(s) of one user
      */
     sendAPN_PUSH: function(user, message, type) {
+        if(!config.production) {
+            return false;
+        }
+
         var passphrase = config.production.APN_PUSH_PASSPHRASE;
         var tokens     = user.device_tokens;
 
@@ -479,6 +483,10 @@ var app = {
      * XXX push
      */
     initAPNFeedbackPolling: function() {
+        if(!config.production) {
+            return false;
+        }
+
         var passphrase = config.production.APN_PUSH_PASSPHRASE;
 
         if(!passphrase) {
