@@ -42,6 +42,17 @@ var todoTestTitle = 'my todo list';
 var User, Todolist, Todo;
 
 var API_TOKEN;
+
+
+
+// if an error occurs, we must close the db connection and exit
+process.on('uncaughtException', function (err) {
+    BOOTSTRAP.after(function() {});
+    console.log('=======> UNCAUGHT ERROR: ' + err);
+    process.exit(-1);
+});
+
+
 /**
  * Can be used to get a "request" object with
  * default HTTP Basic auth api token set on

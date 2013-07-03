@@ -56,6 +56,27 @@ hansName = 'hans';
 // die 2 testuser
 var fred, hans;
 
+
+function disconnectDB() {
+    try {
+        if(mongoose && mongoose.disconnect) {
+            log('--------------- disconnecting from database...');
+            mongoose.disconnect();
+        }
+    }
+    catch(e) {
+        log('error disconnecting db: ' + (e.message ? e.message : e));
+    }
+}
+
+// if an error occurs, we must close the db connection and exit
+process.on('uncaughtException', function (err) {
+    disconnectDB();
+    console.log('=======> UNCAUGHT ERROR: ' + err);
+    process.exit(-1);
+});
+
+
 describe('===== Testing ALL Models', function () {
     var config, User, Todolist, Todo, DeletedUser; // MODEL REFS!
     before(function (done) {
@@ -81,7 +102,7 @@ describe('===== Testing ALL Models', function () {
     });
 
     after(function (done) {
-        mongoose.disconnect();
+        disconnectDB();
         done();
     });
 

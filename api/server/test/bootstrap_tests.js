@@ -88,8 +88,16 @@ BOOTSTRAP.before = function (cb) {
 
 BOOTSTRAP.after = function (cb) {
     var closedApp = false;
+    try {
+        if(mongoose && mongoose.disconnect) {
+            log('--------------- disconnecting from database...');
+            mongoose.disconnect();
+        }
+    }
+    catch(e) {
+        log('error disconnecting db: ' + (e.message ? e.message : e));
+    }
 
-    mongoose.disconnect();
     appServ.on('close', function () {
         setTimeout(function () {
             if (!closedApp) {
@@ -98,7 +106,10 @@ BOOTSTRAP.after = function (cb) {
             }
         }, 500);
     });
-    appServ.close();
+
+    setTimeout(function() {
+        appServ.close();
+    }, 100);
 };
 
 module.exports = BOOTSTRAP;

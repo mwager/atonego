@@ -5,8 +5,13 @@ NOCHMAL NEUES REPO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 dann:
     $ git push -u origin master
 
+
+-----> https://twitter.com/search?q=%23iosreviewtime
+
+
 -> sharethis testen (-:
 -> twitter/xing/app magazine anschreiben?
+
 
 ## onBefore: iOS App Store
 

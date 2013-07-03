@@ -93,27 +93,34 @@ module.exports = {
      * @param done
      */
     cleanDB: function (mongoose, done) {
+        if(!done || typeof done !== 'function') {
+            throw 'db.cleanDB(): done is not a function';
+        }
+
         if (ENV === 'production') {
             var msg = 'SOME IDIOT IS TRYING TO CLEAN WHOLE DB IN PRODUCTION ENV';
             utils.handleError(msg);
             // throw new Error(msg);
-            return;
+            return done();
         }
 
         var collections = mongoose.connection.collections;
         var count = _.size(collections);
+
+        if(count === 0) {
+            return done();
+        }
+
         _.each(collections, function (coll) {
             coll.drop(function (err) {
                 if (err) {
                     utils.handleError(err);
-                    return;
                 } // collection empty, MongoError: ns not found
+                else {
+                    logger.info('collection ' + coll.name + ' dropped');
+                }
 
-
-                logger.info('collection ' + coll.name + ' dropped');
-
-                count--;
-                if (count === 0) {
+                if (--count === 0) {
                     done();
                 }
             });
