@@ -51,6 +51,6 @@
   "main": "server.js",
 
   "scripts": {
-    "test": "cd server && ../node_modules/.bin/mocha --ui bdd --recursive --reporter spec --timeout 20000 --slow 300"
+    "test": "./node_modules/.bin/mocha server/test --ui bdd --recursive --reporter spec --timeout 20000 --slow 300"
   }
 }

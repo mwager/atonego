@@ -37,5 +37,8 @@
     "grunt-open": "~0.2.0",
     "matchdep": "~0.1.1",
     "testem": "*"
-   }
+  },
+  "scripts": {
+    "test": "./api/node_modules/.bin/mocha api/server/test --ui bdd --recursive --reporter spec --timeout 20000 --slow 300"
+  }
 }

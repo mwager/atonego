@@ -273,7 +273,7 @@ all_tests :
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - running all tests. Please start the node server first. $(NO_COLOR)"
 
 	# KABOOM
-	cd api && npm test && cd .. && ./casperjs/bin/casperjs test test/functional && ./node_modules/testem/testem.js ci
+	npm test && ./casperjs/bin/casperjs test test/functional && ./node_modules/testem/testem.js ci
 
 ### run the bench-playground on the sim or device
 bench :
