@@ -19,7 +19,7 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - "cd api && npm install && node server.js &"
   - "sleep 10"
-  - "cd ../casperjs && git checkout tags/1.0.2 && cd .."
+  - "cd ./casperjs && git checkout tags/1.0.2 && cd .."
 
 script:
   - "DISPLAY=:99.0 make all_tests"
