@@ -13,7 +13,7 @@ env:
     - NODE_ENV=test
 
 before_install:
-    - "cd api && npm install"
+  - "cd api && npm install && cd .."
 
 before_script:
   - "export PHANTOMJS_EXECUTABLE='phantomjs --local-to-remote-url-access=yes --ignore-ssl-errors=yes'"
