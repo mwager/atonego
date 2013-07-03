@@ -267,7 +267,7 @@ api_deploy : webapp
 
 	tput bel
 
-# run all tests
+# Run all tests
 all_tests :
 	@echo
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - running all tests. Please start the node server first. $(NO_COLOR)"
@@ -275,7 +275,21 @@ all_tests :
 	# KABOOM
 	npm test && ./casperjs/bin/casperjs test test/functional && ./node_modules/testem/testem.js ci
 
-### run the bench-playground on the sim or device
+# On travis, we only run the node- and testem-tests.
+# The casper testsuite can only be run locally (yet)
+travis_tests :
+	@echo
+	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - running tests on travis: node and testem. $(NO_COLOR)"
+
+	npm test && ./node_modules/testem/testem.js ci
+
+	# XXX this is a bit tricky because the api is already running,
+	# but the app sources must also be served by some web server
+	# on travis from /app/*
+	# ------------------------------------------------------------
+	# ./casperjs/bin/casperjs test test/functional
+
+### Run the bench-playground on the sim or device
 bench :
 	cp app/scripts/vendor/cordova.ios.js mobile/ios/www
 	cp docs/bench/index.html mobile/ios/www
