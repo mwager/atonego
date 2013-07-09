@@ -29,12 +29,10 @@ var
     should = require('should'),
     // _ = require('underscore'),
     // cleanCollection = db.cleanCollection,
-    log = console.log,
     colors = require('colors'),
     ENV = process.env.NODE_ENV || 'test';
 
 colors = colors;
-log = log; // jshint...
 
 describe('===== Seeding DB with demo data', function () {
     var config, User, Todolist, Todo; // MODEL REFS!
@@ -70,7 +68,7 @@ describe('===== Seeding DB with demo data', function () {
                         active:      true
                     },
                     function (err, user) {
-                        log('created user ' + user.email);
+                        console.log('created user ' + user.email);
                         done();
                     });
                 });

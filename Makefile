@@ -267,6 +267,11 @@ api_deploy : webapp
 
 	tput bel
 
+api_restart :
+	# rhc app restart -a atonego
+	rhc app force-stop atonego
+	rhc app start atonego
+
 # Run all tests
 all_tests :
 	@echo

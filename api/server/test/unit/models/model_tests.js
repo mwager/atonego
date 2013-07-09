@@ -35,11 +35,9 @@ var
     should      = require('should'),
     _           = require('underscore'),
     // cleanCollection = db.cleanCollection,
-    log         = console.log,
     // colors   = require('colors'),
     ENV         = process.env.NODE_ENV || 'test';
 
-log = log; // jshint...
 // ----- test globals -----
 var userName, userEmail, hansName;
 var user_id, user_id2;
@@ -60,12 +58,12 @@ var fred, hans;
 function disconnectDB() {
     try {
         if(mongoose && mongoose.disconnect) {
-            log('--------------- disconnecting from database...');
+            console.log('--------------- disconnecting from database...');
             mongoose.disconnect();
         }
     }
     catch(e) {
-        log('error disconnecting db: ' + (e.message ? e.message : e));
+        console.log('error disconnecting db: ' + (e.message ? e.message : e));
     }
 }
 
@@ -801,7 +799,7 @@ describe('===== Testing ALL Models', function () {
                 it('should let the owner drop some user(s)', function (done) {
                     User.removeList(user_id2, todolist, function (err, user) {
                         if(err) {
-                            log(err);
+                            console.log(err);
                         }
                         should.not.exist(err);
 
@@ -944,7 +942,7 @@ describe('===== Testing ALL Models', function () {
                     completed: false
                 }, function (err, todo_) {
                     if(err) {
-                        log(err);
+                        console.log(err);
                     }
 
                     todo = todo_;

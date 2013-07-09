@@ -24,7 +24,7 @@
  */
 
 // scope is "window"
-;(function(undefined) {
+(function(undefined) {
     'use strict';
 
     // todo!? good way to mock socketio globally? just include!?
@@ -82,7 +82,7 @@
 
         // keep in sync with config.js
         conf.paths = {
-           libs        : '../scripts/libs',
+            libs        : '../scripts/libs',
 
             zepto       : '../scripts/libs/zepto',
             lodash      : '../scripts/libs/lodash',
@@ -209,5 +209,5 @@
                     mocha.run(onTestsDone);
                 }, 400);
             });
-        });
+    });
 }(this));

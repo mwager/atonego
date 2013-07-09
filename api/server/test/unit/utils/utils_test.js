@@ -17,10 +17,7 @@ var
     libpath = root + 'server/',
     logger = require(libpath + 'lib/logger'),
     utils = require(libpath + 'lib/utils'),
-    moment = require('moment'),
-    log;
-
-log = console.log;
+    moment = require('moment');
 
 describe('===== Utils', function () {
 

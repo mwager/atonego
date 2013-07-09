@@ -46,12 +46,12 @@ var
 
 if(APN_PRODUCTION) {
     gateway = 'gateway.push.apple.com';
-    cert    = projectRoot + 'server/ssl/ck.pem',
+    cert    = projectRoot + 'server/ssl/ck.pem';
     key     = projectRoot + 'server/ssl/ck.pem';
 }
 else {
     gateway = 'gateway.sandbox.push.apple.com';
-    cert    = projectRoot + 'server/ssl/ck_dev.pem',
+    cert    = projectRoot + 'server/ssl/ck_dev.pem';
     key     = projectRoot + 'server/ssl/ck_dev.pem';
 }
 

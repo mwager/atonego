@@ -31,7 +31,7 @@ window.onerror = function window_onerror(errorMsg, url, lineNumber) {
 
     msg = msg + msg2;
 
-    /* global alert: true*/
+    /**** g lobal al ert : true*/
     // alerting global uncaught errors can be VERY HELPFUL WHILE
     // TESTING ON REAL DEVICES
     // if(__app_config__.touch) {
@@ -151,7 +151,7 @@ require([
     function goBack() {
         // prevent navigation if we are still animating...
         if(JrFork.Navigator.isAnimating) {
-          return false;
+            return false;
         }
 
         // remember the last route
@@ -250,11 +250,11 @@ require([
                     JrFork.Navigator.directions.LEFT;
 
                 JrFork.Navigator.navigate(href, {
-                  animation: {
-                    type:      JrFork.Navigator.animations.SLIDE_STACK,
-                    direction: dir
-                  }
-              });
+                    animation: {
+                        type:      JrFork.Navigator.animations.SLIDE_STACK,
+                        direction: dir
+                    }
+                });
             }
 
             // ein link darf AUF KEINEN FALL innerhalb der webview geöffnet werden

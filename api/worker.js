@@ -60,11 +60,9 @@ var
 
     //  gzippo = require('gzippo'), // XXX ?
 
-    log,
     config,
     KILL_TIMEOUT = (ENV === 'production') ? 30000 : 3000;
 
-log     = console.log;
 colors  = require('colors');
 
 
@@ -603,7 +601,6 @@ function main(conf) {
             return application.sendDefaultSuccess(req, res, {}, 204);
         });
 
-        // book about RESTful APIs !?
         app.get('/api', function __apiWelcomeMessage(req, res) {
             // return res.json(req.session); // check session lifetime via cookies (not really used)
 

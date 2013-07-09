@@ -127,7 +127,7 @@ module.exports = function (mongoose) {
                         }
 
                         cb(null, theList);
-                });
+                    });
             });
         });
     };

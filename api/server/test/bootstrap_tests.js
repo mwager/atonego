@@ -29,7 +29,6 @@ var
     mongoose = require('mongoose'),
     AppEmitter,
     utils, db,
-    log = console.log,
     appServ,
     config;
 
@@ -50,7 +49,7 @@ BOOTSTRAP.API_URL = 'http://127.0.0.1:4001' + application.apiVersion;
 
 // var model_names = ['User', 'Customer', 'Codeblock', 'Code', 'Message'];
 
-log('===== BOOTSTRAP TESTS ====='.green);
+console.log('===== BOOTSTRAP TESTS ====='.green);
 
 /**
  * clean all collections
@@ -90,12 +89,12 @@ BOOTSTRAP.after = function (cb) {
     var closedApp = false;
     try {
         if(mongoose && mongoose.disconnect) {
-            log('--------------- disconnecting from database...');
+            console.log('--------------- disconnecting from database...');
             mongoose.disconnect();
         }
     }
     catch(e) {
-        log('error disconnecting db: ' + (e.message ? e.message : e));
+        console.log('error disconnecting db: ' + (e.message ? e.message : e));
     }
 
     appServ.on('close', function () {

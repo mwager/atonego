@@ -354,7 +354,13 @@ NOTE: this requires additional files (see `/.gitignore`).
     # and pushes the stuff from there up to the openshift server.
     $ make api_deploy
 
+    # restart from cli:
+    $ make api_restart
+
 #### Openshift's CLI Tool "rhc"
+
+    # install: (needs ruby)
+    $ gem install rhc
 
     > rhc app start|stop|restart -a {appName}
     > rhc cartridge start|stop|restart -a {appName} -c mysql-5.1

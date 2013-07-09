@@ -69,7 +69,7 @@ define('TodolistSpec', [
                 });
 
                 it('should not change the title if longer than 32 characters', function (done) {
-                   this.list.once('invalid', function(model, errorMsg, errorObject) {
+                    this.list.once('invalid', function(model, errorMsg, errorObject) {
                         expect(model.get('title')).to.equal(this.testTitle);
                         expect(typeof errorMsg).to.equal('string');
                         expect(typeof errorObject).to.equal('object');

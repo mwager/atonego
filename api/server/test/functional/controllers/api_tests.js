@@ -26,10 +26,7 @@ var
 
     should      = require('should'),
     _           = require('underscore'),
-    log,
     BOOTSTRAP   = require('../../bootstrap_tests');
-
-log = console.log;
 
 var testUserEmail   = 'trash@at-one-go.com',
     testUser2Email  = 'trash2@at-one-go.com';
@@ -323,7 +320,7 @@ describe('===== AtOneGo RESTful API (and parts of the website)', function () {
         });*****/
 
         describe('#PATCH '.cyan + '/users', function () {
-            it('should not patch is email not valid', function (done) {
+            it('should not patch if email is not valid', function (done) {
                 request({
                     method: 'PATCH',
                     url: BOOTSTRAP.API_URL + '/users/' + testUser._id,

@@ -147,7 +147,7 @@ define(function (require) {
                     preCheck(lang);
                 }, function () {
                     return callback(defaultLang); // error, fallback to "defaultLang"...
-            });
+                });
         }
     }
 

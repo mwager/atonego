@@ -278,8 +278,8 @@ UsersController = function (app, mongoose, config) {
 
                             // push an update
                             var data = {
-                                 user: invitedUser,
-                                 list: list
+                                user: invitedUser,
+                                list: list
                             };
                             // self.socketController.pushToUser(issuerUser, 'invitation_accepted', data, req);
 

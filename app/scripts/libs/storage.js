@@ -316,7 +316,7 @@ define(function (require) {
             }
 
             if(!userID) {
-                return done('no user id : ' . userID);
+                return errorCB('no user id : ' . userID, done);
             }
 
             var __storeListsForUser = function(tx) {
@@ -366,10 +366,14 @@ define(function (require) {
                         return done('Could not parse JSON: ' + lists, null);
                     }
 
-                    done(null, lists);
+                    if(_.isFunction(done)) {
+                        done(null, lists);
+                    }
                 }
                 else {
-                    done(null, null);
+                    if(_.isFunction(done)) {
+                        done(null, null);
+                    }
                 }
 
                 /*for (var i=0; i<len; i++){
@@ -460,10 +464,14 @@ define(function (require) {
                         return done('Could not parse JSON: ' + todos, null);
                     }
 
-                    done(null, todos);
+                    if(_.isFunction(done)) {
+                        done(null, todos);
+                    }
                 }
                 else {
-                    done(null, null);
+                    if(_.isFunction(done)) {
+                        done(null, null);
+                    }
                 }
             };
 

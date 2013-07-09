@@ -79,6 +79,16 @@ textarea {
        url('/fonts/26025F_0_0.ttf') format('truetype');
 }
 
+/* XXX firefox does not display the font on the website
+try this?
+@font-face {
+  font-family: 'LITOPRINT';
+  src:      url('../fonts/26025F_0_0.eot?') format('eot'),
+            url('../fonts/26025F_0_0.woff') format('woff'),
+            url('../fonts/26025F_0_0.ttf') format('truetype');
+}
+ **/
+
 body {
     background-image : url(../img/bg.gif);
     height           : 100%;

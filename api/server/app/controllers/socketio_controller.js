@@ -28,11 +28,8 @@ var
     logger = require('../../lib/logger'),
     // _ = require('underscore'),
     User,
-    log,
-
     SocketIOController;
 
-log = console.log;
 
 // Global Socket IO instance
 var socketIO;

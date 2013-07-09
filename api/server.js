@@ -18,7 +18,35 @@
  */
 'use strict';
 
-// var ENV = process.env.NODE_ENV || 'development'
+var ENV = process.env.NODE_ENV || 'development';
+
+/**
+ * Register this app with nodefly for realtime monitoring.
+ *
+ * "This must be the first require before you load any modules.
+ * Otherwise you will not see data reported."
+ *
+ * XXX scaling. new app?
+ *
+ * @see http://nodefly.com/#howto
+ * @see https://www.openshift.com/blogs/step-by-step-nodejs-guide-for-realtime-monitoring-and-scaling
+ */
+if(ENV === 'production') {
+    var app_name = process.env.OPENSHIFT_APP_NAME  || 'AtOneGo Local',
+        host_url = process.env.OPENSHIFT_APP_DNS   || '127.0.0.1',
+        gear_id  = process.env.OPENSHIFT_GEAR_UUID || 1,
+        options  = {},
+        api_key  = require('./server/config/environments/production.json').NODEFLY_KEY;
+
+    require('nodefly').profile(
+        api_key,
+        [app_name, host_url, gear_id],
+        options
+    );
+}
+
+
+// -----------------------------------------------------------------------------
 
 var
     cluster     = require('cluster'),

@@ -24,14 +24,12 @@ var
     moment          = require('moment'),
     utils           = require('../../lib/utils'),
     logger          = require('../../lib/logger'),
-    log,
+    // log             = console.log,
     // _ = require('underscore'),
     passport        = require('passport'),
     LocalStrategy   = require('passport-local').Strategy,
 
     AuthController;
-
-log = console.log;
 
 // helper to send email if account activation is expired
 // this check is used in:
