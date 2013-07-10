@@ -13,21 +13,12 @@
 
 process.env.NODE_ENV = 'test';
 var
-    root = __dirname + '/../../../../',
+    root    = __dirname + '/../../../../',
     libpath = root + 'server/',
-    logger = require(libpath + 'lib/logger'),
-    utils = require(libpath + 'lib/utils'),
-    moment = require('moment');
+    utils   = require(libpath + 'lib/utils'),
+    moment  = require('moment');
 
 describe('===== Utils', function () {
-
-    before(function (done) {
-        done();
-    });
-
-    after(function (done) {
-        done();
-    });
 
     // just in case some developer changes function names or removes something ...
     describe('utils', function () {
@@ -139,20 +130,6 @@ describe('===== Utils', function () {
             // console.log(rnd2, utils.randomString(1287));
 
             rnd2.should.not.equal(rnd1);
-        });
-    });
-
-
-    describe('Logger', function () {
-        it('should log things', function (done) {
-            var logged = false;
-            logged = logger.info('NACHRICHT');
-            logged.should.equal(true);
-
-            logged = logger.err('ERROR LOG FUNCTIONAL TESTING');
-            logged.should.equal(true);
-
-            done();
         });
     });
 

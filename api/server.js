@@ -70,7 +70,7 @@ if (!cluster.isMaster) {
 cluster.fork();
 
 cluster.on('disconnect', function(worker) {
-    logger.info('worker disconnect: WORKER ID = ' + worker.id +
+    logger.log('worker disconnect: WORKER ID = ' + worker.id +
         ' - pid was: ' + worker.process.pid + ' ==> forking new one...');
 
     // now fork a new one !

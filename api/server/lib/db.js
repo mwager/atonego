@@ -51,7 +51,7 @@ module.exports = {
         dbPath += (PORT) + '/';
         dbPath += DATABASE;
 
-        logger.info('connecting to db: ' + dbPath);
+        logger.log('connecting to db: ' + dbPath);
 
         connection = mongoose.connect(dbPath, cb);
 
@@ -76,7 +76,7 @@ module.exports = {
             throw new Error(msg);
         }
 
-        logger.info('CLEANING COLLECTION');
+        logger.log('CLEANING COLLECTION');
 
         var q = Model.find();
         q.remove(function (err) {
@@ -117,7 +117,7 @@ module.exports = {
                     utils.handleError(err);
                 } // collection empty, MongoError: ns not found
                 else {
-                    logger.info('collection ' + coll.name + ' dropped');
+                    logger.log('collection ' + coll.name + ' dropped');
                 }
 
                 if (--count === 0) {

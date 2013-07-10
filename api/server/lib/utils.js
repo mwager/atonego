@@ -87,13 +87,13 @@ function sendMail(from, to, subject, body) {
                 text: text
             };
 
-            // logger.info(JSON.stringify(smtpTransport));
+            // logger.log(JSON.stringify(smtpTransport));
             // send mail with defined transport object
             transport.sendMail(mailOptions, function (error, response) {
                 if(error) {
                     utils.handleError(error); // TODO!?
                 } else {
-                    logger.info('mail sent to ' + to + ' ENV: ' + ENV + ' response: ' + response.message);
+                    logger.log('mail sent to ' + to + ' ENV: ' + ENV + ' response: ' + response.message);
                 }
 
                 // if you don't want to use this transport object anymore, uncomment following line
@@ -214,7 +214,7 @@ utils = {
      */
     handleError: function (err, res, sendEmail) {
         if(err && err.message && err.stack) {
-            logger.err(err.message + '\n --------------------- STACK ------------------------- \n' + err.stack);
+            logger.log(err.message + '\n --------------------- STACK ------------------------- \n' + err.stack, true);
         } else {
 
             // try to stringify....
@@ -231,7 +231,7 @@ utils = {
             try {
                 throw new Error(err);
             } catch(e) {
-                logger.err(e.message + '\n --------------------- STACK ------------------------- \n' + e.stack);
+                logger.log(e.message + '\n --------------------- STACK ------------------------- \n' + e.stack, true);
                 err += e.message + ' STACK: ' + e.stack;
             }
         }

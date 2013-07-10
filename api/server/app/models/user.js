@@ -682,7 +682,7 @@ module.exports = function (mongoose) {
             });
 
             if(!valid) {
-                logger.info('user1 ID: ' + user1ID + ' has already invited user2Mail: ' + user2.email);
+                logger.log('user1 ID: ' + user1ID + ' has already invited user2Mail: ' + user2.email);
                 return cb({key: 'already invited'}); // TODO locale und concept !!!
             }
 
@@ -730,7 +730,7 @@ module.exports = function (mongoose) {
             });
 
             if(!valid) {
-                logger.info('already added to list...');
+                logger.log('already added to list...');
                 return cb({key: 'error'});
             }
 

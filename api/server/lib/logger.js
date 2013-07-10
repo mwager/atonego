@@ -7,30 +7,34 @@
  */
 
 /**
- * File: logger.js
- * Author: Michael Wager <mail@mwager.de>
+ * Logger
  *
- * simple env based logger
+ * NOTE that on openshift, every console.log call will be written
+ * to the node logs, so we do not need to write log files
+ *
+ * @author Michael Wager <mail@mwager.de>
  */
-// 'use strict'; Octal literals are not allowed in strict mode. 0666
-
 var
-    fs = require('fs'),
-    log = {},
-    ENV = process.env.NODE_ENV || 'development',
-    filePath, fileWriter;
-//utils = require('./utils');
+    ENV     = process.env.NODE_ENV || 'development',
+    logger  = {},
+    fs      = require('fs');
 
-filePath = __dirname + '/../logs/' + ENV.toLowerCase() + '.log';
+// var logFilePath = __dirname + '/../logs/' + ENV.toLowerCase() + '.log';
+// var logFileWriter = fs.createWriteStream(logFilePath, {
+//     flags   :'a',
+//     encoding:'utf-8',
+//     mode    :0666
+// });
 
-fileWriter = fs.createWriteStream(filePath, {
+var cronLogFile = __dirname + '/../logs/' + ENV.toLowerCase() + '_cronjob.log';
+var cronFileWriter = fs.createWriteStream(cronLogFile, {
     flags   :'a',
     encoding:'utf-8',
     mode    :0666
 });
 
 /***
- * return a formatted date like '2012-10-09 12:34:12'
+ * Return a formatted date like '2012-10-09 12:34:12'
  * @return {String}
  */
 function getLogDate() {
@@ -45,60 +49,46 @@ function getLogDate() {
  * log a message to one of the log files
  * @param string msg
  */
-log.info = function (msg, isError) {
+logger.log = function (msg, isError) {
     'use strict';
 
-    var str = (isError ? '### TODOS-APP ERROR' : '### TODOS-APP INFO') +
+    if(!msg) {
+        msg = 'no message provided';
+    }
+
+    if(isError) {
+        try {
+            throw new Error(msg);
+        }
+        catch (err) {
+            msg = err.message + ' stack: ' + err.stack;
+        }
+    }
+
+    var str = (isError ? '### AtOneGo ERROR' : '### AtOneGo INFO') +
      ' [' + getLogDate() + '] ' + msg.toString();
 
     str = '\n---> ENV: ' + ENV + ' <---\n' + str;
 
-    fileWriter.write(str);
-
-    // in dev env, also log to stdout
-    // if (ENV === 'development' || ENV === 'staging' || ENV === 'production') {
     if (ENV !== 'test') {
-        // log to stdout too in "production",
-        // bei openshift werden zwar alle console logs in eine globale
-        // "Node-Log" Datei geschrieben, wir haben jedoch auch unsere eigenen
-        // Hier loggen wir auch in Production, 2mal logs is besser als 1mal logs
         console.log(str);
+        // logFileWriter.write(str);
     }
 
     return true;
 };
 
 /**
- * log an error message with stack trace
- *
+ * Log a message to the cronjob logfile
+ * XXX
  * @param string msg
  */
-log.err = function (msg) {
+logger.cronlog = function (msg) {
     'use strict';
 
-    try {
-        throw new Error(msg);
-    }
-    catch (err) {
-        log.info(err.stack, true);
-        return true;
-    }
+    console.log(msg);
+
+    cronFileWriter.write(msg + '\n');
 };
 
-/**
- * Log a message to the cronjob logfile
- *
- * @param string msg
- */
-log.cronlog = function (msg) {
-    var filePath = __dirname + '/../logs/' + ENV.toLowerCase() + '_cronjob.log';
-    var fileWriter = fs.createWriteStream(filePath, {
-        flags   :'a',
-        encoding:'utf-8',
-        mode    :0666
-    });
-
-    fileWriter.write(msg + '\n');
-};
-
-module.exports = log;
+module.exports = logger;

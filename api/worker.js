@@ -66,7 +66,7 @@ var
     //  gzippo = require('gzippo'), // XXX ?
 
     config,
-    KILL_TIMEOUT = (ENV === 'production') ? 30000 : 3000;
+    KILL_TIMEOUT = 3000;
 
 colors  = require('colors');
 
@@ -92,7 +92,7 @@ function globalDomainErrorHandler(err, req, res) {
         // make sure we close down
         // @see http://nodejs.org/api/domain.html#domain_warning_don_t_ignore_errors
         var killtimer = setTimeout(function() {
-            logger.info('============== KILLING THE WORKER ==============');
+            log('============== KILLING THE WORKER ==============');
             process.exit(1);
         }, KILL_TIMEOUT);
 
@@ -230,7 +230,7 @@ function configureExpress() {
         };
 
         onSessionStoreConnected = function (conf) {
-            logger.info(('Mongo Session Storage Module connected to database `' +
+            logger.log(('Mongo Session Storage Module connected to database `' +
                 conf.db.databaseName + '`. CollectionName: `' + sessionCollectionName + '` (-;').green);
         };
 
@@ -333,7 +333,7 @@ function configureSocketIO() {
         //        socketIO.set('origins', '127.0.0.1');
         //        socketIO.set('origins', 'localhost');
 
-        logger.info('CONFIGURE SOCKET IO FOR DEV !!!');
+        logger.log('CONFIGURE SOCKET IO FOR DEV !!!');
 
         socketIO.set('origins', '*:*');
         socketIO.set('origins', '*127.0.0.1*:*');
@@ -361,11 +361,11 @@ function configureSocketIO() {
         if(!API_TOKEN) {
             err = 'No API_TOKEN transmitted.';
             err += ' HEADER: ' + JSON.stringify(handshakeData.headers);
-            logger.info('worker.js: ' + err);
+            logger.log('worker.js: ' + err);
             return accept('No token transmitted', false);
         }
 
-        logger.info('SOCKET IO authorization, API_TOKEN is:' + API_TOKEN);
+        logger.log('SOCKET IO authorization, API_TOKEN is:' + API_TOKEN);
 
         var User   = mongoose.model('User');
         var userID = application.parseRemembermeToken(application.SALT, API_TOKEN);
@@ -594,8 +594,8 @@ function main(conf) {
         var msg = ('Express server listening on ' + url + ', environment: ' + ENV + ', PID: ').green;
         msg     += (process.pid + '').red;
 
-        logger.info(msg);
-        logger.info('loaded config: ' + JSON.stringify(conf[ENV]));
+        logger.log(msg);
+        logger.log('loaded config: ' + JSON.stringify(conf[ENV]));
 
         // CORS OPTIONS FOR API URL
         // see

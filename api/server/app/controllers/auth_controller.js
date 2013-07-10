@@ -65,12 +65,12 @@ AuthController = function (app, mongoose, config) {
         // die "passport-middleware" kümmert sich vorher um das Setzen des
         // Deserialisieren und setzen des "req.user"-Objekts
         passport.serializeUser(function (user, done) {
-            // logger.info('serializeUser ' + JSON.stringify(user));
+            // logger.log('serializeUser ' + JSON.stringify(user));
             done(null, user._id);
         });
 
         passport.deserializeUser(function (userID, done) {
-            // logger.info('deserializeUser ' + JSON.stringify(userID));
+            // logger.log('deserializeUser ' + JSON.stringify(userID));
 
             if(typeof userID !== 'string') {
                 // try pseudo cast, else there will be
@@ -111,15 +111,18 @@ AuthController = function (app, mongoose, config) {
 
                 if(users.length === 0) {
                     err = 'LOGIN STRATEGY: user not found: ' + emailIn;
-                    logger.info(err);
+                    logger.log(err);
                     return done(null, false);
                 }
 
                 user = users[0];
 
                 // --- USER ACTIVATION CHECK ---
-                moment.lang(user.lang || 'en');
+                if(user.lang !== 'en' && user.lang !== 'de') {
+                    user.lang = 'en';
+                }
 
+                moment.lang(user.lang || 'en');
                 i18n.setLocale(user.lang || 'en');
 
                 if(User.expiredAndDeleted(user, moment)) {
@@ -132,7 +135,7 @@ AuthController = function (app, mongoose, config) {
                 if(isValidPassword === true) {
                     done(null, user);
                 } else {
-                    logger.info('=============> NO AUTH: ' + emailIn + ' pass: ' + passwordIn);
+                    logger.log('=============> NO AUTH: ' + emailIn + ' pass: ' + passwordIn);
                     done(null, false);
                 }
             });

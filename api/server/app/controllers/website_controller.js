@@ -350,7 +350,7 @@ WebsiteController = function (app, mongoose, _config) {
         next(); // XXX
 
         // try {
-        //     logger.info('PRE HOOK: request header => ' + JSON.stringify(req.headers));
+        //     logger.log('PRE HOOK: request header => ' + JSON.stringify(req.headers));
         // } catch(e) {}
 
         // detect at-one-go.com - problem:

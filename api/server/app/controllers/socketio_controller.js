@@ -70,7 +70,7 @@ SocketIOController.prototype = {
             }
 
             // some logging
-            logger.info(msg);
+            logger.log(msg);
 
             if(!user) {
                 return false;
