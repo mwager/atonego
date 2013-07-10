@@ -37,6 +37,11 @@ var
 
     //  MemoryStore = express.session.MemoryStore,
     MongoStore      = require('connect-mongo')(express),
+    // "DO NOT - DO NOT - DO NOT USE 'connect-mongo' in production"
+    // http://architects.dzone.com/articles/video-production-nodejs
+    // XXX checkout openshift: new "scalable app" ? then add redis too
+    // RedisStore   = require('connect-redis')(express),
+
 
     EventEmitter    = require('events').EventEmitter,
     AppEmitter      = new EventEmitter(),
@@ -65,7 +70,6 @@ var
 
 colors  = require('colors');
 
-
 /**
  * The domain error handler callback
  *
@@ -77,7 +81,7 @@ colors  = require('colors');
 function globalDomainErrorHandler(err, req, res) {
     // log the error and send an email to the admin if in production
     var sendMail = true; // (ENV === 'production');
-    utils.handleError(err.stack ? err.stack : err, null, sendMail);
+    utils.handleError(err, null, sendMail);
 
     // Note: we're in dangerous territory!
     // By definition, something unexpected occurred,
@@ -628,6 +632,23 @@ function main(conf) {
                 utils.handleError('||| CLIENT ERROR ||| ' + message);
             }
             return application.sendDefaultSuccess(req, res, {}, 204);
+        });
+
+        // endpoint for application usage statistics
+        app.get('/health', function __sendStats(req, res) {
+            var mem = process.memoryUsage();
+            // convert to MB
+            mem.heapTotal = mem.heapTotal / 1024.0 / 1024.0;
+            mem.heapUsed  = mem.heapUsed / 1024.0 / 1024.0;
+            mem.rss = 'actual physical RAM: ' + (mem.rss / 1024.0 / 1024.0);
+
+            var json = {
+                pid   : process.pid,
+                memory: mem,
+                uptime: (process.uptime() / 60.0) + ' minutes'
+            };
+
+            return res.json(json, 200);
         });
 
         if(ENV === 'production') {

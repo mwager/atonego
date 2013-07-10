@@ -1,6 +1,7 @@
 # TODOs
 
 ## API
+* use redis instead of connect-mongo
 * Security review?
 * API: apn push feedback stuff (application.js @ initAPNFeedbackPolling())
 

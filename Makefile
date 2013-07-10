@@ -100,7 +100,6 @@ jsbuild : clean
 	# yeoman build:minify --force
 	# yeoman build --force
 	# yeoman build:text --force
-	# ODER GRUNT:
 	grunt
 
 	### restore version
