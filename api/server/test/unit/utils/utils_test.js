@@ -30,8 +30,8 @@ describe('===== Utils', function () {
     });
 
     // just in case some developer changes function names or removes something ...
-    describe('check own properties', function () {
-        it('should have functions the app uses', function (done) {
+    describe('utils', function () {
+        it('should contain some functions the app uses', function (done) {
             utils.hasOwnProperty('handleError').should.equal(true);
             utils.hasOwnProperty('checkErr').should.equal(true);
             // utils.hasOwnProperty('etag').should.equal(true);
@@ -82,6 +82,22 @@ describe('===== Utils', function () {
             email = 'fredfdgfdgdf5.fsd.5465';
             name = utils.generateNameFromEmail(email);
             name.should.equal(false);
+        });
+    });
+
+    describe('utils.round(number, n)', function () {
+        it('should round numbers', function () {
+            // default 2 decimal places
+            utils.round(2.123).should.equal(2.12);
+            utils.round(0.15634, 0).should.equal(0.16);
+            utils.round(0.211, '').should.equal(0.21);
+
+            utils.round(2.123, 3).should.equal(2.123);
+            utils.round(2.123345576, 1).should.equal(2.1);
+            utils.round(2.15334, 1).should.equal(2.2);
+            utils.round(232.15334, 1).should.equal(232.2);
+
+
         });
     });
 

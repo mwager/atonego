@@ -7,10 +7,9 @@
  */
 
 /**
- * File: utils.js
- * Author: Michael Wager <mail@mwager.de>
+ * Some app-global utils
  *
- * some app global utils (server-side)
+ * @author Michael Wager <mail@mwager.de>
  */
 'use strict';
 
@@ -19,17 +18,13 @@ var
 
     // application hier nicht möglich, da dieses auch utils einbindet (???)
     // application = require('./application'),
-    // i18n = application.getI18nInstance(),
 
-    ENV = process.env.NODE_ENV || 'development',
-    // _ = require('underscore'),
-    // log = console.log,
-    // moment = require('moment'),
-    crypto = require('crypto'),
-    logger = require('./logger'),
-    nodemailer = require('nodemailer'),
-    templatesDir   = __dirname + '/../locales/email_templates',
-    emailTemplates = require('email-templates'),
+    ENV             = process.env.NODE_ENV || 'development',
+    crypto          = require('crypto'),
+    logger          = require('./logger'),
+    nodemailer      = require('nodemailer'),
+    templatesDir    = __dirname + '/../locales/email_templates',
+    emailTemplates  = require('email-templates'),
     utils;
 
 
@@ -108,10 +103,10 @@ function sendMail(from, to, subject, body) {
     });
 } // end func sendMail
 
-
 // setTimeout(function() {
     // sendMail('info@at-one-go.com', 'info@at-one-go.com', 'test betreff', 'Das ist der Body.....<b>kein html</b>');
 // }, 10);
+
 
 utils = {
     loadJson: function (filePath, callback) {
@@ -205,13 +200,6 @@ utils = {
                 });
             });
         });
-    },
-
-    // XXX Sinn?
-    ifEnv: function (env, cb) {
-        if(env === ENV) {
-            cb();
-        }
     },
 
     isSSL: function (req) {
@@ -317,6 +305,23 @@ utils = {
 
         var name = email.split('@')[0];
         return name;
+    },
+
+    /**
+     * Round a number on n decimal places
+     *
+     * @param number    The number
+     * @param n         The amount of decimal places
+     */
+    round: function (number, n) {
+        if(typeof n !== 'number' || n <= 0) {
+            n = 2;
+        }
+
+        n      = Math.pow(10, n);
+        number = Math.round(number * n) / n;
+
+        return number;
     },
 
     // === SIMPLE ENCRYPTION/DECRYPTION HELPERS ===

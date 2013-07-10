@@ -638,14 +638,17 @@ function main(conf) {
         app.get('/stats', function __sendStats(req, res) {
             var mem = process.memoryUsage();
             // convert to MB
-            mem.heapTotal = mem.heapTotal / 1024.0 / 1024.0;
-            mem.heapUsed  = mem.heapUsed / 1024.0 / 1024.0;
-            mem.rss = 'actual physical RAM: ' + (mem.rss / 1024.0 / 1024.0);
+            mem.heapTotal = utils.round(mem.heapTotal / 1024.0 / 1024.0);
+            mem.heapUsed  = utils.round(mem.heapUsed / 1024.0 / 1024.0);
+            mem.rss       = utils.round(mem.rss / 1024.0 / 1024.0) + '(= actual physical RAM)';
+
+            var uptimeH = utils.round(process.uptime() / 60.0 / 60.0);
+            var uptimeM = utils.round(process.uptime() / 60.0);
 
             var json = {
                 pid   : process.pid,
                 memory: mem,
-                uptime: (process.uptime() / 60.0) + ' minutes'
+                uptime: uptimeH + ' hours (= ' + uptimeM + ' minutes)',
             };
 
             return res.json(json, 200);
