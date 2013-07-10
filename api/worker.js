@@ -635,7 +635,7 @@ function main(conf) {
         });
 
         // endpoint for application usage statistics
-        app.get('/health', function __sendStats(req, res) {
+        app.get('/stats', function __sendStats(req, res) {
             var mem = process.memoryUsage();
             // convert to MB
             mem.heapTotal = mem.heapTotal / 1024.0 / 1024.0;
