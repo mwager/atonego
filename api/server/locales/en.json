@@ -11,7 +11,7 @@
 
     "faq1"                      : "<h3>What is the cost of the service or the app?</h3><p>The service and the app is free to use. All you need is an account, which you can easily create <a target=\"_blank\" class=\"own-font\" href=\"https://atonego-mwager.rhcloud.com/app/#signup\">here</a> or in the app.</p>",
     "faq2"                      : "<h3>What happens to my data?</h3><p>So you always have access to your data from anywhere and can share your tasks with others, we store it in a central location in a database. We give neither your email address nor any other personal information to any third parties.</p>",
-    "faq3"                      : "<h3>What do I need to use the app?</h3><p>To use the app you need an iPhone, iPad or iPod. You can use the <a target=\"_blank\" class=\"own-font\" href=\"https://atonego-mwager.rhcloud.com/app\">web app</a> in a modern <a target=\"_blank\" href=\"http://browsehappy.com/\">web browser</a> too!<br/>Apart from that you need an internet connection and an account.</p>",
+    "faq3"                      : "<h3>What do I need to use the app?</h3><p>To use the app you need an iPhone, iPad or iPod Touch. You can use the <a target=\"_blank\" class=\"own-font\" href=\"https://atonego-mwager.rhcloud.com/app\">web app</a> in a modern <a target=\"_blank\" href=\"http://browsehappy.com/\">web browser</a> too!<br/>Apart from that you need an internet connection and an account.</p>",
     "faq4"                      : "<h3>Can I delete my account?</h3><p>Yes, everytime within the app or the web app in the user settings. Your lists and tasks are not deleted if other users are still assigned.</p>",
 
     "todolistNotFound"          : "Todolist not found",

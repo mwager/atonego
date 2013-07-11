@@ -63,6 +63,7 @@ h1, h2, h3, .content a, .aog-list .title, .aog-green-text, .aog-button, select, 
 
    /* disable ios from opening the callout window
       when holding touch over links
+      http://tv.adobe.com/watch/max-2013/architecting-a-phonegap-application
     */
    -webkit-touch-callout: none;
 }
