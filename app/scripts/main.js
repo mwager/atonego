@@ -487,11 +487,11 @@ require([
     /**
      * Hide the splashscreen on device ready
      */
-    function hideSplashScreen(isAuth) {
+    /*function hideSplashScreen(isAuth) {
         setTimeout(function() {
             common.hideSplashscreen();
         }, isAuth ? 2000 : 500); // give some time to render!
-    }
+    }*/
 
     /**
      * Init the application
@@ -499,9 +499,7 @@ require([
      * Called on "device ready" in a phonegap app or on DOM ready else
      */
     function initApp() {
-        // hide the splashscreen after timeout
         var isAuth = common.store.get('is-auth') === '1';
-        hideSplashScreen(isAuth);
 
         var $doc = $(document),
             $body = $('body');
@@ -521,6 +519,14 @@ require([
         if(!app.isIOS) {
             app.isIOS = app.isiOSBrowser;
         }
+
+        // we do autohide, see ios config.xml
+        // this sometimes doen't work and was the
+        // reason the app was rejected after first submission
+        // XXX later? note: WE /DO/ USE on "deviceready" NOT zepto's ready...
+        // AND: it worked EVERYTIME installing via xcode and TESTFLIGHT, only
+        // if the ipa gets installed via itunes is hangs
+        // hideSplashScreen(isAuth);
 
         simulateActiveState($body);
         doMobileSpecificStuffOnDeviceReady($body);
@@ -597,7 +603,6 @@ require([
             common.hideLoader();
         });
     } // end initApp()
-
 
     // --- Init stuff ---
     if(app.isPhonegapAvailable) {
