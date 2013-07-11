@@ -485,11 +485,24 @@ require([
     }
 
     /**
+     * Hide the splashscreen on device ready
+     */
+    function hideSplashScreen(isAuth) {
+        setTimeout(function() {
+            common.hideSplashscreen();
+        }, isAuth ? 2000 : 500); // give some time to render!
+    }
+
+    /**
      * Init the application
      *
      * Called on "device ready" in a phonegap app or on DOM ready else
      */
     function initApp() {
+        // hide the splashscreen after timeout
+        var isAuth = common.store.get('is-auth') === '1';
+        hideSplashScreen(isAuth);
+
         var $doc = $(document),
             $body = $('body');
 
@@ -520,7 +533,7 @@ require([
         // }
 
         // The app router
-        app.router = new AppRouter();
+        app.router = new AppRouter(isAuth);
 
         // global for casperjs: need to do a force logout. better way? XXX
         if(!app.isPhonegapAvailable && app.isPhantomJS) {

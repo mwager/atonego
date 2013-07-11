@@ -67,18 +67,16 @@ define(function (require) {
         /**
          * Constructor
          */
-        initialize: function () {
+        initialize: function (isAuth) {
             // we remember the last route
             this.lastRoute              = '';
             this.currentView            = null;
-
-            this.firstRenderAction      = true;
 
             // catch ALL route changes
             // this.on('route', this.onRouteChange, this);
 
             // If we have a user in the local db, render now!
-            this.isAuth = common.store.get('is-auth') === '1';
+            this.isAuth = isAuth;
 
             this.$ghostbusterLayer = $('#ghostbuster-overlay');
         },
@@ -587,16 +585,9 @@ define(function (require) {
             });
 
             // -------------------- AFTER STUFF --------------------
-            if(this.firstRenderAction) {
-                setTimeout(function() {
-                    common.hideSplashscreen();
-                }, this.isAuth ? 2000 : 500); // give some time to render!
-            }
 
             // no! common.hideLoader();
             common.closeNotify();
-
-            this.firstRenderAction = false;
         },
 
         /**

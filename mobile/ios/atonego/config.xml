@@ -48,9 +48,12 @@
     <!-- https://issues.apache.org/jira/browse/CB-2301
 
     -->
-    <preference name="BackupWebStorage" value="none" />
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="FadeSplashScreenDuration" value=".50" />
+    <preference name="FadeSplashScreen" value="true" />
+    <preference name="ShowSplashScreenSpinner" value="true" />
+
+    <preference name="BackupWebStorage" value="none" />
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <!-- =========================== OWN end =============================== -->
@@ -59,8 +62,7 @@
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="EnableLocation" value="false" /><!-- DEPRECATED -->
     <preference name="EnableViewportScale" value="false" />
-    <preference name="FadeSplashScreen" value="true" />
-    <preference name="ShowSplashScreenSpinner" value="true" />
+
     <preference name="HideKeyboardFormAccessoryBar" value="false" />
     <preference name="KeyboardShrinksView" value="false" />
     <preference name="MediaPlaybackRequiresUserAction" value="false" />

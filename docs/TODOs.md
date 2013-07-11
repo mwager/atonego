@@ -1,13 +1,12 @@
 # TODOs
 
 ## APP ##
-* fix stuff ! install archive via itunes / check logs !!!
-* binary dann nochmal 1-2 tage laufen lassen
+* ...
 
 ## API ##
 * use redis instead of connect-mongo
 
-* Scaling openshift (currently no cronjobs for scalable apps)
+* Scaling openshift (currently no cronjobs for scalable apps, senseless on free account either?)
 * Security review?
 * API: apn push feedback stuff (application.js @ initAPNFeedbackPolling())
 

@@ -17,7 +17,7 @@
  under the License.
  */
 //
-// Prefix header for all source files of the 'atonego' target in the 'atonego' project
+// Prefix header for all source files of the 'AtOneGo' target in the 'AtOneGo' project
 //
 
 #ifdef __OBJC__
