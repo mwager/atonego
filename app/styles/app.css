@@ -54,10 +54,17 @@ h1, h2, h3, .content a, .aog-list .title, .aog-green-text, .aog-button, select, 
    color: #000;
    text-decoration: none;
 
+   /*** remove some "html-ish" behaviour" ***/
+
     /* Tip #10 - Disable tap highlighting
        http://www.mikedellanoce.com/2012/09/10-tips-for-getting-that-native-ios.html
     */
    -webkit-tap-highlight-color:rgba(0,0,0,0);
+
+   /* disable ios from opening the callout window
+      when holding touch over links
+    */
+   -webkit-touch-callout: none;
 }
 
 /*******************************************************************************
