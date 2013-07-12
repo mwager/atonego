@@ -80,13 +80,11 @@ logger.log = function (msg, isError) {
 
 /**
  * Log a message to the cronjob logfile
- * XXX
+ *
  * @param string msg
  */
 logger.cronlog = function (msg) {
     'use strict';
-
-    console.log(msg);
 
     cronFileWriter.write(msg + '\n');
 };

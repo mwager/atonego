@@ -491,9 +491,8 @@ To avoid polluting the global namespace as much as possible, Zepto, Backbone and
 
 Libs which are still global:
 
-* `window.io` -> `/app/scripts/libs/socket.io.js`
 * `window._`  -> `/app/scripts/libs/lodash.js`
-
+* `window.io` -> `/app/scripts/libs/socket.io.js` [not used anymore]
 
 ##### Zepto errors
 
@@ -506,7 +505,7 @@ Search `/app/scripts/lib/zepto.js` for "atonego".
 
 #### iOS does not allow HTTP Requests against self-signed/invalid certs...
 
-On real devices, there were problemes with `https://atonego-mwager.rhcloud.com/api`. The following workaround __is necessary__!
+On iOS devices, there were problemes with the api endpoint at `https://atonego-mwager.rhcloud.com/api`. The following workaround __is necessary__!
 
 The file `/mobile/ios/atonego/Classes/AppDelegate.m` was edited: (at the bottom)
 
@@ -539,9 +538,11 @@ This is one of the most annoying problems I have ever had. Checkout `main.js` an
 
 ### Socket IO
 
+__UPDATE:__ We do not use socket io anymore as its kind of senseless having an open connection in a todo-app. PUSH notifications should be enough. If you want to use websockets via phonegap on iOS, better do not use socketio version 0.9.
+
 The app always crashed on resume after a (little) longer run. I was about to give up, then I found [this](https://issues.apache.org/jira/browse/CB-2301)
 
-SocketIO's "auto reconnect" somehow crashed the app on my iphone (seg fault!). As a workaround I disconnect the websocket connection on Phonegap's `pause`-event, and manually re-connect (using same socket/connection again) on the `resume`-event.
+SocketIO's "auto reconnect" somehow crashed the app on the iOS test devices (seg fault!). As a workaround I disconnect the websocket connection on Phonegap's `pause`-event, and manually re-connect (using same socket/connection again) on the `resume`-event.
 
 See also:
 
@@ -581,7 +582,7 @@ Open the app in chrome or safari ([dev](http://127.0.0.1/atonego/app) or [live](
     list.set('title', 'hello world')
     > app.fetchUser() // watch network tab
 
-    var list = app.todolists.get('51503c5957603cbc0400001e');
+    var list = app.todolists.get('get id hash from url');
     list.set('title', '');
 
 
