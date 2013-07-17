@@ -25,7 +25,7 @@ var
     nodemailer      = require('nodemailer'),
     templatesDir    = __dirname + '/../locales/email_templates',
     emailTemplates  = require('email-templates'),
-    utils;
+    utils, config;
 
 
 /**
@@ -34,6 +34,10 @@ var
  * XXX nodemailer supports batch mails. check out if needed.
  */
 function sendMail(from, to, subject, body) {
+    if(!config || !config.production) {
+        return false;
+    }
+
     // XXX später evtl nur einmal init !?
     var transport = nodemailer.createTransport('SMTP', {
         host: 'smtp.strato.de', // XXX solange wir noch bei strato sind (02-2014 oder so...)
@@ -43,9 +47,8 @@ function sendMail(from, to, subject, body) {
         port: 465,
         // port for secure SMTP
         auth: {
-            // email credentials hardcoded....... XXX
-            user: 'info@at-one-go.com',
-            pass: 'AtOneGoA00_$' // XXX config, no version control (alles in ein gitignored js-module)
+            user: config.production.ADMIN_EMAIL,
+            pass: config.production.EMAIL_PASSWORD
         }
     });
 
@@ -194,6 +197,9 @@ utils = {
                     if(!--pending) {
                         configs.site_url = (configs[ENV].HTTPS) ? 'https://' : 'http://';
                         configs.site_url += configs[ENV].HOST + ':' + configs[ENV].PORT;
+
+                        // set global for this module
+                        config = configs;
 
                         callback(configs);
                     }

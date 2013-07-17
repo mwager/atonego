@@ -12,6 +12,6 @@
 
 ### Other Todos (maybe later) ##
 * Android App ? (fix scrolling and you are done?)
+* FirefoxOS App !
 * Windows App ? (check scrolling and 9-patch images via sdk tools...)
-* FirefoxOS App ?!
 * google analytics tracking? (app store clicks? webapp? ...)
