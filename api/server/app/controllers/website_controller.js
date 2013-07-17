@@ -73,7 +73,7 @@ function renderTemplate(name, data, req, res) {
 
     res.render(name + '.html', data);
 
-    utils.sendMail('info@at-one-go.com', 'trash@mwager.de', 'test', 'translated body text');
+    // utils.sendMail('info@at-one-go.com', 'trash@mwager.de', 'test', 'translated body text');
 }
 
 /**
