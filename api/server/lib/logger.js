@@ -27,11 +27,16 @@ var
 // });
 
 var cronLogFile = __dirname + '/../logs/' + ENV.toLowerCase() + '_cronjob.log';
-var cronFileWriter = fs.createWriteStream(cronLogFile, {
-    flags   :'a',
-    encoding:'utf-8',
-    mode    :0666
-});
+var cronFileWriter;
+
+if(ENV !== 'test') {
+    cronFileWriter = fs.createWriteStream(cronLogFile, {
+        flags   :'a',
+        encoding:'utf-8',
+        mode    :0666
+    });
+}
+
 
 /***
  * Return a formatted date like '2012-10-09 12:34:12'
@@ -86,7 +91,9 @@ logger.log = function (msg, isError) {
 logger.cronlog = function (msg) {
     'use strict';
 
-    cronFileWriter.write(msg + '\n');
+    if(cronFileWriter) {
+        cronFileWriter.write(msg + '\n');
+    }
 };
 
 module.exports = logger;
