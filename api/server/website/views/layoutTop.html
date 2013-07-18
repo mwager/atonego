@@ -53,7 +53,13 @@
         </a>
         <% if(typeof showHeader !== 'undefined' && true === showHeader) { %>
         <div class="store-badges">
-            <a class="store-ios" target="_blank" href="#">
+            <%
+            var url = 'https://itunes.apple.com/en/app/atonego/id668972250';
+            if(lang === 'de') {
+                url = 'https://itunes.apple.com/de/app/atonego/id668972250';
+            }
+            %>
+            <a class="store-ios" target="_blank" href="<%- url %>">
                 <img src="<%- baseUrl %>img/store_ios.png">
             </a>
 
