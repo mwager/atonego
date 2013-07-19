@@ -322,41 +322,6 @@ describe('===== Testing ALL Models', function () {
             });*/
         });
 
-        describe('search()', function () {
-            var query;
-            var limit = 5;
-            it('should search and find users by a querystring BY NAME', function (done) {
-                query = 'e'; // soll 3 user finden!
-                User.search(query, limit, function (err, users) {
-                    should.exist(users);
-                    users.length.should.equal(2);
-                    done();
-                });
-            });
-
-            /*
-            NO! we do not search by email addresses...
-            users can invite other people to liste via an email address (-;
-            it('should search and find users by a querystring BY MAIL', function (done) {
-                query = 'trash';
-                User.search(query, limit, function (err, users) {
-                    should.exist(users);
-                    users.length.should.equal(1);
-                    users[0].email.should.equal(userEmail);
-                    done();
-                });
-            });*/
-
-            it('should search and find nothing', function (done) {
-                query = 'trash1234567';
-                User.search(query, limit, function (err, users) {
-                    should.exist(users);
-                    users.length.should.equal(0);
-                    done();
-                });
-            });
-        });
-
         /**
          * Wir könnten serverseitig bei jedem Senden die user ID verschlüsseln
          * und bei jedem empfangen entschlüsseln!?
