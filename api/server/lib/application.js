@@ -426,6 +426,12 @@ var app = {
         }
 
         message = message.replace(/'/g, '');
+        message = message.replace(/"/g, '');
+
+        // "The maximum size allowed for a notification payload is 256 bytes;"
+        if(message.length > 200) {
+            message = message.substr(0, 200);
+        }
 
         if(tokens.length === 0) {
             // XXX raus
@@ -519,12 +525,17 @@ var app = {
 
             devices.forEach(function(item) {
                 // Do something with item.device and item.time
-                console.log('------------------------------',item);
-                msg += ' DEVICE: ' + item.device + ' at' + item.time;
+                console.log('------------------------------', item);
+                msg += ' DEVICE: ' + item.device + ' at ' + item.time;
 
                 // find the user with this token and remove the token
-                User.removeTokenFromUser(item.device, function(/*err, success*/) {
-
+                User.removeTokenFromUser(item.device, function(err, success) {
+                    if(err) {
+                        utils.handleError(err);
+                    }
+                    else {
+                        console.log(success ? 'NICE ONE' : 'SHIT');
+                    }
                 });
             });
 

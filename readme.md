@@ -563,7 +563,7 @@ Search `/api/worker.js` -> "cron"
 
 
 ## Console testing
-Open the app in chrome or safari ([dev](http://127.0.0.1/atonego/app) or [live](https://atonego-mwager.rhcloud.com)), then open the dev console and put in some of the following commands to play with the app:
+Open the app in chrome or safari ([dev](http://127.0.0.1/atonego/app) or [live](https://atonego-mwager.rhcloud.com/app)), then open the dev console and put in some of the following commands to play with the app:
 
     # as there is (almost) nothing global, we must require stuff first, use this as template:
     > var $ = require('zepto'), app = require('app'), common = require('common');
