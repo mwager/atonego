@@ -38,4 +38,7 @@
     <preference name="BackupWebStorage" value="none" />
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <preference name="DisallowOverscroll" value="true" />
+    <feature name="Notification">
+        <param name="android-package" value="org.apache.cordova.core.Notification" />
+    </feature>
 </widget>

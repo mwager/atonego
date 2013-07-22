@@ -49,6 +49,13 @@ module.exports = [
         "clobbers": [
             "cordova.logger"
         ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.core.dialogs/www/notification.js",
+        "id": "org.apache.cordova.core.dialogs.notification",
+        "merges": [
+            "navigator.notification"
+        ]
     }
 ]
 });
