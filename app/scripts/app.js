@@ -566,6 +566,8 @@ define(function (require) {
 
             // PUSH Plugin "register error handler" (iOS and Android)
             var errorHandler = function(err) {
+                //alert("GCM ERROR: " + err); // XXX now
+
                 log('PUSH: =================> ERROR HANDLER: ');
                 app.handleError(err);
             };
@@ -573,6 +575,7 @@ define(function (require) {
             var opts;
             if (app.isAndroid) {
                 var successHandler = function() {
+                    //alert("GCM SUCCESS"); // XXX now
                     log('PUSH: =================> ANDROID PUSH SUCCESS');
                 };
                 opts = {

@@ -56,6 +56,20 @@ module.exports = [
         "merges": [
             "navigator.notification"
         ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.core.globalization/www/GlobalizationError.js",
+        "id": "org.apache.cordova.core.globalization.GlobalizationError",
+        "clobbers": [
+            "window.GlobalizationError"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.core.globalization/www/globalization.js",
+        "id": "org.apache.cordova.core.globalization.globalization",
+        "clobbers": [
+            "navigator.globalization"
+        ]
     }
 ]
 });

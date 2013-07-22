@@ -55,6 +55,7 @@
 		201EEC6B814E495AB2AC4699 /* PushPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1C2CAA27FF44359AEDE279 /* PushPlugin.m */; };
 		A47FC8FCD056489490C5B3FC /* CDVNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A4688ABA8485CA1845231 /* CDVNotification.m */; };
 		B9A4046DD03E4D7ABC3F61F7 /* CDVNotification.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 24C4AAA868DB43DDBB068EBC /* CDVNotification.bundle */; };
+		15F10CCCF5DC42BDAB64418F /* CDVGlobalization.m in Sources */ = {isa = PBXBuildFile; fileRef = A46740B6BFC640EFB811B526 /* CDVGlobalization.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,8 @@
 		412A4688ABA8485CA1845231 /* CDVNotification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVNotification.m"; path = "org.apache.cordova.core.dialogs/CDVNotification.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		22E2E87883E7464EB411ADD3 /* CDVNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVNotification.h"; path = "org.apache.cordova.core.dialogs/CDVNotification.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		24C4AAA868DB43DDBB068EBC /* CDVNotification.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "CDVNotification.bundle"; path = "CDVNotification.bundle"; sourceTree = "<group>"; };
+		A46740B6BFC640EFB811B526 /* CDVGlobalization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVGlobalization.m"; path = "org.apache.cordova.core.globalization/CDVGlobalization.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		2F4B49D1AFFF41B88FE2CD65 /* CDVGlobalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVGlobalization.h"; path = "org.apache.cordova.core.globalization/CDVGlobalization.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +307,8 @@
 				8D11A255B5384927BF4B4393 /* PushPlugin.h */,
 				412A4688ABA8485CA1845231 /* CDVNotification.m */,
 				22E2E87883E7464EB411ADD3 /* CDVNotification.h */,
+				A46740B6BFC640EFB811B526 /* CDVGlobalization.m */,
+				2F4B49D1AFFF41B88FE2CD65 /* CDVGlobalization.h */,
 			);
 			name = Plugins;
 			path = "AtOneGo/Plugins";
@@ -481,6 +486,7 @@
 				D01B9882E0814B4283BF8ABD /* AppDelegate+notification.m in Sources */,
 				201EEC6B814E495AB2AC4699 /* PushPlugin.m in Sources */,
 				A47FC8FCD056489490C5B3FC /* CDVNotification.m in Sources */,
+				15F10CCCF5DC42BDAB64418F /* CDVGlobalization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

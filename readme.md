@@ -466,7 +466,15 @@ __Note__: use `gateway.sandbox.push.apple.com` in development (same port)
 * [create ssl files](http://www.fasty.de/2011/04/how-to-apple-push-notification-inkl-php-skript/)
 * see `api/server/ssl/push_demo.js` -> sends a push message to hardcoded device token
 
+##### The phonegap's PushPlugin #####
 
+See the [GitHub Page](https://github.com/phonegap-build/PushPlugin).
+
+Installed via `plugman`:
+
+    $ cd mobile
+    $ plugman --platform android --project ./platforms/android --plugin https://github.com/phonegap-build/PushPlugin.git
+    $ plugman --platform ios --project ./platforms/ios --plugin https://github.com/phonegap-build/PushPlugin.git
 
 
 ## Problems, Solutions, Workarounds, Known Bugs

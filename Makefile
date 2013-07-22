@@ -1,7 +1,8 @@
 # ------------------------------------------------------------------------------
 # AtOneGo Makefile
 #
-# Optimize sources via grunt, building and running via phonegap,
+# Optimize sources via grunt, copying src or optimized src to phonegap's
+# "www" folder, building and running via phonegap's cli tools,
 # deploying the api sources, running tests, etc
 # ------------------------------------------------------------------------------
 
@@ -118,16 +119,16 @@ jsbuild : clean
 ### muss "jsbuild_debug" die dependency des "build" tasks sein!
 jsbuild_debug : clean
 	@echo
-	@echo "$(WARN_COLOR)====================================================$(NO_COLOR)"
-	@echo "$(WARN_COLOR)WARNING: just copying the raw app sources to 'dist'!$(NO_COLOR)"
-	@echo "$(WARN_COLOR)====================================================$(NO_COLOR)"
+	@echo "$(ERROR_COLOR)====================================================$(NO_COLOR)"
+	@echo "$(ERROR_COLOR)WARNING: just copying the raw app sources to 'dist'!$(NO_COLOR)"
+	@echo "$(ERROR_COLOR)====================================================$(NO_COLOR)"
 
 	mkdir $(DST)
 	cp -rf $(SRC)/* $(DST)
 
 
 ### copy optimized src to phonegap android/ios directories
-build : jsbuild
+build : jsbuild_debug
 	@echo
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - copy the build product to phonegap platform destinations$(NO_COLOR)"
 	@echo

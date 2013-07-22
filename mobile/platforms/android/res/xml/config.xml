@@ -23,6 +23,13 @@
     <feature name="SplashScreen">
         <param name="android-package" value="org.apache.cordova.core.SplashScreen" />
     </feature>
+    <feature name="Notification">
+        <param name="android-package" value="org.apache.cordova.core.Notification" />
+    </feature>
+    <plugins>
+        <plugin name="PushPlugin" value="com.plugin.gcm.PushPlugin" />
+    </plugins>
+    <feature name="Globalization" value="org.apache.cordova.core.globalization" />
     <access origin="https://atonego-mwager.rhcloud.com*" />
     <access origin="https://at-one-go.com*" />
     <access origin="*.atonego-mwager.rhcloud.com*" />
@@ -38,7 +45,4 @@
     <preference name="BackupWebStorage" value="none" />
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <preference name="DisallowOverscroll" value="true" />
-    <feature name="Notification">
-        <param name="android-package" value="org.apache.cordova.core.Notification" />
-    </feature>
 </widget>
