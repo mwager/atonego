@@ -16,15 +16,13 @@ WARN_COLOR			=\x1b[33;01m
 SRC                 = app
 DST                 = dist
 TEST                = test
-IOS_SRC             = mobile/ios/www/
-ANDROID_SRC         = mobile/android/assets/www/
+CORDOVA_SRC         = mobile/www/
 WEBAPP_SRC          = api/server/website/app/
 ABSOLUTE_WEB_PATH   = http:\/\/127.0.0.1\/atonego\/app\/
 
 API_SRC             = api
 API_DST             = api_deployment
-CORDOVA_IOS         = <script src="scripts\/vendor\/cordova.ios.js"><\/script>
-CORDOVA_ANDROID     = <script src="scripts\/vendor\/cordova.android.js"><\/script>
+CORDOVA_INCLUDE     = <script src="cordova.js"><\/script>
 
 RANDOM_STR          = $(shell /bin/bash -c "echo $$RANDOM")
 
@@ -39,23 +37,14 @@ clean :
 	@echo
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - cleaning up...$(NO_COLOR)"
 
-	rm -rf temp
 	rm -rf dist
-	rm -rf mobile/ios/build/*
-	rm -rf $(IOS_SRC)*
-	rm -rf $(ANDROID_SRC)*
 
-	rm -rf mobile/ios/www/*
-	rm -rf mobile/android/assets/www/*
-
-	# clean android builds (java classes and stuff)
-	rm -rf mobile/android/bin/*
-
-	# mobile/ios/cordova/clean
-
-
-# jsonlint:
-# prüfe die language json/js files auf syntax errors ? -> "npm test" checkt die!
+	# do not delete www/config.xml
+	rm -rf $(CORDOVA_SRC)index.html
+	rm -rf $(CORDOVA_SRC)images
+	rm -rf $(CORDOVA_SRC)fonts
+	rm -rf $(CORDOVA_SRC)scripts
+	rm -rf $(CORDOVA_SRC)styles
 
 
 # Dieser Task kopiert neben den App-Quellen auch die Test-Quellen
@@ -66,18 +55,13 @@ clean :
 # geladen werden
 test_build : clean
     # 1. copy /app und /test to mobile "www"
-	cp -rf $(SRC) $(IOS_SRC)
-	cp -rf $(TEST) $(IOS_SRC)
-
-	cp -rf $(SRC) $(ANDROID_SRC)
-	cp -rf $(TEST) $(ANDROID_SRC)
+	cp -rf $(SRC) $(CORDOVA_SRC)
+	cp -rf $(TEST) $(CORDOVA_SRC)
 
 	# include project specific cordova js stuff in testsuites!
-	sed -i '' 's/<!-- cordova replace -->/$(CORDOVA_ANDROID)/' $(ANDROID_SRC)test/index.html
-	sed -i '' 's/<!-- cordova replace -->/$(CORDOVA_IOS)/'     $(IOS_SRC)test/index.html
-
-	sed -i '' 's/<!-- pushplugin replace -->/$(PUSHPLUGIN_JS)/' $(ANDROID_SRC)test/index.html
-	sed -i '' 's/<!-- pushplugin replace -->/$(PUSHPLUGIN_JS)/' $(IOS_SRC)test/index.html
+	### include cordova js
+	sed -i '' 's/<!-- __CORDOVA_REPLACE__ -->/$(CORDOVA_INCLUDE)/' $(CORDOVA_SRC)index.html
+	sed -i '' 's/<!-- pushplugin replace -->/$(PUSHPLUGIN_JS)/' $(CORDOVA_SRC)index.html
 
 	# => NUN config.xml anpassen !!! und dann "make ios" | "make android"
 
@@ -147,35 +131,23 @@ build : jsbuild
 	@echo
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - copy the build product to phonegap platform destinations$(NO_COLOR)"
 	@echo
-	cp -rf $(DST)/* $(IOS_SRC)
-	cp -rf $(DST)/* $(ANDROID_SRC)
+
+	# the folder /dist should now exist, just copy to phonegap's www folder
+	cp -rf $(DST)/* $(CORDOVA_SRC)
 
 	### NOTE: production ODER staging hier!
-	sed -i '' 's/development/production/' $(IOS_SRC)index.html
-	sed -i '' 's/development/production/' $(ANDROID_SRC)index.html
+	sed -i '' 's/development/production/' $(CORDOVA_SRC)index.html
 
-	### include cordova js based on device type
-	sed -i '' 's/<!-- __CORDOVA_REPLACE__ -->/$(CORDOVA_ANDROID)/' $(ANDROID_SRC)index.html
-	sed -i '' 's/<!-- __CORDOVA_REPLACE__ -->/$(CORDOVA_IOS)/'     $(IOS_SRC)index.html
 
-	sed -i '' 's/<!-- pushplugin replace -->/$(PUSHPLUGIN_JS)/' $(ANDROID_SRC)index.html
-	sed -i '' 's/<!-- pushplugin replace -->/$(PUSHPLUGIN_JS)/' $(IOS_SRC)index.html
+	### include cordova js
+	sed -i '' 's/<!-- __CORDOVA_REPLACE__ -->/$(CORDOVA_INCLUDE)/' $(CORDOVA_SRC)index.html
+	sed -i '' 's/<!-- pushplugin replace -->/$(PUSHPLUGIN_JS)/' $(CORDOVA_SRC)index.html
 
-	mkdir -p $(IOS_SRC)scripts/vendor
-	mkdir -p $(ANDROID_SRC)scripts/vendor
-	cp $(SRC)/scripts/vendor/* $(IOS_SRC)scripts/vendor
-	cp $(SRC)/scripts/vendor/* $(ANDROID_SRC)scripts/vendor
+	# need to copy the vendor stuff manually after the grunt build has finished
+	mkdir -p $(CORDOVA_SRC)scripts/vendor
+	cp $(SRC)/scripts/vendor/* $(CORDOVA_SRC)scripts/vendor
 
-    # sicher ist sicher...
-	rm -rf $(ANDROID_SRC)manifest.appcache
-	rm -rf $(IOS_SRC)manifest.appcache
-
-	rm -rf     $(IOS_SRC)webapp.html
-	rm -rf $(ANDROID_SRC)webapp.html
-
-	# remove bower components
-	# rm -rf     $(IOS_SRC)components/
-	# rm -rf $(ANDROID_SRC)components/
+	rm -rf $(CORDOVA_SRC)webapp.html
 
 
 # ==============================================================================
@@ -185,24 +157,18 @@ build : jsbuild
 ios :
 	@echo
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - building with cordova for ios directly...$(NO_COLOR)"
-	./mobile/ios/cordova/build && ./mobile/ios/cordova/run
+	cd mobile && cordova -d build ios && cordova -d run ios
 
 ios_build : build
 	@echo
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - building with cordova for ios...$(NO_COLOR)"
-	./mobile/ios/cordova/build
-	tput bel
-	./mobile/ios/cordova/run
+	cd mobile && cordova -d  build ios && cordova -d run ios
 
 ios_device : build
 	@echo
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - building with cordova for ios directly. not running. use xcode to start on device after build...$(NO_COLOR)"
-	./mobile/ios/cordova/build
+	cd mobile && cordova -d build ios
 	tput bel
-
-# damn ... maybe sometimes...
-# ios_device_direct :
-#	/Volumes/Data/HOME/INFO/HACKING/TESTING/fruitstrap/fruitstrap -d -b mobile/ios/build/atonego.app
 
 
 ### ANDROID TASKS ###
@@ -210,20 +176,19 @@ ios_device : build
 android :
 	@echo
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - building with cordova for android directly...$(NO_COLOR)"
-	./mobile/android/cordova/build
-	### ./mobile/android/cordova/run
+	cd mobile && cordova -d build android
+
 
 android_build : build
 	@echo
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - building with cordova for android...$(NO_COLOR)"
-	./mobile/android/cordova/build
+	cd mobile && cordova -d build android
 	tput bel
-	### ./mobile/android/cordova/run
 
 android_run :
 	@echo
-	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - running on android - be careful - check first 'adb devices' for connected device $(NO_COLOR)"
-	./mobile/android/cordova/run
+	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - running on android - be careful - check 'adb devices' for connected device first! $(NO_COLOR)"
+	cd mobile && cordova -d run android
 
 
 ### WEBAPP TASKS ###

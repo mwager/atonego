@@ -105,7 +105,7 @@ define(function(require) {
       },
 
       // the main render fn
-      renderScreen: function(mainEl, view, touch, done) {
+      renderScreen: function(mainEl, view, animated, done) {
         // $('#app-main').css('overflow-y', 'hidden');
 
         var newEl,
@@ -114,7 +114,7 @@ define(function(require) {
               null;
 
         // transition only on mobile devices !
-        if(!touch) {
+        if(!animated) {
           animation = null;
         }
 
@@ -300,11 +300,11 @@ define(function(require) {
     };
 
     Jr.Router = Backbone.Router.extend({
-      renderScreen: function(view, isTouch, fn) {
+      renderScreen: function(view, isAnimated, fn) {
         // must reload here
         $appMain = $('#app-main');
 
-        return Jr.Navigator.renderScreen($appMain, view, isTouch, fn);
+        return Jr.Navigator.renderScreen($appMain, view, isAnimated, fn);
       }
     });
   })(Jr);

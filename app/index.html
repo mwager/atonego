@@ -67,9 +67,9 @@
 
     // global log helper
     log = function () {
-        if (__app_config__.ENV === 'production') {
+        /* XXX now if (__app_config__.ENV === 'production') {
             return false;
-        }
+        }*/
 
         if(!console) {
             return false;
@@ -85,6 +85,7 @@
 </script>
 
 <!-- __CORDOVA_REPLACE__ -->
+
 <!-- pushplugin replace -->
 
 <!-- build:js scripts/aog.js -->

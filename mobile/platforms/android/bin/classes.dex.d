@@ -1,0 +1,25 @@
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes.dex : \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/com/plugin/gcm/CordovaGCMBroadcastReceiver.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/com/plugin/gcm/GCMIntentService.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/com/plugin/gcm/PushHandlerActivity.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/com/plugin/gcm/PushPlugin.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/de/mwager/atonego/AtOneGo.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/de/mwager/atonego/BuildConfig.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/de/mwager/atonego/Manifest$permission.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/de/mwager/atonego/Manifest.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/de/mwager/atonego/R$attr.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/de/mwager/atonego/R$drawable.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/de/mwager/atonego/R$layout.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/de/mwager/atonego/R$string.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/de/mwager/atonego/R$xml.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/de/mwager/atonego/R.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/io/cordova/helloCordova/AtOneGo.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/org/apache/cordova/core/Device$1.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/org/apache/cordova/core/Device.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/org/apache/cordova/core/NetworkManager$1.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/org/apache/cordova/core/NetworkManager.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/org/apache/cordova/core/SplashScreen.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/classes/org/apache/cordova/core/Vibration.class \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/dexedLibs/cordova-3.0.0-0c9c1d62ac102732a9f5f7d5d98695ad.jar \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/dexedLibs/gcm-f419703891a4e62051bf61ab47ddb97f.jar \
+/Volumes/Data/htdocs/atonego/mobile/platforms/android/bin/dexedLibs/android-support-v13-8793551e6e8d110d8aac5744ee0daad9.jar \

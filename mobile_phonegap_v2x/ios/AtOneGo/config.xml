@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+-->
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        id        = "io.cordova.helloCordova"
+        version   = "2.0.0">
+
+    <!-- =========================== OWN start ============================= -->
+    <name>AtOneGo</name>
+
+    <description>
+        AtOneGo - you gotta do what you got to do!
+    </description>
+
+    <author href="http://mwager.de" email="mail@mwager.de">
+        Michael Wager
+    </author>
+
+    <preference name="orientation" value="portrait"/>
+
+    <!-- production -->
+    <access origin="https://atonego-mwager.rhcloud.com*"/>
+    <access origin="https://at-one-go.com*"/>
+    <access origin="*.atonego-mwager.rhcloud.com*"/>
+    <access origin="*.at-one-go.com*"/>
+
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="FadeSplashScreenDuration" value=".50" />
+    <preference name="FadeSplashScreen" value="true" />
+    <preference name="ShowSplashScreenSpinner" value="true" />
+
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <!-- =========================== OWN end =============================== -->
+
+    <!-- Preferences for iOS -->
+    <preference name="AllowInlineMediaPlayback" value="false" />
+    <preference name="EnableLocation" value="false" /><!-- DEPRECATED -->
+    <preference name="EnableViewportScale" value="false" />
+
+    <preference name="HideKeyboardFormAccessoryBar" value="false" />
+    <preference name="KeyboardShrinksView" value="false" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="TopActivityIndicator" value="gray" />
+
+    <!--
+    <feature name="Geolocation">
+      <param name="ios-package" value="CDVLocation"/>
+    </feature>
+    <feature name="Accelerometer">
+      <param name="ios-package" value="CDVAccelerometer"/>
+    </feature>
+    <feature name="Compass">
+      <param name="ios-package" value="CDVLocation"/>
+    </feature>
+    <feature name="Media">
+      <param name="ios-package" value="CDVSound"/>
+    </feature>
+    <feature name="Camera">
+      <param name="ios-package" value="CDVCamera"/>
+    </feature>
+    <feature name="Contacts">
+      <param name="ios-package" value="CDVContacts"/>
+    </feature>
+    <feature name="File">
+      <param name="ios-package"  value="CDVFile"/>
+    </feature>
+    <feature name="Capture">
+      <param name="ios-package" value="CDVCapture"/>
+    </feature>
+    <feature name="Battery">
+      <param name="ios-package" value="CDVBattery"/>
+    </feature>
+    -->
+
+    <!-- The phonegap push plugin -->
+    <feature name="PushPlugin">
+        <param name="ios-package" value="PushPlugin" />
+    </feature>
+
+    <feature name="Device">
+      <param name="ios-package" value="CDVDevice"/>
+    </feature>
+    <feature name="NetworkStatus">
+      <param name="ios-package" value="CDVConnection"/>
+    </feature>
+    <feature name="Notification">
+      <param name="ios-package" value="CDVNotification"/>
+    </feature>
+    <feature name="FileTransfer">
+      <param name="ios-package" value="CDVFileTransfer"/>
+    </feature>
+    <feature name="SplashScreen">
+      <param name="ios-package" value="CDVSplashScreen"/>
+    </feature>
+    <feature name="Echo">
+      <param name="ios-package" value="CDVEcho"/>
+    </feature>
+    <feature name="Globalization">
+      <param name="ios-package" value="CDVGlobalization"/>
+    </feature>
+    <feature name="InAppBrowser">
+      <param name="ios-package" value="CDVInAppBrowser"/>
+    </feature>
+    <feature name="Logger">
+      <param name="ios-package" value="CDVLogger"/>
+    </feature>
+    <feature name="LocalStorage">
+        <param name="ios-package" value="CDVLocalStorage"/>
+    </feature>
+</widget>

@@ -26,8 +26,9 @@ var
     utils = require(__dirname + '/utils'),
     moment = require('moment'),
 
-    // apple push notifications
+    // apple/android push notifications
     apn = require('apn'),
+    gcm = require('node-gcm'),
 
     defaultLang, projectRoot,
     I18n = require('i18n-2'),
@@ -434,8 +435,7 @@ var app = {
         }
 
         if(tokens.length === 0) {
-            // XXX raus
-            console.log('NOTE - THIS USER HAS NO DEVICE TOKENS: ' + user.email);
+            // console.log('NOTE - THIS USER HAS NO DEVICE TOKENS: ' + user.email);
             return false;
         }
 
@@ -477,7 +477,7 @@ var app = {
 
             apnsConnection.sendNotification(note);
 
-            console.log('APN NOTIFICATION SENT TO ' + user.email + ' device-token is: ' +
+            console.log('>>>>>>>>>> APN NOTIFICATION SENT TO ' + user.email + ' device-token is: ' +
                 token + ' Message: ' + message);
         });
     },
@@ -541,6 +541,59 @@ var app = {
 
             // send a mail now...
             utils.sendMail('info@at-one-go.com', 'mail@mwager.de', 'apn feedback polling', msg);
+        });
+    },
+
+    /**
+     * Send out a gcm message using "node-gcm"
+     */
+    send_GCM_PUSH: function(user, msg) {
+        if(!config.production) {
+            return false;
+        }
+
+        var API_KEY         = config.production.GCM_API_KEY;
+        var registrationIds = user.gcm_registration_ids || [];
+
+        if(typeof msg !== 'string') {
+            msg = msg + '';
+        }
+
+        msg = msg.replace(/'/g, '');
+        msg = msg.replace(/"/g, '');
+
+        // create "gcm message" object
+        var message = new gcm.Message({
+            collapseKey: 'aog',
+            delayWhileIdle: true,
+            timeToLive: 3,
+            data: {
+                key1: msg
+            }
+        });
+
+        var sender = new gcm.Sender(API_KEY);
+
+        // At least one required
+        if(registrationIds.length === 0) {
+            return false;
+        }
+
+        /**
+         * Parameters: message-literal, registrationIds-array, No. of retries, callback-function
+         */
+        sender.send(message, registrationIds, 4, function (err, result) {
+            console.log('result of gcm push:');
+            console.log(result);
+
+            if(!err) {
+                console.log('>>>>>>>>>> APN NOTIFICATION SENT TO ' + user.email + ' reg_ids are: ' +
+                    registrationIds.join(', ') + ' Message: ' + message);
+            }
+            else {
+                console.log('error?');
+                console.log(err);
+            }
         });
     }
 };

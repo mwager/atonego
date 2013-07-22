@@ -516,12 +516,13 @@ define(function (require) {
                 }*/
             };
 
-            // Android (TODO later)
-            /*window.onNotificationGCM = function(e) {
+            // Android
+            window.onNotificationGCM = function(e) {
+                log(e);
                 log(e.event);
 
                 switch( e.event ) {
-                    case 'registered':
+                case 'registered':
                     if ( e.regid.length > 0 ) {
                         // Your GCM push server needs to know the regID before it can push to this device
                         // here is where you might want to send it the regID for later use.
@@ -529,39 +530,39 @@ define(function (require) {
                     }
                     break;
 
-                    case 'message':
-                        // if this flag is set, this notification happened while we were in the foreground.
-                        // you might want to play a sound to get the user's attention, throw up a dialog, etc.
-                        if (e.foreground) {
-                            log('--INLINE NOTIFICATION--');
+                case 'message':
+                    // if this flag is set, this notification happened while we were in the foreground.
+                    // you might want to play a sound to get the user's attention, throw up a dialog, etc.
+                    if (e.foreground) {
+                        log('--INLINE NOTIFICATION--');
 
-                            // if the notification contains a soundname, play it.
-                            // TODO sound var my_media = new Media('/android_asset/www/' + e.soundname);
-                            // my_media.play();
+                        // if the notification contains a soundname, play it.
+                        // TODO sound var my_media = new Media('/android_asset/www/' + e.soundname);
+                        // my_media.play();
+                    }
+                    // otherwise we were launched because the user touched a notification in the notification tray.
+                    else {
+                        if (e.coldstart) {
+                            log('-COLDSTART NOTIFICATION--');
                         }
-                        // otherwise we were launched because the user touched a notification in the notification tray.
                         else {
-                            if (e.coldstart) {
-                                log('-COLDSTART NOTIFICATION--');
-                            }
-                            else {
-                                log('-BACKGROUND NOTIFICATION--');
-                            }
+                            log('-BACKGROUND NOTIFICATION--');
                         }
+                    }
 
-                        log(e.payload.message);
-                        log(e.payload.msgcnt);
+                    log(e.payload.message);
+                    log(e.payload.msgcnt);
                     break;
 
-                    case 'error':
-                        log(e.msg);
+                case 'error':
+                    log('ERROR: ' + e.msg);
                     break;
 
-                    default:
-                        log('EVENT -> Unknown, an event was received and we do not know what it is');
+                default:
+                    log('EVENT -> Unknown, an event was received and we do not know what it is');
                     break;
                 }
-            };*/
+            };
 
             // PUSH Plugin "register error handler" (iOS and Android)
             var errorHandler = function(err) {
@@ -570,19 +571,18 @@ define(function (require) {
             };
 
             var opts;
-            /*** later?
-            if (app.isAndroid) {  // XXX? android?
+            if (app.isAndroid) {
                 var successHandler = function() {
                     log('PUSH: =================> ANDROID PUSH SUCCESS');
                 };
                 opts = {
-                    'senderID': 'replace_with_sender_id', // TODO !!!!!!! https://github.com/phonegap-build/PushPlugin
+                    'senderID': '231725508602', // XXX not public?
                     'ecb':      'onNotificationGCM'
                 };
 
                 app.pushNotification.register(successHandler, errorHandler, opts);
-            } else */
-            if(app.isIOS) {
+            }
+            else if(app.isIOS) {
                 var tokenHandler = function(result) {
                     log('PUSH: ==> IOS PUSH SUCCESS -> token: ' + result);
 

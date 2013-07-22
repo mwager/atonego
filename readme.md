@@ -20,7 +20,7 @@ Author: Michael Wager <mail@mwager.de>
 
 ### App
 
-Native App via Phonegap for iOS [and Android]. (WebApp served via Node.js)
+Native App via Phonegap for iOS and Android. (WebApp served via Node.js)
 
 * Zepto 1.0
 * Require.js
@@ -30,6 +30,7 @@ Native App via Phonegap for iOS [and Android]. (WebApp served via Node.js)
 * Parts from Html5Boilerplate v4.X
 * Grunt
 * Inspired by the [TodoMVC project](http://todomvc.com) and [Yeoman](http://yeoman.io)
+* Phonegap (v3.x)
 
 ### API and Website via Node.js ([at-one-go.com](http://at-one-go.com))
 

@@ -10,6 +10,7 @@ temp
 dist
 node_modules
 mobile
+mobile_phonegap_v2x
 app/components
 app/scripts/libs
 app/scripts/vendor

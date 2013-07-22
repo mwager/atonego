@@ -629,7 +629,7 @@ function main(conf) {
         app.post('/api/v1/logs', application.checkAuth, function __receiveClientLogs(req, res) {
             var message = req.body.m;
             if(message) {
-                utils.handleError('||| CLIENT ERROR ||| ' + message);
+                console.log('||| CLIENT ERROR ||| ' + message);
             }
             return application.sendDefaultSuccess(req, res, {}, 204);
         });
