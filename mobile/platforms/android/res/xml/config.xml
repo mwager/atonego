@@ -26,9 +26,9 @@
     <feature name="Notification">
         <param name="android-package" value="org.apache.cordova.core.Notification" />
     </feature>
-    <plugins>
-        <plugin name="PushPlugin" value="com.plugin.gcm.PushPlugin" />
-    </plugins>
+    <feature name="PushPlugin">
+        <param name="android-package" value="com.plugin.gcm.PushPlugin" />
+    </feature>
     <feature name="Globalization" value="org.apache.cordova.core.globalization" />
     <access origin="https://atonego-mwager.rhcloud.com*" />
     <access origin="https://at-one-go.com*" />

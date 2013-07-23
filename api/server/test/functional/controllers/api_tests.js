@@ -43,11 +43,11 @@ var API_TOKEN;
 
 
 // if an error occurs, we must close the db connection and exit
-process.on('uncaughtException', function (err) {
+/*process.on('uncaughtException', function (err) {
     BOOTSTRAP.after(function() {});
-    console.log('=======> UNCAUGHT ERROR: ' + err);
+    console.log('=======> API UNCAUGHT ERROR: ' + err);
     process.exit(-1);
-});
+});*/
 
 
 /**

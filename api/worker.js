@@ -519,10 +519,8 @@ function __doCronJobOnPOST(req, res) {
                             }
 
                             // --- 3. Via PUSH
-                            // der user kann das in den einstellungen des geräts einstellen !
-                            // macht also hier keinen sinn, evtl bei android?
-                            // if(user.notify_settings.push) {
-                            application.sendAPN_PUSH(user, pushMessageAPN);
+                            application.sendAPN_PUSH(user,  pushMessageAPN);
+                            application.send_GCM_PUSH(user, pushMessageAPN);
                         }
                     });
                 }

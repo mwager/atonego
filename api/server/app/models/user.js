@@ -62,7 +62,7 @@ var reduceInvitationArray = function (arr, obj) {
 };
 
 var userToJson = function (rawUser) {
-    // TODO|XXX really NEEDED !? BETTA !!!
+    // XXX really NEEDED !?
     var u = {
         _id:            rawUser._id,
         active:         rawUser.active,
@@ -80,7 +80,8 @@ var userToJson = function (rawUser) {
         created_at:     rawUser.created_at,
         updated_at:     rawUser.updated_at,
 
-        device_tokens: rawUser.device_tokens
+        device_tokens:        rawUser.device_tokens,
+        gcm_registration_ids: rawUser.gcm_registration_ids
     };
 
     if(_.isFunction(rawUser.toObject)) {
@@ -94,7 +95,7 @@ module.exports = function (mongoose) {
     // Die Benachrichtigungs-einstellungen pro User (defaults)
     var notify_settings_default = {
         email:      true,
-        push:       true,
+        // push:       true,
         vibrate:    true,
         sound:      true
     };
@@ -185,9 +186,11 @@ module.exports = function (mongoose) {
             index: true
         },
 
-        // array of current valid device tokens (gets updated by aples feedback service
-        // and android: XXX)
+        // array of apple apn device tokens and android gcm registration ids
         device_tokens: {
+            type: Array
+        },
+        gcm_registration_ids: {
             type: Array
         }
     }, false, modelIdentifier);
@@ -649,6 +652,50 @@ module.exports = function (mongoose) {
             }
 
             if(tokenExists === true && remove === false) {
+                return cb(err, false);
+            }
+
+            userFound.save(function(err) {
+                return cb(err, true);
+            });
+        });
+    };
+
+    /**
+     * Add or remove a gcm registration id
+     *
+     * XXX Code dupli with addOrRemoveAPNDeviceToken()
+     *
+     * @param {bool} remove If True we are in "remove"-mode else add
+     */
+    Schema.statics.addOrRemoveGCMRegID = function _addOrRemoveGCMRegID(remove, user, regID, cb) {
+        if(!user || !regID) {
+            return cb({key: 'error'});
+        }
+
+        this.findById(user._id, function(err, userFound) {
+            if(err || !userFound) {
+                return cb({key: 'error'});
+            }
+
+            var regIDs   = userFound.gcm_registration_ids;
+            var idExists = false;
+
+            // let's see if this token already exists
+            regIDs.forEach(function(regIDFound) {
+                if(regID === regIDFound) {
+                    idExists = true;
+                }
+            });
+
+            if(remove === false) {
+                userFound.gcm_registration_ids.push(regID);
+            }
+            else if(idExists === true && remove === true) {
+                userFound.gcm_registration_ids = _.without(userFound.gcm_registration_ids, regID);
+            }
+
+            if(idExists === true && remove === false) {
                 return cb(err, false);
             }
 

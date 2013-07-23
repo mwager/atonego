@@ -486,7 +486,7 @@ var app = {
      * Check for invalid Apple device tokens periodically
      * and remove from user
      *
-     * XXX push
+     * XXX push/still buggy?
      */
     initAPNFeedbackPolling: function() {
         if(!config.production) {
@@ -568,7 +568,10 @@ var app = {
             delayWhileIdle: true,
             timeToLive: 3,
             data: {
-                key1: msg
+                message: msg
+                // add custom keys, up to 4kb
+                // customKey1: 'data1'
+                // customKey2: 'data2'
             }
         });
 
@@ -582,16 +585,16 @@ var app = {
         /**
          * Parameters: message-literal, registrationIds-array, No. of retries, callback-function
          */
-        sender.send(message, registrationIds, 4, function (err, result) {
-            console.log('result of gcm push:');
-            console.log(result);
+        sender.send(message, registrationIds, 4, function (err/*, result*/) {
+            // console.log('result of gcm push:');
+            // console.log(result);
 
             if(!err) {
-                console.log('>>>>>>>>>> APN NOTIFICATION SENT TO ' + user.email + ' reg_ids are: ' +
-                    registrationIds.join(', ') + ' Message: ' + message);
+                console.log('>>>>>>>>>> GCM NOTIFICATION SENT TO ' + user.email + ' reg_ids are: ' +
+                    registrationIds.join(', ') + ' Message: ' + msg);
             }
             else {
-                console.log('error?');
+                console.log('gcm error:');
                 console.log(err);
             }
         });

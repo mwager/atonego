@@ -43,6 +43,8 @@ function doAPNPush(user, todo, pushMsgArgs) {
                     msg = i18n.__.apply(i18n, pushMsgArgs);
 
                     application.sendAPN_PUSH(userFound, msg);
+
+                    application.send_GCM_PUSH(userFound, msg);
                 }
             });
         }

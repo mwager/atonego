@@ -446,7 +446,11 @@ define(function (require) {
          * NOTE:
          * if the received payload has too much "'" signs, apple will send it to
          * the device, but the JSON parser will then fail with an uncaught exception
-         * So, watch out for clean messages
+         * So, watch out for clean messages.
+         *
+         * NOTE2: (XXX)
+         * This method is pretty long and ugly, consider refactoring
+         * (caused by platform specific code)
          *
          * @see https://github.com/phonegap-build/PushPlugin
          */
@@ -454,6 +458,21 @@ define(function (require) {
             if(!window.plugins || !window.plugins.pushNotification) {
                 return false;
             }
+
+            // custom logic must be executed on every push receive (ios/android)
+            var customReceiveHook = function() {
+                // if we are on a site of todos, fetch again
+                if(app.todosContainer) {
+                    app.todosContainer.refetchTodos();
+                }
+
+                setTimeout(function() {
+                    // we must fetch the user here (e.g. new invitation)
+                    // XXX check if custom data possible via #push-plugin
+                    // node-apn supports custom payload!
+                    app.fetchUser();
+                }, 200);
+            };
 
             // XXX module? pull request?
             app.pushNotification = window.plugins.pushNotification;
@@ -471,17 +490,7 @@ define(function (require) {
                 //     snd.play();
                 // }
 
-                // if we are on a site of todos, fetch again
-                if(app.todosContainer) {
-                    app.todosContainer.refetchTodos();
-                }
-
-                setTimeout(function() {
-                    // we must fetch the user here (e.g. new invitation)
-                    // XXX check if custom data possible via #push-plugin
-                    // node-apn supports custom payload!
-                    app.fetchUser();
-                }, 200);
+                customReceiveHook();
 
                 if (evnt.alert) {
                     common.vibrate(500, app.user.get('notify_settings'));
@@ -516,14 +525,30 @@ define(function (require) {
                 }*/
             };
 
+            // we add the regID to our server via "PATCH /users/:id"
+            function sendRegIDToServer(regID) {
+                var u = new User();
+                var d = {
+                    _id: app.user.get('_id'),
+                    gcm_reg_id: regID
+                };
+
+                // just send...
+                u.save(d, {
+                    patch: true
+                    // success: function() {}
+                });
+            }
+
             // Android
             window.onNotificationGCM = function(e) {
-                log(e);
-                log(e.event);
-
                 switch( e.event ) {
                 case 'registered':
                     if ( e.regid.length > 0 ) {
+                        setTimeout(function() {
+                            sendRegIDToServer(e.regid);
+                        }, 1000);
+
                         // Your GCM push server needs to know the regID before it can push to this device
                         // here is where you might want to send it the regID for later use.
                         log('REGISTERED -> REGID:' + e.regid);
@@ -531,6 +556,8 @@ define(function (require) {
                     break;
 
                 case 'message':
+                    customReceiveHook();
+
                     // if this flag is set, this notification happened while we were in the foreground.
                     // you might want to play a sound to get the user's attention, throw up a dialog, etc.
                     if (e.foreground) {
@@ -550,8 +577,18 @@ define(function (require) {
                         }
                     }
 
-                    log(e.payload.message);
-                    log(e.payload.msgcnt);
+                    var msg = e.payload.key1;
+
+                    common.vibrate(500, app.user.get('notify_settings'));
+                    common.notify(msg, 20000);
+                    app.activityCollection.addActivity({
+                        key: 'push_notification',
+                        data: {
+                            body:      msg,
+                            timestamp: new Date().getTime()
+                        }
+                    });
+
                     break;
 
                 case 'error':
@@ -566,16 +603,13 @@ define(function (require) {
 
             // PUSH Plugin "register error handler" (iOS and Android)
             var errorHandler = function(err) {
-                //alert("GCM ERROR: " + err); // XXX now
-
-                log('PUSH: =================> ERROR HANDLER: ');
+                log('GCM PUSH ERROR: ');
                 app.handleError(err);
             };
 
             var opts;
             if (app.isAndroid) {
                 var successHandler = function() {
-                    //alert("GCM SUCCESS"); // XXX now
                     log('PUSH: =================> ANDROID PUSH SUCCESS');
                 };
                 opts = {

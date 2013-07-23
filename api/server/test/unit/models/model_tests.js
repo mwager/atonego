@@ -1,3 +1,5 @@
+/* jshint maxlen: 1200 */
+
 /*
  * This file is part of the AtOneGo project.
  * (c) 2013 Michael Wager <mail@mwager.de>
@@ -68,11 +70,11 @@ function disconnectDB() {
 }
 
 // if an error occurs, we must close the db connection and exit
-process.on('uncaughtException', function (err) {
+/*process.on('uncaughtException', function (err) {
     disconnectDB();
     console.log('=======> UNCAUGHT ERROR: ' + err);
     process.exit(-1);
-});
+});*/
 
 
 describe('===== Testing ALL Models', function () {
@@ -495,7 +497,104 @@ describe('===== Testing ALL Models', function () {
                     });
                 });
             });
+        });
 
+        describe('addOrRemoveGCMRegID()', function () {
+            it('Should add a gcm registration id to an empty array', function (done) {
+                var demoRegID = 'APA91bGFZipfVtuYZeHlOxszUCsN_c9OxkaqPApisPli66zXChCK2_8OU_4D0YbL3oM11-u3epZBAcVPTuHy7LH1J9tqlST0xkHPTSLR_8E3ZZPUC40AJFG9935zaip--jIb7FulDTu3503NB1ocePQIxN7TpHuEcB';
+
+                User.addOrRemoveGCMRegID(false, fred, demoRegID, function(err, success) {
+                    should.not.exist(err);
+                    success.should.equal(true);
+
+                    // re-fetch
+                    User.fetchUser(fred._id, function(err, user) {
+                        user.gcm_registration_ids.length.should.equal(1);
+                        fred = user;
+                        done();
+                    });
+                });
+            });
+
+            it('should add a gcm registration id to an existing array', function (done) {
+                var demoRegID = 'APA91bGFZipfVtuYZeHlOxszUCsN_c9OxkaqPApisPli66zXChCK2_8OU_4D0YbL3oM11-u3epZBAcVPTuHy7LH1J9tqlST0xkHPTSLR_8E3ZZPUC40AJFG9935zaip--jIb7FulDTu3503NB1ocePQIxN7TpHuEcC';
+
+                User.addOrRemoveGCMRegID(false, fred, demoRegID, function(err, success) {
+                    should.not.exist(err);
+                    success.should.equal(true);
+
+                    // re-fetch
+                    User.fetchUser(fred._id, function(err, user) {
+                        user.gcm_registration_ids.length.should.equal(2);
+                        fred = user;
+                        done();
+                    });
+                });
+            });
+
+            it('should NOT add the same reg id twice', function (done) {
+                var demoRegID = 'APA91bGFZipfVtuYZeHlOxszUCsN_c9OxkaqPApisPli66zXChCK2_8OU_4D0YbL3oM11-u3epZBAcVPTuHy7LH1J9tqlST0xkHPTSLR_8E3ZZPUC40AJFG9935zaip--jIb7FulDTu3503NB1ocePQIxN7TpHuEcC';
+
+                User.addOrRemoveGCMRegID(false, fred, demoRegID, function(err, success) {
+                    should.not.exist(err);
+                    success.should.equal(false);
+
+                    // re-fetch
+                    User.fetchUser(fred._id, function(err, user) {
+                        user.gcm_registration_ids.length.should.equal(2); // immer noch 2
+                        fred = user;
+                        done();
+                    });
+                });
+            });
+
+            it('should remove a reg id', function (done) {
+                var demoRegID = 'APA91bGFZipfVtuYZeHlOxszUCsN_c9OxkaqPApisPli66zXChCK2_8OU_4D0YbL3oM11-u3epZBAcVPTuHy7LH1J9tqlST0xkHPTSLR_8E3ZZPUC40AJFG9935zaip--jIb7FulDTu3503NB1ocePQIxN7TpHuEcC';
+
+                User.addOrRemoveGCMRegID(true, fred, demoRegID, function(err, success) {
+                    should.not.exist(err);
+                    success.should.equal(true);
+
+                    // re-fetch
+                    User.fetchUser(fred._id, function(err, user) {
+                        user.gcm_registration_ids.length.should.equal(1);
+                        fred = user;
+                        done();
+                    });
+                });
+            });
+
+            it('should add the reg id again', function (done) {
+                var demoRegID = 'APA91bGFZipfVtuYZeHlOxszUCsN_c9OxkaqPApisPli66zXChCK2_8OU_4D0YbL3oM11-u3epZBAcVPTuHy7LH1J9tqlST0xkHPTSLR_8E3ZZPUC40AJFG9935zaip--jIb7FulDTu3503NB1ocePQIxN7TpHuEcC';
+
+                User.addOrRemoveGCMRegID(false, fred, demoRegID, function(err, success) {
+                    should.not.exist(err);
+                    success.should.equal(true);
+
+                    // re-fetch
+                    User.fetchUser(fred._id, function(err, user) {
+                        user.gcm_registration_ids.length.should.equal(2);
+                        fred = user;
+                        done();
+                    });
+                });
+            });
+
+            /*it('should find users for a reg id to remove it', function (done) {
+                var demoRegID = '42dce3cfa6c2a9e14c5297f4860e5399b95f325acb75311af7cd71a1074e8e19';
+
+                User.removeGCMRegIDFromUser(demoRegID, function(err, success) {
+                    should.not.exist(err);
+                    success.should.equal(true);
+
+                    // re-fetch
+                    User.fetchUser(fred._id, function(err, user) {
+                        user.gcm_registration_ids.length.should.equal(1);
+                        fred = user;
+                        done();
+                    });
+                });
+            });*/
         });
     }); // end User model
 

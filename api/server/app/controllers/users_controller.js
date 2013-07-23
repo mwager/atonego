@@ -93,7 +93,7 @@ UsersController = function (app, mongoose, config) {
         if(req.body.apn_device_token) {
             User.addOrRemoveAPNDeviceToken(false, user, req.body.apn_device_token, function(err/*, success*/) {
 
-                // TODO XXX raus
+                // XXX rm
                 console.log('===> added device token to user ' + user.email +
                     ' token is: ' + req.body.apn_device_token);
 
@@ -102,6 +102,25 @@ UsersController = function (app, mongoose, config) {
                 }
 
                 // NOTE: if success is false, this means that the token was
+                // already added. So serve 204 in both cases.
+                return application.sendDefaultSuccess(req, res, {}, 204);
+            });
+
+            return;
+        }
+
+        // android registration ID ?
+        if(req.body.gcm_reg_id) {
+            User.addOrRemoveGCMRegID(false, user, req.body.gcm_reg_id, function(err/*, success*/) {
+                // XXX rm
+                console.log('===> added gcm registration id to user ' + user.email +
+                    ' id is: ' + req.body.gcm_reg_id);
+
+                if (err) {
+                    return application.sendDefaultError(req, res, err, err); // TODO locale
+                }
+
+                // NOTE: if success is false, this means that the regID was
                 // already added. So serve 204 in both cases.
                 return application.sendDefaultSuccess(req, res, {}, 204);
             });
@@ -246,6 +265,7 @@ UsersController = function (app, mongoose, config) {
                                 req.i18n.setLocale(invitedUser.lang);
                                 var apnMsg = req.i18n.__('listInvitationBodyAPNMsg', user.display_name, todolist.title);
                                 application.sendAPN_PUSH(invitedUser, apnMsg, type);
+                                application.send_GCM_PUSH(invitedUser, apnMsg);
 
                                 return application.sendDefaultSuccess(req, res, invitedUser, 200);
                             });
@@ -286,6 +306,7 @@ UsersController = function (app, mongoose, config) {
                             req.i18n.setLocale(issuerUser.lang);
                             var apnMsg = req.i18n.__('listInvAcceptedBodyAPNMsg', user.display_name, todolist.title);
                             application.sendAPN_PUSH(issuerUser, apnMsg);
+                            application.send_GCM_PUSH(issuerUser, apnMsg);
 
                             // zu hans zurück den user updaten !
                             return application.sendDefaultSuccess(req, res, data, 200);
@@ -320,6 +341,7 @@ UsersController = function (app, mongoose, config) {
                         req.i18n.setLocale(issuerUser.lang);
                         var apnMsg = req.i18n.__('listInvRejectedBodyAPNMsg', user.display_name, todolist.title);
                         application.sendAPN_PUSH(issuerUser, apnMsg);
+                        application.send_GCM_PUSH(issuerUser, apnMsg);
 
                         // zu hans zurück den user updaten !
                         return application.sendDefaultSuccess(req, res, invitedUser, 200);
@@ -350,7 +372,7 @@ UsersController = function (app, mongoose, config) {
                         req.i18n.setLocale(userToBeRemoved.lang);
                         var apnMsg = req.i18n.__('listAccessRemovedAPNMsg', todolist.title);
                         application.sendAPN_PUSH(userToBeRemoved, apnMsg);
-
+                        application.send_GCM_PUSH(userToBeRemoved, apnMsg);
 
                         var answer = {};
                         answer.userToBeRemoved = userToBeRemoved;

@@ -35,7 +35,6 @@ define(function(require) {
             // Benachrichtigungs-Einstellungen: default alles true
             notify_settings: {
                 email:   true,
-                push:    true,
                 vibrate: true,
                 sound:   true
             },

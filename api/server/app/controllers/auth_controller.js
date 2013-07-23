@@ -325,6 +325,8 @@ AuthController = function (app, mongoose, config) {
                     var apnMsg = req.i18n.__('accountActivatedAPNMsg');
                     application.sendAPN_PUSH(user, apnMsg);
 
+                    application.send_GCM_PUSH(user, apnMsg);
+
                     req.flash('info', req.i18n.__('newAccountActivated'));
                     res.redirect(config[ENV].WEBSITE_BASE_URL);
                 }
