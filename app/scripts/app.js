@@ -608,9 +608,9 @@ define(function (require) {
 
                     // log(JSON.stringify(e));
 
-                    // if this flag is set, this notification happened while we were in the foreground.
+                    // if the foreground flag is set, this notification happened while we were in the foreground.
                     // you might want to play a sound to get the user's attention, throw up a dialog, etc.
-                    if (e.foreground) {
+                    if (e.foreground || e.coldstart) {
                         // log('--INLINE NOTIFICATION--');
 
                         common.vibrate(500, app.user.get('notify_settings'));
@@ -725,9 +725,23 @@ define(function (require) {
 
             var noop = function() {};
 
-            if(app.isAndroid) {
-                window.plugins.pushNotification.unregister(noop, noop);
-            }
+            // XXX have an eye on this....
+            /*var deleteRegID_OR_APN_Token_On_Server = function() {
+                var u = new User();
+                var d = {
+                    _id: app.user.get('_id'),
+                    delete_push_token: true
+                };
+
+                // just send...
+                u.save(d, {
+                    patch: true
+                    // success: function() {}
+                });
+            };
+            deleteRegID_OR_APN_Token_On_Server();*/
+
+            window.plugins.pushNotification.unregister(noop, noop);
         }
 
     }, Backbone.Events);

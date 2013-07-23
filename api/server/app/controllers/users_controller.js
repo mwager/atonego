@@ -128,6 +128,12 @@ UsersController = function (app, mongoose, config) {
             return;
         }
 
+        // XXX
+        // if(req.body.delete_push_token) {
+        //     return application.sendDefaultSuccess(req, res, {}, 204);
+        // }
+
+
         // "TODO" auch device token !!!
 
         // NOTE: notify_settings was stringified !
