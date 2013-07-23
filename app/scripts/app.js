@@ -459,6 +459,11 @@ define(function (require) {
                 return false;
             }
 
+            // XXX module?
+            app.pushNotification = window.plugins.pushNotification;
+
+            var opts;
+
             // custom logic must be executed on every push receive (ios/android)
             var customReceiveHook = function() {
                 // if we are on a site of todos, fetch again
@@ -474,11 +479,44 @@ define(function (require) {
                 }, 200);
             };
 
-            // XXX module? pull request?
-            app.pushNotification = window.plugins.pushNotification;
+            // PUSH Plugin "register error handler" (iOS and Android)
+            var errorHandler = function(err) {
+                log('GCM PUSH ERROR: ');
+                app.handleError(err);
+            };
+
+            // we add the token to our server via "PATCH /users/:id"
+            var sendTokenToServer = function(token) {
+                var u = new User();
+                var d = {
+                    _id: app.user.get('_id'),
+                    apn_device_token: token
+                };
+
+                // just send...
+                u.save(d, {
+                    patch: true
+                    // success: function() {}
+                });
+            };
+
+            // we add the regID to our server via "PATCH /users/:id"
+            var sendRegIDToServer = function(regID) {
+                var u = new User();
+                var d = {
+                    _id: app.user.get('_id'),
+                    gcm_reg_id: regID
+                };
+
+                // just send...
+                u.save(d, {
+                    patch: true
+                    // success: function() {}
+                });
+            };
 
             // --- notification callback handlers ---
-            // MUESSEN GLOBAL SEIN!!!???
+            // MUST BE GLOBAL!?!?
 
             // iOS handler gets called if app is open (sadly, this must be global...)
             window.onNotificationAPN = function(evnt) {
@@ -525,22 +563,7 @@ define(function (require) {
                 }*/
             };
 
-            // we add the regID to our server via "PATCH /users/:id"
-            function sendRegIDToServer(regID) {
-                var u = new User();
-                var d = {
-                    _id: app.user.get('_id'),
-                    gcm_reg_id: regID
-                };
-
-                // just send...
-                u.save(d, {
-                    patch: true
-                    // success: function() {}
-                });
-            }
-
-            // Android
+            // Android handler
             window.onNotificationGCM = function(e) {
                 switch( e.event ) {
                 case 'registered':
@@ -558,29 +581,31 @@ define(function (require) {
                 case 'message':
                     customReceiveHook();
 
+                    var msg = e && e.payload ? e.payload.message : 'no message';
+
                     // if this flag is set, this notification happened while we were in the foreground.
                     // you might want to play a sound to get the user's attention, throw up a dialog, etc.
                     if (e.foreground) {
-                        log('--INLINE NOTIFICATION--');
+                        // log('--INLINE NOTIFICATION--');
+
+                        common.vibrate(500, app.user.get('notify_settings'));
+                        common.notify(msg, 20000);
 
                         // if the notification contains a soundname, play it.
                         // TODO sound var my_media = new Media('/android_asset/www/' + e.soundname);
                         // my_media.play();
                     }
                     // otherwise we were launched because the user touched a notification in the notification tray.
-                    else {
+                    /*else {
                         if (e.coldstart) {
-                            log('-COLDSTART NOTIFICATION--');
+                            // log('-COLDSTART NOTIFICATION--');
                         }
                         else {
-                            log('-BACKGROUND NOTIFICATION--');
+                            // log('-BACKGROUND NOTIFICATION--');
                         }
-                    }
+                    }*/
 
-                    var msg = e.payload.key1;
-
-                    common.vibrate(500, app.user.get('notify_settings'));
-                    common.notify(msg, 20000);
+                    // in all cases:
                     app.activityCollection.addActivity({
                         key: 'push_notification',
                         data: {
@@ -592,7 +617,8 @@ define(function (require) {
                     break;
 
                 case 'error':
-                    log('ERROR: ' + e.msg);
+                    log('onNotificationGCM ERROR: ' + e.msg);
+                    app.handleError(e.msg, true);
                     break;
 
                 default:
@@ -601,13 +627,6 @@ define(function (require) {
                 }
             };
 
-            // PUSH Plugin "register error handler" (iOS and Android)
-            var errorHandler = function(err) {
-                log('GCM PUSH ERROR: ');
-                app.handleError(err);
-            };
-
-            var opts;
             if (app.isAndroid) {
                 var successHandler = function() {
                     log('PUSH: =================> ANDROID PUSH SUCCESS');
@@ -622,21 +641,6 @@ define(function (require) {
             else if(app.isIOS) {
                 var tokenHandler = function(result) {
                     log('PUSH: ==> IOS PUSH SUCCESS -> token: ' + result);
-
-                    // we add the token to our server via "PATCH /users/:id"
-                    function sendTokenToServer(token) {
-                        var u = new User();
-                        var d = {
-                            _id: app.user.get('_id'),
-                            apn_device_token: token
-                        };
-
-                        // just send...
-                        u.save(d, {
-                            patch: true
-                            // success: function() {}
-                        });
-                    }
 
                     // "Your iOS push server needs to know the token before
                     // it can push to this device..."
