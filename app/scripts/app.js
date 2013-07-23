@@ -707,6 +707,27 @@ define(function (require) {
                 // and that your server updates the devices' records each time."
                 app.pushNotification.unregister(unregisterHandler, unregisterErrHandler);
             }
+        },
+
+        /**
+         * Unregister push on "deauthenticate"
+         */
+        unregisterPUSHNotifications: function() {
+            if(!window.plugins || !window.plugins.pushNotification) {
+                return false;
+            }
+
+            if(!app.pushNotification) {
+                return false;
+            }
+
+            app.pushNotification = null;
+
+            var noop = function() {};
+
+            if(app.isAndroid) {
+                window.plugins.pushNotification.unregister(noop, noop);
+            }
         }
 
     }, Backbone.Events);

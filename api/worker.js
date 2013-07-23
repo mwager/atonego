@@ -603,13 +603,13 @@ function main(conf) {
             return application.sendDefaultSuccess(req, res, {}, 204);
         });
 
-        app.get('/api', function __apiWelcomeMessage(req, res) {
+        /*app.get('/api', function __apiWelcomeMessage(req, res) {
             // return res.json(req.session); // check session lifetime via cookies (not really used)
 
             // test an error within a request...
-            /*setTimeout(function() {
-                throw new Error('HI!!!!!!!!!!!!!!!!! ERROR!!!!');
-            }, 1000);*/
+            // setTimeout(function() {
+            //    throw new Error('HI!!!!!!!!!!!!!!!!! ERROR!!!!');
+            // }, 1000);
 
             // etags for this response
             // res.etagify();
@@ -619,9 +619,9 @@ function main(conf) {
             // i18n.setLocale('de'); // 'en'
             // return res.send(i18n.__.apply(i18n, ['listInvitationBody', 'fred', 'listeeeeeeeeeeeee']));
 
-            var msg = 'Welcome to the AtOneGo API v' + pjson.version + '. Environment: ' + ENV; // TODO?
+            var msg = 'Welcome to the AtOneGo API v' + pjson.version + '. Environment: ' + ENV;
             return res.json({message: msg}, 200); // hier kein CORS notwendig
-        });
+        });*/
 
         // receive client logs (must be authenticated...)
         app.post('/api/v1/logs', application.checkAuth, function __receiveClientLogs(req, res) {
@@ -647,6 +647,7 @@ function main(conf) {
                 pid   : process.pid,
                 memory: mem,
                 uptime: uptimeH + ' hours (= ' + uptimeM + ' minutes)',
+                customMsg: 'AtOneGo API v' + pjson.version + ' - Environment: ' + ENV
             };
 
             return res.json(json, 200);

@@ -333,6 +333,8 @@ define(function (require) {
             app.todolists.reset(); // !
             app.user = new User();
 
+            app.unregisterPUSHNotifications();
+
             // soll man NICHT sehen wenn eingeloggt
             $('.hide-me').each(function () {
                 $(this).addClass('hidden');
