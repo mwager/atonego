@@ -538,15 +538,12 @@ define(function (require) {
         renderView: function(view) {
             var self = this;
 
-            // slide animations only on iOS
-            var isAnimated = app.isIOS;
-
             // show the "ghostbuster-layer"
             this.__toggleGhostBusterOverlay(true);
 
             // trigger the slide animation (appr. 250-500ms)
             // (listening for "transitionend" callback)
-            this.renderScreen(view, isAnimated, function __animationDone() {
+            this.renderScreen(view, app.useSlideAnimation, function __animationDone() {
                 // common.scrollTop();
 
                 // android iscroll fix

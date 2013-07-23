@@ -519,9 +519,12 @@ require([
             app.isIOS = app.isiOSBrowser;
         }
 
+        // slide only on smartphones (not on tablets)
+        app.useSlideAnimation = app.isPhonegapAvailable && !app.isTablet;
+
         // we do autohide, see ios config.xml
         // this sometimes doen't work and was the
-        // reason the app was rejected after first submission
+        // reason the app was rejected after first submission (iOS)
         // XXX later? note: WE /DO/ USE on "deviceready" NOT zepto's ready...
         // AND: it worked EVERYTIME installing via xcode and TESTFLIGHT, only
         // if the ipa gets installed via itunes is hangs

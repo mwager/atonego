@@ -64,6 +64,28 @@ define(function (require) {
     }
 
     /**
+     * Detect tablets using the user agent )-:
+     *
+     * @see http://googlewebmastercentral.blogspot.de/2011/03/mo-better-to-also-detect-mobile-user.html
+     *
+     * @return {Boolean} True if tablet
+     */
+    function isTablet() {
+        if(isBrowser()) {
+            return false;
+        }
+
+        var ua = navigator.userAgent.toLowerCase();
+
+        log('user agent: ' + ua);
+
+        var isIPAD          = (/(iPad)/).test(ua)    && (/AppleWebKit/).test(ua);
+        var isAndroidTablet = !(/(mobile)/).test(ua) && (/android/).test(ua); // XXX now is this enough?
+
+        return isIPAD || isAndroidTablet;
+    }
+
+    /**
      * http://stackoverflow.com/questions/3007480/determine-if-user-navigated-from-mobile-safari
      * @return {Boolean} True if mobile browser like safari (using user agent...dev only)
      */
@@ -187,6 +209,7 @@ define(function (require) {
         isMobile_Browser:    isMobile_Browser,
         isiOSBrowser:        isiOSBrowser(),
         isPhonegapAvailable: isPhonegapAvailable(),
+        isTablet:            isTablet(),
 
         // @see initApp()
         isIOS:     false,
