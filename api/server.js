@@ -18,7 +18,7 @@
  */
 'use strict';
 
-var ENV = process.env.NODE_ENV || 'development';
+// var ENV = process.env.NODE_ENV || 'development';
 
 /**
  * Register this app with nodefly for realtime monitoring.
@@ -30,7 +30,7 @@ var ENV = process.env.NODE_ENV || 'development';
  *
  * @see http://nodefly.com/#howto
  * @see https://www.openshift.com/blogs/step-by-step-nodejs-guide-for-realtime-monitoring-and-scaling
- */
+  XXX now
 if(ENV === 'production') {
     var app_name = process.env.OPENSHIFT_APP_NAME  || 'AtOneGo Local',
         host_url = process.env.OPENSHIFT_APP_DNS   || '127.0.0.1',
@@ -44,7 +44,7 @@ if(ENV === 'production') {
         options // optional
     );
 }
-
+*/
 // -----------------------------------------------------------------------------
 
 var

@@ -375,10 +375,15 @@ casper.then(function() {
 
 // delete accout
 casper.then(function () {
+
     this.test.assertExists('header .back-btn', 'back-btn exists');
 
     // zurück zu lists
-    this.evaluate(__goBack);
+    // this.evaluate(__goBack);
+
+    this.evaluate(__doClick, {selector: 'header .back-btn'});
+
+    this.wait(1000);
 
     this.evaluate(__doClick, {selector: 'header .back-btn'});
     this.evaluate(__doClick, {selector: '#gotolists'});

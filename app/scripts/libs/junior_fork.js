@@ -224,7 +224,7 @@ define(function(require) {
           // 1.:
           fromEl.remove();
           // 2.:
-          // fromEl.attr('id', 'tmp_' + CNT++).addClass('hidden').addClass('to-be-removed'); // XXX now .remove();
+          // fromEl.attr('id', 'tmp_' + CNT++).addClass('hidden').addClass('to-be-removed');
           // fromEl = null;
 
           toEl.attr('id', 'app-main')

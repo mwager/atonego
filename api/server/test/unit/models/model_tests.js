@@ -118,7 +118,7 @@ describe('===== Testing ALL Models', function () {
                 });
             });
 
-            // TODO raus
+            // XXX rm as not needed
             it('should add user names', function (done) {
                 User.createUser({
                     name: userName
@@ -140,7 +140,6 @@ describe('===== Testing ALL Models', function () {
                         // should have default notify settings
                         should.exist(user.notify_settings);
                         user.notify_settings.email.should.equal(true);
-                        user.notify_settings.push.should.equal(true);
                         user.notify_settings.vibrate.should.equal(true);
                         user.notify_settings.sound.should.equal(true);
 

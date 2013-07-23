@@ -80,7 +80,7 @@ define(function (require) {
         log('user agent: ' + ua);
 
         var isIPAD          = (/(iPad)/).test(ua)    && (/AppleWebKit/).test(ua);
-        var isAndroidTablet = !(/(mobile)/).test(ua) && (/android/).test(ua); // XXX now is this enough?
+        var isAndroidTablet = !(/(mobile)/).test(ua) && (/android/).test(ua); // XXX is this enough?
 
         return isIPAD || isAndroidTablet;
     }
@@ -605,6 +605,8 @@ define(function (require) {
                     customReceiveHook();
 
                     var msg = e && e.payload ? e.payload.message : 'no message';
+
+                    // log(JSON.stringify(e));
 
                     // if this flag is set, this notification happened while we were in the foreground.
                     // you might want to play a sound to get the user's attention, throw up a dialog, etc.
