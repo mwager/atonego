@@ -520,7 +520,7 @@ require([
         }
 
         // slide only on smartphones (not on tablets)
-        app.useSlideAnimation = app.isPhonegapAvailable && !app.isTablet;
+        app.useSlideAnimation = app.isIOS && !app.isTablet; // app.isPhonegapAvailable && !app.isTablet;
 
         // we do autohide, see ios config.xml
         // this sometimes doen't work and was the

@@ -4,6 +4,7 @@
 
 * search project for "XXX" or "XXX now"
 * media queries !!! (zB startpage -> logo kann größer sein)
+* test tablet detection with ipad sim and iphone
 
 ## APP ##
 * we want autohide = false in config.xml but that caused the splash screen hang AFTER first submission to the app store ([maybe this helps](http://community.phonegap.com/nitobi/topics/stops_at_default_phonegap_splash_screen_on_ios_iphone_5))

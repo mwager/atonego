@@ -128,7 +128,7 @@ jsbuild_debug : clean
 
 
 ### copy optimized src to phonegap android/ios directories
-build : jsbuild_debug
+build : jsbuild
 	@echo
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - copy the build product to phonegap platform destinations$(NO_COLOR)"
 	@echo

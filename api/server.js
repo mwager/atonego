@@ -35,16 +35,15 @@ if(ENV === 'production') {
     var app_name = process.env.OPENSHIFT_APP_NAME  || 'AtOneGo Local',
         host_url = process.env.OPENSHIFT_APP_DNS   || '127.0.0.1',
         gear_id  = process.env.OPENSHIFT_GEAR_UUID || 1,
-        options  = {},
+        options  = {blockThreshold: 10},
         api_key  = require('./server/config/environments/production.json').NODEFLY_KEY;
 
-    require('nodefly').profile(
+    require('strong-agent').profile(
         api_key,
         [app_name, host_url, gear_id],
-        options
+        options // optional
     );
 }
-
 
 // -----------------------------------------------------------------------------
 

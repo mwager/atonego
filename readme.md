@@ -338,6 +338,10 @@ We generate __one__ optimized JavaScript file (`aog.js`) via the requirejs optim
 
 Then just switch "Run" and "Archive" configs to "Distribution" under "edit scheme..." in xcode.
 
+### Google Play Store Submission ###
+
+* [see this tutorial](http://www.adobe.com/devnet/dreamweaver/articles/phonegap-mobile-app-pt4.html)
+
 ### Deployment of the API
 
 The API has its own repository at openshift. (URL: [atonego-mwager.rhcloud.com](https://atonego-mwager.rhcloud.com)) We are using a "Node.js-Catridge", default Node-Version is 0.6.x (May 2013), but of course we want a newer version of Node.js, so we also set up this:
