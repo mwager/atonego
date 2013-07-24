@@ -8,7 +8,8 @@ _make webapp && make ios && make android - an experiment with javascript and pho
 
 This is the repo of the app [AtOneGo](http://at-one-go.com)
 
-* [View in iTunes store](https://itunes.apple.com/us/app/atonego/id668972250) (Android currently not supported, maybe later)
+* [View in iTunes store](https://itunes.apple.com/us/app/atonego/id668972250)
+* [View in Google Play store](https://play.google.com/store/apps/details?id=de.mwager.atonego)
 * [Try the WebApp](https://atonego-mwager.rhcloud.com/app)
 
 This file contains the documentation for developers.
