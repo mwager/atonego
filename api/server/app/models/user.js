@@ -716,6 +716,7 @@ module.exports = function (mongoose) {
         user.device_tokens        = [];
         user.gcm_registration_ids = [];
         user.save(function(err) {
+            // console.log('cleared tokens from ' + user.email);
             return cb(err);
         });
     };

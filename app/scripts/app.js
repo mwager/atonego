@@ -739,7 +739,7 @@ define(function (require) {
                 // just send...
                 u.save(d, {
                     patch: true
-                    // success: function() {}
+                    // success: function() {log("OK ");}
                 });
             };
             deleteRegID_OR_APN_Token_On_Server();

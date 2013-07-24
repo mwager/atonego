@@ -50,9 +50,9 @@ define(function (require) {
 
         'signup'    : 'signup',
         'login'     : 'login',
+        'logout'    : 'logout',
         'settings'  : 'settings',
         'help'      : 'help',
-        'logout'    : 'logout',
 
         'todolists'         : 'showTodolists',
         'todolists/edit/:id': 'editTodolist',
@@ -321,6 +321,9 @@ define(function (require) {
         deauthenticateUser: function () {
             var self = this;
 
+            // MUST be called before we reset the user!
+            app.unregisterPUSHNotifications();
+
             setTimeout(function() {
                 self.go('start');
             }, 1);
@@ -332,8 +335,6 @@ define(function (require) {
 
             app.todolists.reset(); // !
             app.user = new User();
-
-            app.unregisterPUSHNotifications();
 
             // soll man NICHT sehen wenn eingeloggt
             $('.hide-me').each(function () {
@@ -397,6 +398,27 @@ define(function (require) {
             this.renderView(loginView);
         },
 
+        /**
+         * Logout the user
+         */
+        logout: function() {
+            // render the startscreen now.
+            this.deauthenticateUser();
+
+            // logout silently in background
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: app.API_ROOT + '/api/v1/logout',
+                success: function ( /*json*/ ) {},
+                error: function ( /*json*/ ) {
+                    common.notify(__('error'));
+                }
+            });
+
+            return false;
+        },
+
         // MainView
         // route '/#todolists'
         showTodolists: function () {
@@ -449,27 +471,6 @@ define(function (require) {
         help: function () {
             var helpView = new HelpView();
             this.renderView(helpView);
-        },
-
-        /**
-         * Logout the user
-         */
-        logout: function() {
-            // render the startscreen now.
-            this.deauthenticateUser();
-
-            // logout silently in background
-            $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url: app.API_ROOT + '/api/v1/logout',
-                success: function ( /*json*/ ) {},
-                error: function ( /*json*/ ) {
-                    common.notify(__('error'));
-                }
-            });
-
-            return false;
         },
 
         /*__initIScroll: function() {
