@@ -439,7 +439,7 @@ require([
         // ----- android stuff -----
 
         // on android: overwrite back button actions
-        var onBackKey = function () {
+        /*var onBackKey = function () {
             var route = Backbone.history.fragment;
 
             // id we are on the start view: EXIT
@@ -447,11 +447,9 @@ require([
                 if(!_.isUndefined(navigator) && navigator.app && navigator.app.exitApp) {
                     navigator.app.exitApp(); // hmm native?
                 }
-                return true;
+                return false;
             }
-
-            return true;
-        };
+        };*/
 
         // on android: listen for the menu-button
         var onMenuKey = function () {
@@ -461,7 +459,7 @@ require([
         };
 
         if(app.isAndroid) {
-            document.addEventListener('backbutton', onBackKey, false);
+            // document.addEventListener('backbutton', onBackKey, false);
             document.addEventListener('menubutton', onMenuKey, false);
         }
     }

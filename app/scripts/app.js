@@ -614,7 +614,9 @@ define(function (require) {
                         // log('--INLINE NOTIFICATION--');
 
                         common.vibrate(500, app.user.get('notify_settings'));
-                        common.notify(msg, 20000);
+                        setTimeout(function() {
+                            common.notify(msg, 20000);
+                        }, 1500);
 
                         // if the notification contains a soundname, play it.
                         // TODO sound var my_media = new Media('/android_asset/www/' + e.soundname);
@@ -710,7 +712,9 @@ define(function (require) {
         },
 
         /**
-         * Unregister push on "deauthenticate"
+         * Unregister push on "deauthenticate".
+         *
+         * Note that we delete ALL apn tokens or gcm reg ids on server side
          */
         unregisterPUSHNotifications: function() {
             if(!window.plugins || !window.plugins.pushNotification) {
@@ -725,12 +729,11 @@ define(function (require) {
 
             var noop = function() {};
 
-            // XXX have an eye on this....
-            /*var deleteRegID_OR_APN_Token_On_Server = function() {
+            var deleteRegID_OR_APN_Token_On_Server = function() {
                 var u = new User();
                 var d = {
                     _id: app.user.get('_id'),
-                    delete_push_token: true
+                    delete_push_tokens: true
                 };
 
                 // just send...
@@ -739,7 +742,7 @@ define(function (require) {
                     // success: function() {}
                 });
             };
-            deleteRegID_OR_APN_Token_On_Server();*/
+            deleteRegID_OR_APN_Token_On_Server();
 
             window.plugins.pushNotification.unregister(noop, noop);
         }

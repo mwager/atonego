@@ -705,6 +705,21 @@ module.exports = function (mongoose) {
         });
     };
 
+    /**
+     * Removes all apn tokens or gcm reg ids from thios user
+     */
+    Schema.statics.clearPUSHTokens = function _clearPUSHTokens(user, cb) {
+        if(!user) {
+            return false;
+        }
+
+        user.device_tokens        = [];
+        user.gcm_registration_ids = [];
+        user.save(function(err) {
+            return cb(err);
+        });
+    };
+
 
     // ----- sharing functions -----
     /**

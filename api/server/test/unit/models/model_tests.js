@@ -595,6 +595,28 @@ describe('===== Testing ALL Models', function () {
                 });
             });*/
         });
+
+        describe('clearPUSHTokens()', function () {
+            it('should delete all apn tokens and gcm reg ids from this user', function(done) {
+                User.findById(fred._id, function(err, user) {
+                    user.device_tokens        = ['123', '456'];
+                    user.gcm_registration_ids = ['123', '456'];
+                    user.save(function() {
+                        should.not.exist(err);
+                        user.device_tokens.length.should.equal(2);
+                        user.gcm_registration_ids.length.should.equal(2);
+
+                        User.clearPUSHTokens(user, function(err) {
+                            should.not.exist(err);
+                            user.device_tokens.length.should.equal(0);
+                            user.gcm_registration_ids.length.should.equal(0);
+                            done();
+                        });
+                    });
+                });
+            });
+        });
+
     }); // end User model
 
 
