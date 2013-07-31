@@ -34,17 +34,19 @@
 @synthesize notificationCallbackId;
 @synthesize callback;
 
-- (void)unregister:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+- (void)unregister:(CDVInvokedUrlCommand*)command;
 {
-	self.callbackId = [arguments pop];
+	self.callbackId = command.callbackId;
 
     [[UIApplication sharedApplication] unregisterForRemoteNotifications];
     [self successWithMessage:@"unregistered"];
 }
 
-- (void)register:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
+- (void)register:(CDVInvokedUrlCommand*)command;
 {
-	self.callbackId = [arguments pop];
+	self.callbackId = command.callbackId;
+
+    NSMutableDictionary* options = [command.arguments objectAtIndex:0];
 
     UIRemoteNotificationType notificationTypes = UIRemoteNotificationTypeNone;
     id badgeArg = [options objectForKey:@"badge"];
@@ -88,11 +90,13 @@
 		[self notificationReceived];	// go ahead and process it
 }
 
+/*
 - (void)isEnabled:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options {
     UIRemoteNotificationType type = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
     NSString *jsStatement = [NSString stringWithFormat:@"navigator.PushPlugin.isEnabled = %d;", type != UIRemoteNotificationTypeNone];
     NSLog(@"JSStatement %@",jsStatement);
 }
+*/
 
 - (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
@@ -225,7 +229,7 @@
 {
     CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
 
-    [self writeJavascript:[commandResult toSuccessCallbackString:self.callbackId]];
+    [self.commandDelegate sendPluginResult:commandResult callbackId:self.callbackId];
 }
 
 -(void)failWithMessage:(NSString *)message withError:(NSError *)error
@@ -233,7 +237,7 @@
     NSString        *errorMessage = (error) ? [NSString stringWithFormat:@"%@ - %@", message, [error localizedDescription]] : message;
     CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:errorMessage];
 
-    [self writeJavascript:[commandResult toErrorCallbackString:self.callbackId]];
+    [self.commandDelegate sendPluginResult:commandResult callbackId:self.callbackId];
 }
 
 @end
