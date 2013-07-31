@@ -312,7 +312,13 @@ define([
                 });
             };
 
-            common.dialog(__('reallyAddUser', {email: email}), addUserHelper, true);
+            // FIX possible "screen dead" BUG on smartphones:
+            // Trigger blur here. Else the screen will shrink to the half
+            this.$searchInput.blur();
+
+            setTimeout(function() {
+                common.dialog(__('reallyAddUser', {email: email}), addUserHelper, true);
+            }, 10);
         },
 
         /**

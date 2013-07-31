@@ -19,7 +19,7 @@ Author: Michael Wager <mail@mwager.de>
 ## Changelog ##
 
 ### v1.0.1 ###
-* Fix a bug: While inviting a user the screen will be dead and the user has to kill the app manually (happened only on iPhones)
+* Fix bug: When clicking on "invite user" the screen shrinks to the half and the whole app is not usable anymore so a user has to kill the app manually (happened only on iPhones)
 
 ### v1.0.0 ###
 * Initial release version
