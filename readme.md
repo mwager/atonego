@@ -16,8 +16,15 @@ This file contains the documentation for developers.
 
 Author: Michael Wager <mail@mwager.de>
 
+## Changelog ##
 
-## TechStack - Overview
+### v1.0.1 ###
+* Fix a bug: While inviting a user the screen will be dead and the user has to kill the app manually (happened only on iPhones)
+
+### v1.0.0 ###
+* Initial release version
+
+## TechStack - Overview ##
 
 ### App
 
@@ -48,7 +55,7 @@ Native App via Phonegap for iOS and Android. (WebApp served via Node.js)
 
 
 
-## Relevant directories & files
+## Relevant directories & files ##
 
 * __`/app`                    - app sources (yeoman requirejs/backbone boilerplate)__
 * __`/api`                    - node.js sources (REST API, SocketIO, DB, Tests, etc)__
@@ -58,9 +65,7 @@ Native App via Phonegap for iOS and Android. (WebApp served via Node.js)
 * __`/api/server/test`        - All backend tests__
 * __`/test`                   - All frontend tests__
 * `/dist`                     - Created via Grunt. The optimized sources will be used in the phonegap app and the webapp
-* `/mobile`                   - Phonegap iOS and Android container (the sources from `dist` will be copied to the specific phonegap `www`-directory)
-* `/mobile/ios/www`           - Phonegap assets dir iOS
-* `/mobile/android/assets/www`- Phonegap assets dir Android
+* `/mobile/`                  - Phonegap project directory (v3.x)
 * `/docs`                     - All software documentation
 
 ### Files
@@ -75,7 +80,7 @@ Native App via Phonegap for iOS and Android. (WebApp served via Node.js)
 
 
 
-## Local installation
+## Local installation ##
 
 #### 1. The App
 
@@ -111,7 +116,7 @@ Now checkout something like:
 Checkout the `Makefile` for more information.
 
 
-## Code quality && -style
+## Code quality && -style ##
 
 ### Static code analysis via JSHint (back end && front end)
 
@@ -168,7 +173,7 @@ We mark problems and todos in the code comments via the marker `XXX` since using
 
 
 
-## Tests
+## Tests ##
 
 ### Overview
 All following commands should run without errors: (all from the project root)
@@ -257,7 +262,7 @@ and open [this](http://192.168.1.233:8081/client/#anonymous) page with a browser
 
 
 
-## The API, error handling & multilingualism
+## The API, error handling & multilingualism ##
 
 ### Authorization & Authentication
 
@@ -308,7 +313,7 @@ Models are always returning the Error as the __first__ parameter in the callback
 
 
 
-## Deployment
+## Deployment ##
 
 Be sure to check out the `Makefile` for more infos.
 
@@ -486,7 +491,7 @@ Installed via `plugman`:
     $ plugman --platform ios --project ./platforms/ios --plugin https://github.com/phonegap-build/PushPlugin.git
 
 
-## Problems, Solutions, Workarounds, Known Bugs
+## Problems, Solutions, Workarounds, Known Bugs ##
 
 ### Performance
 
@@ -580,7 +585,7 @@ A minutely cronjob runs on the server, checking all todos which are due now, so 
 Search `/api/worker.js` -> "cron"
 
 
-## Console testing
+## Console testing ##
 Open the app in chrome or safari ([dev](http://127.0.0.1/atonego/app) or [live](https://atonego-mwager.rhcloud.com/app)), then open the dev console and put in some of the following commands to play with the app:
 
     # as there is (almost) nothing global, we must require stuff first, use this as template:
@@ -604,6 +609,6 @@ Open the app in chrome or safari ([dev](http://127.0.0.1/atonego/app) or [live](
 
 
 
-## Todos
+## Todos ##
 
 See `docs/TODOs.md`
