@@ -63,6 +63,28 @@ module.exports = {
     },
 
     /**
+     * Trying to disconnect from the database.
+     */
+    disconnectFromDB: function(mongoose, done) {
+        try {
+            if(mongoose && mongoose.disconnect) {
+                console.log('--------------- disconnecting from database...');
+                mongoose.disconnect(function() {
+                    console.log('disconnected.');
+
+                    if(typeof done === 'function') {
+                        done();
+                    }
+                });
+            }
+        }
+        catch(e) {
+            console.log('error disconnecting db: ' + (e.message ? e.message : e));
+            console.log(e.stack ? e.stack : 'NO STACKTRACE');
+        }
+    },
+
+    /**
      * remove all documents from a collection
      *
      * @param  Mongoose.Model  Model

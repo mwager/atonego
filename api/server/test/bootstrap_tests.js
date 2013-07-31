@@ -37,19 +37,13 @@ var BOOTSTRAP = {};
 BOOTSTRAP.ENV = process.env.NODE_ENV;
 BOOTSTRAP.api_v1 = application.apiVersion;
 
-// hier wird der worker direkt eingebunden (nicht also "worker")
-// Dies ist notwendig um die app für die api tests zu starten !
-// (anderer port zB 4001, siehe server-config)
-AppEmitter = require(application.PROJECT_ROOT + 'worker');
-
 utils = require(application.PROJECT_ROOT + 'server/lib/utils');
 db = require(application.PROJECT_ROOT + 'server/lib/db');
 BOOTSTRAP.BASE_URL = 'http://127.0.0.1:4001/';
 BOOTSTRAP.API_URL = 'http://127.0.0.1:4001' + application.apiVersion;
 
-// var model_names = ['User', 'Customer', 'Codeblock', 'Code', 'Message'];
 
-console.log('===== BOOTSTRAP TESTS ====='.green);
+console.log('===== BOOTSTRAP API TESTS ====='.green);
 
 /**
  * clean all collections
@@ -60,42 +54,46 @@ function cleanDB(cb) {
     });
 }
 
-
 BOOTSTRAP.before = function (cb) {
     utils.loadConfig(application.PROJECT_ROOT + 'server/config', function (conf) {
         var calledApp = false;
 
         config = conf;
 
-        AppEmitter.on('getApp', function (app) {
-            if (calledApp) {
-                return false;
-            }
+        // disconnect first!
+        db.disconnectFromDB(mongoose, function() {
+            // THIS STARTS THE SERVER
+            // hier wird der worker direkt eingebunden (nicht also "worker")
+            // Dies ist notwendig um die app für die api tests zu starten !
+            // (anderer port zB 4001, siehe server-config)
+            AppEmitter = require(application.PROJECT_ROOT + 'worker');
 
-            calledApp = true;
-            appServ = app;
+            AppEmitter.on('getApp', function (app) {
+                if (calledApp) {
+                    return false;
+                }
 
-            app.listen(config[BOOTSTRAP.ENV].PORT);
+                calledApp = true;
+                appServ = app;
 
-            // clean whole db before running all tests
-            cleanDB(cb);
+                app.listen(config[BOOTSTRAP.ENV].PORT);
+
+                // clean whole db before running all tests
+                cleanDB(cb);
+            });
+
+            // TIMEOUT NEEDED
+            setTimeout(function() {
+                AppEmitter.emit('checkApp');
+            }, 1000);
         });
-
-        AppEmitter.emit('checkApp');
     });
 };
 
 BOOTSTRAP.after = function (cb) {
     var closedApp = false;
-    try {
-        if(mongoose && mongoose.disconnect) {
-            console.log('--------------- disconnecting from database...');
-            mongoose.disconnect();
-        }
-    }
-    catch(e) {
-        console.log('error disconnecting db: ' + (e.message ? e.message : e));
-    }
+
+    db.disconnectFromDB(mongoose);
 
     appServ.on('close', function () {
         setTimeout(function () {

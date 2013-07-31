@@ -57,21 +57,9 @@ hansName = 'hans';
 var fred, hans;
 
 
-function disconnectDB() {
-    try {
-        if(mongoose && mongoose.disconnect) {
-            console.log('--------------- disconnecting from database...');
-            mongoose.disconnect();
-        }
-    }
-    catch(e) {
-        console.log('error disconnecting db: ' + (e.message ? e.message : e));
-    }
-}
-
 // if an error occurs, we must close the db connection and exit
 /*process.on('uncaughtException', function (err) {
-    disconnectDB();
+    db.disconnectFromDB(mongoose, function() {});
     console.log('=======> UNCAUGHT ERROR: ' + err);
     process.exit(-1);
 });*/
@@ -83,27 +71,27 @@ describe('===== Testing ALL Models', function () {
         utils.loadConfig(libpath + 'config', function (conf) {
             config = conf;
 
-            mongoose.disconnect();
-            mongoose = db.connectToDatabase(mongoose, config.db[ENV].main, function (err) {
-                if(err) {
-                    throw err;
-                }
+            db.disconnectFromDB(mongoose, function() {
+                mongoose = db.connectToDatabase(mongoose, config.db[ENV].main, function (err) {
+                    if(err) {
+                        throw err;
+                    }
 
-                // --- register all needed models ---
-                // User = require(libpath + 'app/models/user')(mongoose);
-                User = mongoose.model('User');
-                Todolist = mongoose.model('Todolist');
-                Todo = mongoose.model('Todo');
-                DeletedUser = mongoose.model('DeletedUser');
+                    // --- register all needed models ---
+                    // User = require(libpath + 'app/models/user')(mongoose);
+                    User = mongoose.model('User');
+                    Todolist = mongoose.model('Todolist');
+                    Todo = mongoose.model('Todo');
+                    DeletedUser = mongoose.model('DeletedUser');
 
-                db.cleanDB(mongoose, done);
+                    db.cleanDB(mongoose, done);
+                });
             });
         });
     });
 
     after(function (done) {
-        disconnectDB();
-        done();
+        db.disconnectFromDB(mongoose, done);
     });
 
     describe('Model::User', function () {
