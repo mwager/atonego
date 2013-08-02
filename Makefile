@@ -158,7 +158,7 @@ build : jsbuild
 ios :
 	@echo
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - building with cordova for ios directly...$(NO_COLOR)"
-	cd mobile && cordova -d build ios && cordova -d run ios
+	cd mobile && cordova -d build ios  # && cordova -d run ios
 
 ios_build : build
 	@echo

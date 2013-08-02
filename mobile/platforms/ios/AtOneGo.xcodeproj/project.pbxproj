@@ -5,9 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
-		15F10CCCF5DC42BDAB64418F /* CDVGlobalization.m in Sources */ = {isa = PBXBuildFile; fileRef = A46740B6BFC640EFB811B526 /* CDVGlobalization.m */; };
 		1BF698F5EDEB4BA2A4959182 /* CDVVibration.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71EB8AFE2E4C0D9F69E476 /* CDVVibration.m */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -487,7 +485,6 @@
 				D01B9882E0814B4283BF8ABD /* AppDelegate+notification.m in Sources */,
 				201EEC6B814E495AB2AC4699 /* PushPlugin.m in Sources */,
 				A47FC8FCD056489490C5B3FC /* CDVNotification.m in Sources */,
-				15F10CCCF5DC42BDAB64418F /* CDVGlobalization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -163,6 +163,7 @@ define(function (require) {
 
             preCheck(lang);
         } else { // phonegap environment
+
             navigator.globalization.getPreferredLanguage(
                 function (language) {
                     lang = language.value;

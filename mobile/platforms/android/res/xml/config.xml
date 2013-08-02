@@ -29,7 +29,6 @@
     <feature name="PushPlugin">
         <param name="android-package" value="com.plugin.gcm.PushPlugin" />
     </feature>
-    <feature name="Globalization" value="org.apache.cordova.core.globalization" />
     <access origin="https://atonego-mwager.rhcloud.com*" />
     <access origin="https://at-one-go.com*" />
     <access origin="*.atonego-mwager.rhcloud.com*" />
@@ -45,4 +44,5 @@
     <preference name="BackupWebStorage" value="none" />
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <preference name="DisallowOverscroll" value="true" />
+    <feature name="Globalization" value="org.apache.cordova.core.globalization" />
 </widget>
