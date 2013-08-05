@@ -35,10 +35,20 @@ describe('===== DB UTILS', function () {
     describe('check own properties', function () {
         it('should have functions the app uses', function (done) {
             db.hasOwnProperty('connectToDatabase').should.equal(true);
+            db.hasOwnProperty('disconnectFromDB').should.equal(true);
             db.hasOwnProperty('cleanCollection').should.equal(true);
             db.hasOwnProperty('cleanDB').should.equal(true);
 
             done();
+        });
+    });
+
+    // disconnect first
+    describe('db.disconnectFromDB(...)', function () {
+        it('should disconnect from a database', function (done) {
+            db.disconnectFromDB(mongoose, function() {
+                done();
+            });
         });
     });
 
@@ -63,6 +73,14 @@ describe('===== DB UTILS', function () {
                 // console.log(mongoose.connections)
                 done();
             }
+        });
+    });
+
+    describe('db.disconnectFromDB(...)', function () {
+        it('should disconnect from a database', function (done) {
+            db.disconnectFromDB(mongoose, function() {
+                done();
+            });
         });
     });
 });
