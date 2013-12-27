@@ -23,8 +23,8 @@ before_script:
   #- "sleep 20"
   #- "cd ./casperjs && git checkout tags/1.0.2 && cd .."
   #- -----------------
-  # install api deps too!
-  - "cd ./api && npm install"
+  # install api deps too! need to go back
+  - "cd ./api && npm install && cd .."
 
 script:
   - "DISPLAY=:99.0 make travis_tests"
