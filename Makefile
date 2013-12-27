@@ -252,7 +252,7 @@ travis_tests :
 	@echo
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - running tests on travis: node and testem. $(NO_COLOR)"
 
-	npm test && ./node_modules/testem/testem.js ci
+	npm test ### && ./node_modules/testem/testem.js ci
 
 	# XXX this is a bit tricky because the api is already running,
 	# but the app sources must also be served by some web server
