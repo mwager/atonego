@@ -1,8 +1,8 @@
 # AtOneGo
 
-[![Build Status](https://travis-ci.org/mwager/atonego.png?branch=master)](https://travis-ci.org/mwager/atonego)
+_make webapp && make ios && make android - an experiment with JavaScript/NodeJS and Phonegap_
 
-_make webapp && make ios && make android - an experiment with javascript and phonegap_
+[![Build Status](https://travis-ci.org/mwager/atonego.png?branch=master)](https://travis-ci.org/mwager/atonego)
 
 ![AtOneGo](https://atonego-mwager.rhcloud.com/app/images/logo.png)
 
@@ -18,10 +18,10 @@ Author: Michael Wager <mail@mwager.de>
 
 ## Changelog ##
 
-### v1.0.1 [08/19/2013] ###
+### v1.0.1 [08/2013/19] ###
 * Fix bug: When clicking on "invite user" the screen shrinks to the half and the whole app is not usable anymore so a user has to kill the app manually (happened only on iPhones)
 
-### v1.0.0 [07/18/2013] ###
+### v1.0.0 [07/2013/18] ###
 * Initial release version
 
 ## TechStack - Overview ##
