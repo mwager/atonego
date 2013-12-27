@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
            id="org.apache.cordova.core.globalization"
       version="0.1.0">
     <name>Globalization</name>
@@ -19,11 +19,13 @@
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="Globalization" value="org.apache.cordova.core.globalization"/>
+            <feature name="Globalization">
+                <param name="android-package" value="org.apache.cordova.globalization.Globalization" />
+            </feature>
         </config-file>
 
-        <source-file src="src/android/Globalization.java" target-dir="src/org/apache/cordova/core" />
-        <source-file src="src/android/GlobalizationError.java" target-dir="src/org/apache/cordova/core" />
+        <source-file src="src/android/Globalization.java" target-dir="src/org/apache/cordova/globalization" />
+        <source-file src="src/android/GlobalizationError.java" target-dir="src/org/apache/cordova/globalization" />
     </platform>
        
    <!-- ios -->

@@ -22,7 +22,7 @@
     "trailing": true,
     "smarttabs": true,
     "maxdepth": 4,
-    "maxcomplexity": 10,
+    "maxcomplexity": 15,
     "maxlen": 120,
     "white": false
 }

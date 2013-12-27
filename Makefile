@@ -227,6 +227,7 @@ api_deploy : webapp
 	### check status und ggf manuell deploy/push ?
 	cd ./api_deployment && git status && git add -A && git commit -a -m "auto commit" && git push origin master
 
+	### TODO nicht VOR DEM COMMIT!?
 	### website build
 	bash $(API_SRC)/server/build/run.sh
 

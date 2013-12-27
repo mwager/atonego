@@ -1,51 +1,36 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="de.mwager.atonego" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>AtOneGo</name>
-
     <description>
         AtOneGo - you gotta do what you got to do!
     </description>
-
-    <author href="http://mwager.de" email="mail@mwager.de">
+    <author email="mail@mwager.de" href="http://mwager.de">
         Michael Wager
     </author>
-
-    <!-- production -->
-    <access origin="https://atonego-mwager.rhcloud.com*"/>
-    <access origin="https://at-one-go.com*"/>
-    <access origin="*.atonego-mwager.rhcloud.com*"/>
-    <access origin="*.at-one-go.com*"/>
-
+    <access origin="https://atonego-mwager.rhcloud.com*" />
+    <access origin="https://at-one-go.com*" />
+    <access origin="*.atonego-mwager.rhcloud.com*" />
+    <access origin="*.at-one-go.com*" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
-
-
-    <!-- =========================== OWN start ============================= -->
-    <preference name="orientation" value="portrait"/>
-
+    <preference name="orientation" value="portrait" />
     <preference name="AutoHideSplashScreen" value="true" />
     <preference name="FadeSplashScreenDuration" value=".50" />
     <preference name="FadeSplashScreen" value="true" />
     <preference name="ShowSplashScreenSpinner" value="true" />
-
     <preference name="BackupWebStorage" value="none" />
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <preference name="DisallowOverscroll" value="true" />
-    <!-- =========================== OWN end =============================== -->
-
-    <!-- Preferences for iOS -->
     <preference name="AllowInlineMediaPlayback" value="false" />
-    <preference name="EnableLocation" value="false" /><!-- DEPRECATED -->
+    <preference name="EnableLocation" value="false" />
     <preference name="EnableViewportScale" value="false" />
-
     <preference name="HideKeyboardFormAccessoryBar" value="false" />
     <preference name="KeyboardShrinksView" value="false" />
     <preference name="MediaPlaybackRequiresUserAction" value="false" />
     <preference name="SuppressesIncrementalRendering" value="false" />
     <preference name="TopActivityIndicator" value="gray" />
-
-    <!-- The phonegap push plugin -->
     <feature name="PushPlugin">
         <param name="ios-package" value="PushPlugin" />
     </feature>
+    <content src="index.html" />
 </widget>

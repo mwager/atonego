@@ -87,7 +87,10 @@ define(function (require) {
          */
         onTranslationsLoaded: function () {
             // re-render all views
-            if(this.currentView) {
+            if(this.startView) {
+                this.startView.render();
+            }
+            else if(this.currentView) {
                 this.currentView.render();
             }
         },
@@ -370,8 +373,8 @@ define(function (require) {
                 return this.go('todolists');
             }
 
-            var startScreenView = new StartScreenView();
-            this.renderView(startScreenView);
+            this.startView = new StartScreenView();
+            this.renderView(this.startView);
         },
 
         /**

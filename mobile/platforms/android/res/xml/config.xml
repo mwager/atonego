@@ -37,6 +37,7 @@
     <preference name="exit-on-suspend" value="false" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
+    <preference name="orientation" value="portrait" />
     <preference name="AutoHideSplashScreen" value="true" />
     <preference name="FadeSplashScreenDuration" value=".50" />
     <preference name="FadeSplashScreen" value="true" />
@@ -44,5 +45,15 @@
     <preference name="BackupWebStorage" value="none" />
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <preference name="DisallowOverscroll" value="true" />
-    <feature name="Globalization" value="org.apache.cordova.core.globalization" />
+    <preference name="AllowInlineMediaPlayback" value="false" />
+    <preference name="EnableLocation" value="false" />
+    <preference name="EnableViewportScale" value="false" />
+    <preference name="HideKeyboardFormAccessoryBar" value="false" />
+    <preference name="KeyboardShrinksView" value="false" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="TopActivityIndicator" value="gray" />
+    <feature name="Globalization">
+        <param name="android-package" value="org.apache.cordova.globalization.Globalization" />
+    </feature>
 </widget>

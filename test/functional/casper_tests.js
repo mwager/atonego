@@ -23,10 +23,10 @@
 var DEBUG = false;
 
 
-// Base-URL to test
-var URL             = 'http://127.0.0.1/atonego/app/';
-var email, password = 'new-password';
-var remoteMessages  = [];
+//  to test
+var BASE_URL        = 'http://127.0.0.1/atonego/app/',
+    email, password = 'new-password',
+    remoteMessages  = [];
 
 // Global log helper
 function log() {
@@ -205,7 +205,7 @@ var __signup, __editUserData, __logout, __login, __forceCleanState, generatePseu
 
 
 // test StartScreen and force clean state (logged out, db clean etc)
-casper.start(URL, function () {
+casper.start(BASE_URL, function () {
     casper.page.injectJs('jquery.js');
 
     // first check index.html for some relevant dom elements
@@ -221,7 +221,7 @@ casper.start(URL, function () {
 });
 
 // navigate to the signup page
-casper.thenOpen(URL, function () {
+casper.thenOpen(BASE_URL, function () {
     this.waitForSelector('.signup-btn', function () {
         this.test.assertExists('#startview', '#startview exists -> start screen rendered');
         shot('StartScreen');

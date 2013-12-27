@@ -18,6 +18,8 @@
  * Phonegap Storage docs:
  *     http://docs.phonegap.com/en/2.7.0/cordova_storage_storage.md.html#openDatabase
  *
+ * Bullshit: TODO use https://github.com/mwager/VanillaStorage ?
+ *
  * @author Michael Wager <mail@mwager.de>
  */
 define(function (require) {
