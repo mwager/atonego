@@ -265,7 +265,13 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.renameTask('regarde', 'watch');
+    // grunt.renameTask('regarde', 'watch');
+
+    grunt.registerTask('default', [
+        // 'jshint',
+        // 'test',
+        'build'
+    ]);
 
     grunt.registerTask('server', function (target) {
         if (target === 'dist') {
@@ -304,11 +310,5 @@ module.exports = function (grunt) {
         'uglify',
         'copy',
         'usemin'
-    ]);
-
-    grunt.registerTask('default', [
-        // 'jshint',
-        // 'test',
-        'build'
     ]);
 };
