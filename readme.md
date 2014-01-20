@@ -393,6 +393,13 @@ NOTE: this requires additional files (see `/.gitignore`).
     # RESTART APP ONLY:
     $ rhc app start -a atonego
 
+Fix quota error at openshift:
+
+    $ ssh ...
+    $ rm -rf mongodb-2.2/log/mongodb.log*
+    $ rm -rf rockmongo-1.1/logs/*
+    $ echo "" > nodejs/logs/node.log
+
 #### Cronjob:
 
 On the Production-Server at openshift, there runs a minutely cronjob, checking all todos with notifications, so Email-, PUSH- and SocketIO-messages can be sent to notify users.
