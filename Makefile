@@ -22,7 +22,7 @@ WEBAPP_SRC          = api/server/website/app/
 ABSOLUTE_WEB_PATH   = http:\/\/127.0.0.1\/atonego\/app\/
 
 API_SRC             = api
-API_DST             = api_deployment2
+API_DST             = api_deployment
 CORDOVA_INCLUDE     = <script src="cordova.js"><\/script>
 
 RANDOM_STR          = $(shell /bin/bash -c "echo $$RANDOM")
@@ -265,3 +265,4 @@ bench :
 	cp app/scripts/vendor/cordova.ios.js mobile/ios/www
 	cp docs/bench/index.html mobile/ios/www
 	make ios
+
