@@ -539,8 +539,10 @@ var app = {
                 });
             });
 
-            // send a mail now...
-            utils.sendMail('info@at-one-go.com', 'mail@mwager.de', 'apn feedback polling', msg);
+            if(devices.length > 0) {
+                // send a mail now...
+                utils.sendMail('info@at-one-go.com', 'info@at-one-go.com', 'apn feedback polling', msg);
+            }
         });
     },
 
