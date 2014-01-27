@@ -580,15 +580,19 @@ function main(conf) {
     registerControllers();
 
     if(ENV !== 'test') { // dont listen here when testing
-        var ipaddr = process.env.OPENSHIFT_INTERNAL_IP   || config[ENV].HOST;
-        var port   = process.env.OPENSHIFT_INTERNAL_PORT || config[ENV].PORT;
+        var ipaddr = process.env.OPENSHIFT_NODEJS_IP   || config[ENV].HOST;
+        var port   = process.env.OPENSHIFT_NODEJS_PORT || config[ENV].PORT;
+
+        var url = (config[ENV].HTTPS ? 'https://' : 'http://') + ipaddr + ':' + port;
+
+        logger.log('--> trying url: ' + url);
 
         server.listen(port, ipaddr, function () {
             app.serverUp = true;
         });
 
         // log a startup message...
-        var url = (config[ENV].HTTPS ? 'https://' : 'http://') + ipaddr + ':' + port;
+
         var msg = ('Express server listening on ' + url + ', environment: ' + ENV + ', PID: ').green;
         msg     += (process.pid + '').red;
 

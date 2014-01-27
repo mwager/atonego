@@ -43,7 +43,7 @@ module.exports = {
         var PASS = process.env.OPENSHIFT_MONGODB_DB_PASSWORD || config.PASS;
 
         // DIE DB HEIßT BEI openshift WIE DER APP-NAME zB "test1" ... -namespace usw
-        var DATABASE = isLive ? 'atonego' : config.DATABASE;
+        var DATABASE = isLive ? 'aog' : config.DATABASE;
 
         dbPath = 'mongodb://' + (USER) + ':';
         dbPath += (PASS) + '@';
