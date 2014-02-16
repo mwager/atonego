@@ -25,10 +25,11 @@ require.config({
     paths: {
         libs        : '../scripts/libs',
 
-        zepto       : '../bower_components/zepto/index',
+        zepto       : '../scripts/libs/zepto', // '../bower_components/zepto/index',
 
         underscore  : '../bower_components/underscore/underscore',
         backbone    : '../bower_components/backbone/backbone',
+        fastclick   : '../bower_components/fastclick/lib/fastclick',
         text        : '../bower_components/requirejs-text/text',
         i18next     : '../scripts/libs/i18next.amd-1.6.0',
         moment      : '../scripts/libs/moment',

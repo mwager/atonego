@@ -176,9 +176,8 @@ define(function (require) {
                 log('local todos: ' + todos.length);
 
                 // SILENT! we do not want to trigger "reset" or "add" events here.
-                self.todos
-                    .reset(undefined, {silent: true})
-                    .add(todos, {silent: true});
+                self.todos.reset(undefined, {silent: true});
+                self.todos.add(todos, {silent: true});
 
                 // Now trigger the custom event.
                 // we add all stuff to the DOM at once using

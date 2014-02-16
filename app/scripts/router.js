@@ -445,7 +445,6 @@ define(function (require) {
          * The Todos of a list
          */
         showTodosOfList: function (listID) {
-            // make Globale because of SocketIO Updates
             app.todosContainer = new TodosContainerView({
                 listID: listID
             });

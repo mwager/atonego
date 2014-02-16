@@ -39,7 +39,7 @@ define(function (require) {
         $doc = $(document);
 
         $notification= $('#notification');
-        $notification.on(__app_config__.defaultClickEvent, function() {
+        $notification.on('click', function() {
             $notification.hide().html('');
         });
     });

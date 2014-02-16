@@ -196,7 +196,7 @@ define(function (require) {
         root: __app_config__.APP_ROOT,
 
         // default "click" event ("click" or "tap" on mobile)
-        defaultClickEvent: __app_config__.defaultClickEvent,
+        defaultClickEvent: 'click', // __app_config__.defaultClickEvent,
 
         // Global user object
         user:       null,

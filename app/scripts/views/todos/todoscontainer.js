@@ -48,9 +48,7 @@ define(function (require) {
         // depends on args.listID
         initialize: function (args) {
             if(!args || !args.listID) {
-                throw {
-                    message: 'no list id or todosCollectionInstance provided'
-                };
+                throw 'no list id provided';
             }
 
             this.listID = args.listID;
@@ -59,6 +57,7 @@ define(function (require) {
             this.todolist = app.todolists.get(args.listID);
 
             // Todos collection
+            app.todosCollectionInstance.reset(this.todolist.get('todos'));
             this.todos = app.todosCollectionInstance;
         },
 

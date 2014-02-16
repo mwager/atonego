@@ -688,7 +688,7 @@ ul.aog-list li .title {
     /** overflow-x: hidden; **/
 
     /** BUT STRANGELY, THIS WILL NOT... **/
-    overflow: hidden; **/
+    overflow: hidden;
 
     /*word-break         : break-word;*/
     /*-webkit-transition : color 0.4s;

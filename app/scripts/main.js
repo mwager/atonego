@@ -56,6 +56,7 @@ require([
     'app',
     'i18next',
     'zepto',
+    'fastclick',
     'underscore',
     'backbone',
     'common',
@@ -68,7 +69,7 @@ require([
     'libs/storage',
     'mobiscroll',
     'JrFork'
-], function (app, i18n, $, _, Backbone, common, AppRouter, User, Todos, Todolists,
+], function (app, i18n, $, FastClick, _, Backbone, common, AppRouter, User, Todos, Todolists,
     ActivityCollection, /*SocketIOWrapper,*/ Storage, mobiscroll, JrFork) {
     'use strict';
 
@@ -350,6 +351,10 @@ require([
             return false;
         }
 
+        // attach FastClick:
+        FastClick.attach(document.body);
+
+
         // scrolling: (XXX!?)
         // http://www.kylejlarson.com/blog/2011/fixed-elements-and-scrolling-divs-in-ios-5/
         /*document.addEventListener('touchmove', function(event) {
@@ -590,7 +595,7 @@ require([
 
         // finally init history api
         Backbone.history.start({
-            pushState: false // XXX webapp?
+            pushState: false // XXX __app_config__.isCordova ? false : true
         });
 
         // ----- Global AJAX Event Handling ----- (zepto stylee, http://zeptojs.com/#$.ajax)

@@ -8,7 +8,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="format-detection" content="telephone=no">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="cleartype" content="on">
 
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/apple-touch-icon-144.png">
@@ -22,7 +22,7 @@
     <meta name="msapplication-TileColor" content="#222222">
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-transluent">
     <meta name="apple-mobile-web-app-title" content="AtOneGo">
 
     <link rel="stylesheet" href="styles/main.css">
@@ -56,7 +56,6 @@
     // Global application config (exported to the global namespace)
     appConf = {
         touch: touch,
-        defaultClickEvent: touch ? 'tap' : 'click',
 
         // App-Environment: production | staging | development
         ENV: 'development',
@@ -65,12 +64,19 @@
         isPaused: false
     };
 
-    appConf.BASE_URL         = '/';
+    switch(appConf.ENV) {
+        case 'production':
+            appConf.BASE_URL = '/';
+            // API Endpoint Root
+            appConf.API_ROOT         = 'https://atonego-mwager.rhcloud.com';  // -> no slash
+            appConf.WEBSITE_BASE_URL = 'https://atonego-mwager.rhcloud.com/';
+            break;
 
-    // API Endpoint Root
-    appConf.API_ROOT         = 'https://atonego-mwager.rhcloud.com';  // -> no slash
-    appConf.WEBSITE_BASE_URL = 'https://atonego-mwager.rhcloud.com/';
-
+        default:
+            appConf.BASE_URL         = 'http://192.168.1.140/atonego/app/';
+            appConf.API_ROOT         = 'http://127.0.0.1:4000';  // KEIN slash
+            appConf.WEBSITE_BASE_URL = 'http://127.0.0.1:4000/'; // Mit slash
+    }
 
     // Global log helper
     log = function () {
