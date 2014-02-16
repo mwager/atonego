@@ -15,9 +15,7 @@
 
 require.config({
 
-    urlArgs: __app_config__.ENV === 'production' ?
-        '' :
-        'v' + new Date().getMilliseconds() + Math.random() * 1000,
+    urlArgs: 'v' + new Date().getMilliseconds() + Math.random() * 1000,
 
     waitSeconds: 60000, // dev only!
 
