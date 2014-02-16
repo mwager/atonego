@@ -36,6 +36,8 @@ define(function(require) {
     // events['blur #notice']                           = 'saveTodo';
     events[app.defaultClickEvent + ' .ago-toggle-wrap']  = 'toggleCheckbox';
 
+    events[app.defaultClickEvent + ' #date-input']  = 'onClickDate';
+
     /**
      * Constructor
      */
@@ -358,6 +360,15 @@ define(function(require) {
 
         switchToEditMode: function() {
             this.editMode = true;
+        },
+
+        /**
+         * Fix iOS7 bug:
+         * The datepicker input needs focus on ios7, else it wont open.
+         */
+        onClickDate: function(e) {
+            var $el = $(e.currentTarget);
+            $el.focus();
         }
     });
 
