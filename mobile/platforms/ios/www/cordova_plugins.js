@@ -71,5 +71,17 @@ module.exports = [
             "navigator.globalization"
         ]
     }
-]
+];
+module.exports.metadata = 
+// TOP OF METADATA
+{
+    "org.apache.cordova.core.device": "0.1.0",
+    "org.apache.cordova.core.network-information": "0.1.0",
+    "org.apache.cordova.core.vibration": "0.1.0",
+    "org.apache.cordova.core.splashscreen": "0.1.0",
+    "org.apache.cordova.core.console": "0.1.0",
+    "org.apache.cordova.core.dialogs": "0.1.0",
+    "org.apache.cordova.core.globalization": "0.1.0"
+}
+// BOTTOM OF METADATA
 });

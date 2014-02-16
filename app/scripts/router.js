@@ -19,7 +19,7 @@ define(function (require) {
     var
         app         = require('app'),
         common      = require('common'),
-        _           = require('lodash'),
+        _           = require('underscore'),
         $           = require('zepto'),
         Backbone    = require('backbone'),
         User        = require('models/user'),

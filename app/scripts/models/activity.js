@@ -13,7 +13,7 @@
  */
 define([
     'app',
-    'lodash',
+    'underscore',
     'backbone'
 ], function (app, _, Backbone) {
     'use strict';

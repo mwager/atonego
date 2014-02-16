@@ -24,7 +24,7 @@ define(function (require) {
     var app     = require('app'),
         common  = require('common'),
         $       = require('zepto'),
-        _       = require('lodash'),
+        _       = require('underscore'),
         // Backbone = require('backbone'),
         BaseView = require('views/base'),
         TodoView = require('views/todos/todoview'),

@@ -28,7 +28,7 @@ define(function (require) {
 
         User = null, // NOT POSSIBLE! require('models/user'),
 
-        _        = require('lodash'),
+        _        = require('underscore'),
         Backbone = require('backbone'),
 
         // init localization and language files

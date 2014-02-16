@@ -15,7 +15,7 @@ define(function (require) {
     'use strict';
 
     var
-        _        = require('lodash'),
+        _        = require('underscore'),
         app      = require('app'),
         // common = require('common'),
         tpl      = require('text!templates/start.html'),

@@ -17,7 +17,7 @@ define(function (require) {
     var app             = require('app'),
         common          = require('common'),
         $               = require('zepto'),
-        _               = require('lodash'),
+        _               = require('underscore'),
         TodoEditLayer   = require('views/todos/editlayer'),
         // Backbone     = require('backbone'),
         todosTemplate   = require('text!templates/todos/todoview.html'),

@@ -37,7 +37,7 @@ define(function(require) {
 
   var Backbone = require('backbone');
   var $        = require('zepto');
-  var _        = require('lodash');
+  var _        = require('underscore');
   var app      = require('app');
   var Jr       = Jr || {};
 

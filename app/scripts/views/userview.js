@@ -15,7 +15,7 @@ define([
     'app',
     'common',
     'zepto',
-    'lodash',
+    'underscore',
     'text!templates/userview.html',
     'views/base'
 ], function (app, common, $, _, tpl, BaseView) {

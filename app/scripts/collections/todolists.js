@@ -11,7 +11,7 @@
  */
 define([
     'app',
-    'lodash',
+    'underscore',
     'backbone',
     'models/todolist'
 ], function (app, _, Backbone, Todolist) {

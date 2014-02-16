@@ -14,7 +14,7 @@
 define(function(require) {
     'use strict';
 
-    var _           = require('lodash'),
+    var _           = require('underscore'),
         Backbone    = require('backbone'),
         HeaderView  = require('views/header');
 

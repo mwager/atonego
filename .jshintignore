@@ -5,6 +5,7 @@
 GruntfileNEW.js
 Gruntfile.js
 
+app/bower_components
 docs
 temp
 dist

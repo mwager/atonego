@@ -1,0 +1,23 @@
+{
+  "name": "atonego",
+  "version": "1.1.0",
+  "dependencies": {
+    "zepto": "http://zeptojs.com/zepto.js",
+    "requirejs": "~2.1.10",
+    "requirejs-text": "~2.0.10",
+    "almond": "~0.2.6",
+
+    "backbone": "~1.1.1",
+    "underscore": "~1.6.0",
+
+    "fastclick": "~0.6.10",
+
+    "ratchet": "~1.0.2"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "chai": "~1.7.2",
+    "sinon": "~1.7.3"
+  },
+  "directory": "bower_components"
+}

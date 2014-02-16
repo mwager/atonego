@@ -15,7 +15,7 @@ define(function (require) {
     'use strict';
 
     var $ = require('zepto');
-    var _ = require('lodash');
+    var _ = require('underscore');
     var Backbone = require('backbone');
     var moment = require('moment');
 

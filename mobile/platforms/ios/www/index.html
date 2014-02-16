@@ -7,6 +7,8 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.5, maximum-scale=0.5">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 
     <link rel="stylesheet" href="styles/main.css">
 </head>
@@ -60,9 +62,9 @@
             break;
 
         default:
-            appConf.BASE_URL         = location.origin + '/atonego/app/';
-            appConf.API_ROOT         = location.origin + ':4000';  // KEIN slash
-            appConf.WEBSITE_BASE_URL = location.origin + ':4000/'; // Mit slash
+            appConf.BASE_URL         = 'http://192.168.1.140/atonego/app/';
+            appConf.API_ROOT         = 'http://127.0.0.1:4000';  // KEIN slash
+            appConf.WEBSITE_BASE_URL = 'http://127.0.0.1:4000/'; // Mit slash
     }
 
     // global log helper

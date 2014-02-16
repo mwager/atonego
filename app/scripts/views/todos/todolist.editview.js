@@ -20,7 +20,7 @@
  * @author Michael Wager <mail@mwager.de>
  */
 define([
-    'lodash',
+    'underscore',
     'zepto',
     'app',
     'common',

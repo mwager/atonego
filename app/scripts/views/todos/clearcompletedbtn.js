@@ -16,7 +16,7 @@ define(function (require) {
         app         = require('app'),
         BaseView    = require('views/base'),
         tpl         = require('text!templates/todos/clearcompletedbtn.html'),
-        _           = require('lodash'),
+        _           = require('underscore'),
         $           = require('zepto'),
         common      = require('common'),
         events      = {};

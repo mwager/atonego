@@ -36,7 +36,7 @@ define(function (require) {
     // ... better than no encryption
     var KEY = 'a|T5R#;4r3d$%6L-;^;>{+35>%>>Eh"QD3*+=?~#8+4-.hN:^"0_8:_.K;25V{??.@"330.yG8##22/:4)0/"1<+8/[,@2871-~5';
 
-    var _ = require('lodash');
+    var _ = require('underscore');
 
     // some records are AES encrypted
     var CryptoJS = require('cryptojs');

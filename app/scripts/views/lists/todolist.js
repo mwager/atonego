@@ -17,7 +17,7 @@ define(function (require) {
     'use strict';
 
     var app          = require('app'),
-        _            = require('lodash'),
+        _            = require('underscore'),
         tpl          = require('text!templates/lists/todolist.html'),
         Todolist     = require('models/todolist'),
         BaseView     = require('views/base'),

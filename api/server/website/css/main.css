@@ -172,10 +172,12 @@ footer .right {
     font-weight: bold;
     font-size: 120%;
     position: fixed;
+    top: 0;
     left: 0;
     right: 0;
     width: 100%;
     z-index: 10001;
+    min-height: 25px;
 }
 .flash-error {
     color: white;

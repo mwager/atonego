@@ -56,7 +56,7 @@ require([
     'app',
     'i18next',
     'zepto',
-    'lodash',
+    'underscore',
     'backbone',
     'common',
     'router',
@@ -515,6 +515,13 @@ require([
         // check for mobile safari
         if(!app.isIOS) {
             app.isIOS = app.isiOSBrowser;
+        }
+
+        // iOS7 fix
+        // @see
+        // http://mir.aculo.us/2013/10/10/how-to-create-a-web-app-that-looks-like-a-ios-7-native-app-part-2-behavior/
+        if (app.isIOS && navigator.standalone) {
+            $body.addClass('standalone');
         }
 
         // slide only on smartphones (not on tablets)

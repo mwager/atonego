@@ -11,7 +11,7 @@
  *
  * @author Michael Wager <mail@mwager.de>
  */
-define('AppSpec', ['lodash', 'app', 'common'], function (_, app, common) {
+define('AppSpec', ['underscore', 'app', 'common'], function (_, app, common) {
 
     'use strict';
 
@@ -253,7 +253,9 @@ define('AppSpec', ['lodash', 'app', 'common'], function (_, app, common) {
 
 
     describe('Off Topic', function () {
-        it('How to break Underscore/Lodash\'s each() loop? -> should return false to break it', function () {
+        it('How to break Underscore\'s each() loop? Not possible, you must use ' +
+            '_.find -> should return true to break it', function () {
+
             var i = 0,
                 arr = [1, 2, 3, 4, 5];
 
@@ -266,11 +268,16 @@ define('AppSpec', ['lodash', 'app', 'common'], function (_, app, common) {
             expect(i).to.equal(2);
 
             // 2. Underscore's each()
+            // EDIT: from the underscore docs:
+            // "It's also good to note that an each loop cannot be broken out
+            // of — to break, use _.find instead."
             i = 0;
-            _.each(arr, function (a) {
+            _.find(arr, function (a) {
                 i = a;
+
+                // since 1.6 not possible anymore? damn... use _.find!
                 if (a === 2) {
-                    return false; // breaks underscore each loop! (return reicht auch)
+                    return true; // -> breaks loop
                 }
             });
 

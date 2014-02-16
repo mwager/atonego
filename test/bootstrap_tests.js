@@ -51,10 +51,16 @@
         // BOOM! the app will be started like normal
         deps: ['main'],
 
+        // for backbone: map jquery to zepto
+        map: {
+            '*': {
+                'jquery': 'zepto'
+            }
+        },
+
         shim: {
-            backbone    : {
-                deps   : ['lodash', 'zepto'],
-                exports: 'Backbone'
+            zepto: {
+                exports: 'Zepto'
             },
 
             mobiscroll: {
@@ -84,10 +90,11 @@
         conf.paths = {
             libs        : '../scripts/libs',
 
-            zepto       : '../scripts/libs/zepto',
-            lodash      : '../scripts/libs/lodash',
-            backbone    : '../scripts/libs/backbone',
-            text        : '../scripts/libs/text',
+            zepto       : '../bower_components/zepto/index',
+
+            underscore  : '../bower_components/underscore/underscore',
+            backbone    : '../bower_components/backbone/backbone',
+            text        : '../bower_components/requirejs-text/text',
             i18next     : '../scripts/libs/i18next.amd-1.6.0',
             moment      : '../scripts/libs/moment',
             mobiscroll  : '../scripts/libs/mobiscroll',

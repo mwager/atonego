@@ -11,7 +11,7 @@
  */
 define([
     'app',
-    'lodash',
+    'underscore',
     'backbone',
     'models/user'
 ], function (app, _, Backbone, User) {

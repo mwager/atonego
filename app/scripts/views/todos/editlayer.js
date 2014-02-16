@@ -26,7 +26,7 @@ define(function(require) {
         common              = require('common'),
         BaseView            = require('views/base'),
         tpl                 = require('text!templates/todos/editlayer.html'),
-        _                   = require('lodash'),
+        _                   = require('underscore'),
         events = {};
 
     events['focus input']        = 'switchToEditMode';

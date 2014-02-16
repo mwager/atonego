@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>AtOneGo - WebApp</title>
+    <meta charset="utf-8"/>
+    <title>AtOneGo</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
 
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="cleartype" content="on">
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/apple-touch-icon-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-144.png">
+    <link rel="shortcut icon" href="images/apple-touch-icon-144.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/apple-touch-icon.png">
+    <meta name="msapplication-TileColor" content="#222222">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="AtOneGo">
 
     <link rel="stylesheet" href="styles/main.css">
 </head>
@@ -83,7 +100,7 @@
 </script>
 
 <!-- build:js scripts/aog.js -->
-<script data-main="scripts/config" src="scripts/libs/require.js"></script>
+<script data-main="scripts/config" src="bower_components/requirejs/require.js"></script>
 <!-- endbuild -->
 
 </body>

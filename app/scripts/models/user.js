@@ -13,7 +13,7 @@ define(function(require) {
     'use strict';
 
     var
-        // _ = require('lodash'),
+        // _ = require('underscore'),
         Backbone = require('backbone'),
         app      = require('app');
 

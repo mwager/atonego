@@ -23,10 +23,32 @@ require.config({
 
     deps   : ['main'],
 
+    // for backbone: map jquery to zepto
+    map: {
+        '*': {
+            'jquery': 'zepto'
+        }
+    },
+
+    paths: {
+        libs        : '../scripts/libs',
+
+        zepto       : '../bower_components/zepto/index',
+
+        underscore  : '../bower_components/underscore/underscore',
+        backbone    : '../bower_components/backbone/backbone',
+        text        : '../bower_components/requirejs-text/text',
+        i18next     : '../scripts/libs/i18next.amd-1.6.0',
+        moment      : '../scripts/libs/moment',
+        mobiscroll  : '../scripts/libs/mobiscroll',
+        cryptojs    : '../scripts/libs/cryptojs.aes.3.1.2',
+        JrFork      : '../scripts/libs/junior_fork'
+        // IScroll     : '../scripts/libs/iscroll-lite'
+    },
+
     shim: {
-        backbone    : {
-            deps   : ['lodash', 'zepto'],
-            exports: 'Backbone'
+        zepto: {
+            exports: 'Zepto'
         },
 
         mobiscroll: {
@@ -37,20 +59,5 @@ require.config({
         cryptojs: {
             exports: 'CryptoJS'
         }
-    },
-
-    paths: {
-        libs        : '../scripts/libs',
-
-        zepto       : '../scripts/libs/zepto',
-        lodash      : '../scripts/libs/lodash',
-        backbone    : '../scripts/libs/backbone',
-        text        : '../scripts/libs/text',
-        i18next     : '../scripts/libs/i18next.amd-1.6.0',
-        moment      : '../scripts/libs/moment',
-        mobiscroll  : '../scripts/libs/mobiscroll',
-        cryptojs    : '../scripts/libs/cryptojs.aes.3.1.2',
-        JrFork      : '../scripts/libs/junior_fork'
-        // IScroll     : '../scripts/libs/iscroll-lite'
     }
 });

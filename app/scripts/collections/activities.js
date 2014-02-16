@@ -13,7 +13,7 @@
  */
 define([
     'app',
-    'lodash',
+    'underscore',
     'backbone',
     'common',
     'models/activity'

@@ -16,7 +16,7 @@
 define(function (require) {
     'use strict';
 
-    var _       = require('lodash'),
+    var _       = require('underscore'),
         app     = require('app'),
         common  = require('common'),
         $       = require('zepto'),
