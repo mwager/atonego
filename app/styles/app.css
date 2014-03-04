@@ -29,6 +29,7 @@ body, .modal {
     background : #f6f6bb url(../images/background.png) repeat;
 }
 
+
 /* disable text selection on long tap */
 html {
     -webkit-user-select: none;
