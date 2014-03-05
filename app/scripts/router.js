@@ -346,9 +346,7 @@ define(function (require) {
 
             // deauthenticate means "DELETE ALL LOCAL DATA"
             if(app.storage) {
-                app.storage.___dropTables(function() {
-                    app.storage.initDatabase();
-                });
+                app.storage.nukeAll(function() {});
             }
 
             // unsubscribe from all socket-io events

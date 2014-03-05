@@ -39,9 +39,14 @@ require.config({
         i18next     : '../scripts/libs/i18next.amd-1.6.0',
         moment      : '../scripts/libs/moment',
         mobiscroll  : '../scripts/libs/mobiscroll',
-        cryptojs    : '../scripts/libs/cryptojs.aes.3.1.2',
-        JrFork      : '../scripts/libs/junior_fork'
-        // IScroll     : '../scripts/libs/iscroll-lite'
+        JrFork      : '../scripts/libs/junior_fork',
+
+        // storage stuff
+        VanillaStorage: '../bower_components/vanilla-storage/src/VanillaStorage',
+        WebSQLStorage:  '../bower_components/vanilla-storage/src/WebSQLStorage',
+        IDBStorage:     '../bower_components/vanilla-storage/src/IDBStorage',
+        storageHelpers: '../bower_components/vanilla-storage/src/storageHelpers',
+        cryptojs    :   '../scripts/libs/cryptojs.aes.3.1.2'
     },
 
     shim: {

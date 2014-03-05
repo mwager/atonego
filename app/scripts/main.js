@@ -70,7 +70,7 @@ require([
     'mobiscroll',
     'JrFork'
 ], function (app, i18n, $, FastClick, _, Backbone, common, AppRouter, User, Todos, Todolists,
-    ActivityCollection, /*SocketIOWrapper,*/ Storage, mobiscroll, JrFork) {
+    ActivityCollection, /*SocketIOWrapper,*/ StorageEngine, mobiscroll, JrFork) {
     'use strict';
 
     // ----- some pre-configuration -----
@@ -564,24 +564,24 @@ require([
 
         // init the local database
         try {
-            app.storage = new Storage();
+            app.storage = new StorageEngine(function __ready(err) {
+                if(!err) {
+                    // now it's save to work with the db
+                    app.router.checkLocalDatabaseAndSync();
+                }
+            });
 
-            if(app.storage.hasBrowserSupport()) {
+            /* TODO now if(app.storage.hasBrowserSupport()) {
                 app.storage.openDatabase();
                 app.storage.initDatabase();
-
-                // now it's save to work with the db
-                app.router.checkLocalDatabaseAndSync();
             }
             else {
                 app.router.deauthenticateUser();
                 // app.router.go('start')
-            }
+            }*/
         }
         catch(e) {
             log('DATABASE ERROR: ' + e.message);
-            // hm e.g. firefox does not support window.openDatabase (and prob never will)
-            // this is a more webkit focussed project (ios/android -> phonegap == webkit)
             // alert(__('browserNotSupported'));
         }
 

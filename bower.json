@@ -12,7 +12,9 @@
 
     "fastclick": "~0.6.10",
 
-    "ratchet": "~1.0.2"
+    "ratchet": "~1.0.2",
+
+    "vanilla-storage": "~0.7.0"
   },
   "devDependencies": {
     "mocha": "~1.17.1",
