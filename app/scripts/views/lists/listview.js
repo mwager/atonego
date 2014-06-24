@@ -79,8 +79,8 @@ define([
 
         render: function () {
             var user = this.user ? this.user.toJSON() : new User();
-
             this.renderSelf({
+                noAuth: common.store.get('no-account') === '1',
                 user: user,
                 app:  app
             });

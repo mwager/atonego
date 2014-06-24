@@ -17,12 +17,12 @@ define(function (require) {
     var
         _        = require('underscore'),
         app      = require('app'),
-        // common = require('common'),
+        common   = require('common'),
         tpl      = require('text!templates/start.html'),
         BaseView = require('views/base'),
         events   = {};
 
-    // events[app.defaultClickEvent + ' .no-account-btn'] = 'startWithoutAccount';
+    events[app.defaultClickEvent + ' .no-account-btn'] = 'startWithoutAccount';
 
     return BaseView.extend({
         id: 'startview',
@@ -45,12 +45,11 @@ define(function (require) {
             });
 
             return this;
-        }
+        },
 
-        /*,
         startWithoutAccount: function() {
-            common.store.set('no-account', 1);
+            common.store.set('no-account', '1');
             return true;
-        }*/
+        }
     });
 });

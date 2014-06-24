@@ -12,7 +12,7 @@ define(function (require) {
     var helpText = require("libs/locales/en/helptext");
 
     return {
-        "error": "Sorry, this is an error. Check your internet connectipon and try again!",
+        "error": "Sorry, this is an error. Check your internet connection and try again!",
         "validationError": "Validation-Error. Maybe some text is too long?",
         "success": "Alright!",
         "serverError": "There's something wrong with the server. Try again!",
