@@ -16,13 +16,16 @@
 'use strict';
 
 var
-    ENV = process.env.NODE_ENV || 'development',
+    ENV            = process.env.NODE_ENV || 'development',
     // application = require('../../lib/application'),
-    _ = require('underscore'),
-    utils = require('../../lib/utils'),
-    // logger = require('../../lib/logger'),
-    // log = console.log,
+    _              = require('underscore'),
+    utils          = require('../../lib/utils'),
+    passport       = require('passport'),
+    // logger      = require('../../lib/logger'),
+    // log         = console.log,
     User,
+    Todolist,
+    Todo,
     WebsiteController,
     config;
 
@@ -77,6 +80,18 @@ function renderTemplate(name, data, req, res) {
 }
 
 /**
+ * Authentication pre check helper
+ */
+function checkAuth(req, res, next) {
+    if(req.user) {
+        return next();
+    }
+    else {
+        return res.redirect(config[ENV].BASE_URL + 'login');
+    }
+}
+
+/**
  * Website Controller - Alle Routes für den Webauftritt zur App.
  *
  * NOTE I18N: Es wird bei jedem Request automatisch auf ?lang=XX reagiert
@@ -85,7 +100,10 @@ WebsiteController = function (app, mongoose, _config) {
     config        = _config;
     this.mongoose = mongoose;
 
-    User = mongoose.model('User');
+    // init the needed models in this controller
+    User     = mongoose.model('User');
+    Todolist = mongoose.model('Todolist');
+    Todo     = mongoose.model('Todo');
 
     function getHome(req, res) {
         var features = [];
@@ -336,6 +354,83 @@ WebsiteController = function (app, mongoose, _config) {
     }*/
 
     /**
+     * "Admin panel" entry point
+     */
+    function getAdminPanel(req, res) {
+        User.find({}).sort('-created_at').exec(function(err, users) {
+            // also fetch "dirty" lists
+            Todolist.findDirtyLists(function(err, lists) {
+
+                // also fetch todos...
+                Todo.find({}).sort('-created_at').exec(function(err, todos) {
+                    renderTemplate('admin', {
+                        users: users,
+                        lists:lists,
+                        todos: todos
+                    }, req, res);
+                });
+            });
+        });
+    }
+    function getDisplayUserData(req, res) {
+        var id = req.param('_id');
+
+        User.fetchUser(id, function(err, user) {
+            if(!err && user) {
+                renderTemplate('user', {
+                    user: user
+                }, req, res);
+            }
+        });
+    }
+    // function postDeleteUser(req, res) {
+    //     var id = req.param('_id');
+    // }
+
+
+    function getLogin(req, res) {
+        renderTemplate('login', {
+            uer: req.user,
+            login_post_url: config[ENV].WEBSITE_BASE_URL + 'login',
+        }, req, res);
+    }
+    function postLogin(req, res) {
+
+        function errReturn(err) {
+            req.flash('error', 'Error: ' + err);
+            res.redirect(config[ENV].BASE_URL + 'login');
+        }
+
+        passport.authenticate('local',
+
+        // hier rein kommt der user wenn das passwort stimmt oder false wenn
+        // nicht. Siehe LocalStrategy oben.
+        function (err, user /*, info*/ ) {
+            if(err) {
+                return errReturn(err);
+            }
+
+            // LOGIN FAILED - SEE FAIL-CALLBACK IN STRATEGY
+            if(user === false) {
+                return errReturn('Login failed');
+            }
+
+            // req.login senseless yet, maybe for later use.
+            // we need an api_token in headers on every req to identify the user
+            req.logIn(user, function (err) {
+                if(err) {
+                    return errReturn(err);
+                }
+
+                req.flash('success', 'success!');
+                res.redirect(config[ENV].BASE_URL + 'admin');
+            });
+
+        })(req, res);
+    }
+
+
+    /**
      * Website route pre hook
      *
      * Rewrite www.at-one-go.com to at-one-go.com
@@ -384,6 +479,12 @@ WebsiteController = function (app, mongoose, _config) {
 
     // 4. POST change password goes here
     app.post('/password/change', postChangePassword);
+
+    // admin panel:
+    app.get('/login', getLogin);
+    app.post('/login', postLogin);
+    app.get('/admin', checkAuth, getAdminPanel);
+    app.get('/admin/users/:_id', checkAuth, getDisplayUserData);
 
     // users can POST some feedback
     // app.post('/feedback', postFeedback);

@@ -18,6 +18,7 @@ module.exports = function (mongoose) {
         _ = require('underscore'),
         BaseModel = require(__dirname + '/base'),
         utils = require('../../lib/utils'),
+        //async = require('async'),
         // logger = require('../../lib/logger'),
         Schema,
         modelIdentifier = 'Todolist',
@@ -318,6 +319,35 @@ module.exports = function (mongoose) {
         };
 
         tryDropTheListFromDB();
+    };
+
+    /**
+     * Helper for finding lists without a user ref
+     */
+    Schema.statics.findDirtyLists = function _fdl(cb) {
+        var Todolist = this;
+        // var User = mongoose.model('User');
+
+        Todolist.find({}).sort('-created_at').exec(function(err, lists) {
+            if(err || !lists) {
+                return cb(err || 'DAMN NO LISTS FOUND');
+            }
+            //var retLists = [];
+            return cb(null, lists);
+
+            /*async.map(lists, function(l, cb) {
+                User.fetchUser(l.created_by._id, function(err, user) {
+                    // user der diese liste erstellt hat existiert nich mehr? PUSH!
+                    if(err || !user) {
+                        retLists.push(l)
+                    }
+                    cb();
+                })
+            }, function done() {
+                cb(null, retLists)
+            });*/
+
+        });
     };
 
     return mongoose.model(modelIdentifier, Schema);

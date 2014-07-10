@@ -1,0 +1,54 @@
+<% include layoutTop.html %>
+
+<a href="/admin">go back</a><br><br>
+
+<strong>User: <%= user.display_name + ' / ' + user.email %></strong><br>
+<a href="">delete (with ALL lists and todos)</a>
+
+<hr>
+<h3>Lists</h3>
+<ul>
+<% user.todolists.forEach(function(list) { %>
+<li>
+    <%= list.title %>
+
+    <ul>
+        <li>Created: <%= parseDate(list.created_at) %></li>
+        <li>
+            <div class="toggle-box">
+                <a href="#" class="toggle">show todos</a>
+                <div class="inner hidden">
+                    <ul>
+                    <% list.todos.forEach(function(t) { %>
+                        <li>
+                            <span class="toggle-box">
+                                <%= t.title %>
+                                created: <%= parseDate(t.created_at) %>
+
+                                <a href="#" class="toggle">show todo "<%= t.title %>" as json</a>
+                                <div class="inner hidden">
+                                    <pre> <%= JSON.stringify(t) %></pre>
+                                </div>
+                            </span>
+                        </li>
+                    <% }); %>
+                    </ul>
+
+                    <h3>All todos of list "<%= list.title %>" as JSON</h3>
+                    <pre> <%= JSON.stringify(list.todos) %></pre>
+                </div>
+            </div>
+        </li>
+    </ul>
+</li>
+<% }); %>
+</ul>
+
+<div class="toggle-box">
+    <a href="#" class="toggle">show this user as json</a>
+    <div class="inner hidden">
+        <pre> <%= JSON.stringify(user) %></pre>
+    </div>
+</div>
+
+<% include layoutBottom.html %>

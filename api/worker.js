@@ -126,6 +126,38 @@ function globalDomainErrorHandler(err, req, res) {
  * Express Framework configuration
  */
 function configureExpress() {
+
+    // global helpers for usage in the views...
+    app.locals.parseDate = function(timestamp) {
+        var dateInstance = new Date(Number(timestamp));
+
+        var year    = dateInstance.getFullYear();
+        var month   = dateInstance.getMonth() + 1;
+        var day     = dateInstance.getDate();
+
+        if(day.toString().length === 1) {
+            day = '0' + day;
+        }
+        if(month.toString().length === 1) {
+            month = '0' + month;
+        }
+
+        var str = day + '.' + month + '.' + year;
+        str += ', ';
+
+        var h = dateInstance.getHours();
+        var m = dateInstance.getMinutes();
+
+        if(h.toString().length === 1) {
+            h = '0' + h;
+        }
+        if(m.toString().length === 1) {
+            m = '0' + m;
+        }
+        str += h + ':' + m;
+
+        return str;
+    };
     /**
      * Own Error Handling middleware
      *

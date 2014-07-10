@@ -50,7 +50,8 @@
     "underscore": "*",
     "phantomjs": "~1.9.2-4",
     "grunt-text-replace": "~0.3.10",
-    "matchdep": "~0.1.2"
+    "matchdep": "~0.1.2",
+    "async": "*"
   },
   "devDependencies": {},
   "scripts": {

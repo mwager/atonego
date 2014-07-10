@@ -57,6 +57,16 @@
 
     function onDOMReady() {
         app.fadeOutFlashMessages();
+
+        // simple toggle functionality...
+        $('.toggle').click(function() {
+            var $inner = $(this).parent().find('.inner');
+            if($inner.length === 0) {
+                $inner = $(this).parent().parent().find('.inner');
+            }
+            $inner.first().toggleClass('hidden');
+            return false;
+        });
     }
 
     $(document).ready(onDOMReady);

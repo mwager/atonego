@@ -1007,6 +1007,10 @@ module.exports = function (mongoose) {
         });
     };
 
+    /*Schema.statics.dropAndAllLists = function _dropUser(userID, cb) {
+
+    });*/
+
     /**
      * Drop a user if expired
      *

@@ -51,6 +51,9 @@ module.exports = {
         dbPath += (PORT) + '/';
         dbPath += DATABASE;
 
+        // TODO testing heroku
+        // dbPath = process.env.MONGOHQ_URL
+
         logger.log('connecting to db: ' + dbPath);
 
         connection = mongoose.connect(dbPath, cb);

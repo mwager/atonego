@@ -393,12 +393,23 @@ NOTE: this requires additional files (see `/.gitignore`).
     # RESTART APP ONLY:
     $ rhc app start -a atonego
 
-Fix quota error at openshift:
+Fix quota errors at openshift: (https://www.openshift.com/kb/kb-e1089-disk-quota-exceeded-now-what)
 
     $ ssh ...
+    $ du -h * | sort -rh | head -50
     $ rm -rf mongodb-2.2/log/mongodb.log*
     $ rm -rf rockmongo-1.1/logs/*
     $ echo "" > nodejs/logs/node.log
+
+    # and remove the mongodb journal files:
+    $ rm -rf  mongodb/data/journal/*
+
+Locally:
+
+    rhc app tidy atonego
+
+
+openshift
 
 #### Cronjob:
 
