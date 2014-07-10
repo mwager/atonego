@@ -194,7 +194,7 @@ define(function (require) {
 
         // Toggle the `'completed'` state of the model.
         toggleCompleted: function () {
-            var self = this;
+            // var self = this;
 
             if(this.editMode) {
                 this.editMode = false;
@@ -211,8 +211,10 @@ define(function (require) {
             // fast as possible:
             this.$completedCheckbox.toggleClass('checked', this.model.get('checked'));
 
+            this.saveTodo(null, true);
+
             // first fadeOut, then save in background
-            this.$el.animate({
+            /*this.$el.animate({
                 opacity: 0,
                 translate3d: '0,0%,0'
             }, {
@@ -222,7 +224,7 @@ define(function (require) {
                     // triggers addOne() in todosview.js
                     self.saveTodo(null, true);
                 }
-            });
+            });*/
 
             return false;
         },
