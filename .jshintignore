@@ -1,3 +1,7 @@
+# angular-rewrite/www/lib
+angular-rewrite
+
+
 # if used jshint directly...
 # see GruntfileNEW.js
 
@@ -17,7 +21,6 @@ app/scripts/libs
 app/scripts/vendor
 test/lib
 test/runner
-
 
 ###### api ######
 api/node_modules
