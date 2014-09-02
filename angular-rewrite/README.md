@@ -4,6 +4,17 @@ Ionic App Base
 A starting project for Ionic that optionally supports
 using custom SCSS.
 
+## Custom docs (mwager)
+
+### Developing ###
+
+    # actually....
+    $ gulp scripts && gulp sass && gulp watch
+
+    # workaround
+    $ (gulp scripts && gulp sass && gulp watch) || tput bel
+
+
 ## Using this project
 
 We recommend using the `ionic` utility to create new Ionic projects that are based on this project but use a ready-made starter template.

@@ -9,9 +9,28 @@
 
   <ion-side-menu side="left">
     <header class="bar bar-header bar-stable">
-      <h1 class="title">Left</h1>
+      <h1 class="title">Your lists</h1>
     </header>
     <ion-content class="has-header">
+      <label class="item item-input">
+        <input type="text" placeholder="Create list..." ng-model="list.title" ng-keyup="addList($event)">
+      </label>
+
+      <h3>Todolists</h3>
+      <button ng-click="clearAll()" class="button button-assertive">@debug: clearAll</button>
+
+      <ion-list>
+        <ion-item nav-clear menu-close ng-repeat="list in todolists track by $index" href="#/app/todolists/{{list.id}}">
+          <button class="item item-icon-right" ng-click="deleteList($event)">
+            delete
+          </button>
+
+          {{list.title}}
+        </ion-item>
+      </ion-list>
+
+      <br><br><hr><br>
+
       <ion-list>
         <ion-item nav-clear menu-close ng-click="login()">
           Login
@@ -19,16 +38,12 @@
         <ion-item nav-clear menu-close href="#/app/search">
           Search
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/browse">
-          Browse
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/playlists">
-          Playlists
-        </ion-item>
         <ion-item nav-clear menu-close href="#/app/help">
           Help
         </ion-item>
       </ion-list>
+
+
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>

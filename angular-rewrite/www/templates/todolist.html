@@ -1,0 +1,41 @@
+<ion-view title="Todolist">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+
+  <ion-content class="has-header">
+    <p>{{loadingMsg}}</p>
+
+    <h1>{{list.title}}</h1>
+
+    <label class="item item-input">
+      <input type="search" class=""
+        placeholder="Search" ng-model="searchText">
+    </label>
+
+    <label class="item item-input">
+      <input type="text" placeholder="What needs to be done?" ng-model="todo.title" ng-keyup="addTodo($event)">
+    </label>
+
+
+    <div
+      ng-repeat="todo in list.todos | filter:searchText | orderBy: 'completed'"
+      class="item item-button-right">
+
+       <label class="checkbox">
+         <input type="checkbox" ng-model="todo.completed" ng-change="todoChange(todo)">
+       </label>
+
+      {{todo.title}}
+
+      <button ng-click="openTodoModal(todo)" class="button button-positive">
+        details
+      </button>
+
+    </div>
+
+    <button ng-click="deleteCompleted()" class="button button-block button-assertive">
+      delete completed todos
+    </button>
+  </ion-content>
+</ion-view>
