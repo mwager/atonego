@@ -1,0 +1,23 @@
+<div class="modal">
+  <ion-header-bar>
+    <h1 class="title">TODO</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeModal()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+
+    <div class="list">
+      <div class="item">
+        <input type="checkbox" ng-model="todo.completed" ng-change="todoChange(todo)">
+        <input type="text" value="{{todo.title}}" ng-blur="todoChange(todo)">
+      </div>
+
+      <label class="item item-input">
+        <textarea ng-blur="todoChange(todo)" placeholder="">{{todo.desc}}</textarea>
+      </label>
+    </div>
+
+  </ion-content>
+</div>
+
