@@ -22,15 +22,18 @@ package de.mwager.atonego;
 import android.os.Bundle;
 import org.apache.cordova.*;
 
-public class AtOneGo extends DroidGap
+import android.content.pm.ActivityInfo;
+
+/**
+ * AtOneGo cordova app main class
+ */
+public class AtOneGo extends CordovaActivity
 {
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         // Set by <content src="index.html" /> in config.xml
-        super.loadUrl(Config.getStartUrl());
-        //super.loadUrl("file:///android_asset/www/index.html")
+        loadUrl(launchUrl);
     }
 }
-

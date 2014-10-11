@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.1' encoding='utf-8'?>
 <widget id="de.mwager.atonego" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>AtOneGo</name>
     <description>
@@ -7,10 +7,14 @@
     <author email="mail@mwager.de" href="http://mwager.de">
         Michael Wager
     </author>
-    <access origin="https://atonego-mwager.rhcloud.com*" />
+
+    <!-- <access origin="https://atonego-mwager.rhcloud.com*" />
     <access origin="https://at-one-go.com*" />
     <access origin="*.atonego-mwager.rhcloud.com*" />
     <access origin="*.at-one-go.com*" />
+    -->
+    <access origin="*" />
+
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
     <preference name="orientation" value="portrait" />

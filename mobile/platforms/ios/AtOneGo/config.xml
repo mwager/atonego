@@ -1,62 +1,71 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.helloCordova" version="2.0.0" xmlns="http://www.w3.org/ns/widgets">
-    <name>Hello Cordova</name>
-    <description>
-        A sample Apache Cordova application that responds to the deviceready event.
-    </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
-    </author>
-    <content src="index.html" />
+<widget id="de.mwager.atonego" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="DisallowOverscroll" value="false" />
+    <preference name="FadeSplashScreenDuration" value=".25" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="GapBetweenPages" value="0" />
+    <preference name="PageLength" value="0" />
+    <preference name="PaginationBreakingMode" value="page" />
+    <preference name="PaginationMode" value="unpaginated" />
     <feature name="LocalStorage">
         <param name="ios-package" value="CDVLocalStorage" />
-    </feature>
-    <feature name="Device">
-        <param name="ios-package" value="CDVDevice" />
-    </feature>
-    <feature name="NetworkStatus">
-        <param name="ios-package" value="CDVConnection" />
-    </feature>
-    <feature name="Vibration">
-        <param name="ios-package" value="CDVVibration" />
-    </feature>
-    <feature name="SplashScreen">
-        <param name="ios-package" value="CDVSplashScreen" />
     </feature>
     <feature name="Console">
         <param name="ios-package" value="CDVLogger" />
     </feature>
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
+    </feature>
     <feature name="Notification">
         <param name="ios-package" value="CDVNotification" />
     </feature>
-    <feature name="PushPlugin">
-        <param name="ios-package" value="PushPlugin" />
+    <feature name="NetworkStatus">
+        <param name="ios-package" value="CDVConnection" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="ios-package" value="CDVSplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="StatusBar">
+        <param name="ios-package" onload="true" value="CDVStatusBar" />
+    </feature>
+    <preference name="StatusBarOverlaysWebView" value="true" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+    <feature name="Vibration">
+        <param name="ios-package" value="CDVVibration" />
     </feature>
     <feature name="Globalization">
         <param name="ios-package" value="CDVGlobalization" />
     </feature>
+    <name>AtOneGo</name>
+    <description>
+        AtOneGo - you gotta do what you got to do!
+    </description>
+    <author email="mail@mwager.de" href="http://mwager.de">
+        Michael Wager
+    </author>
     <access origin="https://atonego-mwager.rhcloud.com*" />
     <access origin="https://at-one-go.com*" />
     <access origin="*.atonego-mwager.rhcloud.com*" />
     <access origin="*.at-one-go.com*" />
-    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
-    <preference name="SuppressesIncrementalRendering" value="false" />
-    <preference name="UIWebViewBounce" value="true" />
-    <preference name="TopActivityIndicator" value="gray" />
-    <preference name="EnableLocation" value="false" />
-    <preference name="EnableViewportScale" value="false" />
-    <preference name="AutoHideSplashScreen" value="true" />
-    <preference name="ShowSplashScreenSpinner" value="true" />
-    <preference name="MediaPlaybackRequiresUserAction" value="false" />
-    <preference name="AllowInlineMediaPlayback" value="false" />
-    <preference name="OpenAllWhitelistURLsInWebView" value="false" />
-    <preference name="BackupWebStorage" value="none" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
     <preference name="orientation" value="portrait" />
+    <preference name="AutoHideSplashScreen" value="true" />
     <preference name="FadeSplashScreenDuration" value=".50" />
     <preference name="FadeSplashScreen" value="true" />
+    <preference name="ShowSplashScreenSpinner" value="true" />
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <preference name="DisallowOverscroll" value="true" />
+    <preference name="AllowInlineMediaPlayback" value="false" />
+    <preference name="EnableLocation" value="false" />
+    <preference name="EnableViewportScale" value="false" />
     <preference name="HideKeyboardFormAccessoryBar" value="false" />
     <preference name="KeyboardShrinksView" value="false" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="TopActivityIndicator" value="gray" />
+    <content src="index.html" />
 </widget>

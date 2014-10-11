@@ -1,3 +1,8 @@
+angular-rewrite
+aog_heroku
+
+
+
 # if used jshint directly...
 # see GruntfileNEW.js
 
@@ -8,6 +13,8 @@ Gruntfile.js
 docs
 temp
 dist
+bower_components
+app/bower_components
 node_modules
 mobile
 mobile_phonegap_v2x
@@ -23,6 +30,7 @@ api/node_modules
 api/server/locales
 api/server/website/js/build.js
 api_deployment
+
 
 ###### website ######
 

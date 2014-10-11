@@ -53,6 +53,34 @@ Native App via Phonegap for iOS and Android. (WebApp served via Node.js)
 * PhantomJS/CasperJS: headless webkit testing
 * testem
 
+### Cordova/Phonegap ###
+
+#### Plugins: ####
+
+Installiere alle Plugins:
+
+NOTE: To update cordova plugins we need to remove and re-add !
+
+    cordova plugin add org.apache.cordova.console && \
+    cordova plugin add org.apache.cordova.device  && \
+    cordova plugin add org.apache.cordova.dialogs && \
+    cordova plugin add org.apache.cordova.network-information && \
+    cordova plugin add org.apache.cordova.splashscreen && \
+    cordova plugin add org.apache.cordova.statusbar && \
+    cordova plugin add org.apache.cordova.vibration && \
+    cordova plugin add org.apache.cordova.globalization
+
+Remove all:
+
+    cordova plugin rm org.apache.cordova.console && \
+    cordova plugin rm org.apache.cordova.device  && \
+    cordova plugin rm org.apache.cordova.dialogs && \
+    cordova plugin rm org.apache.cordova.network-information && \
+    cordova plugin rm org.apache.cordova.splashscreen && \
+    cordova plugin rm org.apache.cordova.statusbar && \
+    cordova plugin rm org.apache.cordova.vibration && \
+    cordova plugin rm org.apache.cordova.globalization && \
+    rm -rf plugins/ios.json && rm plugins/android.json
 
 
 ## Relevant directories & files ##
@@ -350,7 +378,7 @@ Then just switch "Run" and "Archive" configs to "Distribution" under "edit schem
 
 ### App Versioning ###
 
-We use git tags for versioning. However, the file `mobile/www/config.xml` [and `api/package.json`] should be manually updated on releases.
+We use git tags for versioning. However, the file `mobile/www/config.xml` [and `api/package.json` and `AndroidManifest.xml`] should be manually updated on releases.
 
 ### Deployment of the API
 

@@ -153,7 +153,7 @@ describe('===== Seeding DB with demo data', function () {
                 Todolist.find().populate('user').exec(function(err, lists) {
                     n = lists.length * todos.length;
 
-                    log(('creating ' + n + ' todos').green);
+                    console.log(('creating ' + n + ' todos').green);
 
                     should.not.exist(err);
                     should.exist(lists);

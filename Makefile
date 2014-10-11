@@ -150,6 +150,24 @@ build : jsbuild
 
 	rm -rf $(CORDOVA_SRC)webapp.html
 
+build_dev : jsbuild_debug
+	@echo
+	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - dev build...$(NO_COLOR)"
+	@echo
+
+	# the folder /dist should now exist, just copy to phonegap's www folder
+	cp -rf $(DST)/* $(CORDOVA_SRC)
+
+	### include cordova js
+	sed -i '' 's/<!-- __CORDOVA_REPLACE__ -->/$(CORDOVA_INCLUDE)/' $(CORDOVA_SRC)index.html
+	sed -i '' 's/<!-- pushplugin replace -->/$(PUSHPLUGIN_JS)/' $(CORDOVA_SRC)index.html
+
+	# need to copy the vendor stuff manually after the grunt build has finished
+	mkdir -p $(CORDOVA_SRC)scripts/vendor
+	cp $(SRC)/scripts/vendor/* $(CORDOVA_SRC)scripts/vendor
+
+	rm -rf $(CORDOVA_SRC)webapp.html
+
 
 # ==============================================================================
 
@@ -179,10 +197,16 @@ android :
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - building with cordova for android directly...$(NO_COLOR)"
 	cd mobile && cordova -d build android
 
-
+# android PROD build (keystore in android/android_keystore!)
 android_build : build
 	@echo
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - building with cordova for android...$(NO_COLOR)"
+	cd mobile && cordova -d build android --release
+	tput bel
+
+android_build_dev : build_dev
+	@echo
+	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - building with cordova for android (dev)...$(NO_COLOR)"
 	cd mobile && cordova -d build android
 	tput bel
 
