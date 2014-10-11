@@ -35,7 +35,7 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onResignActive)
                                                  name:UIApplicationWillResignActiveNotification object:nil];
-    BOOL cloudBackup = [@"cloud" isEqualToString : self.commandDelegate.settings[@"BackupWebStorage"]];
+    BOOL cloudBackup = [@"cloud" isEqualToString : self.commandDelegate.settings[[@"BackupWebStorage" lowercaseString]]];
 
     self.backupInfo = [[self class] createBackupInfoWithCloudBackup:cloudBackup];
 }
@@ -340,6 +340,12 @@
     NSMutableArray* backupInfo = [NSMutableArray arrayWithCapacity:0];
 
     if ([backupType isEqualToString:@"cloud"]) {
+#ifdef DEBUG
+            NSLog(@"\n\nStarted backup to iCloud! Please be careful."
+                "\nYour application might be rejected by Apple if you store too much data."
+                "\nFor more information please read \"iOS Data Storage Guidelines\" at:"
+                "\nhttps://developer.apple.com/icloud/documentation/data-storage/\n\n");
+#endif
         // We would like to restore old backups/caches databases to the new destination (nested in lib folder)
         [backupInfo addObjectsFromArray:[self createBackupInfoWithTargetDir:appLibraryFolder backupDir:[appDocumentsFolder stringByAppendingPathComponent:@"Backups"] targetDirNests:YES backupDirNests:NO rename:YES]];
         [backupInfo addObjectsFromArray:[self createBackupInfoWithTargetDir:appLibraryFolder backupDir:[appLibraryFolder stringByAppendingPathComponent:@"Caches"] targetDirNests:YES backupDirNests:NO rename:NO]];

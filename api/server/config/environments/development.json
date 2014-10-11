@@ -1,6 +1,6 @@
 {
     "HTTPS": false,
-    "HOST" : "0.0.0.0",
+    "HOST" : "192.168.178.23",
     "PORT" : 4000,
 
 
@@ -9,10 +9,8 @@
     "SECRET": "BHDTShHnmYnEhTkMpCZuBqKZefnRhdQhqvyumzTchPfZDAlIUWCiTktmmHdNUMLx",
     "SALT":    "07b0e7ec21ed02e92db00be0d06bdec0c71b7c4f5b04b7d4d60451c28cc2a471",
 
-    "BASE_URL"        : "http://127.0.0.1:4000/",
-    "WEBSITE_BASE_URL": "http://127.0.0.1:4000/",
-
-
+    "BASE_URL"        : "http://192.168.178.23:4000/",
+    "WEBSITE_BASE_URL": "http://192.168.178.23:4000/",
 
     "APN_PUSH_PASSPHRASE": "123456"
 }
