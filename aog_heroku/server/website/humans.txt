@@ -1,0 +1,23 @@
+# www.humanstxt.org
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Michael Wager  -- Developer          -- http://mwager.de
+    Thomas Kress   -- Designer           -- http://projekthelden.de
+    Daniel Koeppel -- Text & Marketing
+    Tobias Gast    -- Translations
+
+# THANKS
+
+    http://cordova.apache.org
+    http://phonegap.com
+    http://zeptojs.com
+    http://backbonejs.org
+    http://requirejs.org
+    ... and many more !
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3, jQuery, Zepto, Phonegap/Apache Cordova,
+    Backbone, Grunt, Yeoman, Bower, ...

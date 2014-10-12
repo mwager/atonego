@@ -1,0 +1,65 @@
+{
+    "error"                     : "Es ist ein Fehler aufgetreten, das tut uns Leid. Versuch`s nochmal!",
+    "intro"                     : "<h2>You gotta do what you got to do - the simple way!</h2><p>Von der Urlaubsplanung bis zur Organisation der nächsten Festlichkeit, für alle die im Team arbeiten oder nach einer einfachen Möglichkeit suchen, Aufgaben gemeinsam zu verwalten ist die Zeit gekommen, sich das Leben etwas leichter zu machen.</p><p>Lege Listen an, in denen du deine Vorhaben entwirfst und verwaltest und lade deine Verbündeten nun zu ausgewählten Listen ein, um Aufgaben gemeinsam zu meistern und jederzeit auf dem Laufenden zu sein.</p>",
+
+    "f1"                        : "Erstelle und verwalte Listen mit deinen Aufgaben",
+    "f2"                        : "Teile ausgewählte Listen mit deinen Freunden, Bekannten, Kollegen oder deinem Lebenspartner",
+    "f3"                        : "Erinnerungen: Lass dich und/oder weitere Listenmitglieder bei Fälligkeit einer Aufgabe benachrichtigen: via E-Mail- und PUSH-Notifications!",
+    "f4"                        : "Kinderleichte Bedienung",
+    "f5"                        : "Für Smartphones und Tablets erhältlich",
+    "f6"                        : "Auch auf deinem Desktop Rechner verfügbar via <a target=\"_blank\" class=\"own-font\" href=\"https://atonego-mwager.rhcloud.com/app\">Web-App</a>",
+
+    "faq1"                      : "<h3>Was kostet das Angebot bzw. die App?</h3><p>Der Dienst und die App ist kostenlos. Du benötigst lediglich einen Account, welchen du ganz einfach <a target=\"_blank\" class=\"own-font\" href=\"https://atonego-mwager.rhcloud.com/app/#signup\">hier</a> oder in der App erstellen kannst.</p>",
+    "faq2"                      : "<h3>Was passiert mit meinen Daten!?</h3><p>Damit du jederzeit von überall auf deine Daten zugreifen und deine Aufgaben mit anderen Personen teilen kannst, speichern wir diese an zentraler Stelle in einer Datenbank. Wir geben weder deine Email-Adresse, noch sonstige personenbezogenen Daten an Dritte.</p>",
+    "faq3"                      : "<h3>Was benötige ich, um die App verwenden zu können?</h3><p>Für die App benötigst du ein iPhone, iPad oder einen iPod Touch oder ein beliebiges Gerät mit Android 4.0 oder höher. Die <a target=\"_blank\" class=\"own-font\" href=\"https://atonego-mwager.rhcloud.com/app\">Web-App</a> kannst du jedoch auch mit einem modernen <a target=\"_blank\" href=\"http://browsehappy.com/\">Internetbrowser</a> verwenden!<br/>Außerdem brauchst du eine Internetverbindung und einen Account, welchen du ganz einfach in der App erstellen kannst.</p>",
+    "faq4"                      : "<h3>Kann ich meinen Account wieder löschen?</h3><p>Ja, jederzeit innerhalb der App in den Einstellungen. Deine Listen und Aufgaben werden jedoch nicht gelöscht, wenn noch andere Benutzer zugeteilt sind.</p>",
+
+    "todolistNotFound"          : "Die Todoliste wurde nicht gefunden",
+    "notAuthenticated"          : "Du bist nicht mehr eingeloggt",
+    "newAccount"                : "AtOneGo - Neuer Account",
+    "newAccountText"            : "<h1>Hi %s!</h1><p>Schön, dass du dich entschieden hast AtOneGo zu verwenden!</p><p>Klicke auf den folgenden Link um deinen Account zu aktivieren:</p><a href=\"%s\">Account aktivieren</a>",
+    "newAccountActivated"       : "Dein Account wurde erfolgreich aktiviert!",
+    "passwordsNotSame"          : "Die beiden Passwörter stimmen nicht überein.",
+    "passwordsLenErr"           : "Das Passwort muss mindestens 6 Zeichen besitzen",
+    "accountDeletedSubject"     : "Account wurde gelöscht!",
+    "accountDeletedBody"        : "<h1>Hi %s!</h1><p>Dein Account wurde gelöscht, da du ihn nicht innerhalb der 3 Tage aktiviert hast.</p><p>Solltest du das einfach vergessen haben, kannst du Dir natürlich einfach nochmal einen Account erstellen.</p>",
+    "newAccountExpired"         : "Der Account wurde nicht rechtzeitig aktiviert und somit gelöscht.",
+    "newAccountAlreadyActivated": "Account wurde bereits aktiviert",
+    "noValidMail"               : "Keine valide EMail-Adresse!",
+    "userDoesNotExist"          : "Benutzer existiert nicht",
+    "passwordReset"             : "Passwort vergessen",
+    "passwordResetMail"         : "<h1>Hi %s!</h1><p>Klicke einfach <a href='%s'>hier</a> um dein Passwort zu ändern!</p>",
+    "passwordRecoverMailSent"   : "Eine E-Mail an %s wurde gesendet!",
+    "passwordChanged"           : "Passwort erfolgreich geändert, du kannst dich nun in der App mit %s und deinem gerade vergebenem Passwort einloggen!",
+
+    "listInvitationSubject"     : "AtOneGo - Einladung zu einer Liste",
+    "listInvitationBody"        : "Hallo, der Benutzer %s hat dich bei AtOneGo zur Liste %s eingeladen. Falls du AtOneGo noch nicht kennst, findest du hier mehr Informationen: www.at-one-go.com",
+
+    "listInvitationBodyAPNMsg"  : "Du wurdest von %s zur Liste %s eingeladen!",
+    "listInvAcceptedBodyAPNMsg" : "Der Benutzer %s hat deine Einladung zur Liste %s angenommen",
+    "listInvRejectedBodyAPNMsg" : "Der Benutzer %s hat deine Einladung zur Liste %s abgelehnt",
+    "listAccessRemovedAPNMsg"   : "Dir wurde der Zugriff auf die Liste %s wieder entzogen",
+    "accountActivatedAPNMsg"    : "Dein Account wurde erfolgreich aktiviert!",
+
+    "feedbackSuccess"           : "Danke! Wir haben dein Feedback erhalten und kümmern uns so schnell es geht um dein Anliegen!",
+    "feedbackTitle"             : "Feedback",
+    "feedbackSubTitle"          : "Anregungen, Fragen, Lob oder Kritik?",
+    "feedbackEmail"             : "Email-Adresse",
+    "feedbackSubject"           : "Betreff",
+    "feedbackBody"              : "Deine Nachricht an uns...",
+
+    "notificationMailSubject"   : "Erinnerung",
+    "notificationMailBody"      : "Erinnerung: Die Aufgabe `%s` in der Liste `%s` ist fällig. <br />Notiz: <pre>%s</pre>",
+    "notificationMailBodyAPN"   : "Erinnerung: Die Aufgabe %s in der Liste %s ist fällig",
+
+    "imprint"                   : "Impressum",
+    "terms"                     : "Nutzungsbedingungen",
+
+
+    "update_list":  "Die Liste %s wurde geändert.",
+    "delete_list":  "Die Liste %s wurde gelöscht.",
+    "create_todo":  "Die Aufgabe %s in der Liste %s wurde erstellt.",
+    "update_todo":  "Die Aufgabe %s in der Liste %s wurde geändert.",
+    "delete_todo":  "Die Aufgabe %s in der Liste %s wurde gelöscht.",
+    "delete_todos": "Die Aufgaben %s in der Liste %s wurden gelöscht."
+}

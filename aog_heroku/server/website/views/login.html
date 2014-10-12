@@ -1,0 +1,22 @@
+<% include layoutTop.html %>
+
+<h2>Login</h2>
+
+<% if (user) { %>
+<p style="color:red;">You are already logged in: <%= JSON.stringify(user) %></p>
+<% } %>
+<form method="POST" action="/login">
+    <div>
+        <label for="u">mail</label>
+        <input id="u" name="email" type="email" required>
+    </div>
+
+    <div>
+        <label for="p2">password</label>
+        <input id="p2" name="password" type="password" required>
+    </div>
+
+    <input type="submit" value="OK">
+</form>
+
+<% include layoutBottom.html %>

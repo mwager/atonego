@@ -1,0 +1,64 @@
+<% include layoutTop.html %>
+
+<h1>Admin</h1>
+
+<h2>Users (<%= users.length %>)</h2>
+
+<div class="toggle-box">
+    <p><a href="#" class="toggle">show</a></p>
+    <div class="inner hidden">
+        <ul>
+            <% users.forEach(function(u) { %>
+                <li>
+                    <%= u.display_name + ' / ' + u.email %>
+
+                    | <a href="/admin/users/<%= u._id %>">show</a>
+
+                    <ul>
+                        <li>Created: <%= parseDate(u.created_at) %> / Updated: <%= parseDate(u.updated_at) %></li>
+                        <li>Active? <%= u.active %> - Active since: <%= u.active_since %></li>
+                    </ul>
+
+                    <!--<pre> <%= JSON.stringify(u) %></pre>-->
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</div>
+
+<h2>Lists (<%= lists.length %>)</h2>
+<div class="toggle-box">
+    <p><a href="#" class="toggle">show</a></p>
+    <div class="inner hidden">
+        <ul>
+            <% lists.forEach(function(l) { %>
+                <li>
+                    <%= l.title %> (<%= parseDate(l.created_at) %>)
+                    <br>
+                    Todos: <%= l.todos ? l.todos.length : 0 %>
+                    <br>
+                    CreatedBy: <%= l.created_by ? (l.created_by.email + '('+ l.created_by._id +')') : 'NO ONE?' %>
+                    <pre> <%= JSON.stringify(l) %></pre>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</div>
+
+<h2>Todos (<%= todos.length %>)</h2>
+<div class="toggle-box">
+    <p><a href="#" class="toggle">show</a></p>
+    <div class="inner hidden">
+        <ul>
+            <% todos.forEach(function(t) { %>
+                <li>
+                    <%= t.title %> (<%= parseDate(t.created_at) %>)
+                    <pre> <%= JSON.stringify(t) %></pre>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</div>
+
+
+<% include layoutBottom.html %>

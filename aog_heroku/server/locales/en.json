@@ -1,0 +1,65 @@
+{
+    "error"                     : "Sorry, this is an error. Try again!",
+    "intro"                     : "<h2>You gotta do what you got to do - the simple way!</h2><p>From vacation planning to the organization of the next party, for all people who work in a team the time has come to make life a little easier.</p><p>Create lists in which you design and manage your tasks. Then invite your allies to selected lists to perform tasks together and to be always up to date.</p>",
+
+    "f1"                        : "Create and manage lists with tasks (todos)",
+    "f2"                        : "Share selected lists with friends, team colleagues or you partner",
+    "f3"                        : "Notifications: Get notifications per task: via email- and push notifications and select users which should be notified",
+    "f4"                        : "Very easy to use",
+    "f5"                        : "Available for Smartphones and Tablets",
+    "f6"                        : "Also available on your desktop computer via <a target=\"_blank\" class=\"own-font\" href=\"https://atonego-mwager.rhcloud.com/app\">web app</a>",
+
+    "faq1"                      : "<h3>What is the cost of the service or the app?</h3><p>The service and the app is free to use. All you need is an account, which you can easily create <a target=\"_blank\" class=\"own-font\" href=\"https://atonego-mwager.rhcloud.com/app/#signup\">here</a> or in the app.</p>",
+    "faq2"                      : "<h3>What happens to my data?</h3><p>So you always have access to your data from anywhere and be able to share your tasks with others, we store it in a central location in a database. We neither give your email address nor any other personal information to any third parties.</p>",
+    "faq3"                      : "<h3>What do I need to use the app?</h3><p>To use the app you need an iPhone, iPad or iPod Touch, or any device which supports Android version 4.0 and higher. You can use the <a target=\"_blank\" class=\"own-font\" href=\"https://atonego-mwager.rhcloud.com/app\">web app</a> in a modern <a target=\"_blank\" href=\"http://browsehappy.com/\">web browser</a> too!<br/>Apart from that you need an internet connection and an account.</p>",
+    "faq4"                      : "<h3>Can I delete my account?</h3><p>Yes, everytime within the app or the web app in the user settings. Your lists and tasks are not deleted if other users are still assigned.</p>",
+
+    "todolistNotFound"          : "Todolist not found",
+    "notAuthenticated"          : "Your're not logged in",
+    "newAccount"                : "AtOneGo - New account",
+    "newAccountText"            : "<h1>Hi %s!</h1><p>Thanks for using AtOneGo!</p><p>Click on the link to activate your account:</p><a href=\"%s\">Activate account</a>",
+    "newAccountActivated"       : "Account activated successfully!",
+    "passwordsNotSame"          : "Passwords are not the same.",
+    "passwordsLenErr"           : "The password must have at least 6 characters",
+    "accountDeletedSubject"     : "Account deleted!",
+    "accountDeletedBody"        : "<h1>Hi %s!</h1><p>Your account was deleted because you did not activate it withing the 3 days.</p>",
+    "newAccountExpired"         : "Account was not activated in time and so deleted.",
+    "newAccountAlreadyActivated": "Account already activated",
+    "noValidMail"               : "No valid email-address!",
+    "userDoesNotExist"          : "User does not exist",
+    "passwordReset"             : "Password recover",
+    "passwordResetMail"         : "<h1>Hi %s!</h1><p>Just click <a href='%s'>here</a> to change your password!</p>",
+    "passwordRecoverMailSent"   : "Mail sent to %s !",
+    "passwordChanged"           : "Password changed. You can now log in to the app with %s!",
+
+    "listInvitationSubject"     : "AtOneGo - Invitation to a list",
+    "listInvitationBody"        : "Hello, the user %s has invited you to the list %s. If you don't know what AtOneGo is, you will find more information here: www.at-one-go.com",
+
+    "listInvitationBodyAPNMsg"  : "%s has invited you to the list %s!",
+    "listInvAcceptedBodyAPNMsg" : "%s has accepted your invitation to the list %s",
+    "listInvRejectedBodyAPNMsg" : "%s has declined your invitation to the list %s",
+    "listAccessRemovedAPNMsg"   : "Your access to the list %s was removed",
+    "accountActivatedAPNMsg"    : "Your account was activated successfully!",
+
+    "feedbackSuccess"           : "EN: Danke! Wir haben dein Feedback erhalten und kümmern uns so schnell es geht um dein Anliegen!",
+    "feedbackTitle"             : "Feedback",
+    "feedbackSubTitle"          : "EN: Anregungen, Fragen, Lob oder Kritik?",
+    "feedbackEmail"             : "EN: Email-Adresse",
+    "feedbackSubject"           : "EN: Betreff",
+    "feedbackBody"              : "EN: Dein Text an uns...",
+
+    "notificationMailSubject"   : "Reminder",
+    "notificationMailBody"      : "Reminder: The task `%s` in the list `%s` is due today. <br />Notice: <pre>%s</pre>",
+    "notificationMailBodyAPN"   : "Reminder: The task %s in the list %s is due today",
+
+    "imprint"                   : "Imprint",
+    "terms"                     : "Terms of service",
+
+
+    "update_list":  "The list %s was updated.",
+    "delete_list":  "The list %s was deleted.",
+    "create_todo":  "The task %s in the list %s was created.",
+    "update_todo":  "The task %s in the list %s was updated.",
+    "delete_todo":  "The task %s in the list %s was deleted.",
+    "delete_todos": "The tasks %s in the list %s were deleted."
+}

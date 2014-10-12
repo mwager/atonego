@@ -1,0 +1,35 @@
+<header></header>
+
+<div class="content">
+    <% var len = app.todolists.length; %>
+
+    <h1 id="welcome">
+    <% if(user.display_name && user.display_name.length > 0) { %>
+    Hi <%- user.display_name %> !
+    <% } else { %>
+    loading...
+    <% } %>
+    </h1>
+
+    <input type="text" id="create-list" placeholder="<%- __('newList') %>">
+
+    <div class="divider"></div>
+
+    <h2><%= __("lists") + ' (<span id="list-len">' + len + '</span>)' %></h2>
+
+    <ul id="todolists" class="aog-list"></ul>
+
+    <div class="divider"></div>
+
+    <div id="activities"></div>
+    <br /><br />
+    <div class="divider"></div>
+
+    <a href="#settings" class="aog-button aog-big aog-white nav-settings">
+        <%= __('settings') %>
+    </a>
+
+    <a href="#help" class="aog-button aog-big aog-white nav-help">
+        <%= __('help') %>
+    </a>
+</div>

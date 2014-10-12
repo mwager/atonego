@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]>
+<html class="no-js iem7"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!-->
+<html lang="<%- lang %>" dir="ltr" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>At One Go<%- title ? ' - ' + title : '' %></title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="author" content="Michael Wager" />
+
+    <meta name="description"
+          content="You gotta do what you got to do - the simple way!"/>
+    <meta name="keywords"
+          content="atonego app todo todoapp todolist reminder notice forgot sync share team productivity aufgaben erledigen vergessen merkzettel">
+
+    <link rel="author" href="<%- baseUrl %>humans.txt"/>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cleartype" content="on">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage"
+          content="<%- baseUrl %>img/touch/apple-touch-icon-114x114-precomposed.png">
+    <meta name="msapplication-TileColor" content="#222222">
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+    <% if(ENV !== 'production') { %>
+    <link rel="stylesheet" href="<%- baseUrl %>css/normalize.css">
+    <link rel="stylesheet" href="<%- baseUrl %>css/bootstrap.css">
+    <link rel="stylesheet" href="<%- baseUrl %>css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="<%- baseUrl %>css/main.css">
+    <% } else { %>
+    <link rel="stylesheet" href="<%- baseUrl %>css/build.css?v=123456">
+    <% } %>
+
+    <script src="<%- baseUrl %>js/vendor/modernizr-2.6.2.min.js"></script>
+
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
+</head>
+<body>
+
+<div id="container">
+    <header>
+        <a href="<%- baseUrl %>?lang=<%- lang %>">
+            <img src="<%- baseUrl %>img/header.png">
+        </a>
+        <% if(typeof showHeader !== 'undefined' && true === showHeader) { %>
+        <div class="store-badges">
+            <%
+            var url = 'https://itunes.apple.com/en/app/atonego/id668972250';
+            if(lang === 'de') {
+                url = 'https://itunes.apple.com/de/app/atonego/id668972250';
+            }
+            %>
+            <a class="store-ios" target="_blank" href="<%- url %>">
+                <img src="<%- baseUrl %>img/store_ios.png">
+            </a>
+
+            <a class="store-android" target="_blank" href="http://play.google.com/store/apps/details?id=de.mwager.atonego">
+                <img src="<%- baseUrl %>img/store_android.png">
+            </a>
+
+            <a class="webapp-link" target="_blank" href="https://atonego-mwager.rhcloud.com/app">
+                <img src="<%- baseUrl %>img/whoNeedsAppStores.png">
+            </a>
+        </div>
+        <% } %>
+    </header>
+
+    <noscript>
+        <div class="flash-error">
+            <a href="http://www.enable-javascript.com">how to enable javascript</a>
+        </div>
+    </noscript>
+
+    <% if(error && error.length > 0) { %>
+    <div class="flash-error"><%- error %></div>
+    <% } else if(info && info.length > 0) { %>
+    <div class="flash-info"><%- info %></div>
+    <% } %>
+
+    <div class="content">

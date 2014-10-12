@@ -1,0 +1,96 @@
+/*
+ * This file is part of the AtOneGo project.
+ * (c) 2013 Michael Wager <mail@mwager.de>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+/*******************************************************************************
+ * AtOneGo-Media-Queries
+ *
+ * @author Michael Wager, Thomas Kress
+ ******************************************************************************/
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+
+    /*
+    body {
+        color: yellow !important;
+    }*/
+
+    /*
+        Retina-Display Notes:
+        ALLE BILDER DER APP SIND VIA "background-image" EINGEBUNDEN.
+        HIER KÖNNEN WIR DIESE FÜR RETINA DISPLAYS ÄNDERN.
+        ---
+        WIR GEBEN ALLEN BILDERN HIER DIE /SELBE/ BREITE WIE SONST,
+        OBWOHL SIE DIE "@2" BILDER DOPPELT SO GROß SIND
+
+        Notwendig für iOS, sowie Android 4 bei manchen Geräten...
+    */
+
+    /* AppLoader */
+    #app-loader {
+        width      : 24px;
+        height     : 24px;
+        background-size: 24px 24px;
+        background-image: url(../images/loader@2.gif);
+    }
+
+    /* StartScreen Logo */
+    #logo-wrap {
+        width: 240px;
+        height: 213px;
+        background-image: url(../images/logo@2.png);
+        background-size: 240px 213px;
+    }
+
+    /* IMAGES IN THE HEADER*/
+    header #gotolists {
+        width: 40px;
+        height: 40px;
+        background-image: url(../images/list@2.png);
+        background-size: 40px 40px;
+    }
+
+    header #goback {
+        width: 40px;
+        height: 40px;
+        background-image: url(../images/back@2.png);
+        background-size: 40px 40px;
+    }
+
+    header #header-save {
+        width: 40px;
+        height: 40px;
+        background-image: url(../images/save@2.png);
+        background-size: 40px 40px;
+    }
+
+    header #list-settings {
+        width: 40px;
+        height: 40px;
+
+        background-image: url(../images/edit@2.png);
+        background-size: 40px 40px;
+    }
+
+    /* OUR LISTS */
+
+    /* DER CHECK-BOX IMG */
+    ul.aog-list li input.toggle {
+        background-image: url(../images/check_n@2.png);
+        width: 18px; /* 18 * 2 = 36 (-; */
+        height: 18px;
+        background-size:18px 18px;
+    }
+    ul.aog-list li .toggle:checked {
+        background-image: url(../images/check_a@2.png);
+    }
+
+    /** IMPORTANT **/
+    ul.aog-list li .title-wrap {
+        width: 85%;
+    }
+}

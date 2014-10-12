@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>AtOneGo</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="cleartype" content="on">
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/apple-touch-icon-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-144.png">
+    <link rel="shortcut icon" href="images/apple-touch-icon-144.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/apple-touch-icon.png">
+    <meta name="msapplication-TileColor" content="#222222">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AtOneGo">
+
+    <link rel="stylesheet" href="styles/main.css?v=23861">
+</head>
+<body>
+
+<!--[if lt IE 10]>
+<h1>SORRY. Your browser is not supported.</h1>
+<p>Please use <a href="http://browsehappy.com/">another one</a>.</p>
+<![endif]-->
+
+<div id="app-container">
+    <div id="app-main"></div>
+</div>
+
+<div id="ghostbuster-overlay"></div>
+<div id="notification" class="aog-white"></div>
+
+<script type="text/javascript">
+(function (win) {
+    'use strict';
+
+    var appConf, log;
+
+    // from modernizr
+    var touch = (
+        ('ontouchstart' in window) ||
+        window.DocumentTouch && document instanceof DocumentTouch
+     );
+
+    // Global application config (exported to the global namespace)
+    appConf = {
+        touch: touch,
+
+        // App-Environment: production | staging | production
+        ENV: 'production',
+
+        // see pause & resume events in main.js
+        isPaused: false
+    };
+
+    switch(appConf.ENV) {
+        case 'production':
+            appConf.BASE_URL = '/';
+            // API Endpoint Root
+            appConf.API_ROOT         = 'https://aog.herokuapp.com';  // -> no slash
+            appConf.WEBSITE_BASE_URL = 'https://aog.herokuapp.com/';
+            break;
+
+        default:
+            appConf.BASE_URL         = 'http://192.168.1.140:8080/atonego/app/';
+            appConf.API_ROOT         = 'http://192.168.1.140:4000';  // KEIN slash
+            appConf.WEBSITE_BASE_URL = 'http://192.168.1.140:4000/'; // Mit slash
+    }
+
+    // Global log helper
+    log = function () {
+        if (__app_config__.ENV === 'production') {
+             return false;
+        }
+
+        if(!console) {
+            return false;
+        }
+
+        console.log.apply(console, arguments);
+    };
+
+    // export globals
+    win.__app_config__ = appConf;
+    win.log = log;
+})(window);
+</script>
+
+<script type="text/javascript">
+    // simple cache busting (see the Makefile's task "webapp")
+    var require = {
+        waitSeconds: 60,
+        urlArgs : 'v=7932'
+    };
+</script>
+
+<script data-main="scripts/aog" src="bower_components/requirejs/require.js"></script>
+
+</body>
+</html>

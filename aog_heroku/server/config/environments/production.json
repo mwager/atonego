@@ -1,0 +1,25 @@
+{
+    "HTTPS"      : true,
+    "HOST"       : "127.0.0.1",
+    "REQ_TIMEOUT": 60000,
+    "PORT"       : 4000,
+
+    "ADMIN_EMAIL": "info@at-one-go.com",
+    "EMAIL_PASSWORD": "guerilla",
+
+    "SECRET":        "BHDTShHnmYnDhTkMpCZuBqKZefnRhdQhqvyumzTchPfZDAlIUWCiTktmmHdNUMLx",
+    "SALT":          "07b0e7ec21ed02e91db00be0d06bdec0c71b7c4f5b04b7d4d60451c28cc2a472",
+    "CRONJOB_KEY":   "07b0e7ec21ed02e91db00be0d06bdec0c71b7c4f5b04b7d4d60451c28cc2a471",
+    "CRONJOB_KEY2":  "07b0e7ef21ed12e91d100bd0d06bdec0c71b7c4f5a04b7d4d60451c28cc2a471",
+
+    "BASE_URL"        : "https://aog.herokuapp.com/",
+    "WEBSITE_BASE_URL": "https://aog.herokuapp.com/",
+
+    "APN_PUSH_PASSPHRASE": "guerilla",
+    "GCM_API_KEY": "AIzaSyBtG5Wrl9MWRQT8E1jBPfW9bzW9Wk8yMwc",
+
+    "NODEFLY_KEY": "ababf030f028729d8e36499e0721c191",
+
+    "FACEBOOK_APP_ID": "607342879292090",
+    "FACEBOOK_APP_SECRET": "e3185238675e7dc0ad0651c1ecd93009"
+}

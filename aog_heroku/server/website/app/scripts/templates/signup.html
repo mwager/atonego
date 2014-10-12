@@ -1,0 +1,18 @@
+<header></header>
+
+<div id="signup-form" class="content">
+    <input placeholder="<%= __('userDisplayName') %>"
+        class="signup-input" type="text" id="display_name">
+
+    <input placeholder="<%= __('userDisplayEmail') %>"
+        class="signup-input" type="email" id="email">
+
+    <input placeholder="<%= __('userDisplayPassword') %>" class="signup-input" type="password" id="password">
+    <input placeholder="<%= __('userDisplayPasswordAgain') %>" class="signup-input" type="password" id="password2">
+    <p id="pw-error" class="error-msg small hidden"><%- __('passwordError') %></p>
+
+    <p><%= __('termsAcceptText') %></p>
+    <button id="signup" class="aog-button aog-big aog-green" disabled>
+        <%= __('signupButton') %>
+    </button>
+</div>
