@@ -47,6 +47,10 @@
                         {
                             "xml": "<feature name=\"Globalization\"><param name=\"ios-package\" value=\"CDVGlobalization\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"PushPlugin\"><param name=\"ios-package\" value=\"PushPlugin\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -98,6 +102,9 @@
             "PACKAGE_NAME": "de.mwager.atonego"
         },
         "org.apache.cordova.globalization": {
+            "PACKAGE_NAME": "de.mwager.atonego"
+        },
+        "com.phonegap.plugins.PushPlugin": {
             "PACKAGE_NAME": "de.mwager.atonego"
         }
     },

@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-    <key>UIStatusBarHidden</key>
-    <true/>
     <key>CFBundleDevelopmentRegion</key>
     <string>English</string>
     <key>CFBundleDisplayName</key>
@@ -18,10 +16,33 @@
       <dict>
         <key>CFBundleIconFiles</key>
         <array>
+          <string>icon-40</string>
+          <string>icon-small</string>
+          <string>icon-60</string>
           <string>icon.png</string>
-          <string>icon@2x.png</string>
-          <string>icon-72.png</string>
-          <string>icon-72@2x.png</string>
+          <string>icon@2x</string>
+          <string>icon-72</string>
+          <string>icon-72@2x</string>
+        </array>
+        <key>UIPrerenderedIcon</key>
+        <false/>
+      </dict>
+    </dict>
+    <key>CFBundleIcons~ipad</key>
+    <dict>
+      <key>CFBundlePrimaryIcon</key>
+      <dict>
+        <key>CFBundleIconFiles</key>
+        <array>
+          <string>icon-small</string>
+          <string>icon-40</string>
+          <string>icon-50</string>
+          <string>icon-76</string>
+          <string>icon-60</string>
+          <string>icon</string>
+          <string>icon@2x</string>
+          <string>icon-72</string>
+          <string>icon-72@2x</string>
         </array>
         <key>UIPrerenderedIcon</key>
         <false/>
@@ -35,18 +56,16 @@
     <string>${PRODUCT_NAME}</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
-    <key>CFBundleShortVersionString</key>
-    <string>1.0.1</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleVersion</key>
-    <string>1.0.1</string>
+    <string>1.0.0</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
+    <key>NSMainNibFile</key>
+    <string></string>
     <key>NSMainNibFile~ipad</key>
     <string></string>
-    <key>UIStatusBarStyle</key>
-    <string>UIStatusBarStyleDefault</string>
     <key>UISupportedInterfaceOrientations</key>
     <array>
       <string>UIInterfaceOrientationPortrait</string>
@@ -58,5 +77,7 @@
       <string>UIInterfaceOrientationPortraitUpsideDown</string>
       <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
   </dict>
 </plist>

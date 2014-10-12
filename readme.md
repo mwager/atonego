@@ -68,7 +68,8 @@ NOTE: To update cordova plugins we need to remove and re-add !
     cordova plugin add org.apache.cordova.splashscreen && \
     cordova plugin add org.apache.cordova.statusbar && \
     cordova plugin add org.apache.cordova.vibration && \
-    cordova plugin add org.apache.cordova.globalization
+    cordova plugin add org.apache.cordova.globalization && \
+    cordova plugin add https://github.com/phonegap-build/PushPlugin.git
 
 Remove all:
 
@@ -117,7 +118,7 @@ Remove all:
     $ cd atonego
     # install local build system using grunt [optional]
     $ npm install
-    # NOTE: The folder `atonego` must be served via a locally installed webserver like apache
+    # NOTE: The folder `atonego` should be served via a locally installed webserver like apache
     $ open http://127.0.0.1/atonego # should serve index.html now
 
 #### 2. The API
