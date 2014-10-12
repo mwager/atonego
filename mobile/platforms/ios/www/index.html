@@ -4,16 +4,9 @@
     <meta charset="utf-8">
     <title>AtOneGo</title>
 
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.5, maximum-scale=0.5">
-    <meta http-equiv="cleartype" content="on">
-
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="AtOneGo">
 
     <link rel="stylesheet" href="styles/main.css">
 </head>
@@ -41,6 +34,7 @@
     // Global application config (exported to the global namespace)
     appConf = {
         touch: touch,
+        defaultClickEvent: touch ? 'tap' : 'click',
 
         // App-Environment: production | staging | production
         ENV: 'production',
@@ -66,9 +60,9 @@
             break;
 
         default:
-            appConf.BASE_URL         = 'http://192.168.1.140:8080/atonego/app/';
-            appConf.API_ROOT         = 'http://192.168.1.140:4000';  // KEIN slash
-            appConf.WEBSITE_BASE_URL = 'http://192.168.1.140:4000/'; // Mit slash
+            appConf.BASE_URL         = 'http://192.168.178.23:4000/atonego/app/';
+            appConf.API_ROOT         = 'http://192.168.178.23:4000';  // KEIN slash
+            appConf.WEBSITE_BASE_URL = 'http://192.168.178.23:4000/'; // Mit slash
     }
 
     // global log helper
@@ -94,7 +88,7 @@
 
 <script src="scripts/vendor/PushNotification.js"></script>
 
-<script data-main="scripts/aog" src="bower_components/requirejs/require.js"></script>
+<script data-main="scripts/aog" src="scripts/libs/require.js"></script>
 
 </body>
 </html>

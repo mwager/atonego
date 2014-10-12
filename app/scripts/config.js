@@ -42,11 +42,8 @@ require.config({
         JrFork      : '../scripts/libs/junior_fork',
 
         // storage stuff
-        VanillaStorage: '../bower_components/vanilla-storage/src/VanillaStorage',
-        WebSQLStorage:  '../bower_components/vanilla-storage/src/WebSQLStorage',
-        IDBStorage:     '../bower_components/vanilla-storage/src/IDBStorage',
-        storageHelpers: '../bower_components/vanilla-storage/src/storageHelpers',
-        cryptojs    :   '../scripts/libs/cryptojs.aes.3.1.2'
+        localforage: '../bower_components/localforage/dist/localforage',
+        cryptojs    : '../scripts/libs/cryptojs.aes.3.1.2'
     },
 
     shim: {

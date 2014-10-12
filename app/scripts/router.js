@@ -122,6 +122,7 @@ define(function (require) {
                 return false;
             }
 
+
             if(!this.isAuth) {
                 return false;
             }
