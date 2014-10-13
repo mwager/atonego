@@ -48,6 +48,10 @@ define(function(require) {
 
             // temporär: zu welchen listen ich von wem eingeladen wurde
             invite_list_ids: []
+        },
+
+        getId: function() {
+            return this.get(this.idAttribute);
         }
     });
 

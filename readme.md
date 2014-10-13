@@ -81,6 +81,7 @@ Remove all:
     cordova plugin rm org.apache.cordova.statusbar && \
     cordova plugin rm org.apache.cordova.vibration && \
     cordova plugin rm org.apache.cordova.globalization && \
+    cordova plugin rm com.phonegap.plugins.PushPlugin && \
     rm -rf plugins/ios.json && rm plugins/android.json
 
 
@@ -490,7 +491,8 @@ The mobile projects were created like this:
 NOTE: see "Cronjobs" und also the demo script: `api_deployment/server/ssl/push_demo.js`
 
     # run demo script via
-    DEBUG=apn node ./api_deployment/server/ssl/push_demo.js
+    ### DEBUG=apn node ./api_deployment/server/ssl/push_demo.js
+    DEBUG=apn node ./api/server/push_demo.js
 
 Some links:
 

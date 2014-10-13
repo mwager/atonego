@@ -16,9 +16,10 @@ define([
     'app',
     'zepto',
     'text!templates/help.html',
-    'views/base'
+    'views/base',
+    'common'
 ],
-    function (_, app, $, tpl, BaseView) {
+    function (_, app, $, tpl, BaseView, common) {
         'use strict';
 
         var events = {};
@@ -40,7 +41,9 @@ define([
 
             render: function () {
                 this.renderSelf({
-                    app: app
+                    app: app,
+                    version: common.generateClientID(app.VERSION, app.user.getId()),
+                    ua: common.getUA()
                 });
 
                 // render the header

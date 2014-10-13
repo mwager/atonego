@@ -151,7 +151,7 @@
 
 @end
 
-// atonego start (see /readme.md)
+// atonego:
 @implementation NSURLRequest(DataController)
 + (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host
 {

@@ -13,7 +13,7 @@
     "strong-agent": "latest",
 
     "cluster": "~0.7.7",
-    "domain": "~0.1.5",
+    "domain": "~0.0.0",
 
     "cookie": "0.0.4",
     "connect": "2.7.x",
