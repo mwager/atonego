@@ -22,5 +22,18 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "www/lib/ionic/scss/ionic";
 
 body {
-    background-color: #ebebeb;
+}
+
+
+// TODO
+.bar {
+    border:none;
+    //background-color: #fff !important;
+    background-image: none !important;
+    background: url("http://aog.herokuapp.com/app/images/header-bg.png") !important;
+    background-repeat: repeat-x;
+    height: 50px!important;
+}
+.pane {
+    background: url("http://aog.herokuapp.com/app/images/background.png");
 }

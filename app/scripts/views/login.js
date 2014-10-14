@@ -1,4 +1,4 @@
-/*
+    /*
  * This file is part of the AtOneGo project.
  * (c) 2013 Michael Wager <mail@mwager.de>
  *

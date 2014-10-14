@@ -20,7 +20,9 @@ window.app
 
   var persistAllLists = function() {
     // persist all lists at once
-    localforage.setItem(STORAGE_KEY, LISTS);
+    localforage.setItem(STORAGE_KEY, LISTS, function(err) {
+      log('persisted ALL lists', LISTS, err);
+    });
   }
 
   // find a list by id in the LISTS array (TODO performance/data structures?)
@@ -78,7 +80,7 @@ window.app
 
     getLists: function(done) {
       log('fetching lists...');
-      localforage.getItem(STORAGE_KEY, function(lists) {
+      localforage.getItem(STORAGE_KEY, function(data, lists) {
         log('fetched lists:', lists);
         LISTS = lists || [];
         done(null, LISTS);
@@ -91,7 +93,7 @@ window.app
         return done(null, list);
       }
       else {
-        localforage.getItem(STORAGE_KEY, function(lists) {
+        localforage.getItem(STORAGE_KEY, function(data, lists) {
           LISTS = lists || [];
           list = findList(id);
 
@@ -121,4 +123,45 @@ window.app
       persistAllLists();
     }
   }
-}]);
+}])
+
+.factory('Auth', function($http, $resource) {
+  // TODO see main.js - global $http conf!
+  // var username = 'AtOneGo';
+  // var authStr  = 'Basic ' + common.base64Encode(username + ':' + app.API_TOKEN);
+  // xhr.setRequestHeader('Authorization', authStr);
+  // xhr.setRequestHeader('Content-Language', app.lang || 'en');
+
+  return {
+    // TODO cleanup
+    doLogin: function(e, p, cb) {
+      var url = 'https://atonego-mwager.rhcloud.com/api/v1/login';
+      // log(url, $http)
+
+      return $http({
+        url:url,
+        method:'POST',
+        headers: {
+        // 'Authorization': 'Basic dGVzdDp0ZXN0',
+          // 'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/json'
+        },
+        cache: false,
+        data: {
+          email:   e,
+          password:p
+        }
+      }).success(function(data, status) {
+        // log('success', arguments)
+        cb(null, data);
+      }).error(function(err, status) {
+        // log('error', arguments)
+        cb(err);
+      });
+    }
+  };
+  // return $resource(url,
+  //   {email:'test@test.de', password:'xxx'}, {
+  //   charge: {method:'POST', params:{charge:true}}
+  // });
+})

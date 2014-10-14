@@ -1,12 +1,16 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var bower = require('bower');
-var concat = require('gulp-concat');
-var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
-var rename = require('gulp-rename');
-var sh = require('shelljs');
+/**
+ * AtOneGo gulpfile
+ */
+var gulp       = require('gulp');
+var gutil      = require('gulp-util');
+var bower      = require('bower');
+var concat     = require('gulp-concat');
+var sass       = require('gulp-sass');
+var minifyCss  = require('gulp-minify-css');
+var rename     = require('gulp-rename');
+var sh         = require('shelljs');
 var browserify = require('gulp-browserify');
+var exec       = require('gulp-exec');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -18,6 +22,9 @@ gulp.task('default', ['sass']);
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
     .pipe(sass())
+    .on('error', function() {
+      console.error('>>>>> SASS ERROR', arguments);
+    })
     .pipe(gulp.dest('./www/css/'))
     .pipe(minifyCss({
       keepSpecialComments: 0
@@ -31,11 +38,14 @@ gulp.task('sass', function(done) {
 gulp.task('scripts', function() {
   // Single entry point to browserify
   gulp.src('./www/js/app.js')
-      .pipe(browserify({
-        insertGlobals : true,
-        debug : !gulp.env.production
-      }))
-      .pipe(gulp.dest('./www/build'))
+    .pipe(browserify({
+      insertGlobals : true,
+      debug : !gulp.env.production
+    }))
+    .on('error', function() {
+      console.error('>>>>> JAVASCRIPT ERROR', arguments);
+    })
+    .pipe(gulp.dest('./www/build'))
 });
 
 gulp.task('watch', function() {
@@ -49,6 +59,31 @@ gulp.task('install', ['git-check'], function() {
       gutil.log('bower', gutil.colors.cyan(data.id), data.message);
     });
 });
+
+// dev helper (run this while developing)
+// old: gulp scripts && gulp sass && gulp watch && tput bel
+gulp.task('dev', ['scripts', 'sass'], function() {
+  setTimeout(function() {
+    console.log('starting watch...');
+    gulp.run('watch');
+  }, 10);
+
+  console.log('starting ionic...');
+  gulp.src('./**/**')
+    // .pipe(exec('git checkout <%= file.path %> <%= options.customTemplatingThing %>',
+    .pipe(exec('ionic serve',
+    {
+      continueOnError:  true, // default = false, true means don't emit error event
+      pipeStdout:       false, // default = false, true means stdout is written to file.contents
+      // customTemplatingThing:    "test" // content passed to gutil.template()
+    }))
+    .pipe(exec.reporter({
+      err: true, // default = true, false means don't write err
+      stderr: true, // default = true, false means don't write stderr
+      stdout: true // default = true, false means don't write stdout
+    }));
+});
+
 
 gulp.task('git-check', function(done) {
   if (!sh.which('git')) {

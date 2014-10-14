@@ -1,6 +1,7 @@
 'use strict';
 var _ = require('../lib/underscore/underscore.js');
 
+// TODO utils||own file
 // Generate four random hex digits.
 function S4() {
   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
@@ -20,7 +21,7 @@ angular.module('atonego.controllers', [])
 /**
  * Controller for the side-menu
  */
-.controller('MenuCtrl', function($scope, $ionicModal, $timeout, Todolists) {
+.controller('MenuCtrl', function($scope, $ionicModal, $timeout, Todolists, Auth) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -93,17 +94,58 @@ angular.module('atonego.controllers', [])
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
+    console.log('Doing login...', $scope.loginData);
 
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
+    Auth.doLogin($scope.loginData.username, $scope.loginData.password, function(err, data) {
+      if(!err) {
+        // $timeout(function() {}, 1000);
+        $scope.closeLogin();
+        setAuth(data);
+      }
+    });
   };
+
+  function setAuth(userJSON) {
+    // ##### API ACCESS TOKEN siehe zepto ajax conf in main.js #####
+    // der token muss nun bei jedem weiteren request mitgehn!
+    app.API_TOKEN  = userJSON.API_TOKEN;
+    app.isLoggedIn = true;
+
+    // wir speichern im local storage einfach ob wir eingeloggt sind
+    // den rest übernimmt der server via access token
+    app.ls.save('is-auth', '1');
+
+    // hier kommt der user mit all seinen todolisten und deren todos
+    // save user and todolists
+    var lists = [];
+    _.each(userJSON.todolists, function (list) {
+        lists.push(list);
+    });
+    // set scope
+    $scope.todolists = lists;
+
+    // app.todolists.reset();
+    // app.todolists.add(lists);
+
+    // update user's language
+    // app.user.set('lang', userJSON.lang, {silent: true});
+    // app.changeLang(userJSON.lang ? userJSON.lang : app.lang);
+
+    // TODO
+    // if(!userJSON.lang) {
+    //     userJSON.lang = app.lang;
+    // }
+
+    log('user is: ' + JSON.stringify(userJSON))
+
+    // remember user
+    app.user = userJSON;
+    // app.ls.save('user', userJSON) // ? TODO localForage!
+  }
 })
 
-/*.controller('TodolistsCtrl', function($scope) {
+/* using menu ctrl for managing the todolists in the menu
+.controller('TodolistsCtrl', function($scope) {
   console.log($scope)
   $scope.todolists = [
     { title: 'Einkauf', id: 1 },
@@ -111,6 +153,7 @@ angular.module('atonego.controllers', [])
   ];
 })*/
 
+// controller for the todos of ONE list
 .controller('TodolistCtrl', function($scope, $ionicModal, $stateParams, $timeout, Todolists) {
   // init:
   $scope.loadingMsg = 'loading todos...'

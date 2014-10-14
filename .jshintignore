@@ -16,6 +16,7 @@ dist
 node_modules
 mobile
 mobile_phonegap_v2x
+mobile_orig
 app/components
 app/scripts/libs
 app/scripts/vendor
@@ -43,5 +44,6 @@ api/server/website/app
 PushPlugin
 casperjs
 pushplugin_tmp_TODO_verfolgen
+api/server/push_demo.js
 
 aog*

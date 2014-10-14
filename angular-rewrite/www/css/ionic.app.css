@@ -7653,5 +7653,12 @@ a.button {
   -webkit-transition: none !important;
   transition: none !important; }
 
-body {
-  background-color: #ebebeb; }
+.bar {
+  border: none;
+  background-image: none !important;
+  background: url("http://aog.herokuapp.com/app/images/header-bg.png") !important;
+  background-repeat: repeat-x;
+  height: 50px !important; }
+
+.pane {
+  background: url("http://aog.herokuapp.com/app/images/background.png"); }
