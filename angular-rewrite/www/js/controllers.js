@@ -124,6 +124,9 @@ angular.module('atonego.controllers', [])
     // set scope
     $scope.todolists = lists;
 
+    // TODO merge mit local lists/sync!
+    Todolists.setLists(lists);
+
     // app.todolists.reset();
     // app.todolists.add(lists);
 

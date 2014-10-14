@@ -20,7 +20,7 @@
       <button ng-click="clearAll()" class="button button-assertive">@debug: clearAll</button>
 
       <ion-list>
-        <ion-item nav-clear menu-close ng-repeat="list in todolists track by $index" href="#/app/todolists/{{list.id}}" class="item-button-right">
+        <ion-item nav-clear menu-close ng-repeat="list in todolists track by $index" href="#/app/todolists/{{list._id}}" class="item-button-right">
           <button ng-click="deleteList($event)" class="button button-positive">
             delete
           </button>

@@ -29,7 +29,7 @@ window.app
   function findList(id) {
     var listFound;
     LISTS.some(function(l) {
-      if(l.id === id) {
+      if(l._id === id) {
         listFound = l;
         return true; // break loop
       }
@@ -61,6 +61,12 @@ window.app
   return {
     clearAll: function() {
       localforage.clear();
+    },
+
+    // TODO merge?
+    setLists: function(lists) {
+      LISTS = lists;
+      persistAllLists();
     },
 
     addList: function(list) {
