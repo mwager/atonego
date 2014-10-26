@@ -21,7 +21,7 @@ angular.module('atonego.controllers', [])
 /**
  * Controller for the side-menu
  */
-.controller('MenuCtrl', function($scope, $ionicModal, $timeout, Todolists, Auth) {
+.controller('MenuCtrl', function($scope, $ionicModal, $state, $timeout, Backend) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -33,9 +33,33 @@ angular.module('atonego.controllers', [])
   });
 
   // Load the lists from storage..
-  Todolists.getLists(function(err, lists) {
-    $scope.todolists = lists;
-  });
+  // Todolists.getLists(function(err, lists) {
+  //   $scope.todolists = lists;
+  // });
+  // Load the lists from server..
+  localforage.getItem('user', function(err, user) {
+    if(err || !user) {
+      return log('no initial data found', err, user);
+    }
+
+    $scope.todolists = user.todolists;
+
+    Backend.setAuthenticated(user);
+
+    Backend.fetchUser(user._id, function(err, user) {
+      if(err) {
+        return log('fetch user error: ', err);
+      }
+
+      // if(user.todolists.length > 0) {
+      //   $state.go('app.single', {listID: user.todolists[0]._id})
+      // }
+
+      Backend.setAuthenticated(user);
+      $scope.todolists = user.todolists;
+    });
+  })
+
 
   // --- scope methods ---
   $scope.clearAll = function() {
@@ -96,55 +120,25 @@ angular.module('atonego.controllers', [])
   $scope.doLogin = function() {
     console.log('Doing login...', $scope.loginData);
 
-    Auth.doLogin($scope.loginData.username, $scope.loginData.password, function(err, data) {
+    Backend.doLogin($scope.loginData.username, $scope.loginData.password, function(err, data) {
       if(!err) {
         // $timeout(function() {}, 1000);
         $scope.closeLogin();
-        setAuth(data);
+
+        // hier kommt der user mit all seinen todolisten und deren todos
+        // save user and todolists
+        var lists = [];
+        _.each(data.todolists, function (list) {
+          lists.push(list);
+        });
+        // set scope
+        $scope.todolists = lists;
+
+        log('OK authenticated!!!')
+        Backend.setAuthenticated(data);
       }
     });
   };
-
-  function setAuth(userJSON) {
-    // ##### API ACCESS TOKEN siehe zepto ajax conf in main.js #####
-    // der token muss nun bei jedem weiteren request mitgehn!
-    app.API_TOKEN  = userJSON.API_TOKEN;
-    app.isLoggedIn = true;
-
-    // wir speichern im local storage einfach ob wir eingeloggt sind
-    // den rest übernimmt der server via access token
-    app.ls.save('is-auth', '1');
-
-    // hier kommt der user mit all seinen todolisten und deren todos
-    // save user and todolists
-    var lists = [];
-    _.each(userJSON.todolists, function (list) {
-      lists.push(list);
-    });
-    // set scope
-    $scope.todolists = lists;
-
-    // TODO merge mit local lists/sync!
-    Todolists.setLists(lists);
-
-    // app.todolists.reset();
-    // app.todolists.add(lists);
-
-    // update user's language
-    // app.user.set('lang', userJSON.lang, {silent: true});
-    // app.changeLang(userJSON.lang ? userJSON.lang : app.lang);
-
-    // TODO
-    // if(!userJSON.lang) {
-    //     userJSON.lang = app.lang;
-    // }
-
-    log('user is: ' + JSON.stringify(userJSON))
-
-    // remember user
-    app.user = userJSON;
-    // app.ls.save('user', userJSON) // ? TODO localForage!
-  }
 })
 
 /* using menu ctrl for managing the todolists in the menu
@@ -228,14 +222,13 @@ angular.module('atonego.controllers', [])
   };
 
   $scope.deleteCompleted = function() {
-    log("OK", $scope.list.todos)
     Todolists.deleteCompletedTodosOfList($scope.list);
   };
 })
 
 // edit a list (title and participants..)
 .controller('TodolistEditCtrl', function($scope, $stateParams, $timeout, Todolists) {
-  $scope.list = {title: "loading.."};
+  $scope.list = {title: 'loading..'}; // TODO
 
   Todolists.getListByID($stateParams.listID, function(err, list) {
     log('GOT LIST TO EDIT: ' , list)

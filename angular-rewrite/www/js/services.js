@@ -4,7 +4,6 @@
  * File contains all services
  */
 
-
 // TODO testing?
 // TODO module definition only once app wide?!
 window.app
@@ -12,11 +11,6 @@ window.app
 .factory('Todolists', ['$window', function(win) {
   var STORAGE_KEY = 'todolists';
   var LISTS = [];
-
-  // configure localforage
-  localforage.config({
-    name: 'AtOneGo App'
-  });
 
   var persistAllLists = function() {
     // persist all lists at once
@@ -26,9 +20,12 @@ window.app
   }
 
   // find a list by id in the LISTS array (TODO performance/data structures?)
-  function findList(id) {
+  function findList(lists, id) {
     var listFound;
-    LISTS.some(function(l) {
+
+    lists.some(function(l) {
+      log(l._id, id)
+
       if(l._id === id) {
         listFound = l;
         return true; // break loop
@@ -59,108 +56,163 @@ window.app
 
   // public API
   return {
-    clearAll: function() {
-      localforage.clear();
+    clearAll: function(done) {
+      localforage.clear(done);
     },
+    // setLists: function(lists) {
+    //   LISTS = lists;
+    //   persistAllLists();
+    // },
 
-    // TODO merge?
-    setLists: function(lists) {
-      LISTS = lists;
-      persistAllLists();
-    },
+    // addList: function(list) {
+    //   list.dirty = true;
+    //   list.todos = [];
 
-    addList: function(list) {
-      list.dirty = true;
-      list.todos = [];
+    //   LISTS.push(list);
 
-      LISTS.push(list);
+    //   persistAllLists();
+    // },
 
-      persistAllLists();
-    },
+    // updateList: function(list) {
+    //   updateList(list);
 
-    updateList: function(list) {
-      updateList(list);
+    //   persistAllLists();
+    // },
 
-      persistAllLists();
-    },
-
-    getLists: function(done) {
-      log('fetching lists...');
-      localforage.getItem(STORAGE_KEY, function(data, lists) {
-        log('fetched lists:', lists);
-        LISTS = lists || [];
-        done(null, LISTS);
-      });
-    },
+    // getLists: function(done) {
+    //   log('fetching lists...');
+    //   localforage.getItem(STORAGE_KEY, function(data, lists) {
+    //     log('fetched lists:', lists);
+    //     LISTS = lists || [];
+    //     done(null, LISTS);
+    //   });
+    // },
 
     getListByID: function(id, done) {
-      var list = findList(id);
-      if(list) {
-        return done(null, list);
-      }
-      else {
-        localforage.getItem(STORAGE_KEY, function(data, lists) {
-          LISTS = lists || [];
-          list = findList(id);
-
-          done(null, list);
-        });
-      }
-    },
-
-    deleteCompletedTodosOfList: function(list) {
-      var l = findList(list.id);
-      if(!l) {
-        return;
-      }
-      var todos = [];
-      l.todos.forEach(function(t) {
-        if(!t.completed) {
-          todos.push(t);
+      if(app.user && app.user.todolists) {
+        var list = findList(app.user.todolists, id);
+        if(list) {
+          return done(null, list);
         }
-      });
-      l.todos = todos;
-      updateList(l);
-      persistAllLists();
+        else {
+          return done('no list');
+        }
+      }
     },
 
-    deleteListByID: function(id) {
-      removeList(id);
-      persistAllLists();
-    }
+    // deleteCompletedTodosOfList: function(list) {
+    //   var l = findList(list.id);
+    //   if(!l) {
+    //     return;
+    //   }
+    //   var todos = [];
+    //   l.todos.forEach(function(t) {
+    //     if(!t.completed) {
+    //       todos.push(t);
+    //     }
+    //   });
+    //   l.todos = todos;
+    //   updateList(l);
+    //   persistAllLists();
+    // },
+
+    // deleteListByID: function(id) {
+    //   removeList(id);
+    //   persistAllLists();
+    // }
   }
 }])
 
-.factory('Auth', function($http, $resource) {
-  // TODO see main.js - global $http conf!
-  // var username = 'AtOneGo';
-  // var authStr  = 'Basic ' + common.base64Encode(username + ':' + app.API_TOKEN);
-  // xhr.setRequestHeader('Authorization', authStr);
-  // xhr.setRequestHeader('Content-Language', app.lang || 'en');
+/**
+ * Responsible for all AJAX based logic
+ */
+.factory('Backend', function($http /*, $resource*/) {
+  // configure localforage
+  localforage.config({
+    name: 'AtOneGo App'
+  });
+
+  // TODO
+  var BASE_URL = 'https://atonego-mwager.rhcloud.com/';
 
   return {
-    // TODO cleanup
+    /**
+     * Does the login against the REST API
+     */
     doLogin: function(e, p, cb) {
-      var url = 'https://atonego-mwager.rhcloud.com/api/v1/login';
-      // log(url, $http)
-
       return $http({
-        url:url,
-        method:'POST',
+        url:    BASE_URL + 'api/v1/login',
+        method: 'POST',
         headers: {
-        // 'Authorization': 'Basic dGVzdDp0ZXN0',
+          // 'Authorization': 'Basic dGVzdDp0ZXN0',
           // 'Content-Type': 'application/x-www-form-urlencoded'
-          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/json'
         },
         cache: false,
         data: {
           email:   e,
           password:p
         }
-      }).success(function(data, status) {
+      }).success(function(data/*, status*/) {
         // log('success', arguments)
         cb(null, data);
-      }).error(function(err, status) {
+      }).error(function(err/*, status*/) {
+        // log('error', arguments)
+        cb(err);
+      });
+    },
+
+    setAuthenticated: function(userJSON) {
+      // ##### API ACCESS TOKEN #####
+      // der token muss nun bei jedem weiteren request mitgehn!
+      app.API_TOKEN  = userJSON.API_TOKEN;
+      app.isLoggedIn = true;
+
+      // persist
+      localforage.setItem('user', userJSON);
+      log('persisted user: ', userJSON)
+
+      // app.todolists.reset();
+      // app.todolists.add(lists);
+
+      // update user's language
+      // app.user.set('lang', userJSON.lang, {silent: true});
+      // app.changeLang(userJSON.lang ? userJSON.lang : app.lang);
+
+      // TODO
+      // if(!userJSON.lang) {
+      //     userJSON.lang = app.lang;
+      // }
+
+      // remember user
+      app.user = userJSON;
+      // app.ls.save('user', userJSON) // ? TODO localForage!
+    },
+
+    /**
+     * If we are logged in (api token from storage)
+     * then we just fetch the user from the server
+     */
+    fetchUser: function(userID, cb) {
+      // TODO global!
+      // "token based" authentication
+      var authStr  = 'Basic ' +
+        app.common.base64Encode('AtOneGo' + ':' + app.API_TOKEN);
+
+      return $http({
+        url:    BASE_URL + 'api/v1/users/' + userID,
+        method: 'GET',
+        headers: {
+          'Authorization': authStr
+        },
+        cache: false,
+        data: {
+
+        }
+      }).success(function(data/*, status*/) {
+        // log('success', arguments)
+        cb(null, data);
+      }).error(function(err/*, status*/) {
         // log('error', arguments)
         cb(err);
       });
@@ -172,7 +224,7 @@ window.app
   // });
 })
 
-.factory('TodoAPI', function($http) {
+.factory('TodoAPI', function(/*$http*/) {
   return {
     // TODO
     updateTodo: function(todo) {
