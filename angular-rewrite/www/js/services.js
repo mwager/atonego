@@ -227,6 +227,29 @@ window.app
     },
 
     /**
+     * Fetch all todos of a list
+     */
+    fetchTodosOfList: function(listID, cb) {
+      // TODO global!
+      // "token based" authentication
+      var authStr  = 'Basic ' +
+        app.common.base64Encode('AtOneGo' + ':' + app.API_TOKEN);
+
+      log('fetching todos of list: ' + listID);
+
+      return doReq({
+        url: BASE_URL + 'api/v1/todos?list_id=' + listID,
+        method: 'GET',
+        headers: {
+          'Authorization': authStr
+        },
+        done: function(err, data) {
+          cb(err, data);
+        }
+      });
+    },
+
+    /**
      * POST a todo
      */
     createTodo: function(todo, cb) {

@@ -160,7 +160,14 @@ angular.module('atonego.controllers', [])
       return $state.go('app.help'); // TODO!?
     }
 
-    // must wrap into $apply() so angular knows to update the DOM after the list was fetched
+    // re-fetch todos from server
+    Backend.fetchTodosOfList($stateParams.listID, function(err, todos) {
+      // nice, this updates the ui (-:
+      $scope.list.todos = todos;
+    });
+
+    // must wrap into $apply() so angular knows to update the DOM after the
+    // list was fetched
     // @see http://jimhoskins.com/2012/12/17/angularjs-and-apply.html
     // $scope.$apply(function () {
     // so, use $timeout(fn) to automatically wrap ya code into $apply() to prevent errors
