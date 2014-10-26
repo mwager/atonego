@@ -21,7 +21,7 @@ angular.module('atonego.controllers', [])
 /**
  * Controller for the side-menu
  */
-.controller('MenuCtrl', function($scope, $ionicModal, $state, $timeout, Backend) {
+.controller('MenuCtrl', function($scope, $ionicModal, $state, $timeout, $ionicBackdrop, Backend) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -36,8 +36,10 @@ angular.module('atonego.controllers', [])
   // Todolists.getLists(function(err, lists) {
   //   $scope.todolists = lists;
   // });
+
   // Load the lists from server..
   localforage.getItem('user', function(err, user) {
+    $ionicBackdrop.release();
     if(err || !user) {
       return log('no initial data found', err, user);
     }
@@ -46,7 +48,11 @@ angular.module('atonego.controllers', [])
 
     Backend.setAuthenticated(user);
 
+    $ionicBackdrop.retain();
+
     Backend.fetchUser(user._id, function(err, user) {
+      $ionicBackdrop.release();
+
       if(err) {
         return log('fetch user error: ', err);
       }
@@ -120,7 +126,11 @@ angular.module('atonego.controllers', [])
   $scope.doLogin = function() {
     console.log('Doing login...', $scope.loginData);
 
+    $ionicBackdrop.retain();
+
     Backend.doLogin($scope.loginData.username, $scope.loginData.password, function(err, data) {
+      $ionicBackdrop.release();
+
       if(!err) {
         // $timeout(function() {}, 1000);
         $scope.closeLogin();
@@ -151,7 +161,7 @@ angular.module('atonego.controllers', [])
 })*/
 
 // controller for the todos of ONE list
-.controller('TodolistCtrl', function($scope, $ionicModal, $state, $stateParams, $timeout, Todolists, Backend) {
+.controller('TodolistCtrl', function($scope, $ionicModal, $ionicBackdrop, $state, $stateParams, $timeout, Todolists, Backend) {
   // init:
   $scope.loadingMsg = 'loading todos...'
 
@@ -161,7 +171,9 @@ angular.module('atonego.controllers', [])
     }
 
     // re-fetch todos from server
+    $ionicBackdrop.retain();
     Backend.fetchTodosOfList($stateParams.listID, function(err, todos) {
+      $ionicBackdrop.release();
       // nice, this updates the ui (-:
       $scope.list.todos = todos;
     });
@@ -187,9 +199,10 @@ angular.module('atonego.controllers', [])
     $scope.list.todos.push(this.todo);
 
     // create the lits on the server
+    $ionicBackdrop.retain();
     this.todo.list_id = $stateParams.listID;
     Backend.createTodo(this.todo, function(/*err, done*/) {
-
+      $ionicBackdrop.release();
     });
 
     this.todo = null;
@@ -221,12 +234,15 @@ angular.module('atonego.controllers', [])
 
   // on change the checkbox we need to persist!
   $scope.todoChange = function(todo) {
-    Backend.updateTodo(todo, function(/*err, done*/) {
+    log(todo.notice)
 
+    $ionicBackdrop.retain();
+    Backend.updateTodo(todo, function(/*err, done*/) {
+      $ionicBackdrop.release();
     });
 
     // note that the $scope.list.todos.. will be changed automatically!
-    log('updating todo ', todo.completed, $scope.list.todos)
+    // log('updating todo ', todo.completed, $scope.list.todos)
     // so just: update the lists in the store
     // Todolists.updateList($scope.list);
   };

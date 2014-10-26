@@ -287,7 +287,7 @@ window.app
         app.common.base64Encode('AtOneGo' + ':' + app.API_TOKEN);
 
       // TODO was noch
-      var data = _.pick(todo, 'title', 'completed');
+      var data = _.pick(todo, 'title', 'completed', 'notice');
 
       return doReq({
         url: BASE_URL + 'api/v1/todos/' + todo._id,
@@ -338,7 +338,34 @@ window.app
           cb(err, data);
         }
       });
-    }
+    },
+
+    /**
+     * POST or PUT(or PATCH?) a list
+     */
+    createOrUpdateList: function(isCreate, list, cb) {
+      log('update list: ', list)
+
+      // TODO global!
+      // "token based" authentication
+      var authStr  = 'Basic ' +
+        app.common.base64Encode('AtOneGo' + ':' + app.API_TOKEN);
+
+      // TODO was noch
+      var data = list; // _.pick(todo, 'title', 'completed');
+
+      return doReq({
+        url: BASE_URL + (isCreate ? 'api/v1/lists' : 'api/v1/lists/' + list._id),
+        method: isCreate ? 'POST' : 'PATCH',
+        headers: {
+          'Authorization': authStr
+        },
+        data: data,
+        done: function(err, data) {
+          cb(err, data);
+        }
+      });
+    },
   };
   // return $resource(url,
   //   {email:'test@test.de', password:'xxx'}, {

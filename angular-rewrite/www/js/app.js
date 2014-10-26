@@ -51,6 +51,7 @@ app.run(function($ionicPlatform) {
     if(window.StatusBar) {
       // org.apache.cordova.statusbar required
       window.StatusBar.styleDefault();
+      // window.StatusBar.show();
     }
   });
 });

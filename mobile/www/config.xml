@@ -33,6 +33,11 @@
     <preference name="MediaPlaybackRequiresUserAction" value="false" />
     <preference name="SuppressesIncrementalRendering" value="false" />
     <preference name="TopActivityIndicator" value="gray" />
+
+    <!-- custom status bar options for ios -->
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+
     <feature name="PushPlugin">
         <param name="ios-package" value="PushPlugin" />
     </feature>
