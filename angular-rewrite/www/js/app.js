@@ -134,7 +134,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
           controller: 'TodolistCtrl'
         }
       }
-    });
+    })
+    .state('app.list', {
+      url: '/todolists/:listID/edit',
+      views: {
+        'menuContent' :{
+          templateUrl: 'templates/todolist-edit.html',
+          controller: 'TodolistEditCtrl'
+        }
+      }
+    })
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/help');
 });

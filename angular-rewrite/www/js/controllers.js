@@ -119,7 +119,7 @@ angular.module('atonego.controllers', [])
     // save user and todolists
     var lists = [];
     _.each(userJSON.todolists, function (list) {
-        lists.push(list);
+      lists.push(list);
     });
     // set scope
     $scope.todolists = lists;
@@ -231,4 +231,22 @@ angular.module('atonego.controllers', [])
     log("OK", $scope.list.todos)
     Todolists.deleteCompletedTodosOfList($scope.list);
   };
+})
+
+// edit a list (title and participants..)
+.controller('TodolistEditCtrl', function($scope, $stateParams, $timeout, Todolists) {
+  $scope.list = {title: "loading.."};
+
+  Todolists.getListByID($stateParams.listID, function(err, list) {
+    log('GOT LIST TO EDIT: ' , list)
+
+    // must wrap into $apply() so angular knows to update the DOM after the list was fetched
+    // @see http://jimhoskins.com/2012/12/17/angularjs-and-apply.html
+    // $scope.$apply(function () {
+    // so, use $timeout(fn) to automatically wrap ya code into $apply() to prevent errors
+    // calling $apply() within an $apply()
+    $timeout(function() {
+      $scope.list = list;
+    });
+  });
 })

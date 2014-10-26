@@ -171,3 +171,12 @@ window.app
   //   charge: {method:'POST', params:{charge:true}}
   // });
 })
+
+.factory('TodoAPI', function($http) {
+  return {
+    // TODO
+    updateTodo: function(todo) {
+
+    }
+  }
+});
