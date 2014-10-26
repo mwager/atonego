@@ -64,7 +64,7 @@ angular.module('atonego.controllers', [])
   // --- scope methods ---
   $scope.clearAll = function() {
     $scope.todolists = [];
-    Todolists.clearAll();
+    // Todolists.clearAll();
     window.location.href = '#app/help';
   }
 
@@ -74,7 +74,7 @@ angular.module('atonego.controllers', [])
     //   delete $scope.lists[id];
     // })
 
-    Todolists.deleteListByID(this.list.id);
+    // Todolists.deleteListByID(this.list.id);
 
     // show the menu? go to startpage?
     // TODO angular.navigate() ?
@@ -91,7 +91,7 @@ angular.module('atonego.controllers', [])
       this.list.id = id;
 
       // add the list to the local store
-      Todolists.addList(this.list);
+      // Todolists.addList(this.list);
 
       log('$scope.todolists', $scope.todolists)
 
@@ -151,12 +151,14 @@ angular.module('atonego.controllers', [])
 })*/
 
 // controller for the todos of ONE list
-.controller('TodolistCtrl', function($scope, $ionicModal, $stateParams, $timeout, Todolists) {
+.controller('TodolistCtrl', function($scope, $ionicModal, $state, $stateParams, $timeout, Todolists, Backend) {
   // init:
   $scope.loadingMsg = 'loading todos...'
 
   Todolists.getListByID($stateParams.listID, function(err, list) {
-    log('GOT LIST: ' , list)
+    if(!list) {
+      return $state.go('app.help'); // TODO!?
+    }
 
     // must wrap into $apply() so angular knows to update the DOM after the list was fetched
     // @see http://jimhoskins.com/2012/12/17/angularjs-and-apply.html
@@ -174,17 +176,14 @@ angular.module('atonego.controllers', [])
       return;
     }
 
-    var id = guid();
-    this.todo.id = id;
-    this.todo.completed = false;
-
-    log('LIST IS: ', $scope.list)
-
     // add the todo to the list
     $scope.list.todos.push(this.todo);
 
-    // update the lists in the store
-    Todolists.updateList($scope.list);
+    // create the lits on the server
+    this.todo.list_id = $stateParams.listID;
+    Backend.createTodo(this.todo, function(/*err, done*/) {
+
+    });
 
     this.todo = null;
   }
@@ -215,14 +214,21 @@ angular.module('atonego.controllers', [])
 
   // on change the checkbox we need to persist!
   $scope.todoChange = function(todo) {
+    Backend.updateTodo(todo, function(/*err, done*/) {
+
+    });
+
     // note that the $scope.list.todos.. will be changed automatically!
     log('updating todo ', todo.completed, $scope.list.todos)
     // so just: update the lists in the store
-    Todolists.updateList($scope.list);
+    // Todolists.updateList($scope.list);
   };
 
   $scope.deleteCompleted = function() {
-    Todolists.deleteCompletedTodosOfList($scope.list);
+    // TODO $scope.list: remove completed !??!
+    Backend.deleteCompletedTodos($scope.list, function() {
+
+    });
   };
 })
 

@@ -4,19 +4,21 @@
  * File contains all services
  */
 
+var _ = require('../lib/underscore/underscore.js');
+
 // TODO testing?
 // TODO module definition only once app wide?!
 window.app
 
 .factory('Todolists', ['$window', function(win) {
-  var STORAGE_KEY = 'todolists';
+  // var STORAGE_KEY = 'todolists';
   var LISTS = [];
 
   var persistAllLists = function() {
     // persist all lists at once
-    localforage.setItem(STORAGE_KEY, LISTS, function(err) {
-      log('persisted ALL lists', LISTS, err);
-    });
+    // localforage.setItem(STORAGE_KEY, LISTS, function(err) {
+    //   log('persisted ALL lists', LISTS, err);
+    // });
   }
 
   // find a list by id in the LISTS array (TODO performance/data structures?)
@@ -24,8 +26,6 @@ window.app
     var listFound;
 
     lists.some(function(l) {
-      log(l._id, id)
-
       if(l._id === id) {
         listFound = l;
         return true; // break loop
@@ -98,6 +98,9 @@ window.app
           return done('no list');
         }
       }
+      else {
+        return done('no list');
+      }
     },
 
     // deleteCompletedTodosOfList: function(list) {
@@ -135,30 +138,42 @@ window.app
   // TODO
   var BASE_URL = 'https://atonego-mwager.rhcloud.com/';
 
+  function doReq(options) {
+    return $http({
+        url:     options.url,
+        method:  options.method || 'GET',
+        headers: options.headers || {},
+        // {
+        //   // 'Authorization': 'Basic dGVzdDp0ZXN0',
+        //   // 'Content-Type': 'application/x-www-form-urlencoded'
+        //   // 'Content-Type': 'application/json'
+        // },
+        // cache: false,
+        data: options.data || {}
+      }).success(function(data/*, status*/) {
+        // log('success', arguments)
+        options.done(null, data);
+      }).error(function(err/*, status*/) {
+        // log('error', arguments)
+        options.done(err);
+      });
+  }
+
   return {
     /**
      * Does the login against the REST API
      */
     doLogin: function(e, p, cb) {
-      return $http({
-        url:    BASE_URL + 'api/v1/login',
+      return doReq({
+        url: BASE_URL + 'api/v1/login',
         method: 'POST',
-        headers: {
-          // 'Authorization': 'Basic dGVzdDp0ZXN0',
-          // 'Content-Type': 'application/x-www-form-urlencoded'
-          // 'Content-Type': 'application/json'
-        },
-        cache: false,
         data: {
           email:   e,
           password:p
+        },
+        done: function(err, data) {
+          cb(err, data);
         }
-      }).success(function(data/*, status*/) {
-        // log('success', arguments)
-        cb(null, data);
-      }).error(function(err/*, status*/) {
-        // log('error', arguments)
-        cb(err);
       });
     },
 
@@ -199,22 +214,106 @@ window.app
       var authStr  = 'Basic ' +
         app.common.base64Encode('AtOneGo' + ':' + app.API_TOKEN);
 
-      return $http({
-        url:    BASE_URL + 'api/v1/users/' + userID,
+      return doReq({
+        url: BASE_URL + 'api/v1/users/' + userID,
         method: 'GET',
         headers: {
           'Authorization': authStr
         },
-        cache: false,
-        data: {
-
+        done: function(err, data) {
+          cb(err, data);
         }
-      }).success(function(data/*, status*/) {
-        // log('success', arguments)
-        cb(null, data);
-      }).error(function(err/*, status*/) {
-        // log('error', arguments)
-        cb(err);
+      });
+    },
+
+    /**
+     * POST a todo
+     */
+    createTodo: function(todo, cb) {
+      log('createTodo: ', todo)
+
+      // TODO global!
+      // "token based" authentication
+      var authStr  = 'Basic ' +
+        app.common.base64Encode('AtOneGo' + ':' + app.API_TOKEN);
+
+      var data = todo; // _.pick(todo, 'title', 'completed');
+
+      return doReq({
+        url: BASE_URL + 'api/v1/todos',
+        method: 'POST',
+        headers: {
+          'Authorization': authStr
+        },
+        data: data,
+        done: function(err, data) {
+          cb(err, data);
+        }
+      });
+    },
+
+    /**
+     * PUT(or PATCH?) a todo
+     */
+    updateTodo: function(todo, cb) {
+      log('update todo: ', todo)
+
+      // TODO global!
+      // "token based" authentication
+      var authStr  = 'Basic ' +
+        app.common.base64Encode('AtOneGo' + ':' + app.API_TOKEN);
+
+      // TODO was noch
+      var data = _.pick(todo, 'title', 'completed');
+
+      return doReq({
+        url: BASE_URL + 'api/v1/todos/' + todo._id,
+        method: 'PATCH',
+        headers: {
+          'Authorization': authStr
+        },
+        data: data,
+        done: function(err, data) {
+          cb(err, data);
+        }
+      });
+    },
+
+    deleteCompletedTodos: function(list, cb) {
+      // TODO global!
+      // "token based" authentication
+      var authStr  = 'Basic ' +
+        app.common.base64Encode('AtOneGo' + ':' + app.API_TOKEN);
+
+
+      var completedTodos = list.todos.filter(function(t) {
+        return t.completed === true;
+      });
+      var uncompletedTodos = list.todos.filter(function(t) {
+        return t.completed === false;
+      });
+      // update ui !!!
+      list.todos = uncompletedTodos;
+
+      var todo_ids = [];
+      completedTodos.forEach(function(t) {
+        todo_ids.push(t._id);
+      });
+
+      var data = {
+        todo_ids: todo_ids
+      };
+
+      return doReq({
+        url: BASE_URL + 'api/v1/todos',
+        method: 'DELETE',
+        headers: {
+          'Authorization': authStr
+        },
+        data: data,
+        done: function(err, data) {
+          cb(err, data);
+        }
       });
     }
   };

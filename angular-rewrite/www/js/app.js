@@ -19,8 +19,7 @@ window.log = function() {
 // require all needed scripts here?
 require('../lib/ionic/js/ionic.bundle.js');
 require('../lib/angular-resource/angular-resource.js');
-// require('../lib/underscore/underscore.js');
-
+// var _ = require('../lib/underscore/underscore.js');
 // TODO: https://github.com/mozilla/localForage/pull/203
 // LF is globally included in index.html yet...
 // var localForage = require('../lib/localforage/src/localforage.js');
@@ -95,14 +94,15 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
       }
     })
 
-    .state('app.start', {
-      url: '/start',
-      views: {
-        'menuContent' :{
-          templateUrl: 'templates/start.html'
-        }
-      }
-    })
+    // Hmm?
+    // .state('app.start', {
+    //   url: '/start',
+    //   views: {
+    //     'menuContent' :{
+    //       templateUrl: 'templates/start.html'
+    //     }
+    //   }
+    // })
     .state('app.help', {
       url: '/help',
       views: {
@@ -144,5 +144,5 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     })
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/start');
+  $urlRouterProvider.otherwise('/app/help');
 });
