@@ -7818,9 +7818,12 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
 .bar {
   border: none;
   background-image: none !important;
-  background: url("http://aog.herokuapp.com/app/images/header-bg.png") !important;
+  background: url("../img/header-bg.png") !important;
   background-repeat: repeat-x;
   height: 50px !important; }
 
 .pane {
-  background: url("http://aog.herokuapp.com/app/images/background.png"); }
+  background: url("../img/background.png"); }
+
+ion-nav-view {
+  background-color: #f6f6bb; }
