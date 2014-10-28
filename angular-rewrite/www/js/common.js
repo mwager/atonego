@@ -23,5 +23,13 @@ module.exports = {
     var encodedData = window.btoa(window.unescape(encodeURIComponent( val )));
 
     return encodedData;
+  },
+
+  isIOS: function() {
+    return window.device ? window.device.platform.toLowerCase() === 'ios' : false;
+
+  },
+  isAndroid: function() {
+    return window.device ? window.device.platform.toLowerCase() === 'android' : false;
   }
 };

@@ -21,9 +21,28 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-body {
+
+
+// custom stuff:
+
+@font-face {
+    font-family : 'LITOPRINT';
+    src         : url('../fonts/26025F_0_0.eot');
+    src         : url('../fonts/26025F_0_0.woff') format('woff'),
+                  url('../fonts/26025F_0_0.ttf') format('truetype');
 }
 
+
+body {
+
+}
+
+/* custom font only for specific elements: */
+h1, h2, h3, .content a, .aog-list .title, .aog-green-text, .aog-button, select, .dwb {
+    font-family : "LITOPRINT", "Helvetica", "Arial", "sans serif" !important;
+    font-weight : normal !important;
+    font-style  : normal !important;
+}
 
 // TODO
 .bar {

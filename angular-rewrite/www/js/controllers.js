@@ -38,33 +38,40 @@ angular.module('atonego.controllers', [])
   // });
 
   // Load the lists from server..
-  localforage.getItem('user', function(err, user) {
+  Backend.loadUser(function(err, user) {
     $ionicBackdrop.release();
     if(err || !user) {
       return log('no initial data found', err, user);
     }
 
-    $scope.todolists = user.todolists;
+    // no. stop pretending offline support please.
+    // if there is no sync support, there should be no loading+displaying
+    // while offline!
+    // $scope.todolists = user.todolists;
 
-    Backend.setAuthenticated(user);
+    // hmm really here? NO.
+    // Backend.setAuthenticated(user);
 
     $ionicBackdrop.retain();
 
+    // localforage.getItem('user', function(err, data) {log(arguments)})
     Backend.fetchUser(user._id, function(err, user) {
       $ionicBackdrop.release();
 
-      if(err) {
-        return log('fetch user error: ', err);
+      if(err || !user) {
+        return log('fetch user error: ' + err.message ? err.message : err, user);
       }
 
       // if(user.todolists.length > 0) {
       //   $state.go('app.single', {listID: user.todolists[0]._id})
       // }
 
-      Backend.setAuthenticated(user);
+      // render
       $scope.todolists = user.todolists;
+
+      Backend.setAuthenticated(user);
     });
-  })
+  });
 
 
   // --- scope methods ---

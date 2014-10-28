@@ -147,3 +147,11 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/help');
 });
+
+
+// XXX
+app.handleError = function() {
+  if(window.console && console.error) {
+    console.error(arguments);
+  }
+};
