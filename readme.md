@@ -68,7 +68,8 @@ NOTE: To update cordova plugins we need to remove and re-add !
     cordova plugin add org.apache.cordova.splashscreen && \
     cordova plugin add org.apache.cordova.statusbar && \
     cordova plugin add org.apache.cordova.vibration && \
-    cordova plugin add org.apache.cordova.globalization
+    cordova plugin add org.apache.cordova.globalization && \
+    cordova plugin add https://github.com/phonegap-build/PushPlugin.git
 
 Remove all:
 
@@ -80,6 +81,7 @@ Remove all:
     cordova plugin rm org.apache.cordova.statusbar && \
     cordova plugin rm org.apache.cordova.vibration && \
     cordova plugin rm org.apache.cordova.globalization && \
+    cordova plugin rm com.phonegap.plugins.PushPlugin && \
     rm -rf plugins/ios.json && rm plugins/android.json
 
 
@@ -117,8 +119,16 @@ Remove all:
     $ cd atonego
     # install local build system using grunt [optional]
     $ npm install
-    # NOTE: The folder `atonego` must be served via a locally installed webserver like apache
+    # NOTE: The folder `atonego` should be served via a locally installed webserver like apache
     $ open http://127.0.0.1/atonego # should serve index.html now
+
+__Via phonegap__
+
+$ make ios_build_dev && clear && t mobile/ios/cordova/console.log
+
+Checkout the `Makefile` for more information.
+
+
 
 #### 2. The API
 
@@ -137,11 +147,6 @@ Now checkout something like:
 * [http://127.0.0.1:4000/api](http://127.0.0.1:4000/api)
 * [http://127.0.0.1:4000](http://127.0.0.1:4000/api)
 
-#### Running on the ios simulator
-
-    $ echo "" > mobile/ios/cordova/console.log && make ios_build && clear && t mobile/ios/cordova/console.log
-
-Checkout the `Makefile` for more information.
 
 
 ## Code quality && -style ##
@@ -489,7 +494,8 @@ The mobile projects were created like this:
 NOTE: see "Cronjobs" und also the demo script: `api_deployment/server/ssl/push_demo.js`
 
     # run demo script via
-    DEBUG=apn node ./api_deployment/server/ssl/push_demo.js
+    ### DEBUG=apn node ./api_deployment/server/ssl/push_demo.js
+    DEBUG=apn node ./api/server/push_demo.js
 
 Some links:
 

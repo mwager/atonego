@@ -99,6 +99,7 @@
             i18next     : '../scripts/libs/i18next.amd-1.6.0',
             moment      : '../scripts/libs/moment',
             mobiscroll  : '../scripts/libs/mobiscroll',
+            localforage: '../bower_components/localforage/dist/localforage',
             cryptojs    : '../scripts/libs/cryptojs.aes.3.1.2',
             JrFork      : '../scripts/libs/junior_fork'
             // IScroll     : '../scripts/libs/iscroll-lite'

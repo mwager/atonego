@@ -183,6 +183,11 @@ ios_build : build
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - building with cordova for ios...$(NO_COLOR)"
 	cd mobile && cordova -d build ios  # && cordova -d run ios
 
+ios_build_dev : build_dev
+	@echo
+	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - building with cordova for ios...$(NO_COLOR)"
+	cd mobile && cordova -d build ios  # && cordova -d run ios
+
 ios_device : build
 	@echo
 	@echo "$(OK_COLOR)AtOneGo $(FINAL_VERSION) - building with cordova for ios directly. not running. use xcode to start on device after build...$(NO_COLOR)"

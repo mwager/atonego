@@ -37,7 +37,7 @@ define(function (require) {
 
     // some records are AES encrypted
     // var CryptoJS       = require('cryptojs');
-    var VanillaStorage = require('VanillaStorage');
+    var localforage = require('localforage');
 
     // JsonFormatter
     // @see https://code.google.com/p/crypto-js/#The_Cipher_Algorithms
@@ -130,21 +130,33 @@ define(function (require) {
      * Init db object and create the tables if not already done.
      */
     var Storage = function(cb) {
-        var storageOptions = {
-            version: '1.0',
-            storeName: 'aog_store'
-        };
-        this.vanilla = new VanillaStorage(storageOptions, function(err) {
-            if(err) {
-                return cb(err);
-            }
-            cb();
+        this.storage = localforage;
+
+        this.storage.config({
+            name        : 'atonego',
+            version     : 1.0,
+            size        : 4980736, // Size of database, in bytes. WebSQL-only for now.
+            storeName   : 'keyvaluepairs', // Should be alphanumeric, with underscores.
+            description : 'aog db'
         });
+
+        // MUST use timeout
+        var self = this;
+        setTimeout(function() {
+            cb(self.hasBrowserSupport() ? null : 'no storage support');
+        }, 10);
+
+        // .ready(function(err) {
+        //     if(err) {
+        //         return cb(err);
+        //     }
+        //     cb();
+        // });
     };
 
     Storage.prototype = {
         hasBrowserSupport: function() {
-            return this.vanilla.isValid();
+            return this.storage.driver() !== null; // TODO?
         },
 
         /**
@@ -181,7 +193,7 @@ define(function (require) {
          */
         storeUser: function(user, done) {
             done = ensureCB(done);
-            if(!this.hasBrowserSupport() || !this.vanilla) {
+            if(!this.hasBrowserSupport() || !this.storage) {
                 return done('no support');
             }
 
@@ -195,7 +207,7 @@ define(function (require) {
             // user = enc(user);
             // log('"F"', user)
 
-            this.vanilla.save('user', user, done);
+            this.storage.setItem('user', user, done);
         },
 
         /**
@@ -203,11 +215,11 @@ define(function (require) {
          */
         fetchUser: function(done) {
             done = ensureCB(done);
-            if(!this.hasBrowserSupport() || !this.vanilla) {
+            if(!this.hasBrowserSupport() || !this.storage) {
                 return done('no support');
             }
 
-            this.vanilla.get('user', function(err, data) {
+            this.storage.getItem('user', function(err, data) {
                 if(err) {
                     return done(err);
                 }
@@ -231,7 +243,7 @@ define(function (require) {
          */
         storeListsForUser: function(userID, lists, done) {
             done = ensureCB(done);
-            if(!this.hasBrowserSupport() || !this.vanilla) {
+            if(!this.hasBrowserSupport() || !this.storage) {
                 return done('no support');
             }
 
@@ -239,7 +251,7 @@ define(function (require) {
                 return done('no user id : ' + userID);
             }
 
-            this.vanilla.save('lists-of-' + userID, lists, done);
+            this.storage.setItem('lists-of-' + userID, lists, done);
         },
 
         /**
@@ -247,11 +259,11 @@ define(function (require) {
          */
         fetchListsForUser: function(userID, done) {
             done = ensureCB(done);
-            if(!this.hasBrowserSupport() || !this.vanilla) {
+            if(!this.hasBrowserSupport() || !this.storage) {
                 return done('no support');
             }
 
-            this.vanilla.get('lists-of-'+userID, done);
+            this.storage.getItem('lists-of-'+userID, done);
         },
 
         /**
@@ -259,11 +271,11 @@ define(function (require) {
          */
         storeTodosOfList: function(listID, todos, done) {
             done = ensureCB(done);
-            if(!this.hasBrowserSupport() || !this.vanilla) {
+            if(!this.hasBrowserSupport() || !this.storage) {
                 return done('no support');
             }
 
-            this.vanilla.save('todos-of-'+listID, todos, done);
+            this.storage.setItem('todos-of-'+listID, todos, done);
         },
 
         /**
@@ -271,22 +283,22 @@ define(function (require) {
          */
         fetchTodosOfList: function(listID, done) {
             done = ensureCB(done);
-            if(!this.hasBrowserSupport() || !this.vanilla) {
+            if(!this.hasBrowserSupport() || !this.storage) {
                 return done('no support');
             }
 
-            this.vanilla.get('todos-of-'+listID, done);
+            this.storage.getItem('todos-of-'+listID, done);
         },
 
         /**
          * Delete all tables
          */
         nukeAll: function(done) {
-            if(!this.hasBrowserSupport() || !this.vanilla) {
+            if(!this.hasBrowserSupport() || !this.storage) {
                 return done('no support');
             }
 
-            this.vanilla.nuke(done);
+            this.storage.clear(done);
         }
     };
 

@@ -1,4 +1,9 @@
 {
-    "id": "de.mwager.atonego",
-    "name": "AtOneGo"
+    "lib": {
+        "www": {
+            "id": "de.mwager.atonego",
+            "version": "3.5.0",
+            "uri": "https://github.com/phonegap/phonegap-app-hello-world/archive/3.5.0.tar.gz"
+        }
+    }
 }

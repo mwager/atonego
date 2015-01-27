@@ -33,6 +33,9 @@ define(function (require) {
     // setTimeout
     var notifyTimer;
 
+    var isCordova = typeof window.cordova !== 'undefined';
+
+
     // cache DOM Selectors
     $(document).ready(function () {
         $htmlBody = $('html,body');
@@ -45,6 +48,8 @@ define(function (require) {
     });
 
     common = _.extend(common, {
+        isCordova: isCordova,
+
         PAGED_EDIT_LOCK: false,
 
         // moment.js formatting:
@@ -588,6 +593,38 @@ define(function (require) {
             var encodedData = window.btoa(unescape(encodeURIComponent( val )));
 
             return encodedData;
+        },
+
+        /**
+         * Generates a client id for google analytics tracking
+         */
+        generateClientID: function(appVersion, userID) {
+            if(!isCordova) {
+                return 'user-' + userID + '-' + appVersion;
+            }
+            else {
+                return 'user-' + userID + '-' +
+                    window.device.platform + '-' +
+                    window.device.version + '-' +
+                    window.device.model + '-' +
+                    appVersion;
+            }
+        },
+
+        getUA: function() {
+            var ua = navigator.userAgent;
+
+            // cordova api?
+            // do not usw uuid!
+            // 'Device UUID: '     + device.uuid     + ' - ' +
+            if(isCordova && window.device && device.model) {
+                var tmp =   device.platform + ' v' + device.version + '/' +
+                            device.model + ' - cordova v' + device.cordova;
+
+                return ua + ' || ' + tmp;
+            }
+
+            return ua;
         }
 
     }, Backbone.Events);

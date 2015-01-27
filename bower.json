@@ -7,14 +7,14 @@
     "requirejs-text": "~2.0.10",
     "almond": "~0.2.6",
 
-    "backbone": "~1.1.1",
+    "backbone": "~1.1.2",
     "underscore": "~1.6.0",
 
-    "fastclick": "~0.6.10",
+    "fastclick": "1.0.6",
 
     "ratchet": "~1.0.2",
 
-    "vanilla-storage": "~0.7.0"
+    "localforage": "1.2.1"
   },
   "devDependencies": {
     "mocha": "~1.17.1",

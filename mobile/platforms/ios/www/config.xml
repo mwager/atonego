@@ -1,5 +1,5 @@
 <?xml version='1.1' encoding='utf-8'?>
-<widget id="de.mwager.atonego" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="de.mwager.atonego" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>AtOneGo</name>
     <description>
         AtOneGo - you gotta do what you got to do!
@@ -7,10 +7,14 @@
     <author email="mail@mwager.de" href="http://mwager.de">
         Michael Wager
     </author>
-    <access origin="https://atonego-mwager.rhcloud.com*" />
+
+    <!-- <access origin="https://atonego-mwager.rhcloud.com*" />
     <access origin="https://at-one-go.com*" />
     <access origin="*.atonego-mwager.rhcloud.com*" />
     <access origin="*.at-one-go.com*" />
+    -->
+    <access origin="*" />
+
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
     <preference name="orientation" value="portrait" />
@@ -29,6 +33,12 @@
     <preference name="MediaPlaybackRequiresUserAction" value="false" />
     <preference name="SuppressesIncrementalRendering" value="false" />
     <preference name="TopActivityIndicator" value="gray" />
+
+    <!-- status bar pluin conf -->
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+
+
     <feature name="PushPlugin">
         <param name="ios-package" value="PushPlugin" />
     </feature>

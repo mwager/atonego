@@ -9,6 +9,10 @@
                 "parents": {
                     "/*": [
                         {
+                            "xml": "<feature name=\"PushPlugin\"><param name=\"ios-package\" value=\"PushPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
                             "count": 1
                         },
@@ -18,6 +22,10 @@
                         },
                         {
                             "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Globalization\"><param name=\"ios-package\" value=\"CDVGlobalization\" /></feature>",
                             "count": 1
                         },
                         {
@@ -42,10 +50,6 @@
                         },
                         {
                             "xml": "<feature name=\"Vibration\"><param name=\"ios-package\" value=\"CDVVibration\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Globalization\"><param name=\"ios-package\" value=\"CDVGlobalization\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -76,6 +80,9 @@
         }
     },
     "installed_plugins": {
+        "com.phonegap.plugins.PushPlugin": {
+            "PACKAGE_NAME": "de.mwager.atonego"
+        },
         "org.apache.cordova.console": {
             "PACKAGE_NAME": "de.mwager.atonego"
         },
@@ -83,6 +90,9 @@
             "PACKAGE_NAME": "de.mwager.atonego"
         },
         "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "de.mwager.atonego"
+        },
+        "org.apache.cordova.globalization": {
             "PACKAGE_NAME": "de.mwager.atonego"
         },
         "org.apache.cordova.network-information": {
@@ -95,9 +105,6 @@
             "PACKAGE_NAME": "de.mwager.atonego"
         },
         "org.apache.cordova.vibration": {
-            "PACKAGE_NAME": "de.mwager.atonego"
-        },
-        "org.apache.cordova.globalization": {
             "PACKAGE_NAME": "de.mwager.atonego"
         }
     },
