@@ -32,16 +32,18 @@
         <ul class="aog-list white-list">
         <% _.each(todolist.participants, function(u) { %>
         <li class="no-link">
-            <p><%- u.display_name + ' (' + u.email + ')'  %><%- u.is_owner ? '(' + __('owner') + ')' : '' %></p>
+            <div class="inner">
+                <p><%- u.display_name + ' (' + u.email + ')'  %><%- u.is_owner ? '(' + __('owner') + ')' : '' %></p>
 
-            <% // cannot remove himself or owner
-            if(!u.is_owner && (u._id != theUser._id)) { %>
-            <div class="divider"></div>
+                <% // cannot remove himself or owner
+                if(!u.is_owner && (u._id != theUser._id)) { %>
+                <div class="divider"></div>
 
-            <a href="#" id="<%- 'user_' + u._id %>"
-                class="destroy destructive centered"
-                    data-user-id="<%- u._id %>"><%- __('remove') %></a>
-            <% } %>
+                <a href="#" id="<%- 'user_' + u._id %>"
+                    class="destroy destructive centered"
+                        data-user-id="<%- u._id %>"><%- __('remove') %></a>
+                <% } %>
+            </div>
         </li>
         <% }); %>
         </ul>

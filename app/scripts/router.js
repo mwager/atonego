@@ -77,8 +77,6 @@ define(function (require) {
 
             // If we have a user in the local db, render now!
             this.isAuth = isAuth;
-
-            this.$ghostbusterLayer = $('#ghostbuster-overlay');
         },
 
         /**
@@ -542,8 +540,8 @@ define(function (require) {
         renderView: function(view) {
             var self = this;
 
-            // show the "ghostbuster-layer"
-            this.__toggleGhostBusterOverlay(true);
+            // show the "ghostbuster-layer" (TODO RAUS!)
+            // this.__toggleGhostBusterOverlay(true);
 
             // trigger the slide animation (appr. 250-500ms)
             // (listening for "transitionend" callback)
@@ -558,7 +556,7 @@ define(function (require) {
                 // unlock "edit" mode
                 common.unlockScreen();
 
-                self.__toggleGhostBusterOverlay(false);
+                // self.__toggleGhostBusterOverlay(false);
 
                 // log memory usage in chrome
                 // if(window.performance && window.performance.memory) {
@@ -600,7 +598,7 @@ define(function (require) {
          * On every rendering of a screen, we will show a w=100%|h=100% hidden
          * div overlay until the rendering and animation is done.
          * This overlay will catch all ghostclicks
-         **/
+
         __toggleGhostBusterOverlay: function (showIt) {
             if(app.isBrowser) {
                 return false;
@@ -611,7 +609,7 @@ define(function (require) {
             } else {
                 this.$ghostbusterLayer.hide();
             }
-        },
+        },**/
 
         // OLD:
         /**

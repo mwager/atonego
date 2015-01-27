@@ -122,6 +122,14 @@ Remove all:
     # NOTE: The folder `atonego` should be served via a locally installed webserver like apache
     $ open http://127.0.0.1/atonego # should serve index.html now
 
+__Via phonegap__
+
+$ make ios_build_dev && clear && t mobile/ios/cordova/console.log
+
+Checkout the `Makefile` for more information.
+
+
+
 #### 2. The API
 
 A RESTful API for the app is written in JavaScript using Node.js, the website at-one-go.com and the webapp will be served through Node.js too.
@@ -139,11 +147,6 @@ Now checkout something like:
 * [http://127.0.0.1:4000/api](http://127.0.0.1:4000/api)
 * [http://127.0.0.1:4000](http://127.0.0.1:4000/api)
 
-#### Running on the ios simulator
-
-    $ echo "" > mobile/ios/cordova/console.log && make ios_build && clear && t mobile/ios/cordova/console.log
-
-Checkout the `Makefile` for more information.
 
 
 ## Code quality && -style ##

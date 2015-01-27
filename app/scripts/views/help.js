@@ -42,7 +42,7 @@ define([
             render: function () {
                 this.renderSelf({
                     app: app,
-                    version: common.generateClientID(app.VERSION, app.user.getId()),
+                    version: app.VERSION + ' (' + common.generateClientID(app.VERSION, app.user.getId()) + ')',
                     ua: common.getUA()
                 });
 

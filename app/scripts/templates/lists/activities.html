@@ -13,81 +13,83 @@
 <ul class="aog-list white-list">
     <% _.each(activities, function(activity) { %>
     <li class="no-link" id="activity-<%- activity.id %>">
-        <% switch(activity.key) {
-            case 'invitation': %>
-            <p><%- __('acceptInvitationQuestion') %></p>
+        <div class="inner">
+            <% switch(activity.key) {
+                case 'invitation': %>
+                <p><%- __('acceptInvitationQuestion') %></p>
 
-            <p><%- __('from') %>:
-            <strong><%- activity.data.user.display_name || activity.data.user.email %></strong>
-            </p>
+                <p><%- __('from') %>:
+                <strong><%- activity.data.user.display_name || activity.data.user.email %></strong>
+                </p>
 
-            <p><%- __('list') %>:
-                <strong><%- activity.data.list.title %></strong>
-            </p>
+                <p><%- __('list') %>:
+                    <strong><%- activity.data.list.title %></strong>
+                </p>
 
-            <div>
-                <button class="accept-invitation aog-button aog-green"
-                        data-user-id="<%- activity.data.user._id %>"
-                        data-list-id="<%- activity.data.list._id %>"
-                        data-activity-id="<%- activity.id %>">
-                    <%- __('yes') %>
-                </button>
-                <button class="reject-invitation aog-button aog-red"
-                        data-user-id="<%- activity.data.user._id %>"
-                        data-list-id="<%- activity.data.list._id %>"
-                        data-activity-id="<%- activity.id %>">
-                    <%- __('no') %>
-                </button>
-            </div>
-            <% break; %>
+                <div>
+                    <button class="accept-invitation aog-button aog-green"
+                            data-user-id="<%- activity.data.user._id %>"
+                            data-list-id="<%- activity.data.list._id %>"
+                            data-activity-id="<%- activity.id %>">
+                        <%- __('yes') %>
+                    </button>
+                    <button class="reject-invitation aog-button aog-red"
+                            data-user-id="<%- activity.data.user._id %>"
+                            data-list-id="<%- activity.data.list._id %>"
+                            data-activity-id="<%- activity.id %>">
+                        <%- __('no') %>
+                    </button>
+                </div>
+                <% break; %>
 
-            <% case 'invitation_accepted': %>
-            <p><%- __('invitation_accepted', {username: activity.data.user.display_name, list: activity.data.list.title}) %></p>
-            <% break; %>
+                <% case 'invitation_accepted': %>
+                <p><%- __('invitation_accepted', {username: activity.data.user.display_name, list: activity.data.list.title}) %></p>
+                <% break; %>
 
-            <% case 'invitation_rejected': %>
-            <p><%- __('invitation_rejected', {username: activity.data.user.display_name, list: activity.data.list.title}) %></p>
-            <% break; %>
+                <% case 'invitation_rejected': %>
+                <p><%- __('invitation_rejected', {username: activity.data.user.display_name, list: activity.data.list.title}) %></p>
+                <% break; %>
 
-            <% case 'update_list': %>
-            <p><%- __('update_list', {list: activity.data.title}) %></p>
-            <% break; %>
+                <% case 'update_list': %>
+                <p><%- __('update_list', {list: activity.data.title}) %></p>
+                <% break; %>
 
-            <% case 'delete_list': %>
-            <p><%- __('delete_list', {list: activity.data.title}) %></p>
-            <% break; %>
+                <% case 'delete_list': %>
+                <p><%- __('delete_list', {list: activity.data.title}) %></p>
+                <% break; %>
 
-            <% case 'create_todo': %>
-            <p><%- __('create_todo', {todo: activity.data.title, list: activity.data.todolist.title}) %></p>
-            <% break; %>
+                <% case 'create_todo': %>
+                <p><%- __('create_todo', {todo: activity.data.title, list: activity.data.todolist.title}) %></p>
+                <% break; %>
 
-            <% case 'delete_todo': %>
-            <p><%- __('delete_todo', {todo: activity.data.title, list: activity.data.todolist.title}) %></p>
-            <% break; %>
+                <% case 'delete_todo': %>
+                <p><%- __('delete_todo', {todo: activity.data.title, list: activity.data.todolist.title}) %></p>
+                <% break; %>
 
-            <% case 'delete_todos': %>
-            <p><%- __('delete_todos', {str: activity.data.str, list: activity.data.list}) %></p>
-            <% break; %>
+                <% case 'delete_todos': %>
+                <p><%- __('delete_todos', {str: activity.data.str, list: activity.data.list}) %></p>
+                <% break; %>
 
-            <% case 'list_access_removed': %>
-            <p><%- __('list_access_removed', {username: activity.data.user.display_name, list: activity.data.list.title}) %></p>
-            <% break; %>
+                <% case 'list_access_removed': %>
+                <p><%- __('list_access_removed', {username: activity.data.user.display_name, list: activity.data.list.title}) %></p>
+                <% break; %>
 
-            <% case 'push_notification': %>
-            <p><%= activity.data.body + ' (' + common.fromNow(activity.data.timestamp, false, app.lang) + ')' %></p>
-            <% break; %>
+                <% case 'push_notification': %>
+                <p><%= activity.data.body + ' (' + common.fromNow(activity.data.timestamp, false, app.lang) + ')' %></p>
+                <% break; %>
 
-            <% case 'welcome_message_after_signup': %>
-            <p>Hi <%- app.user.get('display_name') %>!</p>
-            <p><%= __('welcome_message_after_signup') %></p>
-            <% break; %>
-        <% } /* end switch*/ %>
+                <% case 'welcome_message_after_signup': %>
+                <p>Hi <%- app.user.get('display_name') %>!</p>
+                <p><%= __('welcome_message_after_signup') %></p>
+                <% break; %>
+            <% } /* end switch*/ %>
 
-        <% if(activity.key !== 'invitation') { %>
-        <!-- jede Notification (außer vom typ "invitation") hat einen "remove-button" -->
-        <div class="divider"></div>
-        <a href="#" class="remove-activity destructive" data-activity-id="<%- activity.id %>"><%- __('remove') %></a>
-        <% } %>
+            <% if(activity.key !== 'invitation') { %>
+            <!-- jede Notification (außer vom typ "invitation") hat einen "remove-button" -->
+            <div class="divider"></div>
+            <a href="#" class="remove-activity destructive" data-activity-id="<%- activity.id %>"><%- __('remove') %></a>
+            <% } %>
+        </div>
     </li>
     <% }); %>
 </ul>

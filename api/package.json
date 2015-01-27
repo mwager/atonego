@@ -19,7 +19,7 @@
     "connect": "2.7.x",
     "connect-flash": "~0.1.0",
     "connect-timeout": "0.0.x",
-    "connect-mongo": "0.3.2",
+    "connect-mongo": "0.7.0",
 
     "express": "3.0.x",
     "mongoose": "~3.6.10",

@@ -593,9 +593,15 @@ require([
         app.todolists = new Todolists();
 
         // finally init history api
-        Backbone.history.start({
-            pushState: false // XXX __app_config__.isCordova ? false : true
-        });
+        // NOTE that we want push state on the web! TODO!
+        var historyConf = {
+            pushState: false // !app.isPhonegapAvailable
+        };
+        // if(!app.isPhonegapAvailable) {
+        //     historyConf.root = '/atonego/app/';
+        // }
+
+        Backbone.history.start(historyConf);
 
         // ----- Global AJAX Event Handling ----- (zepto stylee, http://zeptojs.com/#$.ajax)
         $doc.on('ajaxError', function (evnt, xhr, xhrObj) {

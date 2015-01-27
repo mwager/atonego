@@ -10,7 +10,7 @@
 
     <div class="content content-padded">
 
-        <input type="text" id="todo-title" value="<%- todo.title %>">
+        <textarea type="text" id="todo-title" rows="1"><%- todo.title %></textarea>
 
         <p id="timestamp" class="aog-green-text centered small"><%- __('updated') %> <%- common.fromNow(todo.updated_at, false, app.lang) %> <%- __('by') %> <%- common.getUser(todo, true) %></p>
 
@@ -43,10 +43,12 @@
                             data-user-id="<%- user._id %>"></span>
                         </div>
 
-                        <div class="title-wrap">
-                            <p class="title">
-                                <%- theUser._id == user._id ? __('me') : user.display_name + ' (' + user.email + ')' %>
-                            </p>
+                        <div class="inner">
+                            <div class="title-wrap">
+                                <p class="title">
+                                    <%- theUser._id == user._id ? __('me') : user.display_name + ' (' + user.email + ')' %>
+                                </p>
+                            </div>
                         </div>
                     </li>
                     <% }); %>

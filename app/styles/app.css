@@ -532,6 +532,10 @@ funktioniert aber ganz gut.
 .aog-list .pressed-list {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e5e4b4), color-stop(100%,#f7f6c2));
     background: -webkit-linear-gradient(top,  #e5e4b4 0%,#f7f6c2 100%);
+
+    /* same as li */
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
 }
 
 /****************
@@ -625,12 +629,10 @@ ul.aog-list {
 
 ul.aog-list li {
     /*width: 100%;*/
-    /*position: relative;*/
+    position: relative;
 
-    min-height: 22px;
-
+    min-height: 42px;
     margin  : 10px 0 0 0;
-    padding : 12px 10px 8px 10px;
 
     text-decoration: none;
     text-shadow: 1px 1px 1px rgba(255,255,255,.22);
@@ -641,10 +643,11 @@ ul.aog-list li {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f6c2), color-stop(100%,#e5e4b4));
     background: -webkit-linear-gradient(top,  #f7f6c2 0%,#e5e4b4 100%);
 
-    -webkit-border-radius: 8px;
+
     -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,.29), inset 1px 1px 3px rgba(255,255,255,.44);
 
-    border-radius : 5px;
+    border-radius : 8px;
+    -webkit-border-radius: 8px;
 
     opacity: 1;
 }
@@ -655,7 +658,10 @@ ul.aog-list li {
 
 /** The count bubble on our lists **/
 ul.aog-list li .count {
-    float: right;
+    /*float: right;*/
+    position: absolute;
+    top: 10px;
+    right: 8px;
 }
 
 ul.aog-list li input[type=text] {
@@ -665,6 +671,15 @@ ul.aog-list li a {
     /* befindet sich ein link in eines liste muss die ganze liste klickbar sein */
     display:block;
 }
+
+/* the inner text */
+ul.aog-list li .inner {
+    padding : 13px 10px 8px 10px;
+}
+/*special case if controls left, eg checkbox
+ul.aog-list li .inner-control-left {
+    padding-left: 10px;
+}*/
 
 ul.aog-list li a,
 ul.aog-list li .title {
@@ -697,11 +712,15 @@ ul.aog-list li .title {
 }
 
 ul.aog-list li .ago-toggle-wrap {
-    float              : left;
-    margin             : -5px 5px 0px 0px;
+    /*float              : left;*/
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    margin             : 0px;
     width: 35px;
-    height: 30px;
-    /*background-color: red; /** XXX raus **/
+    height: 100%;
+    /*background-color: red; opacity: .2; /** XXX raus */
 }
 
 ul.aog-list li .ago-toggle {
@@ -710,6 +729,7 @@ ul.aog-list li .ago-toggle {
     width              : 18px;
     height             : 18px;
     padding            : 0px;
+    margin             : 11px 0 0 12px;
 
     background-image: url(../images/check_n.png);
     background-repeat: no-repeat;

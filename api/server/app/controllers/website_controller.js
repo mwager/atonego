@@ -390,7 +390,7 @@ WebsiteController = function (app, mongoose, _config) {
 
     function getLogin(req, res) {
         renderTemplate('login', {
-            uer: req.user,
+            user: req.user,
             login_post_url: config[ENV].WEBSITE_BASE_URL + 'login',
         }, req, res);
     }
@@ -479,6 +479,15 @@ WebsiteController = function (app, mongoose, _config) {
 
     // 4. POST change password goes here
     app.post('/password/change', postChangePassword);
+
+    // serve the single page html file for the app to support push state
+    // hmm this gets tricky...
+    // app.get('/app', function serveApp(req, res) {
+    //     renderTemplate('webapp', {
+    //         user: req.user,
+    //         ENV: ENV
+    //     }, req, res);
+    // });
 
     // admin panel:
     app.get('/login', getLogin);

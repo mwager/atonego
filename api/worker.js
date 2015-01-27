@@ -56,7 +56,7 @@ var
 
     // production: sessions in DB
     sessionCollectionName = 'aog-sessions',
-    sessionStore,
+    // sessionStore,
 
     // experimenting, not used anymore
     // socketIO = require('socket.io'),
@@ -226,7 +226,7 @@ function configureExpress() {
     app.configure(function () {
         var dbFromConf,
             mongoStoreConf,
-            onSessionStoreConnected,
+            // onSessionStoreConnected,
             isLive;
 
         // ?
@@ -250,7 +250,7 @@ function configureExpress() {
 
         mongoStoreConf = {
             // use existing mongoose connection !
-            mongoose_connection: mongoose.connections[0],
+            mongooseConnection:  mongoose.connections[0],
             db:                  isLive ? 'atonego' : dbFromConf.DATABASE,
             host:                process.env.OPENSHIFT_MONGODB_DB_HOST || dbFromConf.HOST,
             port:                process.env.OPENSHIFT_MONGODB_DB_PORT|| dbFromConf.PORT || 27017,
@@ -258,15 +258,16 @@ function configureExpress() {
             password:            process.env.OPENSHIFT_MONGODB_DB_PASSWORD || '', // optional
             collection:          sessionCollectionName, // 'mySessions' // optional, default: sessions
 
-            ttl: 30
+            // ttl: 30,
+
+            autoRemove: 'interval',
+            autoRemoveInterval: 10 // In minutes. Default
         };
 
-        onSessionStoreConnected = function (conf) {
-            logger.log(('Mongo Session Storage Module connected to database `' +
-                conf.db.databaseName + '`. CollectionName: `' + sessionCollectionName + '` (-;').green);
-        };
-
-        sessionStore = new MongoStore(mongoStoreConf, onSessionStoreConnected);
+        // onSessionStoreConnected = function (conf) {
+        //     logger.log(('Mongo Session Storage Module connected to database `' +
+        //         conf.db.databaseName + '`. CollectionName: `' + sessionCollectionName + '` (-;').green);
+        // };
 
         // wir wollen keine cookies, deshalb checken wir einen token im header
         // jedes requests um benutzer zu identifizieren
@@ -277,7 +278,7 @@ function configureExpress() {
             // maxAge: Date.now() + (360000),
 
             secret: config[ENV].SECRET,
-            store : sessionStore
+            store : new MongoStore(mongoStoreConf/*, onSessionStoreConnected*/)
             // key: 'connect.sid'
         }));
 
