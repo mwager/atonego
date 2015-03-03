@@ -10,7 +10,7 @@
 
     <div class="content content-padded">
 
-        <textarea type="text" id="todo-title" rows="1"><%- todo.title %></textarea>
+        <textarea type="text" id="todo-title" rows="3"><%- todo.title %></textarea>
 
         <p id="timestamp" class="aog-green-text centered small"><%- __('updated') %> <%- common.fromNow(todo.updated_at, false, app.lang) %> <%- __('by') %> <%- common.getUser(todo, true) %></p>
 
