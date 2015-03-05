@@ -313,17 +313,17 @@ header a {
 }
 
 /** overwrite ratchet stuff **/
-.modal-header a {
+.modal-header .save {
     margin-top: 4px;
     width:  40px  !important;
     height: 40px !important;
 }
 
-/** god dammit **/
+/** god dammit this hack is needed... */
 .modal-header .title {
-    position: absolute;
-    width: 100%;
-    margin: 0;
+  position: absolute;
+  width: 65%;
+  margin: 0 15%;
 }
 
 /** active state of header button images on click/tap */

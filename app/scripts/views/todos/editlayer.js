@@ -29,8 +29,8 @@ define(function(require) {
         _                   = require('underscore'),
         events = {};
 
-    events['focus input']        = 'switchToEditMode';
-    events['focus textarea']     = 'switchToEditMode';
+    events['keyup input']        = 'switchToEditMode';
+    events['keyup textarea']     = 'switchToEditMode';
 
     events[app.defaultClickEvent + ' .close-layer']  = 'close';
     // events['blur #notice']                           = 'saveTodo';
@@ -174,6 +174,7 @@ define(function(require) {
             this.$notice = $('#notice', this.el);
             this.$date   = $('#date-input', this.el);
             this.$chooseParticipants = $('.choose-participants', this.el);
+            this.$saveBtn = this.$('.save');
             // this.$timestamp = $('#timestamp', this.el);
 
             if(todo.date) {
@@ -360,6 +361,8 @@ define(function(require) {
 
         switchToEditMode: function() {
             this.editMode = true;
+
+            this.$saveBtn.removeClass('disabled');
         },
 
         /**

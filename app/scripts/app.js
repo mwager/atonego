@@ -552,6 +552,8 @@ define(function (require) {
                 //     snd.play();
                 // }
 
+                // TODO if todo update push: navigate to the list!?
+                // does this need server changes too?! if so: fuck off.
                 customReceiveHook();
 
                 if (evnt.alert) {

@@ -1,11 +1,9 @@
 <div id="edit-layer-wrapper" class="modal">
     <header class="bar-title modal-header">
-        <h1 class="title"><%- todo.title.substr(0, 7) + '...' %></h1>
-
-        <!-- this save btn is never disabled as it also closes the modal -->
+        <a href="#" id="goback" class="close-layer"></a>
+        <h1 class="title"><%- todo.title %></h1>
         <a id="header-save" href="#"
-            class="close-layer save"></a>
-
+            class="close-layer disabled save"></a>
     </header>
 
     <div class="content content-padded">
@@ -15,7 +13,7 @@
         <p id="timestamp" class="aog-green-text centered small"><%- __('updated') %> <%- common.fromNow(todo.updated_at, false, app.lang) %> <%- __('by') %> <%- common.getUser(todo, true) %></p>
 
         <div class="centered">
-            <textarea id="notice" rows="3" placeholder="<%- __('notices') %>"
+            <textarea id="notice" rows="5" placeholder="<%- __('notices') %>"
                 readonly><%- todo.notice %></textarea>
         </div>
 

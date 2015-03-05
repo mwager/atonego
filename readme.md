@@ -16,13 +16,6 @@ This file contains the documentation for developers.
 
 Author: Michael Wager <mail@mwager.de>
 
-## Changelog ##
-
-### v1.0.1 [08/2013/19] ###
-* Fix bug: When clicking on "invite user" the screen shrinks to the half and the whole app is not usable anymore so a user has to kill the app manually (happened only on iPhones)
-
-### v1.0.0 [07/2013/18] ###
-* Initial release version
 
 ## TechStack - Overview ##
 
