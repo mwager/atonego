@@ -33,6 +33,8 @@ define(function(require) {
     events['keyup textarea']     = 'switchToEditMode';
 
     events[app.defaultClickEvent + ' .close-layer']  = 'close';
+    events[app.defaultClickEvent + ' .save']  = 'onSaveClick';
+
     // events['blur #notice']                           = 'saveTodo';
     events[app.defaultClickEvent + ' .ago-toggle-wrap']  = 'toggleCheckbox';
 
@@ -91,6 +93,19 @@ define(function(require) {
             }, 30);
         },
 
+        onSaveClick: function() {
+            if(!this.editMode) {
+                return false;
+            }
+            var self = this;
+
+            setTimeout(function() {
+                self.saveTodo();
+            }, 0);
+
+            this.close();
+        },
+
         /**
          * Close the modal
          */
@@ -106,13 +121,6 @@ define(function(require) {
 
                 // this triggers the slide down (-;
                 $modal.removeClass('active');
-
-                // we only save on close !
-                if(this.editMode) {
-                    setTimeout(function() {
-                        self.saveTodo();
-                    }, 0);
-                }
 
                 setTimeout(function() {
                     if(self.$el.length > 0) {
