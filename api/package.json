@@ -21,7 +21,7 @@
     "connect-timeout": "0.0.x",
     "connect-mongo": "0.7.0",
 
-    "express": "3.0.x",
+    "express": "3.0.0",
     "mongoose": "~3.6.10",
     "socket.io": "0.9.x",
 
@@ -30,7 +30,7 @@
 
     "ejs": "~0.8.3",
     "nodemailer": "~0.4.1",
-    "email-templates": "~0.1.0",
+    "email-templates": "*",
     "i18n-2": "~0.4.4",
     "oauth": "~0.9.10",
     "passport": "~0.1.16",
