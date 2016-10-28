@@ -1,19 +1,17 @@
 {
-  "name":     "AtOneGo",
-  "version":  "1.0.0",
+  "name": "AtOneGo",
+  "version": "1.0.0",
   "author": {
-    "name":   "Michael Wager",
-    "email":  "mail@mwager.de",
-    "url":    "http://mwager.de"
+    "name": "Michael Wager",
+    "email": "mail@mwager.de",
+    "url": "http://mwager.de"
   },
-  "url":      "https://github.com/mwager/atonego",
+  "url": "https://github.com/mwager/atonego",
   "homepage": "http://at-one-go.com",
-  "private":  true,
-
+  "private": true,
   "engines": {
     "node": ">=0.8.0"
   },
-
   "dependencies": {
     "grunt": "~0.4.1",
     "grunt-cli": "*",
@@ -50,10 +48,20 @@
     "underscore": "*",
     "phantomjs": "~1.9.2-4",
     "grunt-text-replace": "~0.3.10",
-    "matchdep": "~0.1.2",
     "async": "*"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "angular-cli": "^1.0.0-beta.18",
+    "codelyzer": "^1.0.0-beta.3",
+    "jasmine-core": "^2.5.2",
+    "jasmine-spec-reporter": "^2.7.0",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-cli": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-mocha-reporter": "^2.2.0",
+    "karma-remap-istanbul": "^0.2.1"
+  },
   "scripts": {
     "test": "./api/node_modules/.bin/mocha api/server/test --ui bdd --recursive --reporter spec --timeout 20000 --slow 300"
   }
