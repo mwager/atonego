@@ -13,7 +13,8 @@
     "run:before": "build",
 
     "start": "ionic serve",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "tslint src"
   },
   "dependencies": {
     "@angular/common": "2.0.0",

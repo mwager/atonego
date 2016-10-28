@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {
   Http,
   // Response
+  Headers
 } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
@@ -15,13 +16,15 @@ export class LoginService {
 
   doSignup(/*email: string, password: string*/) {
     const url = `http://192.168.178.23:4000/api/v1/signup`;
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
 
     return this.http
       .post(url, {
         display_name: 'Michale',
         email: 'mail@mwager.de',
         pw: 'guerilla'
-      })
+      }, { headers })
       .toPromise()
       .then(res => res.json().data)
       .catch( error => {
