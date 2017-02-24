@@ -8,8 +8,6 @@ import {
 
 import 'rxjs/add/operator/toPromise';
 
-// import 'rxjs/add/operator/map'; // add map function to observable
-
 @Injectable()
 export class LoginService {
   constructor(private http: Http) {}
@@ -33,7 +31,7 @@ export class LoginService {
   }
 
   doLogin(email: string, password: string) {
-    const url = `http://192.168.178.23:4000/api/v1/login`; // `https://atonego-mwager.rhcloud.com/api/v1/login`
+    const url = `http://127.0.0.1:4000/api/v1/login`; // `https://atonego-mwager.rhcloud.com/api/v1/login`
 
     return this.http
       .post(url, {
@@ -45,10 +43,9 @@ export class LoginService {
         console.log(res, res.json())
 
         // TODO: how to handle global state in angular2/typescript...?
+        // hehehehehheheheeeeeee
+        // use a static service?
         window['__app_config__'].authData = res.json()
-
-
-
        })
       .catch( error => {
         console.error(error)

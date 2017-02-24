@@ -1,6 +1,5 @@
 import { inject, TestBed } from '@angular/core/testing';
-import { Http, BaseRequestOptions } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
+import { TestUtils } from '../../test-setup'
 import { LoginService } from './login.service'
 
 
@@ -9,17 +8,11 @@ describe('Login Service', () => {
   let loginService: LoginService;
 
   beforeEach( () => {
+    TestUtils.mockBackend();
+
     TestBed.configureTestingModule({
       providers: [
-        {provide: BaseRequestOptions, useClass: BaseRequestOptions},
-        {provide: MockBackend, useClass: MockBackend},
-        {
-          provide: Http,
-          useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
-            return new Http(backend, defaultOptions);
-          }, deps: [MockBackend, BaseRequestOptions]
-        },
-        {provide: LoginService, useClass: LoginService}
+        {provide: LoginService, useClass: LoginService} // same as just "LoginService"
       ]
     });
   });
@@ -32,6 +25,7 @@ describe('Login Service', () => {
 
     it('should return a promise', () => {
       let promise = loginService.doLogin('test@example.com', 'passw0rd');
+      console.log("OOOOOOOO--->" , promise instanceof Promise)
       expect(promise instanceof Promise).toBeTruthy();
     });
   });
