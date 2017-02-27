@@ -7,6 +7,9 @@ import 'zone.js/dist/jasmine-patch';
 import 'zone.js/dist/async-test';
 import 'zone.js/dist/fake-async-test';
 
+import { Http, BaseRequestOptions } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TestBed } from '@angular/core/testing';
 import { App, MenuController, NavController, Platform, Config, Keyboard, Form, IonicModule }  from 'ionic-angular';
@@ -67,7 +70,17 @@ export class TestUtils {
   }
 
   public static mockBackend(): void {
-
+    TestBed.configureTestingModule({
+      providers: [
+        {provide: BaseRequestOptions, useClass: BaseRequestOptions},
+        {provide: MockBackend, useClass: MockBackend},
+        {
+          provide: Http,
+          useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
+            return new Http(backend, defaultOptions);
+          }, deps: [MockBackend, BaseRequestOptions]
+        }]
+    });
   }
 
   // http://stackoverflow.com/questions/2705583/how-to-simulate-a-click-with-javascript

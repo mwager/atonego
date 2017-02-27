@@ -1,26 +1,26 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler} from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 
-import { IonicApp, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+
 import { MyApp } from './app.component';
-// import { AboutPage } from '../pages/about/about';
-// import { ContactPage } from '../pages/contact/contact';
-// import { HomePage } from '../pages/home/home';
-// import { TabsPage } from '../pages/tabs/tabs';
-import {LoginPage} from '../pages/login/login'
+import { LoginPage } from '../pages/login/login'
+import { StartPage } from '../pages/start/start';
 
+import { StorageService } from './services/storage.service';
+import { AuthService } from './services/auth.service';
 
+export function provideStorage() {
+  return new Storage(['sqlite', 'indexeddb', 'websql'], { name: '__atonego_db' });
+};
 
 @NgModule({
   declarations: [
     MyApp,
-    LoginPage
-
-    // AboutPage,
-    // ContactPage,
-    // HomePage,
-    // TabsPage
+    LoginPage,
+    StartPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -30,12 +30,14 @@ import {LoginPage} from '../pages/login/login'
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    LoginPage
-    // AboutPage,
-    // ContactPage,
-    // HomePage,
-    // TabsPage
+    LoginPage,
+    StartPage
   ],
-  providers: []
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: Storage, useFactory: provideStorage},
+    AuthService,
+    StorageService
+ ]
 })
 export class AppModule {}

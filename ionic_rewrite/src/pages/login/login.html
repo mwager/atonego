@@ -8,25 +8,19 @@
 
 <ion-content padding>
 
-  <form [formGroup]="loginForm" (submit)="doLogin(loginForm.value)">
-    <input formControlName="email" type="email" placeholder="Your email">
-    <input formControlName="password" type="password" placeholder="Your password">
-    <button type="submit">Log in</button>
+  <form (ngSubmit)="doLogin()">
+    <ion-item>
+      <ion-label>Email address</ion-label>
+      <ion-input type="email" [(ngModel)]="user.email" name="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
+    </ion-item>
+
+    <button ion-button type="submit" block>Login</button>
   </form>
-
-  <p>Value: {{ loginForm.value | json }}</p>
-  <p>Validation status: {{ loginForm.status }}</p>
-
-
-  <hr>
-  <h1>Signup...</h1>
-  <form [formGroup]="signupForm" (submit)="doSignup(signupForm.value)">
-    <input formControlName="displayName" type="text" placeholder="Your name">
-    <input formControlName="email" type="email" placeholder="Your email">
-    <input formControlName="password" type="password" placeholder="Your password">
-    <button type="submit">Signup!</button>
-  </form>
-
 
 
 </ion-content>
