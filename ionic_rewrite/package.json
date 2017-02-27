@@ -1,8 +1,10 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "AtOneGo",
+  "author": "Michael Wager <mail@mwager.de>",
+  "homepage": "http://at-one-go.com/",
   "private": true,
+  "description": "ionic_rewrite: An Ionic rewrite for AtOneGo",
+
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
@@ -62,11 +64,6 @@
   ],
   "cordovaPlatforms": [
     "ios",
-    {
-      "platform": "ios",
-      "version": "",
-      "locator": "ios"
-    }
-  ],
-  "description": "ionic_rewrite: An Ionic project"
+    "android"
+  ]
 }
