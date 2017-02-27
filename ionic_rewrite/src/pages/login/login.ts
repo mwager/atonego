@@ -1,7 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { LoadingController, ToastController } from 'ionic-angular';
+import { NavController, LoadingController, ToastController } from 'ionic-angular';
 
 import { AuthService } from '../../app/services/auth.service';
+
+import { TodolistsPage } from '../todolists/todolists';
 
 @Component({
   selector: 'page-login',
@@ -12,6 +14,7 @@ export class LoginPage {
 
   constructor(
     private authService: AuthService,
+    private navController: NavController,
     private loadingController: LoadingController,
     private toastCtrl: ToastController
   ) {}
@@ -40,10 +43,5 @@ export class LoginPage {
         showCloseButton: true,
       }).present();
     });
-  }
-
-  public doSignup() {
-    event.preventDefault();
-    this.authService.signup(/* . hardcoded... ..*/);
   }
 }

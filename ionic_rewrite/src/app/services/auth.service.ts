@@ -12,15 +12,20 @@ import { StorageService } from './storage.service';
 @Injectable()
 export class AuthService {
   public onLoginSuccess = new Subject();
-  public onLoginFail = new Subject();
 
   constructor(
     private http: Http,
     private storageService: StorageService
   ) {}
 
-  public checkIfUserIsAuthenticated() {
-    this.onLoginFail.next();
+  public checkIfUserIsAuthenticated(): Promise<any> {
+    return this.storageService.loadUser()
+    .then((user) => {
+      if(user) {
+        return true;
+      }
+      throw new Error('Not authenticated');
+    });
   }
 
   public login(email: string, password: string) {
@@ -33,9 +38,10 @@ export class AuthService {
     })
     .toPromise()
     .then((response) => {
-      this.storageService.saveUser(response.json())
+      this.storageService.saveUser(response.json());
+
       this.onLoginSuccess.next();
-     });
+    });
   }
 
   signup(/*email: string, password: string*/) {

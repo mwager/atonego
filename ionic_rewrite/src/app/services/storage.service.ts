@@ -7,15 +7,27 @@ import { Storage } from '@ionic/storage';
  */
 @Injectable()
 export class StorageService {
-	private isReadyPromise;
+  private isReadyPromise;
 
-	constructor(private storage: Storage) {
-		this.isReadyPromise = this.storage.ready();
-	}
+  constructor(private storage: Storage) {
+    this.isReadyPromise = this.storage.ready();
+  }
 
-	public saveUser(userObject): Promise<any> {
-		return this.isReadyPromise.then(() => {
-			return this.storage.set('USER', userObject);
-		});
-	}
+  public saveUser(userObject): Promise<any> {
+    return this.isReadyPromise.then(() => {
+      return this.storage.set('USER', userObject);
+    });
+  }
+
+  public loadUser(): Promise<any> {
+    return this.isReadyPromise.then(() => {
+      return this.storage.get('USER');
+    });
+  }
+
+  public fetchTodolists(): Promise<any> {
+    return this.loadUser().then((user) => {
+      return user.todolists;
+    });
+  }
 }

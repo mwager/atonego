@@ -5,9 +5,9 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
 
-import { LoginPage } from '../pages/login/login';
 import { StartPage } from '../pages/start/start';
-
+import { LoginPage } from '../pages/login/login';
+import { TodolistsPage } from '../pages/todolists/todolists';
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
@@ -32,12 +32,15 @@ export class MyApp {
 
   private initializeServices() {
     this.authService.onLoginSuccess.subscribe(() => {
-      this.rootPage = StartPage;
-    });
-    this.authService.onLoginFail.subscribe(() => {
-      this.rootPage = LoginPage;
+      this.rootPage = TodolistsPage;
     });
 
-    this.authService.checkIfUserIsAuthenticated();
+    this.authService.checkIfUserIsAuthenticated()
+    .then(() => {
+      this.rootPage = TodolistsPage;
+    })
+    .catch(() => {
+      this.rootPage = StartPage;
+    });
   }
 }

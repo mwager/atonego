@@ -6,21 +6,24 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { MyApp } from './app.component';
-import { LoginPage } from '../pages/login/login'
+
 import { StartPage } from '../pages/start/start';
+import { LoginPage } from '../pages/login/login';
+import { TodolistsPage } from '../pages/todolists/todolists';
 
 import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
 
 export function provideStorage() {
-  return new Storage(['sqlite', 'indexeddb', 'websql'], { name: '__atonego_db' });
+  return new Storage(['sqlite', 'indexeddb', 'websql'], { name: '__atonego_database' });
 };
 
 @NgModule({
   declarations: [
     MyApp,
+    StartPage,
     LoginPage,
-    StartPage
+    TodolistsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -30,10 +33,12 @@ export function provideStorage() {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    StartPage,
     LoginPage,
-    StartPage
+    TodolistsPage
   ],
   providers: [
+    MyApp,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: Storage, useFactory: provideStorage},
     AuthService,
