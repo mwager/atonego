@@ -9,6 +9,8 @@
 <ion-content>
 
 	<h1>Todolists</h1>
+  <a (click)="logout()" ion-button block>Logout</a>
+
 
  	<ion-list>
     <ion-item class="list-item" *ngFor="let todolist of todolists"

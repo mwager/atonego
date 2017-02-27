@@ -12,6 +12,7 @@ import { StorageService } from './storage.service';
 @Injectable()
 export class AuthService {
   public onLoginSuccess = new Subject();
+  public onLogout = new Subject();
 
   constructor(
     private http: Http,
@@ -28,7 +29,7 @@ export class AuthService {
     });
   }
 
-  public login(email: string, password: string) {
+  public login(email: string, password: string): Promise<any> {
     const url = `https://atonego-mwager.rhcloud.com/api/v1/login`;
 
     return this.http
@@ -41,6 +42,13 @@ export class AuthService {
       this.storageService.saveUser(response.json());
 
       this.onLoginSuccess.next();
+    });
+  }
+
+  public logout(): Promise<any> {
+    return this.storageService.dropDatabase()
+    .then(() => {
+      this.onLogout.next();
     });
   }
 

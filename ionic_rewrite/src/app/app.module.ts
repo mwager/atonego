@@ -10,6 +10,7 @@ import { MyApp } from './app.component';
 import { StartPage } from '../pages/start/start';
 import { LoginPage } from '../pages/login/login';
 import { TodolistsPage } from '../pages/todolists/todolists';
+import { TodolistPage } from '../pages/todolist/todolist';
 
 import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
@@ -23,7 +24,8 @@ export function provideStorage() {
     MyApp,
     StartPage,
     LoginPage,
-    TodolistsPage
+    TodolistsPage,
+    TodolistPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -35,7 +37,8 @@ export function provideStorage() {
     MyApp,
     StartPage,
     LoginPage,
-    TodolistsPage
+    TodolistsPage,
+    TodolistPage
   ],
   providers: [
     MyApp,

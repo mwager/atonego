@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
 
 import { StorageService } from '../../app/services/storage.service';
+import { AuthService } from '../../app/services/auth.service';
+
+import { TodolistPage } from '../todolist/todolist';
 
 @Component({
   selector: 'page-todolists',
@@ -10,7 +14,9 @@ export class TodolistsPage {
   public todolists;
 
   constructor(
-    private storageService: StorageService
+    private navController: NavController,
+    private storageService: StorageService,
+    private authService: AuthService
   ) {
     this.storageService.fetchTodolists()
     .then((todolists) => {
@@ -19,7 +25,13 @@ export class TodolistsPage {
     });
   }
 
+  public logout() {
+    this.authService.logout();
+  }
+
   public navigateToList(todolist) {
-    console.log(todolist)
+    this.navController.push(TodolistPage, {
+      todolist: todolist
+    });
   }
 }

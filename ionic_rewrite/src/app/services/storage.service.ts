@@ -30,4 +30,8 @@ export class StorageService {
       return user.todolists;
     });
   }
+
+  public dropDatabase(): Promise<any> {
+    return this.storage.clear();
+  }
 }

@@ -10,7 +10,7 @@ import { LoginPage } from '../pages/login/login';
 import { TodolistsPage } from '../pages/todolists/todolists';
 
 @Component({
-  template: `<ion-nav [root]="rootPage"></ion-nav>`
+  templateUrl: `app.html`
 })
 export class MyApp {
   rootPage;
@@ -33,6 +33,9 @@ export class MyApp {
   private initializeServices() {
     this.authService.onLoginSuccess.subscribe(() => {
       this.rootPage = TodolistsPage;
+    });
+    this.authService.onLogout.subscribe(() => {
+      this.rootPage = StartPage;
     });
 
     this.authService.checkIfUserIsAuthenticated()
