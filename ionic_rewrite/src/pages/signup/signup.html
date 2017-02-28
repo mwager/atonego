@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Signup
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form (ngSubmit)="doSignup()">
+    <ion-item>
+      <ion-label>Display Name</ion-label>
+      <ion-input type="displayName" [(ngModel)]="user.displayName" name="displayName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Email address</ion-label>
+      <ion-input type="email" [(ngModel)]="user.email" name="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
+    </ion-item>
+
+    <button ion-button type="submit" block>Signup</button>
+  </form>
+
+
+</ion-content>

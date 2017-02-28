@@ -9,6 +9,7 @@ import { MyApp } from './app.component';
 
 import { StartPage } from '../pages/start/start';
 import { LoginPage } from '../pages/login/login';
+import { SignupPage } from '../pages/signup/signup';
 import { TodolistsPage } from '../pages/todolists/todolists';
 import { TodolistPage } from '../pages/todolist/todolist';
 
@@ -24,6 +25,7 @@ export function provideStorage() {
     MyApp,
     StartPage,
     LoginPage,
+    SignupPage,
     TodolistsPage,
     TodolistPage
   ],
@@ -37,6 +39,7 @@ export function provideStorage() {
     MyApp,
     StartPage,
     LoginPage,
+    SignupPage,
     TodolistsPage,
     TodolistPage
   ],

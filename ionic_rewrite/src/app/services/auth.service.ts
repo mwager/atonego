@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  Http,
-  Headers
+  Http
 } from '@angular/http';
 
 import { Subject } from 'rxjs/Subject';
@@ -40,7 +39,6 @@ export class AuthService {
     .toPromise()
     .then((response) => {
       this.storageService.saveUser(response.json());
-
       this.onLoginSuccess.next();
     });
   }
@@ -52,21 +50,19 @@ export class AuthService {
     });
   }
 
-  signup(/*email: string, password: string*/) {
-    const url = `http://192.168.178.23:4000/api/v1/signup`;
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+  public signup(displayName: string, email: string, password: string) {
+    const url = `https://atonego-mwager.rhcloud.com/api/v1/signup`;
 
     return this.http
-      .post(url, {
-        display_name: 'Michale',
-        email: 'mail@mwager.de',
-        pw: ''
-      }, { headers })
-      .toPromise()
-      .then(res => res.json().data)
-      .catch( error => {
-        console.error(error)
-      });
+    .post(url, {
+      display_name: displayName,
+      email: email,
+      pw: password
+    })
+    .toPromise()
+    .then((response) => {
+      this.storageService.saveUser(response.json());
+      this.onLoginSuccess.next();
+    });
   }
 }

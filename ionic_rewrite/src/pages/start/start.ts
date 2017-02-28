@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { LoginPage } from '../login/login';
+import { SignupPage } from '../signup/signup';
 
 @Component({
   selector: 'page-start',
@@ -13,11 +14,10 @@ export class StartPage {
   }
 
   public navigateToLogin() {
-  	this.navController.push(LoginPage);
+    this.navController.push(LoginPage);
   }
 
   public navigateToSignup() {
-  	console.log("TODO");
-  	// this.navController.push(SignupPage);
+    this.navController.push(SignupPage);
   }
 }

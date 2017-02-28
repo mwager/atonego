@@ -6,7 +6,6 @@ import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
 
 import { StartPage } from '../pages/start/start';
-import { LoginPage } from '../pages/login/login';
 import { TodolistsPage } from '../pages/todolists/todolists';
 
 @Component({
