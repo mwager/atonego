@@ -7,6 +7,8 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/toPromise';
 
 import { StorageService } from './storage.service';
+import { AppConfig } from '../../shared/app_config';
+
 
 @Injectable()
 export class AuthService {
@@ -29,7 +31,7 @@ export class AuthService {
   }
 
   public login(email: string, password: string): Promise<any> {
-    const url = `https://atonego-mwager.rhcloud.com/api/v1/login`;
+    const url = AppConfig.API_BASE_URL + 'login';
 
     return this.http
     .post(url, {
@@ -51,7 +53,7 @@ export class AuthService {
   }
 
   public signup(displayName: string, email: string, password: string) {
-    const url = `https://atonego-mwager.rhcloud.com/api/v1/signup`;
+    const url = AppConfig.API_BASE_URL + 'signup';
 
     return this.http
     .post(url, {

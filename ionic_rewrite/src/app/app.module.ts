@@ -15,6 +15,7 @@ import { TodolistPage } from '../pages/todolist/todolist';
 
 import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
+import { HttpBackendService } from './services/http-backend.service';
 
 export function provideStorage() {
   return new Storage(['sqlite', 'indexeddb', 'websql'], { name: '__atonego_database' });
@@ -44,11 +45,12 @@ export function provideStorage() {
     TodolistPage
   ],
   providers: [
-    MyApp,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+
     {provide: Storage, useFactory: provideStorage},
     AuthService,
-    StorageService
+    StorageService,
+    HttpBackendService
  ]
 })
 export class AppModule {}

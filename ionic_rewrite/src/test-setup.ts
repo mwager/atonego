@@ -11,12 +11,17 @@ import { Http, BaseRequestOptions } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, getTestBed } from '@angular/core/testing';
 import { App, MenuController, NavController, Platform, Config, Keyboard, Form, IonicModule }  from 'ionic-angular';
 import { ConfigMock, NavMock, PlatformMock } from './mocks';
 // import { ClickersServiceMock } from './services/clickers.mock';
 // import { ClickersService } from './services';
 
+
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting
+} from '@angular/platform-browser-dynamic/testing';
 
 // Unfortunately there's no typing for the `__karma__` variable. Just declare it as any.
 declare var __karma__: any;
@@ -25,23 +30,40 @@ declare var require: any;
 // Prevent Karma from running prematurely.
 __karma__.loaded = function () {};
 
-Promise.all([
-  System.import('@angular/core/testing'),
-  System.import('@angular/platform-browser-dynamic/testing')
-])
-  // First, initialize the Angular testing environment.
-  .then(([testing, testingBrowser]) => {
-    testing.getTestBed().initTestEnvironment(
-      testingBrowser.BrowserDynamicTestingModule,
-      testingBrowser.platformBrowserDynamicTesting()
-    );
-  })
-  // Then we find all the tests.
-  .then(() => require.context('./', true, /\.spec\.ts/))
-  // And load the modules.
-  .then(context => context.keys().map(context))
-  // Finally, start Karma to run the tests.
-  .then(__karma__.start, __karma__.error);
+// make some stuff globally available
+// window['$'] = window['jQuery'];
+
+
+// log helper in order to just write "log" within tests for visual feedback
+window['log'] = function() {
+  console['log'].apply(console, arguments);
+};
+// handy debug helper to pretty log an object to the console
+window['logPretty'] = (data) => {
+  console['log'](JSON.stringify(data, null, 2));
+};
+
+// beforeEach(() => {
+//   TestBed.configureTestingModule({
+//     providers: [
+//     ]
+//   });
+// });
+// afterEach(() => {});
+
+// First, initialize the Angular testing environment.
+getTestBed().initTestEnvironment(
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting()
+);
+// Then we find all the tests.
+let context = require.context('./', true, /\.spec\.ts$/);
+// And load the modules.
+context.keys().map(context);
+// Finally, start Karma to run the tests.
+__karma__.start();
+
+
 
 
 export class TestUtils {
@@ -81,16 +103,5 @@ export class TestUtils {
           }, deps: [MockBackend, BaseRequestOptions]
         }]
     });
-  }
-
-  // http://stackoverflow.com/questions/2705583/how-to-simulate-a-click-with-javascript
-  public static eventFire(el: any, etype: string): void {
-    if (el.fireEvent) {
-      el.fireEvent('on' + etype);
-    } else {
-      let evObj: any = document.createEvent('Events');
-      evObj.initEvent(etype, true, false);
-      el.dispatchEvent(evObj);
-    }
   }
 }

@@ -8,7 +8,13 @@
 
 <ion-content>
 
-  <p>Input to add toto...</p>
+  <form (ngSubmit)="createTodo()">
+    <ion-item>
+      <ion-input placeholder="Create Todo" type="text" [(ngModel)]="todo.title" name="title"></ion-input>
+    </ion-item>
+  </form>
+
+  <br>
 
   <ion-list>
     <ion-item class="list-item" *ngFor="let todo of todolist.todos">

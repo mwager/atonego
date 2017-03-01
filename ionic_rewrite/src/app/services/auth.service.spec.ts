@@ -2,7 +2,6 @@ import { inject, TestBed } from '@angular/core/testing';
 import { TestUtils } from '../../test-setup'
 import { AuthService } from './auth.service'
 
-
 describe('AuthService', () => {
 
   let authService: AuthService;

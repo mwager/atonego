@@ -54,6 +54,7 @@
   "main": "server.js",
 
   "scripts": {
-    "test": "./node_modules/.bin/mocha server/test --ui bdd --recursive --reporter spec --timeout 20000 --slow 300"
+    "test": "./node_modules/.bin/mocha server/test --ui bdd --recursive --reporter spec --timeout 20000 --slow 300",
+    "seed": "./node_modules/.bin/mocha --ui bdd --reporter spec --timeout 200000 --slow 300 server/tasks/seed_db.js"
   }
 }
