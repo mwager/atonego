@@ -7,7 +7,7 @@ import 'zone.js/dist/jasmine-patch';
 import 'zone.js/dist/async-test';
 import 'zone.js/dist/fake-async-test';
 
-import { Http, BaseRequestOptions } from '@angular/http';
+import { Http, BaseRequestOptions, ResponseOptions, Response, Headers } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -102,6 +102,45 @@ export class TestUtils {
             return new Http(backend, defaultOptions);
           }, deps: [MockBackend, BaseRequestOptions]
         }]
+    });
+  }
+
+  public static prepareSuccessfullHttpResponse(
+    mockBackend,
+    responseData: any = {success: true},
+    headerData: any = {},
+    status = 200
+  ) {
+
+    let response = new Response(
+      new ResponseOptions({
+        status: status,
+        body: JSON.stringify(responseData),
+        headers: new Headers(headerData)
+      })
+    );
+
+    mockBackend.connections.subscribe(connection => {
+      connection.mockRespond(response);
+    });
+  }
+
+  public static prepareErrorHttpResponse(
+    mockBackend,
+    response?: Response | any,
+    status = 500
+  ) {
+    if (!response) {
+      response = new Response(new ResponseOptions({status: status}));
+    }
+    else if (!(response instanceof Response)) {
+      response = new Response(new ResponseOptions({
+        status: status,
+        body: JSON.stringify(response)
+      }));
+    }
+    mockBackend.connections.subscribe(connection => {
+      connection.mockError(response);
     });
   }
 }

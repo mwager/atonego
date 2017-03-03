@@ -1,21 +1,25 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Your lists
+      You gotta do it!
     </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="navigateToSetings()">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
 
-	<h1>Todolists</h1>
-  <a (click)="logout()" ion-button block>Logout</a>
+  <h1>Todolists</h1>
 
-
- 	<ion-list>
+  <ion-list>
     <ion-item class="list-item" *ngFor="let todolist of todolists"
-    	(click)="navigateToList(todolist)">
-	    {{todolist.title}}
+      (click)="navigateToList(todolist)">
+      {{todolist.title}}
       <br>
       {{todolist.updated_at | date:"yyyy-MM-dd hh:mm:ss"}}
     </ion-item>

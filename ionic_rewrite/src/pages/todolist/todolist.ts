@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { NavParams, NavController, ToastController } from 'ionic-angular';
 
 import { StorageService } from '../../app/services/storage.service';
-import { HttpBackendService } from '../../app/services/http-backend.service';
+import { PersistanceService } from '../../app/services/persistance.service';
+
+import { TodoPage } from '../todo/todo';
 
 @Component({
   selector: 'page-todolist',
@@ -13,31 +15,56 @@ export class TodolistPage {
   public todo: any = {};
 
   constructor(
+    private navController: NavController,
     private navParams: NavParams,
-    private httpBackendService: HttpBackendService
+    private toastCtrl: ToastController,
+    private persistanceService: PersistanceService
   ) {
     this.todolist = this.navParams.get('todolist');
+
+    // Angular > 2 does not include filter/sort pipes:
+    // see https://angular.io/docs/ts/latest/guide/pipes.html#!#no-filter-pipe
+    // "The Angular team and many experienced Angular
+    // developers strongly recommend moving filtering
+    // and sorting logic into the component itself."
+    // TODO: better + specs (POC!)
+    this.todolist.todos.sort((a, b) => {
+      return b.updated_at - a.updated_at;
+    });
   }
 
-  // TODO:
-  // 1. backend/storage.addTodo
-  // 2. this.todolist = fetchTodolist(this.todolist._id)
-
-  // offline support
-  // wir speichern erstmal lokal
-  // beim sync werden dann erstmal die lokalen gepostet
-  // anschließend ein fetch gemacht
   public createTodo() {
-    this.todo.list_id = this.todolist._id
+    this.todo.list_id = this.todolist._id;
+    this.todo.completed = false;
 
-    console.log("POSTING", this.todo)
+    this.persistanceService.createOrEditTodo(this.todo)
+    .then((response) => {
+      let createdTodo = response.json();
 
-    this.httpBackendService.createTodo(this.todo)
-    .then(() => {
+      // push as first element:
+      this.todolist.todos.unshift(createdTodo);
+
       this.todo = {};
     })
-    .catch(() => {
+    .catch((errorResponse) => {
+      this.todo = {};
 
+      console.error('Error: ', errorResponse);
+
+      this.toastCtrl.create({
+        message: 'Error saving todo',
+        position: 'top',
+        showCloseButton: true
+      }).present();
     });
+  }
+
+  public navigateToTodo(todo: any) {
+    this.navController.push(TodoPage, {
+      todo: todo
+    });
+  }
+  public navigateToTodolistSettings() {
+    console.log("TODO...", this.todolist)
   }
 }

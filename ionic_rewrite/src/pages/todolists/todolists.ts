@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { StorageService } from '../../app/services/storage.service';
-import { AuthService } from '../../app/services/auth.service';
 
 import { TodolistPage } from '../todolist/todolist';
+import { SettingsPage } from '../settings/settings';
 
 @Component({
   selector: 'page-todolists',
@@ -15,23 +15,21 @@ export class TodolistsPage {
 
   constructor(
     private navController: NavController,
-    private storageService: StorageService,
-    private authService: AuthService
+    private storageService: StorageService
   ) {
     this.storageService.fetchTodolists()
     .then((todolists) => {
-      console.log("todolists", todolists);
       this.todolists = todolists;
     });
-  }
-
-  public logout() {
-    this.authService.logout();
   }
 
   public navigateToList(todolist) {
     this.navController.push(TodolistPage, {
       todolist: todolist
     });
+  }
+
+  public navigateToSetings() {
+     this.navController.push(SettingsPage);
   }
 }

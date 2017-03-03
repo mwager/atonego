@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler} from '@angular/core';
 import { FormsModule }   from '@angular/forms';
-import { HttpModule }    from '@angular/http';
+import { HttpModule, BaseRequestOptions }    from '@angular/http';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -8,14 +8,17 @@ import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
 
 import { StartPage } from '../pages/start/start';
+import { SettingsPage } from '../pages/settings/settings';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { TodolistsPage } from '../pages/todolists/todolists';
 import { TodolistPage } from '../pages/todolist/todolist';
+import { TodoPage } from '../pages/todo/todo';
 
 import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
-import { HttpBackendService } from './services/http-backend.service';
+import { PersistanceService } from './services/persistance.service';
+import { CUSTOM_HTTP_PROVIDER } from '../shared/custom-http';
 
 export function provideStorage() {
   return new Storage(['sqlite', 'indexeddb', 'websql'], { name: '__atonego_database' });
@@ -24,11 +27,13 @@ export function provideStorage() {
 @NgModule({
   declarations: [
     MyApp,
+    SettingsPage,
     StartPage,
     LoginPage,
     SignupPage,
     TodolistsPage,
-    TodolistPage
+    TodolistPage,
+    TodoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -38,19 +43,23 @@ export function provideStorage() {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    SettingsPage,
     StartPage,
     LoginPage,
     SignupPage,
     TodolistsPage,
-    TodolistPage
+    TodolistPage,
+    TodoPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-
     {provide: Storage, useFactory: provideStorage},
     AuthService,
     StorageService,
-    HttpBackendService
+
+    BaseRequestOptions,
+    CUSTOM_HTTP_PROVIDER,
+    PersistanceService
  ]
 })
 export class AppModule {}

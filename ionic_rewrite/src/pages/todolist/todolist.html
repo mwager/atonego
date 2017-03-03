@@ -3,6 +3,14 @@
     <ion-title>
       {{todolist.title}}
     </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only
+        (click)="navigateToTodolistSettings()">
+
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -10,18 +18,30 @@
 
   <form (ngSubmit)="createTodo()">
     <ion-item>
-      <ion-input placeholder="Create Todo" type="text" [(ngModel)]="todo.title" name="title"></ion-input>
+      <ion-input
+        placeholder="Create Todo"
+        name="title"
+        type="submit"
+        [(ngModel)]="todo.title"></ion-input>
     </ion-item>
   </form>
 
   <br>
 
   <ion-list>
-    <ion-item class="list-item" *ngFor="let todo of todolist.todos">
-      {{todo.title}}
-      <br>
+    <ion-item
+      *ngFor="let todo of todolist.todos">
+
+      <ion-label
+        (click)="navigateToTodo(todo)"
+      >{{todo.title}}</ion-label>
+
       {{todo.updated_at | date:"yyyy-MM-dd hh:mm:ss"}}
+      <ion-toggle
+        [(ngModel)]="todo.completed"
+        checked="{{todo.completed}}"></ion-toggle>
     </ion-item>
+
   </ion-list>
 
 </ion-content>

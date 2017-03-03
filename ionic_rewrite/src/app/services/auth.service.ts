@@ -8,7 +8,15 @@ import 'rxjs/add/operator/toPromise';
 
 import { StorageService } from './storage.service';
 import { AppConfig } from '../../shared/app_config';
+import { CustomHttp } from '../../shared/custom-http';
 
+declare var unescape: any;
+declare var btoa: any;
+declare var encodeURIComponent: any;
+
+let base64Encode = (val) => {
+  return btoa(unescape(encodeURIComponent( val )));
+};
 
 @Injectable()
 export class AuthService {
@@ -23,10 +31,34 @@ export class AuthService {
   public checkIfUserIsAuthenticated(): Promise<any> {
     return this.storageService.loadUser()
     .then((user) => {
-      if(user) {
-        return true;
+      if(!user) {
+        throw new Error('Not authenticated');
       }
-      throw new Error('Not authenticated');
+
+      this.setGlobalHeaders(user);
+
+      // If we have a user in storage, we try to fetch
+      // an update from the server
+
+      // TODO: offline support!
+      // if we are offline, this wont work
+      return this.http.get(AppConfig.API_BASE_URL + 'users/' + user._id)
+      .toPromise()
+      .then((response) => {
+        let userJSON = response.json();
+
+        this.setGlobalHeaders(userJSON);
+
+        this.storageService.saveUser(userJSON);
+
+        return true;
+      })
+      .catch((errorResponse) => {
+        // we may offline band we have a user in storage,
+        // so let users use the app
+        // TODO: make this more stable
+        return Promise.resolve(true);
+      });
     });
   }
 
@@ -40,6 +72,10 @@ export class AuthService {
     })
     .toPromise()
     .then((response) => {
+      let userJSON = response.json();
+
+      this.setGlobalHeaders(userJSON);
+
       this.storageService.saveUser(response.json());
       this.onLoginSuccess.next();
     });
@@ -63,8 +99,28 @@ export class AuthService {
     })
     .toPromise()
     .then((response) => {
-      this.storageService.saveUser(response.json());
+      let userJSON = response.json();
+
+      this.setGlobalHeaders(userJSON);
+
+      this.storageService.saveUser(userJSON);
       this.onLoginSuccess.next();
+    });
+  }
+
+  private setGlobalHeaders(userJSON) {
+    let username = 'AtOneGo';
+
+    let authStr  = 'Basic ' +
+      base64Encode(username + ':' + userJSON.API_TOKEN);
+
+    CustomHttp.addGlobalRequestHeader({
+      name: 'Authorization',
+      value: authStr
+    });
+    CustomHttp.addGlobalRequestHeader({
+      name: 'Content-Language',
+      value: 'en'
     });
   }
 }

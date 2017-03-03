@@ -14,7 +14,6 @@ export class LoginPage {
 
   constructor(
     private authService: AuthService,
-    private navController: NavController,
     private loadingController: LoadingController,
     private toastCtrl: ToastController
   ) {}

@@ -11,7 +11,12 @@ describe('Storage Service', () => {
     TestBed.configureTestingModule({
       providers: [
         StorageService,
-        Storage
+        {
+          provide: Storage,
+          useFactory: () => {
+            return new Storage(['localstorage']);
+          }
+        }
       ]
     });
   });
@@ -30,25 +35,56 @@ describe('Storage Service', () => {
 
 
   describe('#saveUser', () => {
+    let user;
 
-    it('should', () => {
+    beforeEach(async(() => {
+      spyOn(ionicStorage, 'set')
+      .and.returnValue(Promise.resolve())
 
+      user = {
+        _id: 'user-id',
+        API_TOKEN: 'API_TOKEN',
+        todolists: [
+          {_id: 'id1', title: 'hi', todos: []}
+        ]
+      };
+      storageService.saveUser(user);
+    }));
+
+    it('should remember the api token', () => {
+      expect(storageService.API_TOKEN).toBe(user.API_TOKEN);
+    });
+
+    it('should remember the todolists', () => {
+      expect(storageService.todolists['list-id1'])
+        .toEqual(user.todolists[0]);
+    });
+
+    it('should store the todolists seperated', () => {
+      expect(ionicStorage.set)
+        .toHaveBeenCalledWith('list-id1', user.todolists[0]);
+    });
+
+    it('should store the user', () => {
+      expect(ionicStorage.set)
+        .toHaveBeenCalledWith('USER', user);
     });
   });
 
   describe('#loadUser', () => {
 
-    it('should', () => {
+    it('should load the user from storage', () => {
 
     });
   });
 
   describe('#fetchTodolists', () => {
 
-    it('should', () => {
+    it('should fetch all todolists from storage', () => {
 
     });
   });
+
 
   describe('#dropDatabase', () => {
 

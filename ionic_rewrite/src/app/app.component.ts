@@ -39,7 +39,6 @@ export class MyApp {
 
     this.authService.checkIfUserIsAuthenticated()
     .then(() => {
-      // TODO we need to fetch all stuff if we are logged in!!!
       this.rootPage = TodolistsPage;
     })
     .catch(() => {
