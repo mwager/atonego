@@ -1,5 +1,6 @@
 let environment = 'dev';
 let apiBaseurl;
+let version = '2.0.0.beta-1';
 
 switch(environment) {
   case 'dev':
@@ -14,4 +15,6 @@ switch(environment) {
 export class AppConfig {
   static ENVIRONMENT = environment;
   static API_BASE_URL = apiBaseurl;
+
+  static version = version;
 }

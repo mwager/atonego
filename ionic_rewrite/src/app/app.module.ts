@@ -9,6 +9,8 @@ import { MyApp } from './app.component';
 
 import { StartPage } from '../pages/start/start';
 import { SettingsPage } from '../pages/settings/settings';
+import { HelpPage } from '../pages/help/help';
+import { UserPage } from '../pages/settings/user/user';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { TodolistsPage } from '../pages/todolists/todolists';
@@ -28,6 +30,8 @@ export function provideStorage() {
   declarations: [
     MyApp,
     SettingsPage,
+    HelpPage,
+    UserPage,
     StartPage,
     LoginPage,
     SignupPage,
@@ -44,6 +48,8 @@ export function provideStorage() {
   entryComponents: [
     MyApp,
     SettingsPage,
+    HelpPage,
+    UserPage,
     StartPage,
     LoginPage,
     SignupPage,

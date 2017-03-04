@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { StorageService } from '../../app/services/storage.service';
+import { PersistanceService } from '../../app/services/persistance.service';
 
 import { TodolistPage } from '../todolist/todolist';
 import { SettingsPage } from '../settings/settings';
@@ -15,9 +15,9 @@ export class TodolistsPage {
 
   constructor(
     private navController: NavController,
-    private storageService: StorageService
+    private persistanceService: PersistanceService
   ) {
-    this.storageService.fetchTodolists()
+    this.persistanceService.fetchTodolists()
     .then((todolists) => {
       this.todolists = todolists;
     });

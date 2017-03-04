@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      User settings
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Email address</ion-label>
+      <ion-input type="text" [(ngModel)]="user.display_name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Email address</ion-label>
+      <ion-input type="email" [(ngModel)]="user.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Password again</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password2"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Language</ion-label>
+      <ion-select [(ngModel)]="user.lang">
+        <ion-option value="de">Deutsch</ion-option>
+        <ion-option value="en">English</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Email notifications?</ion-label>
+      <ion-checkbox [(ngModel)]="user.notify_settings.email"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

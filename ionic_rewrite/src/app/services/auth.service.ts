@@ -6,7 +6,7 @@ import {
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/toPromise';
 
-import { StorageService } from './storage.service';
+import { PersistanceService } from './persistance.service';
 import { AppConfig } from '../../shared/app_config';
 import { CustomHttp } from '../../shared/custom-http';
 
@@ -25,11 +25,11 @@ export class AuthService {
 
   constructor(
     private http: Http,
-    private storageService: StorageService
+    private persistanceService: PersistanceService
   ) {}
 
   public checkIfUserIsAuthenticated(): Promise<any> {
-    return this.storageService.loadUser()
+    return this.persistanceService.loadUser()
     .then((user) => {
       if(!user) {
         throw new Error('Not authenticated');
@@ -49,12 +49,12 @@ export class AuthService {
 
         this.setGlobalHeaders(userJSON);
 
-        this.storageService.saveUser(userJSON);
+        this.persistanceService.saveUser(userJSON);
 
         return true;
       })
       .catch((errorResponse) => {
-        // we may offline band we have a user in storage,
+        // we may offline and we have a user in storage,
         // so let users use the app
         // TODO: make this more stable
         return Promise.resolve(true);
@@ -76,13 +76,13 @@ export class AuthService {
 
       this.setGlobalHeaders(userJSON);
 
-      this.storageService.saveUser(response.json());
+      this.persistanceService.saveUser(response.json());
       this.onLoginSuccess.next();
     });
   }
 
   public logout(): Promise<any> {
-    return this.storageService.dropDatabase()
+    return this.persistanceService.dropDatabase()
     .then(() => {
       this.onLogout.next();
     });
@@ -103,7 +103,7 @@ export class AuthService {
 
       this.setGlobalHeaders(userJSON);
 
-      this.storageService.saveUser(userJSON);
+      this.persistanceService.saveUser(userJSON);
       this.onLoginSuccess.next();
     });
   }

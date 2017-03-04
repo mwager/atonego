@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { StorageService } from '../../app/services/storage.service';
 import { AuthService } from '../../app/services/auth.service';
+import { HelpPage } from '../../pages/help/help';
+import { UserPage } from './user/user';
 
 @Component({
   selector: 'page-settings',
@@ -12,10 +13,17 @@ export class SettingsPage {
 
   constructor(
     private navController: NavController,
-    private storageService: StorageService,
     private authService: AuthService
   ) {
 
+  }
+
+  public navToUser() {
+    this.navController.push(UserPage);
+  }
+
+  public navToHelp() {
+    this.navController.push(HelpPage);
   }
 
   public logout() {

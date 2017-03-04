@@ -55,16 +55,6 @@ describe('Storage Service', () => {
       expect(storageService.API_TOKEN).toBe(user.API_TOKEN);
     });
 
-    it('should remember the todolists', () => {
-      expect(storageService.todolists['list-id1'])
-        .toEqual(user.todolists[0]);
-    });
-
-    it('should store the todolists seperated', () => {
-      expect(ionicStorage.set)
-        .toHaveBeenCalledWith('list-id1', user.todolists[0]);
-    });
-
     it('should store the user', () => {
       expect(ionicStorage.set)
         .toHaveBeenCalledWith('USER', user);

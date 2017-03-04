@@ -9,11 +9,11 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-input
+      <ion-textarea
         placeholder="Edit title"
-        type="text" [(ngModel)]="todo.title"
-        name="title">
-      </ion-input>
+        [(ngModel)]="todo.title"
+        name="title"
+        rows="3"></ion-textarea>
 
       <ion-toggle
         [(ngModel)]="todo.completed"
@@ -26,6 +26,12 @@
         [(ngModel)]="todo.notice"
         name="notice"
         rows="5"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <button color="danger"
+        ion-button block
+        (click)="delete()">Delete</button>
     </ion-item>
   </ion-list>
 </ion-content>

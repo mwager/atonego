@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { NavParams, NavController } from 'ionic-angular';
 
 import { PersistanceService } from '../../app/services/persistance.service';
 
@@ -12,6 +12,7 @@ export class TodoPage implements OnDestroy {
 
   constructor(
     private navParams: NavParams,
+    private navController: NavController,
     private persistanceService: PersistanceService
   ) {
     this.todo = this.navParams.get('todo');
@@ -21,6 +22,17 @@ export class TodoPage implements OnDestroy {
     console.log("ngOnDestroy", this.todo)
 
     // TODO: enough?
-    this.persistanceService.createOrEditTodo(this.todo);
+    if (this.todo) {
+      this.persistanceService.createOrEditTodo(this.todo);
+    }
+  }
+
+  delete() {
+    this.persistanceService.deleteTodo(this.todo);
+
+    // pop leads to ngOnDestroy, so:
+    this.todo = null;
+
+    this.navController.pop();
   }
 }

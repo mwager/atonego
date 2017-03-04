@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController, ToastController } from 'ionic-angular';
 
-import { StorageService } from '../../app/services/storage.service';
 import { PersistanceService } from '../../app/services/persistance.service';
 
 import { TodoPage } from '../todo/todo';

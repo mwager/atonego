@@ -12,26 +12,29 @@ export class StorageService {
   private isReadyPromise;
   public API_TOKEN;
 
-  public todolists = {};
+  public user;
 
   constructor(private storage: Storage) {
+    // TODO: really necessary?
     this.isReadyPromise = this.storage.ready();
   }
 
   public saveUser(userObject: any): Promise<any> {
     this.API_TOKEN = userObject.API_TOKEN;
+    this.user = userObject;
 
     return this.isReadyPromise.then(() => {
-      return Promise.all([
-        this.saveTodolists(userObject.todolists),
-        this.storage.set(USER_KEY, userObject)
-      ]);
+      return this.storage.set(USER_KEY, userObject);
     });
   }
 
   public loadUser(): Promise<any> {
     return this.isReadyPromise.then(() => {
-      return this.storage.get(USER_KEY);
+      return this.storage.get(USER_KEY)
+      .then((user) => {
+        this.user = user;
+        return user;
+      });
     });
   }
 
@@ -43,14 +46,5 @@ export class StorageService {
 
   public dropDatabase(): Promise<any> {
     return this.storage.clear();
-  }
-
-  private saveTodolists(todolists) {
-    return Promise.all(todolists.map((todolist) => {
-      let id = `list-${todolist._id}`;
-      this.todolists[id] = todolist;
-
-      return this.storage.set(id, todolist)
-    }));
   }
 }
